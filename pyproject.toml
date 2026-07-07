@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "spatios2e"
+version = "0.1.0"
+description = "Spatial expression prediction from H&E morphology, spatial graphs, DNA sequence priors, and optional snRNA-seq priors."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+dependencies = [
+  "numpy>=1.23",
+  "scipy>=1.10",
+  "pandas>=1.5",
+  "pyyaml>=6.0",
+  "h5py>=3.8",
+  "torch>=2.0",
+]
+
+[project.optional-dependencies]
+preprocess = [
+  "pillow>=9.0",
+  "tqdm>=4.64",
+  "torchvision>=0.15",
+]
+dev = [
+  "pytest>=7.0",
+  "ruff>=0.4",
+]
+
+[project.scripts]
+spatios2e-train = "spatios2e.training.train:main"
+spatios2e-eval = "spatios2e.evaluation.evaluate:main"
+spatios2e-compute-residual-scale = "spatios2e.utils.residual_scale:main"
+spatios2e-normalize-visium = "spatios2e.preprocessing.normalize_visium:main"
+spatios2e-prepare-spatial-features = "spatios2e.preprocessing.prepare_spatial_features:main"
+spatios2e-extract-histology = "spatios2e.preprocessing.extract_histology_embeddings:main"
+spatios2e-build-snrna-scgpt-context = "spatios2e.preprocessing.build_snrna_scgpt_gene_context:main"
+spatios2e-aggregate-features = "spatios2e.preprocessing.aggregate_multimodal_features:main"
+spatios2e-build-spatial-graph = "spatios2e.preprocessing.build_spatial_graph:main"
+spatios2e-subset-expression = "spatios2e.preprocessing.subset_expression_by_gene_split:main"
+
+[tool.setuptools.packages.find]
+include = ["spatios2e*"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"

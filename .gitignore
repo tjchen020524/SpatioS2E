@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Local data, weights, and run outputs
+/data/
+/weights/
+/checkpoints/
+/outputs/
+/logs/
+/reports/
+/wandb/
+
+# Large scientific artifacts
+*.h5ad
+*.h5
+*.rds
+*.pt
+*.pth
+*.ckpt
+*.npz
+*.tar
+*.tar.gz
+*.fa
+*.fasta
+
+# Keep included example gene lists tracked.
+!examples/hippocampus/gene_splits/*.txt

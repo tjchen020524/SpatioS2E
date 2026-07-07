@@ -1,0 +1,66 @@
+run_name: "hippocampus_spatios2e"
+paths:
+  expression_root: "data/processed/expression_full"
+  multimodal_root: "data/processed/multimodal_features"
+  graph_root: "data/processed/spatial_graphs"
+  modality_stats: "data/processed/multimodal_features/modality_stats.json"
+  decima_ckpt: "weights/decima/rep0.ckpt"
+  decima_h5: null
+  decima_npz_dir: "data/decima_input/gene_inputs_npz"
+  gene_split_dir: "examples/hippocampus/gene_splits"
+  checkpoint_dir: "outputs/hippocampus_spatios2e/checkpoints"
+  checkpoint_name: "best.pt"
+  residual_scale_npz: "outputs/hippocampus_spatios2e/artifacts/train_residual_scale.npz"
+
+split:
+  train: ['GSM8226200_V10B01-086_D1', 'GSM8226205_V11U08-084_A1', 'GSM8226205_V11U08-084_B1', 'GSM8226202_V10B01-085_C1', 'GSM8226206_V11A20-297_B1', 'GSM8226207_V11U08-081_A1', 'GSM8226203_V10B01-086_B1', 'GSM8226202_V10B01-085_A1', 'GSM8226204_V11L05-335_A1', 'GSM8226202_V10B01-085_B1', 'GSM8226206_V11A20-297_D1', 'GSM8226203_V10B01-086_A1', 'GSM8226206_V11A20-297_C1', 'GSM8226201_V11L05-333_D1', 'GSM8226201_V11L05-333_C1', 'GSM8226207_V11U08-081_B1', 'GSM8226201_V11L05-333_A1', 'GSM8226205_V11U08-084_D1', 'GSM8226199_V12F14-051_A1', 'GSM8226208_V11L05-336_C1', 'GSM8226202_V10B01-085_D1', 'GSM8226204_V11L05-335_C1', 'GSM8226199_V12F14-051_C1', 'GSM8226208_V11L05-336_B1']
+  val: ['GSM8226206_V11L05-335_D1', 'GSM8226205_V11U08-084_C1', 'GSM8226199_V12F14-051_D1', 'GSM8226206_V11A20-297_A1', 'GSM8226200_V10B01-086_C1']
+  test: ['GSM8226208_V11L05-336_A1', 'GSM8226208_V11L05-336_D1', 'GSM8226204_V11L05-335_B1', 'GSM8226199_V12F14-051_B1', 'GSM8226201_V11L05-333_B1']
+
+targets_dense: true
+normalize_modalities: true
+
+model:
+  variant: "spatios2e"
+  gnn_hidden: 256
+  gnn_layers: 3
+  gnn_dropout: 0.1
+  gnn_post_mlp_layers: 1
+  gnn_residual: true
+  film_hidden: 256
+  spot_head_hidden: 128
+  freeze_decima_backbone: true
+  freeze_pseudobulk_head: false
+  delta_head_init_std: 0.0
+  residual_scale_floor: 1.0e-3
+  residual_scale_hidden: 128
+  residual_scale_logscale_clip: 0.75
+
+loss:
+  point_loss: "huber"
+  huber_beta: 1.0
+  lambda_point: 1.0
+  lambda_gene: 0.6
+  lambda_spot: 0.05
+  lambda_delta_point: 0.0
+  lambda_delta_gene: 0.0
+  delta_target_mode: "baseline_relative"
+  lambda_lap: 6.0e-4
+  lambda_calib_identity: 5.0e-4
+  min_true_std: 1.0e-6
+
+optim:
+  lr: 2.5e-4
+  weight_decay: 1.0e-4
+  max_epochs: 10
+  max_genes_per_batch: 96
+  val_max_genes_per_batch: 128
+  log_every: 1
+  early_stop_patience: 4
+  selection_metric: "gene_flat_combo"
+  selection_flat_weight: 0.25
+
+eval:
+  max_genes_per_batch: 128
+
+seed: 42
