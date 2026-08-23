@@ -1,6 +1,8 @@
 # Hippocampus Benchmark Example
 
-This example mirrors the hippocampus benchmark split used for the SpatioS2E manuscript experiments.
+This example uses the manuscript's donor-disjoint hippocampus partition: six
+training donors (22 sections), two validation donors (8 sections) and two test
+donors (4 sections).
 
 Required external files:
 

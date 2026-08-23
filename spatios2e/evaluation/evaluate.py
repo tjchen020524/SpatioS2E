@@ -14,6 +14,7 @@ import pandas as pd
 import torch
 
 from spatios2e.data.dataset import SpatioS2EDataset, collate_graphs
+from spatios2e.evaluation.components import pearson_correlation
 from spatios2e.models.factory import build_model
 
 
@@ -116,6 +117,12 @@ class RunningStats:
         cov = self.sum_pred_true / self.count - mean_p * mean_t
         return float(cov / np.sqrt(var_p * var_t))
 
+    def mean_pred(self) -> float:
+        return self.sum_pred / self.count if self.count else float("nan")
+
+    def mean_true(self) -> float:
+        return self.sum_true / self.count if self.count else float("nan")
+
 
 def _resolve_max_genes(cfg: Dict, override: Optional[int]) -> Optional[int]:
     if override is not None:
@@ -209,42 +216,62 @@ def eval_split(
     overall_mse = overall_stats.mse()
     overall_corr = overall_stats.corr()
 
-    gene_rows = [{"gene_id": gid, "mse": stats.mse(), "corr": stats.corr()} for gid, stats in gene_stats.items()]
-    sample_rows = [{"sample": name, "mse": stats.mse(), "corr": stats.corr()} for name, stats in sample_stats.items()]
+    gene_rows = [
+        {
+            "gene_id": gid,
+            "mse": stats.mse(),
+            "corr": stats.corr(),
+            "mean_pred": stats.mean_pred(),
+            "mean_true": stats.mean_true(),
+            "n_spots": stats.count,
+        }
+        for gid, stats in gene_stats.items()
+    ]
+    sample_rows = [
+        {"sample": name, "mse": stats.mse(), "corr": stats.corr()}
+        for name, stats in sample_stats.items()
+    ]
 
     gene_corr_vals = [row["corr"] for row in gene_rows if np.isfinite(row["corr"])]
     gene_corr_mean = float(np.mean(gene_corr_vals)) if gene_corr_vals else float("nan")
     gene_corr_median = float(np.median(gene_corr_vals)) if gene_corr_vals else float("nan")
 
+    mean_pred = np.asarray([row["mean_pred"] for row in gene_rows], dtype=np.float64)
+    mean_true = np.asarray([row["mean_true"] for row in gene_rows], dtype=np.float64)
+    gene_counts = np.asarray([row["n_spots"] for row in gene_rows], dtype=np.float64)
+    mean_squared_errors = (mean_pred - mean_true) ** 2
+    gene_mean_mse = float(np.average(mean_squared_errors, weights=gene_counts))
+    abundance_rmse = float(np.sqrt(np.mean(mean_squared_errors)))
+    abundance_pcc = pearson_correlation(mean_true, mean_pred)
+    centered_mse = max(float(overall_mse - gene_mean_mse), 0.0)
+    component_summary = {
+        "full_matrix_mse": overall_mse,
+        "full_matrix_pcc": overall_corr,
+        "abundance_pcc": abundance_pcc,
+        "abundance_rmse": abundance_rmse,
+        "mean_gene_pcc": gene_corr_mean,
+        "centered_rmse": float(np.sqrt(centered_mse)),
+        "gene_mean_mse": gene_mean_mse,
+        "centered_mse": centered_mse,
+        "decomposition_error": overall_mse - gene_mean_mse - centered_mse,
+    }
+
+    # Retain the original keys for checkpoints and scripts created with v0.1.
+    overall_payload = {
+        "split": split,
+        "mse": overall_mse,
+        "corr": overall_corr,
+        "gene_corr_mean": gene_corr_mean,
+        "gene_corr_median": gene_corr_median,
+        "no_graph": no_graph,
+        **component_summary,
+    }
+
     save_dir.mkdir(parents=True, exist_ok=True)
-    (save_dir / f"{split}_overall.json").write_text(
-        json.dumps(
-            {
-                "split": split,
-                "mse": overall_mse,
-                "corr": overall_corr,
-                "gene_corr_mean": gene_corr_mean,
-                "gene_corr_median": gene_corr_median,
-                "no_graph": no_graph,
-            },
-            indent=2,
-        )
-    )
+    (save_dir / f"{split}_overall.json").write_text(json.dumps(overall_payload, indent=2))
     pd.DataFrame(sample_rows).to_csv(save_dir / f"{split}_sample_metrics.tsv", sep="\t", index=False)
     pd.DataFrame(gene_rows).to_csv(save_dir / f"{split}_gene_metrics.tsv", sep="\t", index=False)
-    print(
-        json.dumps(
-            {
-                "split": split,
-                "mse": overall_mse,
-                "corr": overall_corr,
-                "gene_corr_mean": gene_corr_mean,
-                "gene_corr_median": gene_corr_median,
-                "no_graph": no_graph,
-            },
-            indent=2,
-        )
-    )
+    print(json.dumps(overall_payload, indent=2))
 
 
 def main() -> None:

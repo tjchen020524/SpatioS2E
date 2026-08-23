@@ -1,30 +1,56 @@
 # SpatioS2E
 
-SpatioS2E predicts spatial gene expression from H&E-derived spot features, a
-spatial neighbor graph, and gene-level molecular priors. The main model uses a
-residual form:
+SpatioS2E is a controlled framework for asking what transfers in
+gene-conditioned virtual spatial transcriptomics. It separates two evaluation
+axes that can otherwise be conflated:
 
-```text
-predicted log expression = gene prior + spatial residual
-```
+- **across-gene abundance**: whether genes that are generally high or low are
+  correctly ordered and calibrated;
+- **within-gene spatial variation**: whether a gene's variation across tissue
+  spots is recovered.
 
-The repository contains the Python package, command-line tools, and benchmark
-configuration used for the hippocampus experiments. Data files, trained
-checkpoints, Decima weights, UNI2-h weights, and generated results are kept
-outside git.
+The repository contains the fitted-gene prediction framework, the separately
+trained target-disjoint decoders used for held-out genes, component-resolved
+metrics, preprocessing utilities, and an end-to-end hippocampus configuration.
+Raw data, third-party encoders and weights, trained checkpoints, and generated
+predictions are intentionally not stored in git.
 
-## Repository Contents
+## Experimental systems
 
-- `spatios2e/`: package code for data loading, preprocessing, models, training,
-  residual-scale estimation, and evaluation.
-- `configs/hippocampus_spatios2e.yaml`: default hippocampus benchmark config.
-- `examples/hippocampus/`: gene splits and a train/evaluate wrapper script.
-- `tests/`: smoke tests for public imports.
-- `environment.yml` and `pyproject.toml`: reproducible setup files.
+### Fitted genes
+
+The fitted-gene framework combines frozen tissue-image features and spatial
+coordinates, optional neighbourhood context, and an optional gene
+representation. Its sequence-conditioned form uses FiLM conditioning and an
+additive gene-level abundance route. Direct, morphology-only, sequence-prior,
+and optional single-cell-prior variants remain available through the model
+factory.
+
+### Held-out genes
+
+Target-disjoint evaluation uses a separate `FactorizedDotProductDecoder` on
+precomputed spot representations and fixed gene vectors. In the manuscript,
+the pretrained vectors came from **Decima**, an external pretrained
+reference-sequence model; Decima is not the SpatioS2E predictor and is not
+vendored here. Matched random and constant gene vectors serve as controls.
+
+The release also exposes the architecture-audit decoders:
+
+- `BiasFreeFactorizedDecoder`, with one intercept shared by all spots and
+  genes;
+- `ConcatenationMLPDecoder`, a parameter-matched alternative decoder family;
+- `SectionCenteredResidualDecoder`, with signed outputs for exactly centred
+  residual targets.
+
+These classes reproduce the decoder definitions. Cohort-specific data
+partitions, fixed vectors and optimization settings remain the responsibility
+of the experiment configuration. Utilities in `spatios2e.models.gene_vectors`
+standardize pretrained vectors using training genes only and construct matched
+random, constant and identity-permuted controls.
 
 ## Installation
 
-Create the conda environment and install the package in editable mode:
+SpatioS2E requires Python 3.10 or newer.
 
 ```bash
 conda env create -f environment.yml
@@ -32,90 +58,70 @@ conda activate spatios2e
 pip install -e ".[preprocess,dev]"
 ```
 
-Decima is not vendored in this repository. Install it separately, or add its
-source directory to `PYTHONPATH` before running sequence-conditioned models:
+Decima and UNI2-h must be obtained from their respective upstream projects.
+For sequence-conditioned fitted-gene models, install Decima separately or add
+its source directory to `PYTHONPATH` and place its checkpoint at the path given
+in the experiment config. The optional scGPT preprocessing module likewise
+requires a separate scGPT installation.
 
-```bash
-export PYTHONPATH="/path/to/decima/src:${PYTHONPATH:-}"
+## Component-resolved evaluation
+
+For two finite `[spot, gene]` matrices:
+
+```python
+import numpy as np
+from spatios2e.evaluation import component_metrics
+
+observed = np.load("observed.npy")
+predicted = np.load("predicted.npy")
+metrics = component_metrics(observed, predicted)
+
+print(metrics["full_matrix_pcc"])
+print(metrics["abundance_pcc"])
+print(metrics["mean_gene_pcc"])
+print(metrics["decomposition_error"])
 ```
 
-scGPT is also external. It is only needed to build the optional scGPT snRNA
-gene-context artifact:
+The evaluator reports full-matrix PCC and MSE, abundance PCC and RMSE, mean
+gene-wise PCC, centred RMSE, and the two exact MSE components. For a rectangular
+matrix,
 
-```bash
-export PYTHONPATH="/path/to/scGPT:${PYTHONPATH:-}"
+```text
+full-matrix MSE = gene-mean MSE + centred MSE.
 ```
 
-The default config expects the Decima checkpoint at:
+The same evaluator is available as a command-line tool:
+
+```bash
+spatios2e-eval-components predictions.npz --output component_metrics.json
+```
+
+The NPZ must contain `observed` and `predicted` arrays. Add
+`--section-key section_ids` to centre both matrices independently within each
+tissue section before evaluation.
+
+## Fitted-gene hippocampus example
+
+The public example expects the following external layout:
 
 ```text
 weights/
-  decima/
-    rep0.ckpt
-```
-
-## Expected Data Layout
-
-The hippocampus config uses paths relative to the repository root:
-
-```text
+  decima/rep0.ckpt
 data/
-  decima_input/
-    gene_inputs_npz/
-      <ENSG_ID>.npz
-  processed/
-    expression_full/
-      <sample>/
-        train.npz
-        val.npz
-        test.npz
-    multimodal_features/
-      modality_stats.json
-      <sample>/
-        multimodal_features.npz
-    spatial_graphs/
-      <sample>/
-        graph.npz
+  decima_input/gene_inputs_npz/<ENSG_ID>.npz
+  processed/expression_full/<sample>/{train,val,test}.npz
+  processed/multimodal_features/modality_stats.json
+  processed/multimodal_features/<sample>/multimodal_features.npz
+  processed/spatial_graphs/<sample>/graph.npz
 ```
 
-Required file fields:
-
-- expression split files: CSR fields `data`, `indices`, `indptr`, `shape`, plus
-  `gene_ids` and `barcodes`;
-- multimodal feature files: `barcodes`, `spatial_features`,
-  `histology_embeddings`, `celltype_weights`, `spatial_feature_names`,
-  `celltype_names`, and/or `combined_features`;
-- `modality_stats.json`: `spatial`, `histology`, and `celltype` mean/std arrays;
-- graph files: `edge_index`, `edge_weight`, `barcodes`, and optional
-  `positions`/`metadata`;
-- Decima inputs: one `<ENSG_ID>.npz` per gene containing a `(5, L)`
-  one-hot-plus-mask array.
-
-Optional single-cell prior inputs:
-
-- donor baseline/residual-scale files: `gene_ids`, `donor_ids`, `sample_ids`,
-  `sample_donor_ids`, `donor_log_mu_base`, and `residual_scale`;
-- scGPT gene-context profiles: `gene_ids`, `donor_ids`, `sample_ids`,
-  `sample_donor_ids`, `donor_scgpt_gene_context`, and
-  `donor_scgpt_gene_expr_sum`.
-
-To build the scGPT gene-context profile file from 10x snRNA matrices, provide a
-config whose `paths.source_snrna_base_npz`, `paths.sample_links_csv`, and
-`paths.snrna_root` point to the donor baseline artifact, donor/sample metadata,
-and raw snRNA directories:
+Run training and evaluation from the repository root:
 
 ```bash
-spatios2e-build-snrna-scgpt-context \
-  --config <config.yaml> \
-  --model-dir /path/to/scGPT/brain_model \
-  --scgpt-root /path/to/scGPT \
-  --output data/processed/snrna/snrna_scgpt_gene_context.npz \
-  --amp
+bash examples/hippocampus/run_train_eval.sh
 ```
 
-## Run the Hippocampus Benchmark
-
-From the repository root:
+or invoke the individual commands:
 
 ```bash
 spatios2e-compute-residual-scale configs/hippocampus_spatios2e.yaml
@@ -127,50 +133,33 @@ spatios2e-eval \
   --save-dir outputs/hippocampus_spatios2e/results
 ```
 
-The same sequence is available as:
+For the supplied full fitted-gene configuration, the first command computes
+the training-spot-weighted abundance anchor and residual scale in one artifact;
+validation and test expression are not read.
 
-```bash
-bash examples/hippocampus/run_train_eval.sh
-```
+Evaluation writes backward-compatible `mse` and `corr` fields together with
+explicit `full_matrix_mse`, `full_matrix_pcc`, abundance and centred endpoints.
 
-## Model Variants
+## Repository map
 
-Set `model.variant` in the config:
+- `spatios2e/models/`: fitted-gene models and held-out-gene decoders;
+- `spatios2e/evaluation/`: checkpoint evaluation and component-resolved
+  endpoints;
+- `spatios2e/preprocessing/`: expression, image-feature and graph preparation;
+- `spatios2e/training/`: fitted-gene training entry point;
+- `configs/` and `examples/`: portable hippocampus example;
+- `docs/paper_code_map.md`: mapping from manuscript analyses to public code;
+- `tests/`: import, decoder and metric identity tests.
 
-- `spatios2e`: H&E morphology, spatial graph, DNA sequence prior, and learned
-  spatial residual.
-- `morphology_graph`: H&E morphology and spatial graph without a molecular
-  prior.
-- `sequence_prior`: DNA prior baseline without a learned spatial residual.
-- `single_cell_prior`: DNA sequence conditioning with a learned scalar gate
-  adding donor-matched scGPT snRNA gene-context information.
+## Reproducibility boundary
 
-## Outputs
+Included in git are reusable source code, configuration templates and tests.
+Excluded are identifiable or licensed source data, third-party weights,
+checkpoints, predictions, cluster logs and manuscript build artifacts. The
+manuscript's numerical source-data package is versioned separately from this
+software release.
 
-Evaluation writes:
+## License and citation
 
-- `test_overall.json`: pooled MSE and Pearson correlation across evaluated
-  spot-gene pairs;
-- `test_sample_metrics.tsv`: per-sample metrics;
-- `test_gene_metrics.tsv`: per-gene metrics, including gene-level spatial-map
-  correlations.
-
-## Scope
-
-Included in git:
-
-- model, training, preprocessing, and evaluation code;
-- public ablation variants;
-- hippocampus benchmark config and gene splits;
-- smoke tests and GitHub Actions configuration.
-
-Not included in git:
-
-- raw Visium data or processed matrices;
-- third-party model weights;
-- trained checkpoints, predictions, reports, figures, and cluster logs.
-
-## License
-
-The code is released under the MIT License. Citation information can be added
-after the manuscript or preprint record is available.
+The code is released under the MIT License. Citation metadata will be added
+when the manuscript or preprint record is public.

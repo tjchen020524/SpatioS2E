@@ -47,6 +47,37 @@ def compute_log_mu_base(cfg: Dict, gene_ids: list[str], device: torch.device, ch
     return np.concatenate(chunks, axis=0).astype(np.float32, copy=False)
 
 
+def load_aligned_training_matrix(cfg: Dict, gene_ids: list[str], sample: str) -> np.ndarray:
+    """Load one training section and align it to the configured gene order."""
+
+    expr_root = Path(cfg["paths"]["expression_root"])
+    expr = load_expression_split(expr_root / sample / "train.npz", to_dense=True)
+    sample_gene_ids = expr["gene_ids"]
+    if sample_gene_ids != gene_ids:
+        order = {gid: i for i, gid in enumerate(sample_gene_ids)}
+        missing = [gid for gid in gene_ids if gid not in order]
+        if missing:
+            preview = ", ".join(missing[:5])
+            raise KeyError(f"Training section {sample} is missing {len(missing)} genes, e.g. {preview}")
+        indices = [order[gid] for gid in gene_ids]
+        return np.asarray(expr["matrix"], dtype=np.float32)[:, indices]
+    return np.asarray(expr["matrix"], dtype=np.float32)
+
+
+def compute_training_tissue_mean(cfg: Dict, gene_ids: list[str]) -> tuple[np.ndarray, int]:
+    """Compute the spot-weighted gene mean using training sections only."""
+
+    total = np.zeros(len(gene_ids), dtype=np.float64)
+    n_spots = 0
+    for sample in cfg["split"]["train"]:
+        values = load_aligned_training_matrix(cfg, gene_ids, sample)
+        total += values.sum(axis=0, dtype=np.float64)
+        n_spots += int(values.shape[0])
+    if n_spots <= 0:
+        raise RuntimeError("No training spots found while computing the tissue mean")
+    return (total / float(n_spots)).astype(np.float32), n_spots
+
+
 def main() -> None:
     import argparse
 
@@ -63,23 +94,23 @@ def main() -> None:
     gene_ids = resolve_gene_ids(cfg)
     chunk_size = int(cfg.get("eval", {}).get("max_genes_per_batch", 256))
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    log_mu_base = compute_log_mu_base(cfg, gene_ids, device=device, chunk_size=chunk_size)
+    abundance_source = str(cfg.get("model", {}).get("abundance_source", "decima")).lower()
+    if abundance_source in {"training_tissue_mean", "training_mean", "tissue_mean"}:
+        log_mu_base, expected_n_spots = compute_training_tissue_mean(cfg, gene_ids)
+        abundance_source = "training_tissue_mean"
+    elif abundance_source in {"decima", "sequence", "sequence_head"}:
+        log_mu_base = compute_log_mu_base(cfg, gene_ids, device=device, chunk_size=chunk_size)
+        expected_n_spots = None
+        abundance_source = "decima"
+    else:
+        raise ValueError(f"Unsupported model.abundance_source={abundance_source!r}")
 
     n_gene = len(gene_ids)
     sum_resid = np.zeros(n_gene, dtype=np.float64)
     sumsq_resid = np.zeros(n_gene, dtype=np.float64)
     n_spots = 0
-    expr_root = Path(cfg["paths"]["expression_root"])
-
     for sample in cfg["split"]["train"]:
-        expr = load_expression_split(expr_root / sample / "train.npz", to_dense=True)
-        sample_gene_ids = expr["gene_ids"]
-        if sample_gene_ids != gene_ids:
-            order = {gid: i for i, gid in enumerate(sample_gene_ids)}
-            idx = [order[gid] for gid in gene_ids]
-            y = np.asarray(expr["matrix"], dtype=np.float32)[:, idx]
-        else:
-            y = np.asarray(expr["matrix"], dtype=np.float32)
+        y = load_aligned_training_matrix(cfg, gene_ids, sample)
         resid = y.astype(np.float64, copy=False) - log_mu_base[np.newaxis, :]
         sum_resid += resid.sum(axis=0)
         sumsq_resid += np.square(resid).sum(axis=0)
@@ -87,6 +118,8 @@ def main() -> None:
 
     if n_spots <= 0:
         raise RuntimeError("No training spots found while computing residual scale")
+    if expected_n_spots is not None and n_spots != expected_n_spots:
+        raise RuntimeError("Training spot count changed between abundance and scale passes")
 
     resid_mean = sum_resid / float(n_spots)
     resid_var = np.maximum(sumsq_resid / float(n_spots) - resid_mean * resid_mean, 0.0)
@@ -109,6 +142,7 @@ def main() -> None:
         "n_genes": int(n_gene),
         "n_train_samples": int(len(cfg["split"]["train"])),
         "n_train_spots": int(n_spots),
+        "abundance_source": abundance_source,
         "residual_scale_mean": float(np.mean(resid_scale)),
         "residual_scale_median": float(np.median(resid_scale)),
         "residual_scale_p90": float(np.quantile(resid_scale, 0.9)),

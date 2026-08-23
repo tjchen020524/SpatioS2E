@@ -1,3 +1,3 @@
-"""SpatioS2E: spatial expression recovery with histology, graphs, and gene priors."""
+"""SpatioS2E: component-resolved gene-conditioned spatial prediction."""
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"

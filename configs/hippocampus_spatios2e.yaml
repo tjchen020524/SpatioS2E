@@ -10,12 +10,48 @@ paths:
   gene_split_dir: "examples/hippocampus/gene_splits"
   checkpoint_dir: "outputs/hippocampus_spatios2e/checkpoints"
   checkpoint_name: "best.pt"
-  residual_scale_npz: "outputs/hippocampus_spatios2e/artifacts/train_residual_scale.npz"
+  residual_scale_npz: "outputs/hippocampus_spatios2e/artifacts/train_gene_prior.npz"
+  log_mu_base_npz: "outputs/hippocampus_spatios2e/artifacts/train_gene_prior.npz"
 
 split:
-  train: ['GSM8226200_V10B01-086_D1', 'GSM8226205_V11U08-084_A1', 'GSM8226205_V11U08-084_B1', 'GSM8226202_V10B01-085_C1', 'GSM8226206_V11A20-297_B1', 'GSM8226207_V11U08-081_A1', 'GSM8226203_V10B01-086_B1', 'GSM8226202_V10B01-085_A1', 'GSM8226204_V11L05-335_A1', 'GSM8226202_V10B01-085_B1', 'GSM8226206_V11A20-297_D1', 'GSM8226203_V10B01-086_A1', 'GSM8226206_V11A20-297_C1', 'GSM8226201_V11L05-333_D1', 'GSM8226201_V11L05-333_C1', 'GSM8226207_V11U08-081_B1', 'GSM8226201_V11L05-333_A1', 'GSM8226205_V11U08-084_D1', 'GSM8226199_V12F14-051_A1', 'GSM8226208_V11L05-336_C1', 'GSM8226202_V10B01-085_D1', 'GSM8226204_V11L05-335_C1', 'GSM8226199_V12F14-051_C1', 'GSM8226208_V11L05-336_B1']
-  val: ['GSM8226206_V11L05-335_D1', 'GSM8226205_V11U08-084_C1', 'GSM8226199_V12F14-051_D1', 'GSM8226206_V11A20-297_A1', 'GSM8226200_V10B01-086_C1']
-  test: ['GSM8226208_V11L05-336_A1', 'GSM8226208_V11L05-336_D1', 'GSM8226204_V11L05-335_B1', 'GSM8226199_V12F14-051_B1', 'GSM8226201_V11L05-333_B1']
+  # Six/two/two donor split (22/8/4 sections) used in the manuscript.
+  train:
+    - GSM8226199_V12F14-051_A1
+    - GSM8226199_V12F14-051_B1
+    - GSM8226199_V12F14-051_C1
+    - GSM8226199_V12F14-051_D1
+    - GSM8226201_V11L05-333_A1
+    - GSM8226201_V11L05-333_B1
+    - GSM8226201_V11L05-333_C1
+    - GSM8226201_V11L05-333_D1
+    - GSM8226203_V10B01-086_A1
+    - GSM8226203_V10B01-086_B1
+    - GSM8226204_V11L05-335_A1
+    - GSM8226204_V11L05-335_B1
+    - GSM8226204_V11L05-335_C1
+    - GSM8226205_V11U08-084_A1
+    - GSM8226205_V11U08-084_B1
+    - GSM8226205_V11U08-084_C1
+    - GSM8226205_V11U08-084_D1
+    - GSM8226206_V11A20-297_A1
+    - GSM8226206_V11A20-297_B1
+    - GSM8226206_V11A20-297_C1
+    - GSM8226206_V11A20-297_D1
+    - GSM8226206_V11L05-335_D1
+  val:
+    - GSM8226202_V10B01-085_A1
+    - GSM8226202_V10B01-085_B1
+    - GSM8226202_V10B01-085_C1
+    - GSM8226202_V10B01-085_D1
+    - GSM8226208_V11L05-336_A1
+    - GSM8226208_V11L05-336_B1
+    - GSM8226208_V11L05-336_C1
+    - GSM8226208_V11L05-336_D1
+  test:
+    - GSM8226200_V10B01-086_C1
+    - GSM8226200_V10B01-086_D1
+    - GSM8226207_V11U08-081_A1
+    - GSM8226207_V11U08-081_B1
 
 targets_dense: true
 normalize_modalities: true
@@ -30,7 +66,8 @@ model:
   film_hidden: 256
   spot_head_hidden: 128
   freeze_decima_backbone: true
-  freeze_pseudobulk_head: false
+  freeze_pseudobulk_head: true
+  abundance_source: "training_tissue_mean"
   delta_head_init_std: 0.0
   residual_scale_floor: 1.0e-3
   residual_scale_hidden: 128

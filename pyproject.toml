@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "spatios2e"
-version = "0.1.0"
-description = "Spatial expression prediction from H&E morphology, spatial graphs, DNA sequence priors, and optional snRNA-seq priors."
+version = "0.2.0"
+description = "Component-resolved evaluation and gene-conditioned prediction of spatial expression."
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
@@ -25,6 +25,7 @@ preprocess = [
   "torchvision>=0.15",
 ]
 dev = [
+  "build>=1.2",
   "pytest>=7.0",
   "ruff>=0.4",
 ]
@@ -32,6 +33,7 @@ dev = [
 [project.scripts]
 spatios2e-train = "spatios2e.training.train:main"
 spatios2e-eval = "spatios2e.evaluation.evaluate:main"
+spatios2e-eval-components = "spatios2e.evaluation.components:main"
 spatios2e-compute-residual-scale = "spatios2e.utils.residual_scale:main"
 spatios2e-normalize-visium = "spatios2e.preprocessing.normalize_visium:main"
 spatios2e-prepare-spatial-features = "spatios2e.preprocessing.prepare_spatial_features:main"
