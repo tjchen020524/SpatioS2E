@@ -123,6 +123,66 @@ class RunningStats:
     def mean_true(self) -> float:
         return self.sum_true / self.count if self.count else float("nan")
 
+    def std_pred(self) -> float:
+        if not self.count:
+            return float("nan")
+        variance = self.sum_pred2 / self.count - self.mean_pred() ** 2
+        return float(np.sqrt(max(variance, 0.0)))
+
+    def std_true(self) -> float:
+        if not self.count:
+            return float("nan")
+        variance = self.sum_true2 / self.count - self.mean_true() ** 2
+        return float(np.sqrt(max(variance, 0.0)))
+
+
+def correlation_with_thresholds(
+    stats: RunningStats,
+    true_std_threshold: float,
+    pred_std_threshold: float,
+) -> tuple[float, float, bool, bool]:
+    """Apply explicit eligibility and constant-prediction rules to gene PCC."""
+
+    true_std = stats.std_true()
+    pred_std = stats.std_pred()
+    eligible = bool(np.isfinite(true_std) and true_std > true_std_threshold)
+    pred_variable = bool(np.isfinite(pred_std) and pred_std > pred_std_threshold)
+    if not eligible:
+        return float("nan"), float("nan"), eligible, pred_variable
+    if not pred_variable:
+        return 0.0, float("nan"), eligible, pred_variable
+    correlation = stats.corr()
+    if not np.isfinite(correlation):
+        return 0.0, float("nan"), eligible, pred_variable
+    correlation = float(np.clip(correlation, -1.0, 1.0))
+    return correlation, correlation, eligible, pred_variable
+
+
+def summarize_hvg(gene_frame: pd.DataFrame, ranking: Sequence[str]) -> List[Dict[str, float | int]]:
+    """Summarize gene-PCC coverage for training-derived HVG panels."""
+
+    indexed = gene_frame.set_index("gene_id")
+    rows: List[Dict[str, float | int]] = []
+    for panel_size in (50, 100, 200, 500, 1000, 2000):
+        panel = [gene_id for gene_id in ranking[:panel_size] if gene_id in indexed.index]
+        frame = indexed.loc[panel] if panel else indexed.iloc[0:0]
+        eligible = frame[frame["eligible_true_variance"]]
+        finite = eligible[np.isfinite(eligible["corr_finite"])]
+        rows.append(
+            {
+                "k": panel_size,
+                "n_panel": len(panel),
+                "n_eligible": int(len(eligible)),
+                "n_finite": int(len(finite)),
+                "coverage": float(len(finite) / len(eligible)) if len(eligible) else float("nan"),
+                "mean_pcc_primary": (
+                    float(eligible["corr_primary"].mean()) if len(eligible) else float("nan")
+                ),
+                "mean_pcc_finite": float(finite["corr_finite"].mean()) if len(finite) else float("nan"),
+            }
+        )
+    return rows
+
 
 def _resolve_max_genes(cfg: Dict, override: Optional[int]) -> Optional[int]:
     if override is not None:
@@ -147,6 +207,9 @@ def eval_split(
 ) -> None:
     cfg = load_config(cfg_path)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    eval_cfg = cfg.get("eval", {})
+    true_std_threshold = float(eval_cfg.get("true_std_threshold", 1.0e-6))
+    pred_std_threshold = float(eval_cfg.get("pred_std_threshold", 1.0e-8))
 
     samples_cfg = cfg.get("split", {})
     samples = samples_cfg.get(split) if isinstance(samples_cfg, dict) else None
@@ -216,25 +279,38 @@ def eval_split(
     overall_mse = overall_stats.mse()
     overall_corr = overall_stats.corr()
 
-    gene_rows = [
-        {
-            "gene_id": gid,
-            "mse": stats.mse(),
-            "corr": stats.corr(),
-            "mean_pred": stats.mean_pred(),
-            "mean_true": stats.mean_true(),
-            "n_spots": stats.count,
-        }
-        for gid, stats in gene_stats.items()
-    ]
+    gene_rows = []
+    for gid, stats in gene_stats.items():
+        corr_primary, corr_finite, eligible, pred_variable = correlation_with_thresholds(
+            stats,
+            true_std_threshold=true_std_threshold,
+            pred_std_threshold=pred_std_threshold,
+        )
+        gene_rows.append(
+            {
+                "gene_id": gid,
+                "mse": stats.mse(),
+                "corr": stats.corr(),
+                "corr_primary": corr_primary,
+                "corr_finite": corr_finite,
+                "eligible_true_variance": eligible,
+                "pred_has_variance": pred_variable,
+                "mean_pred": stats.mean_pred(),
+                "mean_true": stats.mean_true(),
+                "pred_std": stats.std_pred(),
+                "true_std": stats.std_true(),
+                "n_spots": stats.count,
+            }
+        )
     sample_rows = [
         {"sample": name, "mse": stats.mse(), "corr": stats.corr()}
         for name, stats in sample_stats.items()
     ]
 
-    gene_corr_vals = [row["corr"] for row in gene_rows if np.isfinite(row["corr"])]
-    gene_corr_mean = float(np.mean(gene_corr_vals)) if gene_corr_vals else float("nan")
-    gene_corr_median = float(np.median(gene_corr_vals)) if gene_corr_vals else float("nan")
+    primary_gene_corr = [row["corr_primary"] for row in gene_rows if row["eligible_true_variance"]]
+    finite_gene_corr = [row["corr_finite"] for row in gene_rows if np.isfinite(row["corr_finite"])]
+    gene_corr_mean = float(np.mean(primary_gene_corr)) if primary_gene_corr else float("nan")
+    gene_corr_median = float(np.median(primary_gene_corr)) if primary_gene_corr else float("nan")
 
     mean_pred = np.asarray([row["mean_pred"] for row in gene_rows], dtype=np.float64)
     mean_true = np.asarray([row["mean_true"] for row in gene_rows], dtype=np.float64)
@@ -263,14 +339,41 @@ def eval_split(
         "corr": overall_corr,
         "gene_corr_mean": gene_corr_mean,
         "gene_corr_median": gene_corr_median,
+        "gene_corr_mean_primary": gene_corr_mean,
+        "gene_corr_median_primary": gene_corr_median,
+        "gene_corr_mean_finite": float(np.mean(finite_gene_corr)) if finite_gene_corr else float("nan"),
+        "gene_corr_median_finite": float(np.median(finite_gene_corr)) if finite_gene_corr else float("nan"),
+        "n_genes_total": len(gene_rows),
+        "n_genes_eligible": len(primary_gene_corr),
+        "n_gene_corr_finite": len(finite_gene_corr),
+        "gene_corr_coverage": (
+            float(len(finite_gene_corr) / len(primary_gene_corr)) if primary_gene_corr else float("nan")
+        ),
+        "true_std_threshold": true_std_threshold,
+        "pred_std_threshold": pred_std_threshold,
         "no_graph": no_graph,
         **component_summary,
     }
 
+    gene_frame = pd.DataFrame(gene_rows)
+    hvg_rows: List[Dict[str, float | int]] = []
+    ranking_value = eval_cfg.get("hvg_ranking_file")
+    if ranking_value:
+        ranking_path = Path(ranking_value)
+        if ranking_path.exists():
+            ranking_frame = pd.read_csv(ranking_path, sep="\t")
+            ranking = ranking_frame["gene_id"].astype(str).tolist()
+            hvg_rows = summarize_hvg(gene_frame, ranking)
+            for row in hvg_rows:
+                overall_payload[f"top{row['k']}_pcc_primary"] = row["mean_pcc_primary"]
+                overall_payload[f"top{row['k']}_coverage"] = row["coverage"]
+
     save_dir.mkdir(parents=True, exist_ok=True)
     (save_dir / f"{split}_overall.json").write_text(json.dumps(overall_payload, indent=2))
     pd.DataFrame(sample_rows).to_csv(save_dir / f"{split}_sample_metrics.tsv", sep="\t", index=False)
-    pd.DataFrame(gene_rows).to_csv(save_dir / f"{split}_gene_metrics.tsv", sep="\t", index=False)
+    gene_frame.to_csv(save_dir / f"{split}_gene_metrics.tsv", sep="\t", index=False)
+    if hvg_rows:
+        pd.DataFrame(hvg_rows).to_csv(save_dir / f"{split}_hvg_metrics.tsv", sep="\t", index=False)
     print(json.dumps(overall_payload, indent=2))
 
 
@@ -282,14 +385,30 @@ def main() -> None:
     parser.add_argument("--save-dir", type=Path, required=True)
     parser.add_argument("--max-genes-per-batch", type=int, default=None)
     parser.add_argument("--gene-subset-file", type=Path, default=None)
-    parser.add_argument("--no-graph", action="store_true", help="Disable spatial graph message passing by zeroing edge weights.")
+    parser.add_argument(
+        "--no-graph",
+        action="store_true",
+        help="Disable spatial graph message passing by zeroing edge weights.",
+    )
     args = parser.parse_args()
     cfg = load_config(args.config)
     max_genes = _resolve_max_genes(cfg, args.max_genes_per_batch)
     gene_subset = None
     if args.gene_subset_file is not None:
-        gene_subset = [line.strip() for line in args.gene_subset_file.read_text().splitlines() if line.strip()]
-    eval_split(args.config, args.ckpt, args.split, args.save_dir, max_genes, gene_subset, no_graph_override=bool(args.no_graph))
+        gene_subset = [
+            line.strip()
+            for line in args.gene_subset_file.read_text().splitlines()
+            if line.strip()
+        ]
+    eval_split(
+        args.config,
+        args.ckpt,
+        args.split,
+        args.save_dir,
+        max_genes,
+        gene_subset,
+        no_graph_override=bool(args.no_graph),
+    )
 
 
 if __name__ == "__main__":

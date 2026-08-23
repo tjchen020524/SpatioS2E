@@ -89,9 +89,12 @@ loss:
 optim:
   lr: 2.5e-4
   weight_decay: 1.0e-4
-  max_epochs: 10
+  max_epochs: 12
+  min_epochs: 8
   max_genes_per_batch: 96
   val_max_genes_per_batch: 128
+  train_gene_chunks_per_sample: 9
+  require_full_gene_coverage_per_epoch: true
   log_every: 1
   early_stop_patience: 4
   selection_metric: "gene_flat_combo"
@@ -99,5 +102,8 @@ optim:
 
 eval:
   max_genes_per_batch: 128
+  true_std_threshold: 1.0e-6
+  pred_std_threshold: 1.0e-6
+  hvg_ranking_file: "outputs/hippocampus_spatios2e/artifacts/train_gene_prior.gene_stats.tsv"
 
 seed: 42

@@ -135,10 +135,14 @@ spatios2e-eval \
 
 For the supplied full fitted-gene configuration, the first command computes
 the training-spot-weighted abundance anchor and residual scale in one artifact;
-validation and test expression are not read.
+validation and test expression are not read. The training configuration uses
+balanced gene chunks and verifies complete target-gene coverage in every epoch.
 
 Evaluation writes backward-compatible `mse` and `corr` fields together with
 explicit `full_matrix_mse`, `full_matrix_pcc`, abundance and centred endpoints.
+It also reports gene-PCC eligibility, finite-map coverage and training-derived
+top-HVG summaries; an eligible gene with a constant predicted map contributes
+zero to the primary mean rather than disappearing from the denominator.
 
 ## Repository map
 

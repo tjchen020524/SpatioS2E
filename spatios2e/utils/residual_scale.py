@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Dict
 
 import numpy as np
+import pandas as pd
 import torch
 import yaml
 
@@ -136,9 +137,24 @@ def main() -> None:
         log_mu_base=log_mu_base.astype(np.float32),
     )
 
+    ranking_value = cfg.get("eval", {}).get("hvg_ranking_file")
+    ranking_path = Path(ranking_value) if ranking_value else out_path.with_suffix(".gene_stats.tsv")
+    ranking_path.parent.mkdir(parents=True, exist_ok=True)
+    training_mean = log_mu_base.astype(np.float64) + resid_mean
+    ranking_order = np.argsort(-resid_scale_raw, kind="stable")
+    pd.DataFrame(
+        {
+            "gene_id": np.asarray(gene_ids, dtype=str)[ranking_order],
+            "training_mean": training_mean[ranking_order],
+            "training_std": resid_scale_raw[ranking_order],
+            "variance_rank": np.arange(1, n_gene + 1),
+        }
+    ).to_csv(ranking_path, sep="\t", index=False)
+
     summary = {
         "config": str(cfg_path),
         "output": str(out_path),
+        "hvg_ranking_file": str(ranking_path),
         "n_genes": int(n_gene),
         "n_train_samples": int(len(cfg["split"]["train"])),
         "n_train_spots": int(n_spots),

@@ -270,7 +270,11 @@ def load_config(path: Path) -> Dict:
 
 
 def build_dataloader(cfg: Dict, split: str) -> torch.utils.data.DataLoader:
-    gene_list_path = Path(cfg.get("paths", {}).get("gene_split_dir", "data/processed/dataset_gene_split")) / f"{split}_genes.txt"
+    gene_split_dir = cfg.get("paths", {}).get(
+        "gene_split_dir",
+        "data/processed/dataset_gene_split",
+    )
+    gene_list_path = Path(gene_split_dir) / f"{split}_genes.txt"
     gene_filter = None
     if gene_list_path.exists():
         gene_filter = [line.strip() for line in gene_list_path.read_text().splitlines() if line.strip()]
@@ -441,6 +445,58 @@ def forward_train_batch(
     return losses
 
 
+def take_balanced_chunk(
+    order: torch.Tensor,
+    cursor: int,
+    width: int,
+    n_genes: int,
+) -> tuple[torch.Tensor, torch.Tensor, int]:
+    """Take a fixed-width gene chunk, reshuffling only after full coverage."""
+
+    pieces = []
+    remaining = width
+    while remaining > 0:
+        available = n_genes - cursor
+        take = min(remaining, available)
+        pieces.append(order[cursor : cursor + take])
+        cursor += take
+        remaining -= take
+        if cursor == n_genes:
+            order = torch.randperm(n_genes)
+            cursor = 0
+    return torch.cat(pieces), order, cursor
+
+
+def forward_selected_batch(
+    model,
+    batch: Dict[str, Sequence],
+    cfg_loss: Dict,
+    gene_indices: torch.Tensor,
+    device: torch.device,
+    no_graph: bool = False,
+) -> Dict[str, torch.Tensor]:
+    """Evaluate one explicitly selected gene chunk from a tissue section."""
+
+    x = batch["x"][0].to(device)
+    edge_index = batch["edge_index"][0].to(device)
+    edge_weight = batch["edge_weight"][0].to(device)
+    if no_graph:
+        edge_weight = torch.zeros_like(edge_weight)
+    true = to_dense(batch["y"][0]).to(device)
+    indices = gene_indices.to(device=device)
+    true = true.index_select(1, indices)
+    all_gene_ids = batch["gene_ids"][0]
+    gene_ids = [all_gene_ids[index] for index in gene_indices.tolist()]
+    sample_name = batch["sample"][0]
+
+    out = forward_model(model, x, edge_index, edge_weight, gene_ids, sample_name=sample_name)
+    losses = compute_losses(out["log_mu"], true, edge_index, edge_weight, cfg_loss, out=out)
+    calibration = calibration_identity_loss(out)
+    losses["loss"] = losses["loss"] + float(cfg_loss.get("lambda_calib_identity", 0.0)) * calibration
+    losses["l_calib"] = calibration.detach()
+    return losses
+
+
 def validate(
     model,
     val_loader: torch.utils.data.DataLoader,
@@ -540,6 +596,7 @@ def train(cfg_path: Path, no_graph: bool = False) -> None:
 
     sample_batch = next(iter(train_loader))
     input_dim = sample_batch["x"][0].shape[1]
+    n_genes = int(sample_batch["y"][0].shape[1])
 
     model = build_model(cfg, input_dim=input_dim).to(device)
 
@@ -558,8 +615,18 @@ def train(cfg_path: Path, no_graph: bool = False) -> None:
         val_max_genes = int(val_max_genes)
 
     max_epochs = int(cfg["optim"]["max_epochs"])
+    min_epochs = int(cfg["optim"].get("min_epochs", 1))
     log_every = int(cfg["optim"].get("log_every", 1))
     patience = int(cfg["optim"].get("early_stop_patience", 0))
+    balanced_chunks = "train_gene_chunks_per_sample" in cfg["optim"]
+    chunks_per_sample = int(cfg["optim"].get("train_gene_chunks_per_sample", 1))
+    chunk_width = n_genes if max_genes is None else int(max_genes)
+    if chunks_per_sample < 1 or chunk_width < 1:
+        raise ValueError("Gene chunk width and chunks per sample must be positive")
+    capacity = len(train_loader) * chunks_per_sample * chunk_width
+    require_full_coverage = bool(cfg["optim"].get("require_full_gene_coverage_per_epoch", False))
+    if balanced_chunks and require_full_coverage and capacity < n_genes:
+        raise ValueError(f"Per-epoch gene capacity {capacity} is smaller than the {n_genes}-gene panel")
 
     ckpt_dir = Path(cfg["paths"].get("checkpoint_dir", "outputs/spatios2e/checkpoints"))
     ckpt_name = cfg["paths"].get("checkpoint_name", "best.pt")
@@ -573,35 +640,66 @@ def train(cfg_path: Path, no_graph: bool = False) -> None:
 
     for epoch in range(1, max_epochs + 1):
         model.train()
-        total_loss = point_sum = gene_sum = spot_sum = var_sum = hi_sum = delta_p_sum = delta_g_sum = lap_sum = calib_sum = 0.0
+        total_loss = point_sum = gene_sum = spot_sum = var_sum = 0.0
+        hi_sum = delta_p_sum = delta_g_sum = lap_sum = calib_sum = 0.0
         steps = 0
+        order = torch.randperm(n_genes)
+        cursor = 0
+        seen = torch.zeros(n_genes, dtype=torch.bool)
         for batch in train_loader:
-            optimizer.zero_grad()
-            losses = forward_train_batch(
-                model,
-                batch,
-                cfg_loss=cfg_loss,
-                max_genes=max_genes,
-                device=device,
-                no_graph=no_graph,
-            )
-            if not torch.isfinite(losses["loss"]):
-                print("[warn] non-finite loss, skipping batch")
-                continue
-            losses["loss"].backward()
-            torch.nn.utils.clip_grad_norm_(filter(lambda p: p.requires_grad, model.parameters()), max_norm=1.0)
-            optimizer.step()
-            total_loss += float(losses["loss"].item())
-            point_sum += float(losses["l_point"].item())
-            gene_sum += float(losses["l_gene"].item())
-            spot_sum += float(losses["l_spot"].item())
-            var_sum += float(losses["l_var"].item())
-            hi_sum += float(losses["l_hi_under"].item())
-            delta_p_sum += float(losses["l_delta_point"].item())
-            delta_g_sum += float(losses["l_delta_gene"].item())
-            lap_sum += float(losses["l_lap"].item())
-            calib_sum += float(losses["l_calib"].item())
-            steps += 1
+            if int(batch["y"][0].shape[1]) != n_genes:
+                raise ValueError("All training samples must use the same ordered gene panel")
+            selections: list[torch.Tensor | None]
+            if balanced_chunks:
+                selections = []
+                for _ in range(chunks_per_sample):
+                    indices, order, cursor = take_balanced_chunk(order, cursor, chunk_width, n_genes)
+                    seen[indices] = True
+                    selections.append(indices)
+            else:
+                selections = [None]
+
+            for gene_indices in selections:
+                optimizer.zero_grad()
+                if gene_indices is None:
+                    losses = forward_train_batch(
+                        model,
+                        batch,
+                        cfg_loss=cfg_loss,
+                        max_genes=max_genes,
+                        device=device,
+                        no_graph=no_graph,
+                    )
+                else:
+                    losses = forward_selected_batch(
+                        model,
+                        batch,
+                        cfg_loss=cfg_loss,
+                        gene_indices=gene_indices,
+                        device=device,
+                        no_graph=no_graph,
+                    )
+                if not torch.isfinite(losses["loss"]):
+                    print("[warn] non-finite loss, skipping batch")
+                    continue
+                losses["loss"].backward()
+                torch.nn.utils.clip_grad_norm_(filter(lambda p: p.requires_grad, model.parameters()), max_norm=1.0)
+                optimizer.step()
+                total_loss += float(losses["loss"].item())
+                point_sum += float(losses["l_point"].item())
+                gene_sum += float(losses["l_gene"].item())
+                spot_sum += float(losses["l_spot"].item())
+                var_sum += float(losses["l_var"].item())
+                hi_sum += float(losses["l_hi_under"].item())
+                delta_p_sum += float(losses["l_delta_point"].item())
+                delta_g_sum += float(losses["l_delta_gene"].item())
+                lap_sum += float(losses["l_lap"].item())
+                calib_sum += float(losses["l_calib"].item())
+                steps += 1
+
+        coverage = float(seen.float().mean().item()) if balanced_chunks else float("nan")
+        if balanced_chunks and require_full_coverage and coverage < 1.0:
+            raise RuntimeError(f"Epoch {epoch} covered only {coverage:.3%} of target genes")
 
         avg_loss = total_loss / max(steps, 1)
         avg_point = point_sum / max(steps, 1)
@@ -614,11 +712,12 @@ def train(cfg_path: Path, no_graph: bool = False) -> None:
         avg_lap = lap_sum / max(steps, 1)
         avg_calib = calib_sum / max(steps, 1)
         if epoch % log_every == 0:
+            coverage_text = f", gene_coverage={coverage:.4f}" if balanced_chunks else ""
             print(
                 f"[epoch {epoch}/{max_epochs}] train_loss={avg_loss:.4f} "
                 f"(point={avg_point:.4f}, gene={avg_gene:.4f}, spot={avg_spot:.4f}, "
                 f"var={avg_var:.4f}, hi={avg_hi:.4f}, delta_p={avg_delta_p:.4f}, "
-                f"delta_g={avg_delta_g:.4f}, lap={avg_lap:.4f}, calib={avg_calib:.4f})"
+                f"delta_g={avg_delta_g:.4f}, lap={avg_lap:.4f}, calib={avg_calib:.4f}{coverage_text})"
             )
 
         if val_loader is not None:
@@ -651,6 +750,7 @@ def train(cfg_path: Path, no_graph: bool = False) -> None:
                         "config": cfg,
                         "best_metric_name": metric_name,
                         "no_graph": bool(no_graph),
+                        "balanced_full_gene_coverage": bool(balanced_chunks),
                     },
                     best_path,
                 )
@@ -659,19 +759,34 @@ def train(cfg_path: Path, no_graph: bool = False) -> None:
             else:
                 no_improve += 1
 
-        if patience > 0 and no_improve >= patience:
-            print(f"[early stop] no improvement for {no_improve} epochs (best@{best_epoch} metric={best_metric:.4f})")
+        if epoch >= min_epochs and patience > 0 and no_improve >= patience:
+            print(
+                f"[early stop] no improvement for {no_improve} epochs "
+                f"(best@{best_epoch} metric={best_metric:.4f})"
+            )
             break
 
     if val_loader is None or not saved_once:
-        torch.save({"model": model.state_dict(), "epoch": epoch, "config": cfg, "no_graph": bool(no_graph)}, best_path)
+        torch.save(
+            {
+                "model": model.state_dict(),
+                "epoch": epoch,
+                "config": cfg,
+                "no_graph": bool(no_graph),
+            },
+            best_path,
+        )
         print(f"[ckpt] saved final model to {best_path} (no val or no improvement) at epoch {epoch}")
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, required=True)
-    parser.add_argument("--no-graph", action="store_true", help="Disable spatial graph message passing by zeroing edge weights.")
+    parser.add_argument(
+        "--no-graph",
+        action="store_true",
+        help="Disable spatial graph message passing by zeroing edge weights.",
+    )
     args = parser.parse_args()
     train(args.config, no_graph=bool(args.no_graph))
 

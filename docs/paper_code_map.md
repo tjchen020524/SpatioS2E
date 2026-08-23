@@ -15,6 +15,12 @@ data and generated evidence. Figure numbers refer to the current manuscript.
 | Fig. 4 residual-only assay | `SectionCenteredResidualDecoder` and `center_within_section` | Exactly section-centred training targets |
 | Fig. 4 branch intervention | `FactorizedDotProductDecoder.forward_branches` | Frozen checkpoint and a reproducible permutation of held-out-gene identity |
 
+The supplied fitted-gene trainer implements the manuscript schedule's balanced
+gene chunks, full-panel coverage assertion, minimum-epoch rule and
+validation-based checkpoint selection. The checkpoint evaluator applies the
+reported gene-variance eligibility and constant-prediction rules and can export
+training-derived top-HVG summaries.
+
 At the manuscript dimensions (1,536 spot features, 1,920 gene features, a
 512-unit hidden layer and 96-dimensional programs), the public implementations
 have 2,371,777 parameters for the full factorized decoder, 1,875,905 for the
