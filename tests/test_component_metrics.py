@@ -28,6 +28,7 @@ def test_component_metrics_obey_exact_mse_identity():
         metrics["gene_mean_mse"] + metrics["centered_mse"],
     )
     assert metrics["n_finite_gene_pcc"] == observed.shape[1]
+    assert metrics["q25_gene_pcc"] <= metrics["median_gene_pcc"] <= metrics["q75_gene_pcc"]
 
 
 def test_abundance_only_prediction_has_no_within_gene_variation():
@@ -43,7 +44,9 @@ def test_abundance_only_prediction_has_no_within_gene_variation():
 
     assert np.isclose(metrics["abundance_pcc"], 1.0)
     assert np.isclose(metrics["abundance_rmse"], 0.0)
-    assert np.isnan(metrics["mean_gene_pcc"])
+    assert metrics["mean_gene_pcc"] == 0.0
+    assert metrics["centered_full_matrix_pcc"] == 0.0
+    assert metrics["n_constant_prediction_gene_pcc"] == observed.shape[1]
     assert metrics["centered_rmse"] > 0
 
 

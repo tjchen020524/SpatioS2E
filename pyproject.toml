@@ -34,6 +34,7 @@ dev = [
 spatios2e-train = "spatios2e.training.train:main"
 spatios2e-eval = "spatios2e.evaluation.evaluate:main"
 spatios2e-eval-components = "spatios2e.evaluation.components:main"
+spatios2e-gene-mean-counterfactual = "spatios2e.evaluation.gene_mean:main"
 spatios2e-compute-residual-scale = "spatios2e.utils.residual_scale:main"
 spatios2e-normalize-visium = "spatios2e.preprocessing.normalize_visium:main"
 spatios2e-prepare-spatial-features = "spatios2e.preprocessing.prepare_spatial_features:main"

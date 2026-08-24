@@ -67,6 +67,9 @@ def center_within_section(
 def component_metrics(
     observed: np.ndarray | Sequence[Sequence[float]],
     predicted: np.ndarray | Sequence[Sequence[float]],
+    *,
+    observed_std_min: float = 1.0e-6,
+    predicted_std_min: float = 1.0e-6,
 ) -> Dict[str, float | int]:
     """Compute full-matrix, abundance and within-gene endpoints.
 
@@ -93,11 +96,23 @@ def component_metrics(
     centered_squared_error = (centered_pred - centered_true) ** 2
     gene_mean_squared_error = (mean_pred - mean_true) ** 2
 
-    gene_correlations = np.asarray(
-        [pearson_correlation(true[:, gene], pred[:, gene]) for gene in range(true.shape[1])],
-        dtype=np.float64,
-    )
-    finite_gene_correlations = gene_correlations[np.isfinite(gene_correlations)]
+    observed_std = true.std(axis=0)
+    predicted_std = pred.std(axis=0)
+    eligible = observed_std > observed_std_min
+    prediction_variable = predicted_std > predicted_std_min
+    gene_correlations = np.full(true.shape[1], np.nan, dtype=np.float64)
+    gene_correlations[eligible] = 0.0
+    for gene in np.flatnonzero(eligible & prediction_variable):
+        gene_correlations[gene] = pearson_correlation(true[:, gene], pred[:, gene])
+    eligible_gene_correlations = gene_correlations[eligible]
+    if not eligible.any():
+        centered_full_matrix_pcc = float("nan")
+    elif prediction_variable[eligible].any():
+        centered_full_matrix_pcc = pearson_correlation(
+            centered_true[:, eligible], centered_pred[:, eligible]
+        )
+    else:
+        centered_full_matrix_pcc = 0.0
 
     full_matrix_mse = float(squared_error.mean())
     gene_mean_mse = float(gene_mean_squared_error.mean())
@@ -110,9 +125,29 @@ def component_metrics(
         "abundance_pcc": pearson_correlation(mean_true, mean_pred),
         "abundance_rmse": float(np.sqrt(gene_mean_mse)),
         "mean_gene_pcc": (
-            float(finite_gene_correlations.mean()) if finite_gene_correlations.size else float("nan")
+            float(eligible_gene_correlations.mean())
+            if eligible_gene_correlations.size
+            else float("nan")
         ),
-        "n_finite_gene_pcc": int(finite_gene_correlations.size),
+        "median_gene_pcc": (
+            float(np.median(eligible_gene_correlations))
+            if eligible_gene_correlations.size
+            else float("nan")
+        ),
+        "q25_gene_pcc": (
+            float(np.quantile(eligible_gene_correlations, 0.25))
+            if eligible_gene_correlations.size
+            else float("nan")
+        ),
+        "q75_gene_pcc": (
+            float(np.quantile(eligible_gene_correlations, 0.75))
+            if eligible_gene_correlations.size
+            else float("nan")
+        ),
+        "n_eligible_gene_pcc": int(eligible.sum()),
+        "n_finite_gene_pcc": int(eligible.sum()),
+        "n_constant_prediction_gene_pcc": int((eligible & ~prediction_variable).sum()),
+        "centered_full_matrix_pcc": centered_full_matrix_pcc,
         "centered_rmse": float(np.sqrt(centered_mse)),
         "gene_mean_mse": gene_mean_mse,
         "centered_mse": centered_mse,

@@ -1,0 +1,48 @@
+{
+  "train": [
+    "GSM9227428_Nac_2720_33V",
+    "GSM9227429_Nac_2720_34V",
+    "GSM9227430_Nac_2720_35V",
+    "GSM9227431_Nac_2720_36V",
+    "GSM9227436_41v_NAc",
+    "GSM9227437_42v_NAc",
+    "GSM9227438_43v_NAc",
+    "GSM9227439_44v_NAc",
+    "GSM9227442_47v_Nac",
+    "GSM9227444_49v_Nac",
+    "GSM9227445_50v_Nac",
+    "GSM9227446_51v_Nac",
+    "GSM9227447_52v_Nac",
+    "GSM9227448_53v_NAc",
+    "GSM9227449_54v_NAc",
+    "GSM9227450_55v_NAc",
+    "GSM9227451_56v_NAc",
+    "GSM9227452_57v_NAc",
+    "GSM9227453_58v_NAc",
+    "GSM9227454_59v_NAc",
+    "GSM9227455_60v_NAc",
+    "GSM9227460_73v_NAc",
+    "GSM9227461_74v_NAc",
+    "GSM9227462_75v_NAc",
+    "GSM9227463_76v_NAc"
+  ],
+  "val": [
+    "GSM9227440_45v_Nac",
+    "GSM9227441_46v_Nac",
+    "GSM9227443_48v_Nac",
+    "GSM9227464_78v_NAc",
+    "GSM9227465_79v_NAc"
+  ],
+  "test": [
+    "GSM9227432_37v_NAc",
+    "GSM9227433_38v_NAc",
+    "GSM9227434_39v_NAc",
+    "GSM9227435_40v_NAc",
+    "GSM9227456_61v_NAc",
+    "GSM9227457_62v_NAc",
+    "GSM9227458_63v_NAc",
+    "GSM9227459_64v_NAc"
+  ],
+  "embedding_dim": 1536,
+  "feature_source": "multimodal_features.npz:histology_embeddings"
+}

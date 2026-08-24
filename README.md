@@ -12,6 +12,9 @@ axes that can otherwise be conflated:
 The repository contains the fitted-gene prediction framework, the separately
 trained target-disjoint decoders used for held-out genes, component-resolved
 metrics, preprocessing utilities, and an end-to-end hippocampus configuration.
+It also freezes the exact four-cohort biological section splits, primary
+downstream gene partitions and held-out-assay hyperparameters under
+`configs/manuscript/`.
 Raw data, third-party encoders and weights, trained checkpoints, and generated
 predictions are intentionally not stored in git.
 
@@ -82,9 +85,12 @@ print(metrics["mean_gene_pcc"])
 print(metrics["decomposition_error"])
 ```
 
-The evaluator reports full-matrix PCC and MSE, abundance PCC and RMSE, mean
-gene-wise PCC, centred RMSE, and the two exact MSE components. For a rectangular
-matrix,
+The evaluator reports full-matrix PCC and MSE, abundance PCC and RMSE, mean,
+median and interquartile gene-wise PCC, gene-centred full-matrix PCC, centred RMSE, and the two
+exact MSE components. Gene-wise eligibility is defined only by observed
+variation. An eligible gene with a constant prediction contributes PCC zero,
+so different prediction conditions retain the same observed-defined
+denominator. For a rectangular matrix,
 
 ```text
 full-matrix MSE = gene-mean MSE + centred MSE.
@@ -99,6 +105,22 @@ spatios2e-eval-components predictions.npz --output component_metrics.json
 The NPZ must contain `observed` and `predicted` arrays. Add
 `--section-key section_ids` to centre both matrices independently within each
 tissue section before evaluation.
+
+The release also implements the no-image counterfactual used to determine how
+much target-disjoint matrix performance is available from gene means alone:
+
+```bash
+spatios2e-gene-mean-counterfactual gene_vectors_and_training_means.npz \
+  --output heldout_gene_means.npz
+```
+
+The input contains `vectors`, training-individual `gene_means`, and downstream
+`training_indices` and `heldout_indices`. The fitted ridge receives no image,
+coordinate or spot input. Its predicted held-out-gene means can be broadcast
+over any number of spots with `broadcast_gene_means`; component evaluation of
+that map has zero within-gene correlation by construction. Random or
+identity-permuted vectors from `spatios2e.models.gene_vectors` provide matched
+controls under the same fitting procedure.
 
 ## Fitted-gene hippocampus example
 
@@ -152,6 +174,8 @@ zero to the primary mean rather than disappearing from the denominator.
 - `spatios2e/preprocessing/`: expression, image-feature and graph preparation;
 - `spatios2e/training/`: fitted-gene training entry point;
 - `configs/` and `examples/`: portable hippocampus example;
+- `configs/manuscript/`: four-cohort design, exact biological/gene splits,
+  held-out-assay protocol and external-model checksums;
 - `docs/paper_code_map.md`: mapping from manuscript analyses to public code;
 - `tests/`: import, decoder and metric identity tests.
 

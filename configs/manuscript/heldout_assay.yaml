@@ -1,0 +1,50 @@
+input:
+  spot_representation: UNI2-h
+  spot_dimension: 1536
+  gene_representation: Decima v0.5.1 v1_rep0 mean-pooled frozen vectors
+  gene_dimension: 1920
+  coordinates: false
+  graph: false
+
+model:
+  class: FactorizedDotProductDecoder
+  hidden_dimension: 512
+  program_dimension: 96
+  dropout: 0.1
+  output: softplus
+
+controls:
+  pretrained: training-gene-standardized frozen Decima-derived vectors
+  random: dimension-matched fixed standard-normal vectors
+  constant: one zero vector shared by every gene
+  shuffled: within-partition permutation of the standardized pretrained-vector multiset
+
+optimization:
+  epochs: 6
+  optimizer: AdamW
+  learning_rate: 0.0002
+  weight_decay: 0.0001
+  batch_size: 256
+  gradient_clip_norm: 1.0
+  genes_per_batch_maximum: 512
+  mse_weight: 1.0
+  gene_correlation_loss_weight: 0.15
+  checkpoint_score: validation_mean_gene_pcc - 0.02 * validation_mse
+  validation_training_genes: 2048
+  validation_gene_sampling: uniform_without_replacement
+  seeds: [42, 123, 456]
+
+evaluation:
+  gene_eligibility: observed_variance_only
+  eligible_constant_prediction_pcc: 0.0
+  endpoints:
+    - full_matrix_pcc
+    - full_matrix_mse
+    - abundance_pcc
+    - abundance_rmse
+    - mean_gene_pcc
+    - median_gene_pcc
+    - gene_centered_full_matrix_pcc
+    - centered_rmse
+    - gene_mean_mse
+    - centered_mse

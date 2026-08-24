@@ -1,0 +1,46 @@
+cohorts:
+  hippocampus:
+    accession: GSE264692
+    tissue: anterior hippocampus
+    platform: 10x Visium
+    biological_unit: donor
+    image_modality: H&E
+    individuals: {total: 10, train: 6, validation: 2, test: 2}
+    sections: {total: 34, train: 22, validation: 8, test: 4}
+    target_genes: 18397
+    biological_split: biological_splits/hippocampus.json
+    gene_split: gene_splits/hippocampus_donor_disjoint
+  dlpfc:
+    accession: GSE307403
+    tissue: dorsolateral prefrontal cortex
+    platform: 10x Visium
+    biological_unit: donor
+    image_modality: immunofluorescence
+    individuals: {total: 63, train: 44, validation: 9, test: 10}
+    sections: {total: 63, train: 44, validation: 9, test: 10}
+    target_genes: 18397
+    biological_split: biological_splits/dlpfc.json
+    gene_split: gene_splits/dlpfc
+  nac:
+    accession: GSE307586
+    processed_data_doi: 10.5281/zenodo.17089020
+    tissue: nucleus accumbens
+    platform: 10x Visium
+    biological_unit: donor
+    image_modality: H&E
+    individuals: {total: 10, train: 6, validation: 2, test: 2}
+    sections: {total: 38, train: 25, validation: 5, test: 8}
+    target_genes: 18397
+    biological_split: biological_splits/nac.json
+    gene_split: gene_splits/nac
+  her2st:
+    accession: 10.5281/zenodo.4751624
+    tissue: HER2-positive breast cancer
+    platform: Spatial Transcriptomics
+    biological_unit: patient
+    image_modality: H&E
+    individuals: {total: 8, train: 5, validation: 1, test: 2}
+    sections: {total: 36, train: 27, validation: 3, test: 6}
+    target_genes: 15914
+    biological_split: biological_splits/her2st.json
+    gene_split: gene_splits/her2st

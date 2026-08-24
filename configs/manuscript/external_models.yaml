@@ -1,0 +1,17 @@
+UNI2-h:
+  upstream_identifier: MahmoodLab/UNI2-h
+  checkpoint_file: pytorch_model.bin
+  revision: d517a8dd47902dd7c308b3c36f63bce47e7b9a43
+  sha256: 6e077eda234bebc595868d918d3458d9dd32a050199b0ff04443b2f46a0a3b1e
+  output_dimension: 1536
+  redistribution: obtain from the official upstream project; weights are not included
+
+Decima:
+  package_version: 0.5.1
+  model_alias: v1_rep0
+  local_checkpoint_alias: rep0.ckpt
+  sha256: 9b4efc2967d09d05c34ced1877744ad1d499d3899863463d5107d072046bfb31
+  reference_assembly: GCA_000001405.15
+  input_window_bp: 524288
+  pooled_output_dimension: 1920
+  redistribution: obtain under the official upstream terms; weights are not included

@@ -8,12 +8,18 @@ data and generated evidence. Figure numbers refer to the current manuscript.
 | Fig. 1 fitted-gene framework | `spatios2e.models.SpatioS2EModel`, `MorphologyGraphModel` and the model factory | UNI2-h features, spatial coordinates/graphs, Decima vectors and training-derived abundance artifacts |
 | Fig. 1 component endpoints | `spatios2e.evaluation.component_metrics` | Observed and predicted `[spot, gene]` matrices |
 | Fig. 2 fitted-gene contrasts | fitted-gene models plus YAML configuration | Cohort-specific biological splits and variant configs |
-| Fig. 3 held-out-gene assay | `FactorizedDotProductDecoder` and `spatios2e.models.gene_vectors` | Fixed training/held-out gene split, frozen spot features, and pretrained, random or constant gene vectors |
+| Held-out-gene assay | `FactorizedDotProductDecoder` and `spatios2e.models.gene_vectors` | Fixed training/held-out gene split, frozen spot features, and pretrained, random or constant gene vectors |
+| No-image gene-mean counterfactual | `fit_gene_mean_counterfactual` and `broadcast_gene_means` | Frozen gene vectors and training-individual gene means; no spot-level input |
 | Fig. 3 section-centred sensitivity | `center_within_section` and `component_metrics` | Tissue-section identifiers |
 | Fig. 4 bias-free audit | `BiasFreeFactorizedDecoder` | Same target-disjoint inputs and controls as Fig. 3 |
 | Fig. 4 decoder-family audit | `ConcatenationMLPDecoder` | Same target-disjoint inputs and controls as Fig. 3 |
 | Fig. 4 residual-only assay | `SectionCenteredResidualDecoder` and `center_within_section` | Exactly section-centred training targets |
 | Fig. 4 branch intervention | `FactorizedDotProductDecoder.forward_branches` | Frozen checkpoint and a reproducible permutation of held-out-gene identity |
+
+The exact section and primary downstream gene partitions for all four cohorts
+are versioned in `configs/manuscript/`. `heldout_assay.yaml` records the matched
+decoder, vector controls, optimization and endpoint policy; `external_models.yaml`
+records upstream revisions and hashes without redistributing checkpoints.
 
 The supplied fitted-gene trainer implements the manuscript schedule's balanced
 gene chunks, full-panel coverage assertion, minimum-epoch rule and
