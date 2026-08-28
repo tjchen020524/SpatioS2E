@@ -1,10 +1,29 @@
-input:
-  spot_representation: UNI2-h
-  spot_dimension: 1536
-  gene_representation: Decima v0.5.1 v1_rep0 mean-pooled frozen vectors
-  gene_dimension: 1920
+design:
+  biological_partition: individual-disjoint within cohort
+  molecular_partition: target-disjoint from optimization and checkpoint selection
   coordinates: false
   graph: false
+
+spot_input:
+  representation: UNI2-h
+  dimension: 1536
+  frozen: true
+
+gene_representations:
+  decima:
+    description: Decima v0.5.1 v1_rep0 mean-pooled frozen vectors
+    dimension: 1920
+    downstream_standardization: feature-wise mean and standard deviation from downstream training genes
+    heldout_targets: {hippocampus: 3680, dlpfc: 3680, nac: 3680, her2st: 3184}
+  scgpt_whole_human:
+    description: static gene-token rows after checkpoint layer normalization
+    dimension: 512
+    cell_specific_expression_supplied: false
+    contextual_transformer_output_supplied: false
+    downstream_standardization: feature-wise mean and standard deviation from vocabulary-covered downstream training genes
+    vocabulary_policy: exclude out-of-vocabulary genes identically from every matched condition
+    heldout_targets: {hippocampus: 3574, dlpfc: 3574, nac: 3574, her2st: 3179}
+  comparison_policy: parallel within-representation contrasts on exact common downstream targets; not a Decima-versus-scGPT leaderboard
 
 model:
   class: FactorizedDotProductDecoder
@@ -14,10 +33,13 @@ model:
   output: softplus
 
 controls:
-  pretrained: training-gene-standardized frozen Decima-derived vectors
+  pretrained: training-gene-standardized frozen vectors with the correct gene identity
   random: dimension-matched fixed standard-normal vectors
   constant: one zero vector shared by every gene
   shuffled: within-partition permutation of the standardized pretrained-vector multiset
+  random_seed: analysis_seed + 12345
+  shuffle_seed: analysis_seed + 810001
+  shuffle_scope: downstream training and held-out partitions permuted independently and fixed through training, validation and test
 
 optimization:
   epochs: 6
@@ -40,11 +62,15 @@ evaluation:
   endpoints:
     - full_matrix_pcc
     - full_matrix_mse
-    - abundance_pcc
-    - abundance_rmse
+    - gene_mean_pcc
+    - gene_mean_rmse
     - mean_gene_pcc
     - median_gene_pcc
-    - gene_centered_full_matrix_pcc
+    - centered_full_matrix_pcc
     - centered_rmse
     - gene_mean_mse
     - centered_mse
+  compatibility_aliases:
+    abundance_pcc: gene_mean_pcc
+    abundance_rmse: gene_mean_rmse
+  constant_vector_gene_mean_pcc: undefined because predicted gene means have no across-gene variance

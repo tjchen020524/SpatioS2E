@@ -4,6 +4,7 @@ from spatios2e.models.factory import build_model
 from spatios2e.models.gene_vectors import (
     constant_gene_vectors,
     permute_gene_identity,
+    permute_gene_identity_within_partitions,
     random_gene_vectors,
     standardize_from_training_genes,
 )
@@ -31,6 +32,7 @@ __all__ = [
     "build_model",
     "constant_gene_vectors",
     "permute_gene_identity",
+    "permute_gene_identity_within_partitions",
     "random_gene_vectors",
     "standardize_from_training_genes",
 ]

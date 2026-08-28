@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: If you use this software, please cite the manuscript and the archived software release.
+title: Component-resolved evaluation reveals gene-mean-dominated transfer in virtual spatial transcriptomics
+type: software
+authors:
+  - family-names: Chen
+    given-names: Tingjun
+  - family-names: Hicks
+    given-names: Stephanie C.
+version: 0.2.0
+repository-code: https://github.com/tjchen020524/SpatioS2E
+license: MIT
+keywords:
+  - spatial transcriptomics
+  - gene-conditioned prediction
+  - component-resolved evaluation
+  - target-disjoint evaluation

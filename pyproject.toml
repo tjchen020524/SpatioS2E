@@ -8,7 +8,18 @@ version = "0.2.0"
 description = "Component-resolved evaluation and gene-conditioned prediction of spatial expression."
 readme = "README.md"
 requires-python = ">=3.10"
-license = {text = "MIT"}
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+  {name = "Tingjun Chen"},
+  {name = "Stephanie C. Hicks"},
+]
+keywords = [
+  "spatial transcriptomics",
+  "virtual spatial transcriptomics",
+  "gene-conditioned prediction",
+  "component-resolved evaluation",
+]
 dependencies = [
   "numpy>=1.23",
   "scipy>=1.10",
@@ -17,6 +28,10 @@ dependencies = [
   "h5py>=3.8",
   "torch>=2.0",
 ]
+
+[project.urls]
+Repository = "https://github.com/tjchen020524/SpatioS2E"
+Issues = "https://github.com/tjchen020524/SpatioS2E/issues"
 
 [project.optional-dependencies]
 preprocess = [
@@ -35,6 +50,7 @@ spatios2e-train = "spatios2e.training.train:main"
 spatios2e-eval = "spatios2e.evaluation.evaluate:main"
 spatios2e-eval-components = "spatios2e.evaluation.components:main"
 spatios2e-gene-mean-counterfactual = "spatios2e.evaluation.gene_mean:main"
+spatios2e-extract-scgpt-tokens = "spatios2e.preprocessing.extract_scgpt_gene_tokens:main"
 spatios2e-compute-residual-scale = "spatios2e.utils.residual_scale:main"
 spatios2e-normalize-visium = "spatios2e.preprocessing.normalize_visium:main"
 spatios2e-prepare-spatial-features = "spatios2e.preprocessing.prepare_spatial_features:main"

@@ -31,7 +31,7 @@ def test_component_metrics_obey_exact_mse_identity():
     assert metrics["q25_gene_pcc"] <= metrics["median_gene_pcc"] <= metrics["q75_gene_pcc"]
 
 
-def test_abundance_only_prediction_has_no_within_gene_variation():
+def test_gene_mean_only_prediction_has_no_within_gene_variation():
     observed = np.asarray(
         [
             [0.0, 2.0, 5.0],
@@ -42,8 +42,10 @@ def test_abundance_only_prediction_has_no_within_gene_variation():
     predicted = np.broadcast_to(observed.mean(axis=0), observed.shape)
     metrics = component_metrics(observed, predicted)
 
-    assert np.isclose(metrics["abundance_pcc"], 1.0)
-    assert np.isclose(metrics["abundance_rmse"], 0.0)
+    assert np.isclose(metrics["gene_mean_pcc"], 1.0)
+    assert np.isclose(metrics["gene_mean_rmse"], 0.0)
+    assert metrics["abundance_pcc"] == metrics["gene_mean_pcc"]
+    assert metrics["abundance_rmse"] == metrics["gene_mean_rmse"]
     assert metrics["mean_gene_pcc"] == 0.0
     assert metrics["centered_full_matrix_pcc"] == 0.0
     assert metrics["n_constant_prediction_gene_pcc"] == observed.shape[1]

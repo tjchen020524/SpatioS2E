@@ -1,4 +1,4 @@
-"""Decoders used in the target-disjoint held-out-gene assays.
+"""Decoders used in the target-disjoint held-out-target assays.
 
 These modules operate on precomputed spot representations and fixed gene
 vectors.  They do not load or fine-tune the model that produced either input.
@@ -25,7 +25,7 @@ def _program_encoder(input_dim: int, hidden_dim: int, program_dim: int, dropout:
 
 
 class FactorizedDotProductDecoder(nn.Module):
-    """Primary held-out-gene decoder with gene-bias and interaction paths.
+    """Primary held-out-target decoder with gene-bias and interaction paths.
 
     For spot representation ``x_i`` and gene vector ``e_g``, the model returns
     ``softplus(<f_spot(x_i), f_gene(e_g)> / sqrt(k) + f_bias(e_g))``.

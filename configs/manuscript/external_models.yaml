@@ -15,3 +15,20 @@ Decima:
   input_window_bp: 524288
   pooled_output_dimension: 1920
   redistribution: obtain under the official upstream terms; weights are not included
+
+scGPT_whole_human:
+  upstream_repository: https://github.com/bowang-lab/scGPT
+  repository_revision_used_for_extraction: cebd6fae655b9c585a4807daa3ac31bb764f06b4
+  checkpoint_scope: whole-human pretraining checkpoint; not downstream fine-tuned
+  upstream_training_description: official model-zoo description states 33 million normal human cells
+  checkpoint_file: best_model.pt
+  checkpoint_sha256: 6cb5d451ab5c4b33eb673adbe4fddc61d2389df1b89b7651a9fe2e557572b922
+  checkpoint_args_file: args.json
+  checkpoint_args_sha256: c18e075e018140cb8b2d9029387b9de26607a5ce6a8ccabd6ead70cd76b95d60
+  vocabulary_file: vocab.json
+  vocabulary_sha256: acca93d114ca62c3f0f50debbd23e8c87f0714f4737764454f6b2b13f2e8580f
+  vocabulary_size: 60697
+  token_dimension: 512
+  extraction: encoder.embedding.weight row followed by encoder.enc_norm LayerNorm with epsilon 1e-5
+  upstream_overlap_status: exact accession-level overlap with downstream cohorts cannot be resolved from packaged checkpoint metadata
+  redistribution: obtain from the official upstream project; weights are not included

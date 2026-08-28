@@ -7,6 +7,14 @@ __pycache__/
 .ipynb_checkpoints/
 .venv/
 venv/
+.coverage
+htmlcov/
+.DS_Store
+.idea/
+.vscode/
+.env
+.env.*
+!.env.example
 
 # Build artifacts
 build/
@@ -21,6 +29,12 @@ dist/
 /logs/
 /reports/
 /wandb/
+
+# Upstream repositories are external dependencies, not vendored source.
+/Decima/
+/scGPT/
+/UNI/
+/UNI2-h/
 
 # Large scientific artifacts
 *.h5ad

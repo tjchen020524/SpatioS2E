@@ -317,14 +317,17 @@ def eval_split(
     gene_counts = np.asarray([row["n_spots"] for row in gene_rows], dtype=np.float64)
     mean_squared_errors = (mean_pred - mean_true) ** 2
     gene_mean_mse = float(np.average(mean_squared_errors, weights=gene_counts))
-    abundance_rmse = float(np.sqrt(np.mean(mean_squared_errors)))
-    abundance_pcc = pearson_correlation(mean_true, mean_pred)
+    gene_mean_rmse = float(np.sqrt(np.mean(mean_squared_errors)))
+    gene_mean_pcc = pearson_correlation(mean_true, mean_pred)
     centered_mse = max(float(overall_mse - gene_mean_mse), 0.0)
     component_summary = {
         "full_matrix_mse": overall_mse,
         "full_matrix_pcc": overall_corr,
-        "abundance_pcc": abundance_pcc,
-        "abundance_rmse": abundance_rmse,
+        "gene_mean_pcc": gene_mean_pcc,
+        "gene_mean_rmse": gene_mean_rmse,
+        # Compatibility aliases used by v0.1 outputs and analysis scripts.
+        "abundance_pcc": gene_mean_pcc,
+        "abundance_rmse": gene_mean_rmse,
         "mean_gene_pcc": gene_corr_mean,
         "centered_rmse": float(np.sqrt(centered_mse)),
         "gene_mean_mse": gene_mean_mse,

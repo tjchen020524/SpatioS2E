@@ -1,0 +1,8 @@
+include CHANGELOG.md
+include CITATION.cff
+include environment.yml
+include requirements.txt
+recursive-include configs *.json *.md *.txt *.yaml
+recursive-include docs *.md
+recursive-include examples *.sh *.txt
+recursive-include tests *.py

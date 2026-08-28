@@ -3,6 +3,7 @@ import numpy as np
 from spatios2e.models import (
     constant_gene_vectors,
     permute_gene_identity,
+    permute_gene_identity_within_partitions,
     random_gene_vectors,
     standardize_from_training_genes,
 )
@@ -32,3 +33,18 @@ def test_identity_permutation_preserves_vector_set():
 
     assert np.array_equal(permuted, vectors[permutation])
     assert sorted(permutation.tolist()) == list(range(vectors.shape[0]))
+
+
+def test_identity_permutation_preserves_each_downstream_partition():
+    vectors = np.arange(32, dtype=np.float32).reshape(8, 4)
+    partitions = ([0, 2, 4, 6], [1, 3, 5])
+    permuted, permutation = permute_gene_identity_within_partitions(
+        vectors,
+        partitions,
+        seed=810_043,
+    )
+
+    assert sorted(permutation[list(partitions[0])].tolist()) == sorted(partitions[0])
+    assert sorted(permutation[list(partitions[1])].tolist()) == sorted(partitions[1])
+    assert permutation[7] == 7
+    assert np.array_equal(permuted, vectors[permutation])

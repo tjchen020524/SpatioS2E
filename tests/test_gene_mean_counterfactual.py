@@ -27,7 +27,7 @@ def test_gene_mean_counterfactual_recovers_vector_signal_without_spatial_variati
     metrics = component_metrics(observed, predicted)
 
     assert len(diagnostics) == 3
-    assert metrics["abundance_pcc"] > 0.99
+    assert metrics["gene_mean_pcc"] > 0.99
     assert metrics["mean_gene_pcc"] == 0.0
     assert metrics["centered_full_matrix_pcc"] == 0.0
     assert abs(metrics["decomposition_error"]) < 1.0e-12

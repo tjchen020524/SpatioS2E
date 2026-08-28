@@ -1,7 +1,8 @@
 """Component-resolved endpoints for spatial-expression matrices.
 
-Matrices are expected in ``[spot, gene]`` order.  Gene means describe
-across-gene abundance; subtracting those means isolates within-gene variation.
+Matrices are expected in ``[spot, gene]`` order. Gene means describe the
+across-gene ordering of mean normalized log-expression; subtracting those
+means isolates within-gene variation.
 """
 
 from __future__ import annotations
@@ -71,7 +72,7 @@ def component_metrics(
     observed_std_min: float = 1.0e-6,
     predicted_std_min: float = 1.0e-6,
 ) -> Dict[str, float | int]:
-    """Compute full-matrix, abundance and within-gene endpoints.
+    """Compute full-matrix, gene-mean and within-gene endpoints.
 
     The returned MSE terms obey the exact identity
 
@@ -117,13 +118,18 @@ def component_metrics(
     full_matrix_mse = float(squared_error.mean())
     gene_mean_mse = float(gene_mean_squared_error.mean())
     centered_mse = float(centered_squared_error.mean())
+    gene_mean_pcc = pearson_correlation(mean_true, mean_pred)
+    gene_mean_rmse = float(np.sqrt(gene_mean_mse))
     return {
         "n_spots": int(true.shape[0]),
         "n_genes": int(true.shape[1]),
         "full_matrix_pcc": pearson_correlation(true, pred),
         "full_matrix_mse": full_matrix_mse,
-        "abundance_pcc": pearson_correlation(mean_true, mean_pred),
-        "abundance_rmse": float(np.sqrt(gene_mean_mse)),
+        "gene_mean_pcc": gene_mean_pcc,
+        "gene_mean_rmse": gene_mean_rmse,
+        # Compatibility aliases used by v0.1 and the frozen analysis scripts.
+        "abundance_pcc": gene_mean_pcc,
+        "abundance_rmse": gene_mean_rmse,
         "mean_gene_pcc": (
             float(eligible_gene_correlations.mean())
             if eligible_gene_correlations.size

@@ -4,7 +4,6 @@ from pathlib import Path
 
 import yaml
 
-
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs" / "manuscript"
 
@@ -74,3 +73,31 @@ def test_primary_gene_split_counts_disjointness_and_checksums():
         assert set(train).isdisjoint(heldout)
         assert _sha256(train_path) == train_sha
         assert _sha256(heldout_path) == heldout_sha
+
+
+def test_heldout_assay_records_both_representation_contracts():
+    assay = yaml.safe_load((CONFIG / "heldout_assay.yaml").read_text())
+    representations = assay["gene_representations"]
+    assert representations["decima"]["dimension"] == 1_920
+    assert representations["scgpt_whole_human"]["dimension"] == 512
+    assert representations["scgpt_whole_human"]["heldout_targets"] == {
+        "hippocampus": 3_574,
+        "dlpfc": 3_574,
+        "nac": 3_574,
+        "her2st": 3_179,
+    }
+    assert assay["evaluation"]["constant_vector_gene_mean_pcc"].startswith("undefined")
+
+
+def test_external_model_hashes_are_frozen_without_local_paths():
+    text = (CONFIG / "external_models.yaml").read_text()
+    models = yaml.safe_load(text)
+    assert models["Decima"]["sha256"] == (
+        "9b4efc2967d09d05c34ced1877744ad1d499d3899863463d5107d072046bfb31"
+    )
+    assert models["scGPT_whole_human"]["checkpoint_sha256"] == (
+        "6cb5d451ab5c4b33eb673adbe4fddc61d2389df1b89b7651a9fe2e557572b922"
+    )
+    assert "/dcs04/" not in text
+    assert "/users/" not in text
+    assert "/scratch/" not in text
