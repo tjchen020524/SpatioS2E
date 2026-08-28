@@ -206,6 +206,7 @@ zero to the primary mean rather than disappearing from the denominator.
   held-out-assay protocol and external-model checksums;
 - `docs/paper_code_map.md`: mapping from manuscript analyses to public code;
 - `docs/heldout_assay.md`: portable target-disjoint batch and control contract;
+- `docs/releases/v0.2.0.md`: publication-release notes;
 - `tests/`: import, decoder and metric identity tests.
 
 ## Reproducibility boundary
@@ -220,5 +221,5 @@ portable model, evaluation and control implementations they call.
 ## License and citation
 
 The code is released under the MIT License. Please use the metadata in
-[`CITATION.cff`](CITATION.cff) when citing this software. A manuscript DOI and
-archival software DOI will be added to an immutable release when public.
+[`CITATION.cff`](CITATION.cff) when citing this software. The version-specific
+Zenodo DOI and manuscript DOI will be linked here after they are assigned.
