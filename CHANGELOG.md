@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.2.0 — unreleased
+## 0.2.0 — 2026-08-28
 
 - Align the public hippocampus example with the manuscript's donor-disjoint
   22/8/4-section partition, training-tissue gene-mean anchor and balanced
