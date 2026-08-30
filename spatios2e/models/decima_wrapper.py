@@ -150,14 +150,12 @@ class GeneSequenceLoader:
             # Prefer keys named like "input" or the first array with shape (5, L)
             candidate_keys = ["input"] + list(data.files)
             arr = None
-            chosen = None
             for key in candidate_keys:
                 if key not in data:
                     continue
                 a = data[key]
                 if a.ndim >= 2 and a.shape[0] == 5:
                     arr = a
-                    chosen = key
                     break
             if arr is None:
                 raise ValueError(

@@ -437,7 +437,6 @@ def forward_train_batch(
 
     out = forward_model(model, x, edge_index, edge_weight, gene_ids, sample_name=sample_name)
     pred = out["log_mu"]
-    delta = out["delta"]
     losses = compute_losses(pred, y_spot, edge_index, edge_weight, cfg_loss, out=out)
     l_calib = calibration_identity_loss(out)
     losses["loss"] = losses["loss"] + float(cfg_loss.get("lambda_calib_identity", 0.0)) * l_calib
@@ -533,7 +532,6 @@ def validate(
                 y_chunk = y_spot[:, start:end]
                 out = forward_model(model, x, edge_index, edge_weight, gene_ids, sample_name=sample_name)
                 pred = out["log_mu"]
-                delta = out["delta"]
                 losses = compute_losses(pred, y_chunk, edge_index, edge_weight, cfg_loss, out=out)
                 l_calib = calibration_identity_loss(out)
                 losses["loss"] = losses["loss"] + float(cfg_loss.get("lambda_calib_identity", 0.0)) * l_calib

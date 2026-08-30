@@ -30,7 +30,7 @@ import gzip
 import json
 import logging
 from pathlib import Path
-from typing import Dict, List, Sequence, Tuple
+from typing import Dict, List, Sequence
 
 import numpy as np
 from scipy import sparse

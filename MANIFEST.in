@@ -1,8 +1,12 @@
 include CHANGELOG.md
 include CITATION.cff
 include environment.yml
+include environment-lock.yml
 include requirements.txt
+include requirements-lock-linux-x86_64-py310.txt
 recursive-include configs *.json *.md *.txt *.yaml
 recursive-include docs *.md
 recursive-include examples *.sh *.txt
+recursive-include scripts *.py *.sh
 recursive-include tests *.py
+recursive-include validation *.md

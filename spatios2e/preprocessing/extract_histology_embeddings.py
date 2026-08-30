@@ -33,7 +33,8 @@ except ImportError as exc:  # pragma: no cover - defensive guard
 try:
     from tqdm import tqdm
 except ImportError:  # pragma: no cover - fallback if tqdm missing
-    tqdm = lambda it, **kw: it  # type: ignore
+    def tqdm(iterable, **kwargs):  # type: ignore
+        return iterable
 
 LOGGER = logging.getLogger("spatios2e.extract_histology_embeddings")
 
@@ -165,7 +166,6 @@ def resolve_image_path(
     requested: str = "auto",
 ) -> Tuple[Path, str, float]:
     """Locate the best available histology image and return with scale factor."""
-    candidates: List[Tuple[str, str, float]] = []
     hires_scale = float(scalefactors.get("tissue_hires_scalef", 1.0))
     lowres_scale = float(scalefactors.get("tissue_lowres_scalef", hires_scale))
     resolution_order = {

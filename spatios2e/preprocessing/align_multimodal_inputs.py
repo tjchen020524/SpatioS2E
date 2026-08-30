@@ -8,7 +8,7 @@ import csv
 import gzip
 import json
 from pathlib import Path
-from typing import Dict, Iterable, List, Set
+from typing import Dict, List, Set
 
 import numpy as np
 

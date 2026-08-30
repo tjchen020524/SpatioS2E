@@ -1,0 +1,8 @@
+name: spatios2e-py310-locked
+channels:
+  - defaults
+dependencies:
+  - python=3.10.19
+  - pip=25.0.1
+  - pip:
+      - -r requirements-lock-linux-x86_64-py310.txt

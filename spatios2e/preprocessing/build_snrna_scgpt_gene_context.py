@@ -23,7 +23,8 @@ from torch.utils.data import DataLoader, Dataset, SequentialSampler
 try:
     from tqdm import tqdm
 except ImportError:  # pragma: no cover
-    tqdm = lambda it, **kw: it  # type: ignore
+    def tqdm(iterable, **kwargs):  # type: ignore
+        return iterable
 
 
 class SimpleVocab:

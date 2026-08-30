@@ -1,0 +1,360 @@
+{
+  "construction": {
+    "chromosome_blocked": "chromosomes 1, 14, 15 and X held out",
+    "embedding_cluster": "standardized Decima vectors; randomized PCA(50, seed 42); ten MiniBatchKMeans clusters within each expression bin; full clusters assigned held out",
+    "expression_seed123": "primary construction repeated with sampling seed 123",
+    "expression_seed456": "primary construction repeated with sampling seed 456",
+    "historical": "prespecified earlier working-set partition retained only as sensitivity analysis",
+    "primary": "ten training-expression rank bins; 20% sampled within bin; seed 42"
+  },
+  "identifier": "stable Ensembl identifiers in file order",
+  "partitions": {
+    "chromosome_blocked": {
+      "dlpfc": {
+        "heldout": {
+          "n_genes": 3677,
+          "path": "configs/manuscript/gene_splits_sensitivity/chromosome_blocked/dlpfc/heldout_genes.txt",
+          "sha256": "11e363be5ee89829617d9d1107296571e0653735ea4eb96de3c7d9653a3b4ec9"
+        },
+        "train": {
+          "n_genes": 14720,
+          "path": "configs/manuscript/gene_splits_sensitivity/chromosome_blocked/dlpfc/train_genes.txt",
+          "sha256": "01b7b644b55d7e7e23a918b1770c4ef705f8c6e113a1f6fec07482b9c317b715"
+        },
+        "universe_n_genes": 18397
+      },
+      "her2st": {
+        "heldout": {
+          "n_genes": 3194,
+          "path": "configs/manuscript/gene_splits_sensitivity/chromosome_blocked/her2st/heldout_genes.txt",
+          "sha256": "1ed025bdcef1ed7572486b103fdf07d5391a8b8995fdde09794f22abcbe9f7d6"
+        },
+        "train": {
+          "n_genes": 12720,
+          "path": "configs/manuscript/gene_splits_sensitivity/chromosome_blocked/her2st/train_genes.txt",
+          "sha256": "b6ce7cb52f65ac38f376d47862c98b87eff267e027af6373d426d68aad3ed032"
+        },
+        "universe_n_genes": 15914
+      },
+      "hippocampus_donor_disjoint": {
+        "heldout": {
+          "n_genes": 3677,
+          "path": "configs/manuscript/gene_splits_sensitivity/chromosome_blocked/hippocampus_donor_disjoint/heldout_genes.txt",
+          "sha256": "11e363be5ee89829617d9d1107296571e0653735ea4eb96de3c7d9653a3b4ec9"
+        },
+        "train": {
+          "n_genes": 14720,
+          "path": "configs/manuscript/gene_splits_sensitivity/chromosome_blocked/hippocampus_donor_disjoint/train_genes.txt",
+          "sha256": "01b7b644b55d7e7e23a918b1770c4ef705f8c6e113a1f6fec07482b9c317b715"
+        },
+        "universe_n_genes": 18397
+      },
+      "nac": {
+        "heldout": {
+          "n_genes": 3677,
+          "path": "configs/manuscript/gene_splits_sensitivity/chromosome_blocked/nac/heldout_genes.txt",
+          "sha256": "79375b29a3ddd663f3a01f4ca30d938243e807f7a821753e106d724498b444b3"
+        },
+        "train": {
+          "n_genes": 14720,
+          "path": "configs/manuscript/gene_splits_sensitivity/chromosome_blocked/nac/train_genes.txt",
+          "sha256": "6407f21a6afac0c4a7c2a7fded713ed339e60af9935d03046d74de783396d2c4"
+        },
+        "universe_n_genes": 18397
+      }
+    },
+    "embedding_cluster": {
+      "dlpfc": {
+        "heldout": {
+          "n_genes": 3666,
+          "path": "configs/manuscript/gene_splits_sensitivity/embedding_cluster/dlpfc/heldout_genes.txt",
+          "sha256": "63613f840b667873e6eba997195a22c110f1587f0b8097276de42427fa9bba3a"
+        },
+        "train": {
+          "n_genes": 14731,
+          "path": "configs/manuscript/gene_splits_sensitivity/embedding_cluster/dlpfc/train_genes.txt",
+          "sha256": "f0454cfd1044c49487e23563c7986694cab8832032a851ab3c89a9d1be403396"
+        },
+        "universe_n_genes": 18397
+      },
+      "her2st": {
+        "heldout": {
+          "n_genes": 3153,
+          "path": "configs/manuscript/gene_splits_sensitivity/embedding_cluster/her2st/heldout_genes.txt",
+          "sha256": "7cbde127753d05507c0f773a949df4ad1e7cffd77de9ecb089fa2d34bcf5beda"
+        },
+        "train": {
+          "n_genes": 12761,
+          "path": "configs/manuscript/gene_splits_sensitivity/embedding_cluster/her2st/train_genes.txt",
+          "sha256": "1c0e65b0682664a7b51a48fc801101e1abd74e6f20e73894d72bf09864eda7d4"
+        },
+        "universe_n_genes": 15914
+      },
+      "hippocampus_donor_disjoint": {
+        "heldout": {
+          "n_genes": 3666,
+          "path": "configs/manuscript/gene_splits_sensitivity/embedding_cluster/hippocampus_donor_disjoint/heldout_genes.txt",
+          "sha256": "63613f840b667873e6eba997195a22c110f1587f0b8097276de42427fa9bba3a"
+        },
+        "train": {
+          "n_genes": 14731,
+          "path": "configs/manuscript/gene_splits_sensitivity/embedding_cluster/hippocampus_donor_disjoint/train_genes.txt",
+          "sha256": "f0454cfd1044c49487e23563c7986694cab8832032a851ab3c89a9d1be403396"
+        },
+        "universe_n_genes": 18397
+      },
+      "nac": {
+        "heldout": {
+          "n_genes": 3666,
+          "path": "configs/manuscript/gene_splits_sensitivity/embedding_cluster/nac/heldout_genes.txt",
+          "sha256": "f6cda89df2e48e769f9117ef3a2ab917a9f5220563c91ae88eed4771f03dd034"
+        },
+        "train": {
+          "n_genes": 14731,
+          "path": "configs/manuscript/gene_splits_sensitivity/embedding_cluster/nac/train_genes.txt",
+          "sha256": "1675782acaf4053964d9bec38e80b7d6a45b807c74ade4acef83310c65cfb828"
+        },
+        "universe_n_genes": 18397
+      }
+    },
+    "expression_seed123": {
+      "dlpfc": {
+        "heldout": {
+          "n_genes": 3680,
+          "path": "configs/manuscript/gene_splits_sensitivity/expression_seed123/dlpfc/heldout_genes.txt",
+          "sha256": "1bd361996ae69b9fcb5adad65897dde6407c5bca55678b4dddabc3bbc5497fbc"
+        },
+        "train": {
+          "n_genes": 14717,
+          "path": "configs/manuscript/gene_splits_sensitivity/expression_seed123/dlpfc/train_genes.txt",
+          "sha256": "7a9f9021cc1a89773c29de92ed95234e96d1b9869c0ae798318afb03aa1fdccc"
+        },
+        "universe_n_genes": 18397
+      },
+      "her2st": {
+        "heldout": {
+          "n_genes": 3179,
+          "path": "configs/manuscript/gene_splits_sensitivity/expression_seed123/her2st/heldout_genes.txt",
+          "sha256": "7b1dcdd2ceb6fe5529cb69d2e112ee29e55a5bcfaf19a09ff7a0c19e013aa882"
+        },
+        "train": {
+          "n_genes": 12735,
+          "path": "configs/manuscript/gene_splits_sensitivity/expression_seed123/her2st/train_genes.txt",
+          "sha256": "6db2fa9d28003470f436f513a3184f25d696e309aafc3374e12e76fc0ce453b4"
+        },
+        "universe_n_genes": 15914
+      },
+      "hippocampus_donor_disjoint": {
+        "heldout": {
+          "n_genes": 3680,
+          "path": "configs/manuscript/gene_splits_sensitivity/expression_seed123/hippocampus_donor_disjoint/heldout_genes.txt",
+          "sha256": "1bd361996ae69b9fcb5adad65897dde6407c5bca55678b4dddabc3bbc5497fbc"
+        },
+        "train": {
+          "n_genes": 14717,
+          "path": "configs/manuscript/gene_splits_sensitivity/expression_seed123/hippocampus_donor_disjoint/train_genes.txt",
+          "sha256": "7a9f9021cc1a89773c29de92ed95234e96d1b9869c0ae798318afb03aa1fdccc"
+        },
+        "universe_n_genes": 18397
+      },
+      "nac": {
+        "heldout": {
+          "n_genes": 3680,
+          "path": "configs/manuscript/gene_splits_sensitivity/expression_seed123/nac/heldout_genes.txt",
+          "sha256": "bd9953d9765e049b2d386724fdced4252625533bda00f097b38f2c3f33d6406e"
+        },
+        "train": {
+          "n_genes": 14717,
+          "path": "configs/manuscript/gene_splits_sensitivity/expression_seed123/nac/train_genes.txt",
+          "sha256": "da1bb9b1b865a02ef24390cdc6cf74cb0ae3f53e309cad10985e9dc9d4b46e66"
+        },
+        "universe_n_genes": 18397
+      }
+    },
+    "expression_seed456": {
+      "dlpfc": {
+        "heldout": {
+          "n_genes": 3680,
+          "path": "configs/manuscript/gene_splits_sensitivity/expression_seed456/dlpfc/heldout_genes.txt",
+          "sha256": "9de9f77ece96ea403ad3e7ceb158c0229546848639ca0386fab6450816be4ee8"
+        },
+        "train": {
+          "n_genes": 14717,
+          "path": "configs/manuscript/gene_splits_sensitivity/expression_seed456/dlpfc/train_genes.txt",
+          "sha256": "0c2573bdfbc84a1216c21f6b22cf4714a3a191b674db2cfdb78acb3ac54c13ad"
+        },
+        "universe_n_genes": 18397
+      },
+      "her2st": {
+        "heldout": {
+          "n_genes": 3162,
+          "path": "configs/manuscript/gene_splits_sensitivity/expression_seed456/her2st/heldout_genes.txt",
+          "sha256": "6863f0a17e62bb28a1421ee4bb5599a0059fd53c53225791dc1d4bd0161bf1de"
+        },
+        "train": {
+          "n_genes": 12752,
+          "path": "configs/manuscript/gene_splits_sensitivity/expression_seed456/her2st/train_genes.txt",
+          "sha256": "0e29bc2d0a8d862aceef1e26f1eabecde8c8abf6a175f36618b84cebceb8ec3e"
+        },
+        "universe_n_genes": 15914
+      },
+      "hippocampus_donor_disjoint": {
+        "heldout": {
+          "n_genes": 3680,
+          "path": "configs/manuscript/gene_splits_sensitivity/expression_seed456/hippocampus_donor_disjoint/heldout_genes.txt",
+          "sha256": "9de9f77ece96ea403ad3e7ceb158c0229546848639ca0386fab6450816be4ee8"
+        },
+        "train": {
+          "n_genes": 14717,
+          "path": "configs/manuscript/gene_splits_sensitivity/expression_seed456/hippocampus_donor_disjoint/train_genes.txt",
+          "sha256": "0c2573bdfbc84a1216c21f6b22cf4714a3a191b674db2cfdb78acb3ac54c13ad"
+        },
+        "universe_n_genes": 18397
+      },
+      "nac": {
+        "heldout": {
+          "n_genes": 3680,
+          "path": "configs/manuscript/gene_splits_sensitivity/expression_seed456/nac/heldout_genes.txt",
+          "sha256": "6f9a67798ba55ff7dcf9c4c533b556c22292440fd7336ad9b936294e52819ad9"
+        },
+        "train": {
+          "n_genes": 14717,
+          "path": "configs/manuscript/gene_splits_sensitivity/expression_seed456/nac/train_genes.txt",
+          "sha256": "4beddcff1bf5f159194c8ace6cd4c0b70f990635db4ccea6d6cc7ac3a4e2d59c"
+        },
+        "universe_n_genes": 18397
+      }
+    },
+    "historical": {
+      "dlpfc": {
+        "heldout": {
+          "n_genes": 3680,
+          "path": "configs/manuscript/gene_splits_sensitivity/historical/dlpfc/heldout_genes.txt",
+          "sha256": "cfa659a46fb4b35c27571ae5a9c77dc935bcfe16117ed6d30d0b7b494881fff6"
+        },
+        "train": {
+          "n_genes": 14717,
+          "path": "configs/manuscript/gene_splits_sensitivity/historical/dlpfc/train_genes.txt",
+          "sha256": "ed1a0a7a452d778f4c87af11f1231085a3f1ce69579406ed3a7945f903e4082a"
+        },
+        "universe_n_genes": 18397
+      },
+      "her2st": {
+        "heldout": {
+          "n_genes": 3126,
+          "path": "configs/manuscript/gene_splits_sensitivity/historical/her2st/heldout_genes.txt",
+          "sha256": "5526dfbe06e111c2683a3b5249e8210ca4f61bf3c6b78955adb48a45a8d42ccf"
+        },
+        "train": {
+          "n_genes": 12788,
+          "path": "configs/manuscript/gene_splits_sensitivity/historical/her2st/train_genes.txt",
+          "sha256": "17467116063cbf4135be1972c5ff6b38a6b4348cf289a361c13ca0421a8bc206"
+        },
+        "universe_n_genes": 15914
+      },
+      "hippocampus_donor_disjoint": {
+        "heldout": {
+          "n_genes": 3680,
+          "path": "configs/manuscript/gene_splits_sensitivity/historical/hippocampus_donor_disjoint/heldout_genes.txt",
+          "sha256": "cfa659a46fb4b35c27571ae5a9c77dc935bcfe16117ed6d30d0b7b494881fff6"
+        },
+        "train": {
+          "n_genes": 14717,
+          "path": "configs/manuscript/gene_splits_sensitivity/historical/hippocampus_donor_disjoint/train_genes.txt",
+          "sha256": "ed1a0a7a452d778f4c87af11f1231085a3f1ce69579406ed3a7945f903e4082a"
+        },
+        "universe_n_genes": 18397
+      },
+      "nac": {
+        "heldout": {
+          "n_genes": 3680,
+          "path": "configs/manuscript/gene_splits_sensitivity/historical/nac/heldout_genes.txt",
+          "sha256": "80b918e3a1065684b3f015f4e7066bcc5c467918bf74709437a81885b3079392"
+        },
+        "train": {
+          "n_genes": 14717,
+          "path": "configs/manuscript/gene_splits_sensitivity/historical/nac/train_genes.txt",
+          "sha256": "5ff26179002d5e00520c80b55e5f89199f4f17c761e932167450ecd301cc2985"
+        },
+        "universe_n_genes": 18397
+      }
+    },
+    "primary": {
+      "dlpfc": {
+        "heldout": {
+          "n_genes": 3680,
+          "path": "configs/manuscript/gene_splits/dlpfc/heldout_genes.txt",
+          "sha256": "f3ff669018819b0d47afa921b252989510b986c8c443435e894f35cb11a69baa"
+        },
+        "train": {
+          "n_genes": 14717,
+          "path": "configs/manuscript/gene_splits/dlpfc/train_genes.txt",
+          "sha256": "92e7cb74e03615cb33771ea195e411ceb02c7449f7df2b2104a31325afc03e13"
+        },
+        "universe_n_genes": 18397
+      },
+      "her2st": {
+        "heldout": {
+          "n_genes": 3184,
+          "path": "configs/manuscript/gene_splits/her2st/heldout_genes.txt",
+          "sha256": "413a0ca2cb25ca8fe5049712bd09ebcd39bdc346cb0248a2c7e71f5cef2c48f8"
+        },
+        "train": {
+          "n_genes": 12730,
+          "path": "configs/manuscript/gene_splits/her2st/train_genes.txt",
+          "sha256": "bb961fa62b755ee1dca447ca645953cd6d623e9e4b83147f0bbd31215e6dbe7d"
+        },
+        "universe_n_genes": 15914
+      },
+      "hippocampus_donor_disjoint": {
+        "heldout": {
+          "n_genes": 3680,
+          "path": "configs/manuscript/gene_splits/hippocampus_donor_disjoint/heldout_genes.txt",
+          "sha256": "f3ff669018819b0d47afa921b252989510b986c8c443435e894f35cb11a69baa"
+        },
+        "train": {
+          "n_genes": 14717,
+          "path": "configs/manuscript/gene_splits/hippocampus_donor_disjoint/train_genes.txt",
+          "sha256": "92e7cb74e03615cb33771ea195e411ceb02c7449f7df2b2104a31325afc03e13"
+        },
+        "universe_n_genes": 18397
+      },
+      "nac": {
+        "heldout": {
+          "n_genes": 3680,
+          "path": "configs/manuscript/gene_splits/nac/heldout_genes.txt",
+          "sha256": "72b6f1429628cbaefcaaf880b9a9243680a2b330b9830dc30f3fc1c1daf7dab2"
+        },
+        "train": {
+          "n_genes": 14717,
+          "path": "configs/manuscript/gene_splits/nac/train_genes.txt",
+          "sha256": "748d9b486cae9f4962afe1c8cfccd184e2bd635d23aaeab873cc5581cf0a0476"
+        },
+        "universe_n_genes": 18397
+      }
+    }
+  },
+  "primary_vs_historical_heldout_overlap": {
+    "dlpfc": {
+      "intersection_n_genes": 831,
+      "jaccard": 0.1272782968295298,
+      "union_n_genes": 6529
+    },
+    "her2st": {
+      "intersection_n_genes": 695,
+      "jaccard": 0.12377560106856635,
+      "union_n_genes": 5615
+    },
+    "hippocampus_donor_disjoint": {
+      "intersection_n_genes": 831,
+      "jaccard": 0.1272782968295298,
+      "union_n_genes": 6529
+    },
+    "nac": {
+      "intersection_n_genes": 831,
+      "jaccard": 0.1272782968295298,
+      "union_n_genes": 6529
+    }
+  },
+  "schema_version": 1
+}

@@ -12,8 +12,8 @@ axes that can otherwise be conflated:
 The repository contains the fitted-target prediction framework, the separately
 trained target-disjoint decoders used for held-out targets, component-resolved
 metrics, preprocessing utilities, and an end-to-end hippocampus configuration.
-It also freezes the exact four-cohort biological section splits, primary
-downstream gene partitions and held-out-assay hyperparameters under
+It also freezes the exact four-cohort biological section splits, primary and
+sensitivity downstream gene partitions and held-out-assay hyperparameters under
 `configs/manuscript/`.
 Raw data, third-party encoders and weights, trained checkpoints, and generated
 predictions are intentionally not stored in git.
@@ -59,6 +59,29 @@ identity-permuted controls.
 ## Installation
 
 SpatioS2E requires Python 3.10 or newer.
+
+For the publication release, the supported clean-room target is CPython
+3.10.19 on Linux x86_64 with CPU PyTorch. From the repository root:
+
+```bash
+python3.10 -m venv --copies /new/path/spatios2e-cleanroom
+/new/path/spatios2e-cleanroom/bin/python -m pip install \
+  --requirement requirements-lock-linux-x86_64-py310.txt
+/new/path/spatios2e-cleanroom/bin/python -m pip install \
+  --no-deps --no-build-isolation .
+/new/path/spatios2e-cleanroom/bin/python scripts/validate_cleanroom.py \
+  --output validation/local-validation.json
+```
+
+`environment-lock.yml` provides the equivalent Python and pip entry point.
+The version-pinned lock, its checksum and a successful independent rebuild are
+archived under [`validation`](validation/README.md). This validated CPU target
+does not retrospectively reconstruct the mutable CUDA environments used for
+the manuscript experiments.
+
+For development or platform-specific GPU work, the following broader Conda
+specification remains available as a convenience environment rather than an
+archival lock:
 
 ```bash
 conda env create -f environment.yml

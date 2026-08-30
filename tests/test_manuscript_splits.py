@@ -75,6 +75,48 @@ def test_primary_gene_split_counts_disjointness_and_checksums():
         assert _sha256(heldout_path) == heldout_sha
 
 
+def test_complete_gene_partition_manifest_matches_archived_files():
+    manifest = json.loads((CONFIG / "gene_partition_manifest.json").read_text())
+    expected_names = {
+        "primary",
+        "historical",
+        "expression_seed123",
+        "expression_seed456",
+        "embedding_cluster",
+        "chromosome_blocked",
+    }
+    assert set(manifest["partitions"]) == expected_names
+    for partition_name, cohorts in manifest["partitions"].items():
+        assert set(cohorts) == set(EXPECTED_GENE_SPLITS)
+        for cohort, record in cohorts.items():
+            observed_sets = {}
+            for split in ("train", "heldout"):
+                split_record = record[split]
+                path = ROOT / split_record["path"]
+                genes = _lines(path)
+                observed_sets[split] = set(genes)
+                assert len(genes) == split_record["n_genes"], (partition_name, cohort, split)
+                assert len(genes) == len(observed_sets[split])
+                assert _sha256(path) == split_record["sha256"]
+            assert observed_sets["train"].isdisjoint(observed_sets["heldout"])
+            assert sum(len(values) for values in observed_sets.values()) == record["universe_n_genes"]
+
+    for cohort, overlap in manifest["primary_vs_historical_heldout_overlap"].items():
+        primary = set(_lines(CONFIG / "gene_splits" / cohort / "heldout_genes.txt"))
+        historical = set(
+            _lines(
+                CONFIG
+                / "gene_splits_sensitivity"
+                / "historical"
+                / cohort
+                / "heldout_genes.txt"
+            )
+        )
+        assert len(primary & historical) == overlap["intersection_n_genes"]
+        assert len(primary | historical) == overlap["union_n_genes"]
+        assert len(primary & historical) / len(primary | historical) == overlap["jaccard"]
+
+
 def test_heldout_assay_records_both_representation_contracts():
     assay = yaml.safe_load((CONFIG / "heldout_assay.yaml").read_text())
     representations = assay["gene_representations"]
