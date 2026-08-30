@@ -158,16 +158,29 @@ def _git_inventory() -> dict[str, object]:
     }
 
 
+def _portable_text(value: str) -> str:
+    """Remove machine-local environment prefixes from the archived report."""
+    text = value.replace(str(Path(sys.executable).resolve()), "python")
+    text = text.replace(str(ROOT.resolve()), "<repository>")
+    text = re.sub(
+        r"/(?:[^/\s]+/)*lib/python\d+\.\d+",
+        "<python-environment>/lib/python",
+        text,
+    )
+    text = re.sub(r"/tmp/spatios2e-build-[^/\s]+", "<temporary-build-dir>", text)
+    return text
+
+
 def _run(label: str, command: list[str], cwd: Path = ROOT) -> dict[str, object]:
     started = time.monotonic()
     completed = subprocess.run(command, cwd=cwd, check=False, capture_output=True, text=True)
     return {
         "label": label,
-        "command": command,
+        "command": [_portable_text(argument) for argument in command],
         "return_code": completed.returncode,
         "duration_seconds": round(time.monotonic() - started, 3),
-        "stdout": completed.stdout,
-        "stderr": completed.stderr,
+        "stdout": _portable_text(completed.stdout),
+        "stderr": _portable_text(completed.stderr),
     }
 
 
