@@ -9,4 +9,8 @@ recursive-include docs *.md
 recursive-include examples *.sh *.txt
 recursive-include scripts *.py *.sh
 recursive-include tests *.py
-recursive-include validation *.md
+include validation/README.md
+include validation/checksums.sha256
+include validation/cleanroom_validation_linux_x86_64_py310.json
+include validation/real_heldout_smoke_hippocampus_seed42.json
+include validation/real_heldout_smoke_hippocampus_seed42.tsv

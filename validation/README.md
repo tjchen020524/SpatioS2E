@@ -33,7 +33,9 @@ weights, trained checkpoints and source-data outputs that licensing permits.
 
 The companion `real_heldout_smoke_hippocampus_seed42` record is a bounded
 real-data integration check. It reads frozen hippocampus expression and UNI2-h
-feature files, the archived target partition and Decima vectors; fits matched
+feature files, the archived biological and target partitions and Decima
+vectors; verifies every spot-manifest sample against the final donor-disjoint
+manuscript split; fits matched
 pretrained- and random-vector decoders for one epoch using the manuscript
 decoder dimensions; evaluates downstream-held-out genes; and writes a TSV
 source table. Its deliberately small subset tests data alignment, fitting and

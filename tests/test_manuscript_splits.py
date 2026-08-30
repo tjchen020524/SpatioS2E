@@ -2,7 +2,11 @@ import hashlib
 import json
 from pathlib import Path
 
+import pandas as pd
+import pytest
 import yaml
+
+from scripts.validate_real_heldout_smoke import _validate_manifest_biological_split
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs" / "manuscript"
@@ -57,6 +61,37 @@ def test_biological_split_counts_and_disjointness():
         assert len(set(split["train"]) & set(split["val"])) == 0
         assert len(set(split["train"]) & set(split["test"])) == 0
         assert len(set(split["val"]) & set(split["test"])) == 0
+
+
+def test_real_smoke_manifest_is_checked_against_frozen_biological_split(tmp_path):
+    split_path = tmp_path / "split.json"
+    split_path.write_text(json.dumps({"train": ["sample-a"], "val": ["sample-b"], "test": ["sample-c"]}))
+    manifest = pd.DataFrame(
+        {
+            "sample": ["sample-a", "sample-b", "sample-c"],
+            "split": ["train", "val", "test"],
+            "barcode": ["a-1", "b-1", "c-1"],
+        }
+    )
+    assert _validate_manifest_biological_split(manifest, split_path) == {
+        "train": ["sample-a"],
+        "val": ["sample-b"],
+        "test": ["sample-c"],
+    }
+
+
+def test_real_smoke_manifest_rejects_stale_section_labels(tmp_path):
+    split_path = tmp_path / "split.json"
+    split_path.write_text(json.dumps({"train": ["sample-a"], "val": ["sample-b"], "test": ["sample-c"]}))
+    manifest = pd.DataFrame(
+        {
+            "sample": ["sample-a", "sample-b", "sample-c"],
+            "split": ["test", "val", "train"],
+            "barcode": ["a-1", "b-1", "c-1"],
+        }
+    )
+    with pytest.raises(ValueError, match="violates the frozen biological split"):
+        _validate_manifest_biological_split(manifest, split_path)
 
 
 def test_primary_gene_split_counts_disjointness_and_checksums():

@@ -27,6 +27,52 @@ def _read_genes(path: Path) -> list[str]:
     return [line.strip() for line in path.read_text().splitlines() if line.strip()]
 
 
+def _validate_manifest_biological_split(manifest: pd.DataFrame, split_path: Path) -> dict[str, list[str]]:
+    """Require every manifest row to follow the frozen manuscript section split."""
+    required_columns = {"sample", "split", "barcode"}
+    missing_columns = sorted(required_columns - set(manifest.columns))
+    if missing_columns:
+        raise ValueError(f"Spot manifest lacks required columns: {', '.join(missing_columns)}")
+
+    payload = json.loads(split_path.read_text())
+    required_splits = ("train", "val", "test")
+    missing_splits = [split for split in required_splits if split not in payload]
+    if missing_splits:
+        raise ValueError(f"Biological split lacks keys: {', '.join(missing_splits)}")
+
+    normalized = {split: [str(sample) for sample in payload[split]] for split in required_splits}
+    sample_to_split: dict[str, str] = {}
+    for split, samples in normalized.items():
+        if len(samples) != len(set(samples)):
+            raise ValueError(f"Biological split contains duplicate samples within {split}")
+        for sample in samples:
+            previous = sample_to_split.setdefault(sample, split)
+            if previous != split:
+                raise ValueError(f"Sample {sample} occurs in both {previous} and {split}")
+
+    observed_samples = set(manifest["sample"].astype(str))
+    expected_samples = set(sample_to_split)
+    missing_samples = sorted(expected_samples - observed_samples)
+    unexpected_samples = sorted(observed_samples - expected_samples)
+    if missing_samples or unexpected_samples:
+        raise ValueError(
+            "Spot manifest and biological split contain different samples; "
+            f"missing={missing_samples[:5]}, unexpected={unexpected_samples[:5]}"
+        )
+
+    observed_split = manifest["split"].astype(str)
+    expected_split = manifest["sample"].astype(str).map(sample_to_split)
+    mismatch = observed_split != expected_split
+    if mismatch.any():
+        examples = manifest.loc[mismatch, ["sample", "split"]].drop_duplicates().head(5)
+        rendered = ", ".join(
+            f"{row.sample}: observed={row.split}, expected={sample_to_split[str(row.sample)]}"
+            for row in examples.itertuples(index=False)
+        )
+        raise ValueError(f"Spot manifest violates the frozen biological split ({rendered})")
+    return normalized
+
+
 def _load_spots(
     manifest: pd.DataFrame,
     split: str,
@@ -112,6 +158,7 @@ def _batches(features: torch.Tensor, expression: torch.Tensor, batch_size: int) 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", type=Path, required=True)
+    parser.add_argument("--biological-split", type=Path, required=True)
     parser.add_argument("--expression-root", type=Path, required=True)
     parser.add_argument("--embedding-root", type=Path, required=True)
     parser.add_argument("--gene-vectors", type=Path, required=True)
@@ -124,6 +171,7 @@ def main() -> None:
     args = parser.parse_args()
 
     manifest = pd.read_csv(args.manifest, sep="\t", dtype=str)
+    biological_split = _validate_manifest_biological_split(manifest, args.biological_split)
     vector_archive = np.load(args.gene_vectors, allow_pickle=False)
     vector_genes = vector_archive["gene_ids"].astype(str).tolist()
     vectors = vector_archive["embeddings"].astype(np.float32, copy=False)
@@ -150,6 +198,12 @@ def main() -> None:
             "name": args.manifest.name,
             "bytes": args.manifest.stat().st_size,
             "sha256": _sha256(args.manifest),
+        },
+        {
+            "role": "frozen biological split",
+            "name": args.biological_split.name,
+            "bytes": args.biological_split.stat().st_size,
+            "sha256": _sha256(args.biological_split),
         },
         {
             "role": "gene representation",
@@ -230,6 +284,7 @@ def main() -> None:
             "spots_per_split": args.spots_per_split,
             "training_genes": len(training_genes),
             "heldout_genes": len(heldout_genes),
+            "sections": {split: len(samples) for split, samples in biological_split.items()},
         },
         "training_gene_sha256": hashlib.sha256("\n".join(training_genes).encode()).hexdigest(),
         "heldout_gene_sha256": hashlib.sha256("\n".join(heldout_genes).encode()).hexdigest(),

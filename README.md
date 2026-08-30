@@ -237,9 +237,10 @@ zero to the primary mean rather than disappearing from the denominator.
 Included in git are reusable source code, configuration templates and tests.
 Excluded are identifiable or licensed source data, third-party weights,
 checkpoints, predictions, cluster logs and manuscript build artifacts. The
-manuscript's numerical source data and final figure-assembly scripts are
-versioned separately in the submission archive; this repository contains the
-portable model, evaluation and control implementations they call.
+manuscript's numerical source data are supplied separately with the submission;
+this repository contains the portable model, evaluation and control
+implementations used to generate those numerical results. Final publication
+figure layout and assembly are outside the scope of this software package.
 
 ## License and citation
 

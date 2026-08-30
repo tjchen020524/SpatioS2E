@@ -1,16 +1,27 @@
 {
   "counts": {
     "heldout_genes": 32,
+    "sections": {
+      "test": 4,
+      "train": 22,
+      "val": 8
+    },
     "spots_per_split": 128,
     "training_genes": 128
   },
   "heldout_gene_sha256": "72c5184d11d9f6faa2d2413b5e337a06fd4489ea2c99e1d8b1ca14f08ef56a36",
   "inputs": [
     {
-      "bytes": 7118832,
-      "name": "manifest.tsv",
+      "bytes": 7104477,
+      "name": "hippocampus_final_biological_manifest.tsv",
       "role": "spot manifest",
-      "sha256": "671eb2e6d3c77954caf1560ede89f41e518f6e770eb85ed41e2a21067bdad417"
+      "sha256": "45cfecab828a8c494f9a4e829c0ac682185d13eade6d82893d1350375200047a"
+    },
+    {
+      "bytes": 1231,
+      "name": "hippocampus.json",
+      "role": "frozen biological split",
+      "sha256": "5277a60955b23f4af8184934c01786d51e6698fa27710425e833ab411b3491ae"
     },
     {
       "bytes": 131451518,
@@ -19,12 +30,42 @@
       "sha256": "46810217219bfaaa1d0986758b811f22406057d20e87ee23802aea5c8b5c0f19"
     },
     {
-      "bytes": 18587955,
+      "bytes": 20281750,
       "name": "train.npz",
+      "role": "expression",
+      "sample": "GSM8226205_V11U08-084_A1",
+      "sha256": "f64437f5e93a1eed7018231f734163becec84dfd35f4efcb25aa34d2719c8666",
+      "split": "train"
+    },
+    {
+      "bytes": 27846319,
+      "name": "embeddings.npz",
+      "role": "spot representation",
+      "sample": "GSM8226205_V11U08-084_A1",
+      "sha256": "89f4da726024611848d5ab2b25b96338c325ba5c552460efad2076accb4205a5"
+    },
+    {
+      "bytes": 28727156,
+      "name": "val.npz",
+      "role": "expression",
+      "sample": "GSM8226202_V10B01-085_C1",
+      "sha256": "c2229bb7ab95ed7b202262a6d0d0a7d2696cb68c3244bb50eced9006ef3f96e2",
+      "split": "val"
+    },
+    {
+      "bytes": 21687907,
+      "name": "embeddings.npz",
+      "role": "spot representation",
+      "sample": "GSM8226202_V10B01-085_C1",
+      "sha256": "66affaa095e2d62e11c612a67f9ce1a0558c57705b0b1f72d30e60fa9ae18425"
+    },
+    {
+      "bytes": 18587955,
+      "name": "test.npz",
       "role": "expression",
       "sample": "GSM8226200_V10B01-086_D1",
       "sha256": "3d61d4e7478af6465acf35c938d515ee09ec3843e81450f409d72b7e80761807",
-      "split": "train"
+      "split": "test"
     },
     {
       "bytes": 19787484,
@@ -32,89 +73,59 @@
       "role": "spot representation",
       "sample": "GSM8226200_V10B01-086_D1",
       "sha256": "f23c1a0c68354b32163ed74d3fedfe89cc15589cef9b400b0e0bfb1c77a6a538"
-    },
-    {
-      "bytes": 16315666,
-      "name": "val.npz",
-      "role": "expression",
-      "sample": "GSM8226206_V11L05-335_D1",
-      "sha256": "b376df35265f6ae10e9024e47e2c4dcff6d0e53a8a05ba36a68fc01f9782cb17",
-      "split": "val"
-    },
-    {
-      "bytes": 25824075,
-      "name": "embeddings.npz",
-      "role": "spot representation",
-      "sample": "GSM8226206_V11L05-335_D1",
-      "sha256": "9e1d7fe4ef52df8841c604b4f11c042318f064c789854f2fff95817fcd3e275b"
-    },
-    {
-      "bytes": 26250671,
-      "name": "test.npz",
-      "role": "expression",
-      "sample": "GSM8226208_V11L05-336_A1",
-      "sha256": "5c50415c34f07c004535b6140cd92ac9df469df058de99000e8c1550f7b050cb",
-      "split": "test"
-    },
-    {
-      "bytes": 26773450,
-      "name": "embeddings.npz",
-      "role": "spot representation",
-      "sample": "GSM8226208_V11L05-336_A1",
-      "sha256": "7786a1c81b3c02243fb29a97c6a3417387ddaa469c43af051bec4898cd9282a0"
     }
   ],
   "output_table": {
     "name": "real_heldout_smoke_hippocampus_seed42.tsv",
-    "sha256": "95d3cecadbfb52e0188b0fe100852c694b0c23f16ef4aa3b24c86ffc5382f625"
+    "sha256": "74939c53b93660d0ff75ef4941fcdb94924d662c64587255c34c5493a4128220"
   },
   "results": [
     {
-      "abundance_pcc": 0.3178050971382603,
-      "abundance_rmse": 0.7885698604331258,
+      "abundance_pcc": -0.007223054054126781,
+      "abundance_rmse": 0.6493910850920983,
       "best_epoch": 1,
-      "centered_full_matrix_pcc": 0.14801156652060754,
-      "centered_mse": 2.620441596090033,
-      "centered_rmse": 1.618777809364223,
-      "decomposition_error": 0.0,
-      "full_matrix_mse": 3.2422840208735524,
-      "full_matrix_pcc": 0.13947387083545035,
-      "gene_mean_mse": 0.6218424247835195,
-      "gene_mean_pcc": 0.3178050971382603,
-      "gene_mean_rmse": 0.7885698604331258,
-      "mean_gene_pcc": 0.09585747077563385,
-      "median_gene_pcc": 0.09153074224983666,
+      "centered_full_matrix_pcc": 0.09389228901617565,
+      "centered_mse": 2.256685402932323,
+      "centered_rmse": 1.5022268147428082,
+      "decomposition_error": -4.440892098500626e-16,
+      "full_matrix_mse": 2.6783941843294157,
+      "full_matrix_pcc": 0.009780251126586923,
+      "gene_mean_mse": 0.4217087813970929,
+      "gene_mean_pcc": -0.007223054054126781,
+      "gene_mean_rmse": 0.6493910850920983,
+      "mean_gene_pcc": 0.05118151166683666,
+      "median_gene_pcc": 0.048201162999967864,
       "n_constant_prediction_gene_pcc": 0,
-      "n_eligible_gene_pcc": 29,
-      "n_finite_gene_pcc": 29,
+      "n_eligible_gene_pcc": 27,
+      "n_finite_gene_pcc": 27,
       "n_genes": 32,
       "n_spots": 128,
-      "q25_gene_pcc": 0.021183444658762356,
-      "q75_gene_pcc": 0.16585782529640272,
+      "q25_gene_pcc": -0.03555291384601254,
+      "q75_gene_pcc": 0.1172430164816648,
       "variant": "pretrained"
     },
     {
-      "abundance_pcc": 0.26750133424675354,
-      "abundance_rmse": 0.6660347031105591,
+      "abundance_pcc": 0.31400599293062365,
+      "abundance_rmse": 0.6346517130816031,
       "best_epoch": 1,
-      "centered_full_matrix_pcc": 0.08000685810540317,
-      "centered_mse": 2.639156690583069,
-      "centered_rmse": 1.6245481496659522,
-      "decomposition_error": -4.440892098500626e-16,
-      "full_matrix_mse": 3.082758916330639,
-      "full_matrix_pcc": 0.11030026977168325,
-      "gene_mean_mse": 0.4436022257475707,
-      "gene_mean_pcc": 0.26750133424675354,
-      "gene_mean_rmse": 0.6660347031105591,
-      "mean_gene_pcc": 0.0494367650581933,
-      "median_gene_pcc": 0.061519488439087826,
+      "centered_full_matrix_pcc": 0.04632902505919222,
+      "centered_mse": 2.2611074022901825,
+      "centered_rmse": 1.5036979092524476,
+      "decomposition_error": -8.881784197001252e-16,
+      "full_matrix_mse": 2.6638901992075947,
+      "full_matrix_pcc": 0.12256663990428866,
+      "gene_mean_mse": 0.40278279691741337,
+      "gene_mean_pcc": 0.31400599293062365,
+      "gene_mean_rmse": 0.6346517130816031,
+      "mean_gene_pcc": 0.050395297931629196,
+      "median_gene_pcc": 0.06514357998410199,
       "n_constant_prediction_gene_pcc": 0,
-      "n_eligible_gene_pcc": 29,
-      "n_finite_gene_pcc": 29,
+      "n_eligible_gene_pcc": 27,
+      "n_finite_gene_pcc": 27,
       "n_genes": 32,
       "n_spots": 128,
-      "q25_gene_pcc": -0.0605167525745715,
-      "q75_gene_pcc": 0.1428818567261807,
+      "q25_gene_pcc": -0.01644385839738926,
+      "q75_gene_pcc": 0.10783529875566214,
       "variant": "random"
     }
   ],
@@ -122,6 +133,6 @@
   "scope": "Bounded real-data hippocampus smoke test using one epoch, 128 spots per biological split, 128 downstream training genes and 32 held-out genes. It exercises the manuscript decoder dimensions and target-disjoint API but is not a reproduction or estimate of manuscript performance.",
   "seed": 42,
   "status": "PASS",
-  "timestamp_utc": "2026-08-30T01:19:52.773261+00:00",
+  "timestamp_utc": "2026-08-30T23:15:06.982172+00:00",
   "training_gene_sha256": "c133e63727f4c131d727b181da6deb1bf5e3d885d2c677c83eebec11db071e09"
 }
