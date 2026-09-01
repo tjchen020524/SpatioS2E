@@ -1,7 +1,10 @@
 # SpatioS2E
 
-SpatioS2E is a controlled framework for asking what transfers in
-gene-conditioned virtual spatial transcriptomics. It separates two evaluation
+SpatioS2E is the name of this research-software repository and installable
+Python package. It implements the evaluation and assay workflows used in the
+accompanying study; the name does not designate a single predictive model or a
+new pretrained foundation model. The workflows ask what transfers in
+gene-conditioned virtual spatial transcriptomics and separate two evaluation
 axes that can otherwise be conflated:
 
 - **gene-mean log-expression**: whether genes that are generally high or low
@@ -9,7 +12,7 @@ axes that can otherwise be conflated:
 - **within-gene spatial variation**: whether a gene's variation across tissue
   spots is recovered.
 
-The repository contains the fitted-target prediction framework, the separately
+The repository contains the fitted-target experimental models, the separately
 trained target-disjoint decoders used for held-out targets, component-resolved
 metrics, preprocessing utilities, and an end-to-end hippocampus configuration.
 It also freezes the exact four-cohort biological section splits, primary and
@@ -18,12 +21,41 @@ sensitivity downstream gene partitions and held-out-assay hyperparameters under
 Raw data, third-party encoders and weights, trained checkpoints, and generated
 predictions are intentionally not stored in git.
 
+## What the software can do
+
+SpatioS2E supports three related uses:
+
+1. **Evaluate predictions from any model.** Given aligned observed and
+   predicted `[spot, gene]` matrices, the Python API and command-line evaluator
+   separate gene means from within-gene residuals, verify the exact MSE
+   decomposition and report full-matrix, gene-mean, gene-wise and centred
+   correlation and error endpoints. Optional section-wise centring is
+   supported.
+2. **Train target-disjoint gene-conditioned decoders.** Reusable PyTorch
+   modules fit and evaluate shared decoders from precomputed spot
+   representations and fixed gene vectors while excluding held-out targets
+   from optimization and checkpoint selection. Random, constant and
+   identity-shuffled vector controls, no-image mean-only prediction and decoder
+   variants are included.
+3. **Run the fitted-target reference workflow.** The preprocessing, training
+   and inference commands implement the study's fitted-target image-to-spatial-
+   transcriptomics experiments when the required cohort data and licensed
+   upstream encoders or weights are supplied.
+
+This is therefore reusable research software and a reference implementation,
+not a ready-to-deploy pretrained predictor. New-cohort prediction requires the
+user to prepare tissue-image features and gene representations and to train a
+downstream model. The repository alone cannot regenerate every manuscript
+number because source data, third-party weights, trained checkpoints,
+predictions and numerical Source Data are distributed separately or remain
+subject to their original access terms.
+
 ## Experimental systems
 
 ### Fitted targets
 
-The fitted-gene framework combines frozen tissue-image features and spatial
-coordinates, optional neighbourhood context, and an optional gene
+The fitted-gene experimental system combines frozen tissue-image features and
+spatial coordinates, optional neighbourhood context, and an optional gene
 representation. Its sequence-conditioned form uses FiLM conditioning and an
 additive gene-conditioned route. Direct, morphology-only, sequence-prior,
 and optional single-cell-prior variants remain available through the model
@@ -35,7 +67,7 @@ Target-disjoint evaluation uses a separate `FactorizedDotProductDecoder` on
 precomputed spot representations and fixed gene vectors. The manuscript uses
 two external representation sources: sequence-derived **Decima** vectors and
 static gene-token vectors from the **scGPT whole-human checkpoint**. Neither
-Decima nor scGPT is the spatial predictor introduced by this package, and
+Decima nor scGPT is itself a downstream spatial decoder evaluated here, and
 neither dependency is vendored here. Dimension-matched random vectors, a
 single constant vector and within-partition identity shuffles provide matched
 controls.
@@ -229,7 +261,7 @@ zero to the primary mean rather than disappearing from the denominator.
   held-out-assay protocol and external-model checksums;
 - `docs/paper_code_map.md`: mapping from manuscript analyses to public code;
 - `docs/heldout_assay.md`: portable target-disjoint batch and control contract;
-- `docs/releases/v0.2.0.md`: publication-release notes;
+- `docs/releases/v1.0.0.md`: stable publication-release notes;
 - `tests/`: import, decoder and metric identity tests.
 
 ## Reproducibility boundary

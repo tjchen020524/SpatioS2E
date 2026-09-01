@@ -15,7 +15,8 @@ authors:
   - family-names: Hicks
     given-names: Stephanie C.
     affiliation: Johns Hopkins University
-version: 0.2.0
+version: 1.0.0
+date-released: 2026-08-31
 repository-code: https://github.com/tjchen020524/SpatioS2E
 license: MIT
 keywords:

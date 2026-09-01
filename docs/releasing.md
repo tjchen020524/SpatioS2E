@@ -32,9 +32,9 @@ ignores `CITATION.cff` during GitHub archiving.
 
 ## 3. Create the immutable release
 
-After integration is confirmed, create an annotated `v0.2.0` tag at the audited
-commit and publish a GitHub release titled `SpatioS2E v0.2.0`. Use
-[`docs/releases/v0.2.0.md`](releases/v0.2.0.md) as the release notes. Do not mark
+After integration is confirmed, create an annotated `v1.0.0` tag at the audited
+commit and publish a GitHub release titled `SpatioS2E v1.0.0`. Use
+[`docs/releases/v1.0.0.md`](releases/v1.0.0.md) as the release notes. Do not mark
 the release as a prerelease.
 
 Zenodo should ingest the new GitHub release automatically. Processing can take

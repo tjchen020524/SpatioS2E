@@ -22,7 +22,15 @@ ROOT = Path(__file__).resolve().parents[1]
 LOCK = ROOT / "requirements-lock-linux-x86_64-py310.txt"
 PARTITION_MANIFEST = ROOT / "configs" / "manuscript" / "gene_partition_manifest.json"
 SOURCE_ROOTS = ("spatios2e", "tests", "scripts", "configs/manuscript", "docs")
-SOURCE_FILES = ("pyproject.toml", "MANIFEST.in", "README.md", LOCK.name)
+SOURCE_FILES = (
+    "pyproject.toml",
+    "MANIFEST.in",
+    "README.md",
+    "LICENSE",
+    "CITATION.cff",
+    "CHANGELOG.md",
+    LOCK.name,
+)
 
 
 def _sha256(path: Path) -> str:

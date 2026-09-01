@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.0.0 — 2026-08-31
+
+- Mark the first stable, citable manuscript software release.
+- Define SpatioS2E as the repository and Python package rather than the name of
+  a single predictive model.
+- Document the supported uses and the boundary between reusable evaluation,
+  trainable reference implementations and externally supplied data or model
+  weights.
+- Adopt the collective MIT copyright holder `SpatioS2E authors`.
+- Add release-metadata consistency tests and include citation, license and
+  changelog files in the validated source snapshot.
+
 ## 0.2.0 — 2026-08-28
 
 - Align the public hippocampus example with the manuscript's donor-disjoint
