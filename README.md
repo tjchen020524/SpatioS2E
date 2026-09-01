@@ -1,140 +1,67 @@
 # SpatioS2E
 
-SpatioS2E is the name of this research-software repository and installable
-Python package. It implements the evaluation and assay workflows used in the
-accompanying study; the name does not designate a single predictive model or a
-new pretrained foundation model. The workflows ask what transfers in
-gene-conditioned virtual spatial transcriptomics and separate two evaluation
-axes that can otherwise be conflated:
+Research software for component-resolved evaluation and gene-conditioned
+prediction in virtual spatial transcriptomics.
 
-- **gene-mean log-expression**: whether genes that are generally high or low
-  are correctly ordered and calibrated across targets;
-- **within-gene spatial variation**: whether a gene's variation across tissue
-  spots is recovered.
+[![Tests](https://github.com/tjchen020524/SpatioS2E/actions/workflows/tests.yml/badge.svg)](https://github.com/tjchen020524/SpatioS2E/actions/workflows/tests.yml)
+[![Python](https://img.shields.io/badge/python-%E2%89%A53.10-3776AB.svg)](pyproject.toml)
+[![License](https://img.shields.io/badge/license-MIT-2F855A.svg)](LICENSE)
 
-The repository contains the fitted-target experimental models, the separately
-trained target-disjoint decoders used for held-out targets, component-resolved
-metrics, preprocessing utilities, and an end-to-end hippocampus configuration.
-It also freezes the exact four-cohort biological section splits, primary and
-sensitivity downstream gene partitions and held-out-assay hyperparameters under
-`configs/manuscript/`.
-Raw data, third-party encoders and weights, trained checkpoints, and generated
-predictions are intentionally not stored in git.
+SpatioS2E separates agreement in mean expression across genes from recovery of
+within-gene spatial variation. The package provides model-agnostic evaluation,
+matched gene-vector controls, trainable fitted-target and target-disjoint
+decoders, and the frozen design records used in the accompanying study.
 
-## What the software can do
+![Image feature extraction and fitted- and held-out-gene assays](docs/assets/figure_1_abc.png)
 
-SpatioS2E supports three related uses:
+*Image feature extraction and the separately trained fitted- and held-out-gene
+assays used in the accompanying study (Fig. 1a--c).*
 
-1. **Evaluate predictions from any model.** Given aligned observed and
-   predicted `[spot, gene]` matrices, the Python API and command-line evaluator
-   separate gene means from within-gene residuals, verify the exact MSE
-   decomposition and report full-matrix, gene-mean, gene-wise and centred
-   correlation and error endpoints. Optional section-wise centring is
-   supported.
-2. **Train target-disjoint gene-conditioned decoders.** Reusable PyTorch
-   modules fit and evaluate shared decoders from precomputed spot
-   representations and fixed gene vectors while excluding held-out targets
-   from optimization and checkpoint selection. Random, constant and
-   identity-shuffled vector controls, no-image mean-only prediction and decoder
-   variants are included.
-3. **Run the fitted-target reference workflow.** The preprocessing, training
-   and inference commands implement the study's fitted-target image-to-spatial-
-   transcriptomics experiments when the required cohort data and licensed
-   upstream encoders or weights are supplied.
+## Highlights
 
-This is therefore reusable research software and a reference implementation,
-not a ready-to-deploy pretrained predictor. New-cohort prediction requires the
-user to prepare tissue-image features and gene representations and to train a
-downstream model. The repository alone cannot regenerate every manuscript
-number because source data, third-party weights, trained checkpoints,
-predictions and numerical Source Data are distributed separately or remain
-subject to their original access terms.
-
-## Experimental systems
-
-### Fitted targets
-
-The fitted-gene experimental system combines frozen tissue-image features and
-spatial coordinates, optional neighbourhood context, and an optional gene
-representation. Its sequence-conditioned form uses FiLM conditioning and an
-additive gene-conditioned route. Direct, morphology-only, sequence-prior,
-and optional single-cell-prior variants remain available through the model
-factory.
-
-### Held-out targets
-
-Target-disjoint evaluation uses a separate `FactorizedDotProductDecoder` on
-precomputed spot representations and fixed gene vectors. The manuscript uses
-two external representation sources: sequence-derived **Decima** vectors and
-static gene-token vectors from the **scGPT whole-human checkpoint**. Neither
-Decima nor scGPT is itself a downstream spatial decoder evaluated here, and
-neither dependency is vendored here. Dimension-matched random vectors, a
-single constant vector and within-partition identity shuffles provide matched
-controls.
-
-The release also exposes the architecture-audit decoders:
-
-- `BiasFreeFactorizedDecoder`, with one intercept shared by all spots and
-  genes;
-- `ConcatenationMLPDecoder`, a parameter-matched alternative decoder family;
-- `SectionCenteredResidualDecoder`, with signed outputs for exactly centred
-  residual targets.
-
-These classes reproduce the decoder definitions. Cohort-specific data
-partitions, fixed vectors and optimization settings remain the responsibility
-of the experiment configuration. The reusable fitting and checkpoint-selection
-loop is exposed in `spatios2e.training.heldout`. Utilities in
-`spatios2e.models.gene_vectors` standardize pretrained vectors using training
-genes only and construct matched random, constant and partition-preserving
-identity-permuted controls.
+- Decompose `[spot, gene]` expression matrices into gene means and centred
+  within-gene variation.
+- Report full-matrix, gene-mean, gene-wise and centred PCC and error endpoints,
+  including the exact MSE decomposition.
+- Centre observed and predicted expression independently within tissue section.
+- Train shared decoders while excluding held-out targets from optimization and
+  checkpoint selection.
+- Construct dimension-matched random, constant and partition-preserving
+  identity-shuffled gene-vector controls.
+- Fit a no-image ridge counterfactual that predicts one mean per held-out gene.
+- Reuse the manuscript's biological splits, target partitions, model settings
+  and external-model checksums.
 
 ## Installation
 
 SpatioS2E requires Python 3.10 or newer.
 
-For the publication release, the supported clean-room target is CPython
-3.10.19 on Linux x86_64 with CPU PyTorch. From the repository root:
-
 ```bash
-python3.10 -m venv --copies /new/path/spatios2e-cleanroom
-/new/path/spatios2e-cleanroom/bin/python -m pip install \
-  --requirement requirements-lock-linux-x86_64-py310.txt
-/new/path/spatios2e-cleanroom/bin/python -m pip install \
-  --no-deps --no-build-isolation .
-/new/path/spatios2e-cleanroom/bin/python scripts/validate_cleanroom.py \
-  --output validation/local-validation.json
+git clone https://github.com/tjchen020524/SpatioS2E.git
+cd SpatioS2E
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -e .
 ```
 
-`environment-lock.yml` provides the equivalent Python and pip entry point.
-The version-pinned lock, its checksum and a successful independent rebuild are
-archived under [`validation`](validation/README.md). This validated CPU target
-does not retrospectively reconstruct the mutable CUDA environments used for
-the manuscript experiments.
-
-For development or platform-specific GPU work, the following broader Conda
-specification remains available as a convenience environment rather than an
-archival lock:
+Install preprocessing and development dependencies when needed:
 
 ```bash
-conda env create -f environment.yml
-conda activate spatios2e
-pip install -e ".[preprocess,dev]"
+python -m pip install -e ".[preprocess,dev]"
 ```
 
-Decima, UNI2-h and scGPT checkpoints must be obtained from their respective
-upstream projects.
-For sequence-conditioned fitted-gene models, install Decima separately or add
-its source directory to `PYTHONPATH` and place its checkpoint at the path given
-in the experiment config. The static scGPT token extractor reads the packaged
-checkpoint tensors and vocabulary directly; the older optional single-cell
-context module requires a separate scGPT installation.
+The publication release also includes a fully pinned CPython 3.10 Linux/CPU
+environment and an independently generated validation record. See
+[`validation/README.md`](validation/README.md) for the exact clean-room
+procedure.
 
 ## Component-resolved evaluation
 
-For two finite `[spot, gene]` matrices:
+Use the Python API with any aligned observed and predicted matrices:
 
 ```python
 import numpy as np
+
 from spatios2e.evaluation import component_metrics
 
 observed = np.load("observed.npy")
@@ -144,37 +71,48 @@ metrics = component_metrics(observed, predicted)
 print(metrics["full_matrix_pcc"])
 print(metrics["gene_mean_pcc"])
 print(metrics["mean_gene_pcc"])
+print(metrics["centered_rmse"])
 print(metrics["decomposition_error"])
 ```
 
-The evaluator reports full-matrix PCC and MSE, gene-mean PCC and RMSE, mean,
-median and interquartile gene-wise PCC, gene-centred full-matrix PCC, centred
-RMSE, and the two exact MSE components. The legacy keys `abundance_pcc` and
-`abundance_rmse` remain aliases for compatibility; they refer to mean
-normalized log-expression rather than absolute molecule counts. Gene-wise
-eligibility is defined only by observed variation. An eligible gene with a
-constant prediction contributes PCC zero, so different prediction conditions
-retain the same observed-defined denominator. For a rectangular matrix,
+For finite rectangular matrices, the evaluator verifies
 
 ```text
 full-matrix MSE = gene-mean MSE + centred MSE.
 ```
 
-The same evaluator is available as a command-line tool:
+The equivalent command-line interface reads an NPZ containing `observed` and
+`predicted` arrays:
 
 ```bash
-spatios2e-eval-components predictions.npz --output component_metrics.json
+spatios2e-eval-components predictions.npz \
+  --output component_metrics.json
 ```
 
-The NPZ must contain `observed` and `predicted` arrays. Add
-`--section-key section_ids` to centre both matrices independently within each
-tissue section before evaluation.
+To remove observed and predicted means independently within each section, add
+section labels to the NPZ and pass `--section-key section_ids`.
 
-## Frozen gene representations
+## Gene-conditioned prediction
 
-Decima features are produced by the upstream package. Static scGPT gene-token
-vectors can be extracted reproducibly from the official whole-human checkpoint
-without running a cell through the transformer:
+### Target-disjoint decoders
+
+`spatios2e.models` provides the primary `FactorizedDotProductDecoder` and three
+architecture controls:
+
+- `BiasFreeFactorizedDecoder`;
+- `ConcatenationMLPDecoder`;
+- `SectionCenteredResidualDecoder`.
+
+`spatios2e.training.heldout` exposes reusable fitting, checkpoint selection and
+evaluation functions for precomputed spot representations and fixed gene
+vectors. The held-out targets enter only the post-fit evaluation call. See the
+[`held-out assay contract`](docs/heldout_assay.md) for the batch interface and
+an API example.
+
+The manuscript uses sequence-derived Decima vectors and static scGPT gene-token
+vectors. Utilities for vector standardization and matched controls are in
+`spatios2e.models.gene_vectors`. Static scGPT token vectors can be extracted
+from an upstream checkpoint with:
 
 ```bash
 spatios2e-extract-scgpt-tokens \
@@ -183,49 +121,25 @@ spatios2e-extract-scgpt-tokens \
   --output data/scgpt_whole_human_gene_tokens.npz
 ```
 
-The command writes `gene_symbols`, a `[token, 512]` vector matrix and a JSON
-sidecar containing checkpoint and vocabulary SHA-256 digests. Exact hashes,
-extraction semantics, vocabulary coverage and downstream comparison boundaries
-are frozen in [`configs/manuscript`](configs/manuscript/README.md).
-
-The release also implements the no-image counterfactual used to determine how
-much target-disjoint matrix performance is available from gene means alone:
+The no-image counterfactual is available as both a Python API and a CLI:
 
 ```bash
 spatios2e-gene-mean-counterfactual gene_vectors_and_training_means.npz \
   --output heldout_gene_means.npz
 ```
 
-The input contains `vectors`, training-individual `gene_means`, and downstream
-`training_indices` and `heldout_indices`. The fitted ridge receives no image,
-coordinate or spot input. Its predicted held-out-target means can be broadcast
-over any number of spots with `broadcast_gene_means`; component evaluation of
-that map has zero within-gene correlation by construction. Random or
-identity-permuted vectors from `spatios2e.models.gene_vectors` provide matched
-controls under the same fitting procedure.
+### Fitted-target workflow
 
-## Fitted-target hippocampus example
-
-The public example expects the following external layout:
-
-```text
-weights/
-  decima/rep0.ckpt
-data/
-  decima_input/gene_inputs_npz/<ENSG_ID>.npz
-  processed/expression_full/<sample>/{train,val,test}.npz
-  processed/multimodal_features/modality_stats.json
-  processed/multimodal_features/<sample>/multimodal_features.npz
-  processed/spatial_graphs/<sample>/graph.npz
-```
-
-Run training and evaluation from the repository root:
+The fitted-target implementation combines frozen tissue-image features,
+spatial coordinates, optional neighbourhood context and optional gene
+conditioning. A donor-disjoint hippocampus configuration is supplied under
+`configs/` and `examples/`:
 
 ```bash
 bash examples/hippocampus/run_train_eval.sh
 ```
 
-or invoke the individual commands:
+The underlying steps can also be invoked directly:
 
 ```bash
 spatios2e-compute-residual-scale configs/hippocampus_spatios2e.yaml
@@ -237,45 +151,37 @@ spatios2e-eval \
   --save-dir outputs/hippocampus_spatios2e/results
 ```
 
-For the supplied full fitted-target configuration, the first command computes
-the training-spot-weighted gene-mean anchor and residual scale in one artifact;
-validation and test expression are not read. The training configuration uses
-balanced gene chunks and verifies complete target-gene coverage in every epoch.
+New-cohort prediction requires cohort data and upstream tissue-image and gene
+representations. UNI2-h, Decima and scGPT weights are obtained from their
+respective projects; trained downstream checkpoints are not distributed in
+this repository.
 
-Evaluation writes backward-compatible `mse` and `corr` fields together with
-explicit `full_matrix_mse`, `full_matrix_pcc`, gene-mean and centred endpoints.
-It also reports gene-PCC eligibility, finite-map coverage and training-derived
-top-HVG summaries; an eligible gene with a constant predicted map contributes
-zero to the primary mean rather than disappearing from the denominator.
+## Manuscript resources
 
-## Repository map
+[`configs/manuscript/`](configs/manuscript/README.md) contains the exact
+four-cohort biological splits, primary and sensitivity target partitions,
+held-out-assay settings and external-model provenance. The
+[`manuscript-to-code map`](docs/paper_code_map.md) links each analysis to its
+public implementation.
 
-- `spatios2e/models/`: fitted-target models and held-out-target decoders;
-- `spatios2e/evaluation/`: checkpoint evaluation and component-resolved
-  endpoints;
-- `spatios2e/preprocessing/`: expression, image-feature and graph preparation;
-- `spatios2e/training/`: fitted-target training plus reusable held-out-target
-  fitting and evaluation;
-- `configs/` and `examples/`: portable hippocampus example;
-- `configs/manuscript/`: four-cohort design, exact biological/gene splits,
-  held-out-assay protocol and external-model checksums;
-- `docs/paper_code_map.md`: mapping from manuscript analyses to public code;
-- `docs/heldout_assay.md`: portable target-disjoint batch and control contract;
-- `docs/releases/v1.0.0.md`: stable publication-release notes;
-- `tests/`: import, decoder and metric identity tests.
+The repository includes reusable source code, configuration records and tests.
+Raw cohort data, licensed third-party weights, trained checkpoints, prediction
+matrices and numerical Source Data are distributed separately under their
+applicable terms.
 
-## Reproducibility boundary
+## Repository layout
 
-Included in git are reusable source code, configuration templates and tests.
-Excluded are identifiable or licensed source data, third-party weights,
-checkpoints, predictions, cluster logs and manuscript build artifacts. The
-manuscript's numerical source data are supplied separately with the submission;
-this repository contains the portable model, evaluation and control
-implementations used to generate those numerical results. Final publication
-figure layout and assembly are outside the scope of this software package.
+- `spatios2e/evaluation/` — component-resolved metrics and counterfactuals;
+- `spatios2e/models/` — fitted-target models and target-disjoint decoders;
+- `spatios2e/training/` — fitted-target and held-out-target training;
+- `spatios2e/preprocessing/` — expression, image-feature and graph preparation;
+- `configs/manuscript/` — frozen manuscript design records;
+- `examples/hippocampus/` — fitted-target example;
+- `tests/` — unit, decoder, split and synthetic-training tests;
+- `validation/` — dependency and clean-room validation records.
 
 ## License and citation
 
-The code is released under the MIT License. Please use the metadata in
-[`CITATION.cff`](CITATION.cff) when citing this software. The version-specific
-Zenodo DOI and manuscript DOI will be linked here after they are assigned.
+SpatioS2E is released under the [MIT License](LICENSE). Citation metadata are
+provided in [`CITATION.cff`](CITATION.cff). The version-specific Zenodo DOI and
+manuscript DOI will be added after assignment.

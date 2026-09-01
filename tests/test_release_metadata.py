@@ -29,3 +29,11 @@ def test_release_license_uses_collective_holder_and_no_email():
 
     assert "Copyright (c) 2026 SpatioS2E authors" in license_text
     assert "@" not in citation_text
+
+
+def test_readme_overview_is_included_in_source_distribution():
+    overview = ROOT / "docs" / "assets" / "figure_1_abc.png"
+    manifest = (ROOT / "MANIFEST.in").read_text()
+
+    assert overview.is_file()
+    assert "recursive-include docs *.md *.png" in manifest

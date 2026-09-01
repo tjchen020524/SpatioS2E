@@ -34,22 +34,15 @@ have 2,371,777 parameters for the full factorized decoder, 1,875,905 for the
 bias-free decoder, 2,441,345 for the 704-unit concatenation MLP and 1,875,904
 for the residual-only decoder. These counts are locked by the test suite.
 
-## Interpretation of names
+## Model roles
 
-SpatioS2E names the software repository and Python package, not one model in
-the manuscript. The repository includes both fitted-target experimental models
-and separately trained held-out-target decoders. Decima and scGPT are external
-pretrained models used only to produce frozen gene vectors; neither is a
-spatial predictor introduced by this package. The held-out-target models are
-not zero-shot deployments of the fitted-target architecture. Decima and scGPT
-results are parallel within-representation contrasts, not a representation
-leaderboard.
+The repository includes fitted-target models and separately trained
+held-out-target decoders. Decima and scGPT provide frozen gene vectors; all
+reported comparisons are made against matched controls within each
+representation family.
 
 ## Numerical evidence
 
-The public software repository deliberately does not contain raw cohort data,
-third-party weights, trained checkpoints or manuscript results. Numerical
-source data, checksums and evidence manifests are maintained with the
-manuscript submission package. Users can apply the public component evaluator
-to exported prediction matrices to reproduce the definitions and exact MSE
-identity independently of the original cohorts.
+Raw cohort data, third-party weights, trained checkpoints and manuscript
+results are distributed separately. The component evaluator can be applied to
+any compatible prediction matrices independently of the original cohorts.
