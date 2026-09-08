@@ -16,6 +16,26 @@ Decima:
   pooled_output_dimension: 1920
   redistribution: obtain under the official upstream terms; weights are not included
 
+GeneQuery_audit:
+  upstream_repository: https://github.com/xy-always/GeneQuery
+  source_revision: 7d61d38497316cce384fc11cdf7158cea752d413
+  her2_description_vectors_sha256: 61f482f4a5e4377f1085d6a95d28ff59cf721a9d4311e1abae9fc7813efbd83d
+  resnet50_artifact_revision: 767268603ca0cb0bfe326fa87277f19c419566ef
+  training_settings: [frozen_features, end_to_end]
+  seeds: [42, 123, 456]
+  heldout_genes: 138
+  redistribution: obtain upstream vectors and weights separately under their own terms
+
+DeepSpotM_audit:
+  source_revision: 3ec046fffba9bed05974283a1a020ee01ebe6c22
+  full_checkpoint_sha256: 7c57a60b82f3a32b54433430fccab4af2de400b89ca78c97d07cb63f0c6721b3
+  pathway: scgpt
+  intervention: inference-time token replacement; no downstream refitting
+  target_exposure: upstream spatial-training exposure
+  seeds: [42]
+  heldout_genes: 135
+  redistribution: gated checkpoint; obtain access separately and retain upstream terms
+
 scGPT_whole_human:
   upstream_repository: https://github.com/bowang-lab/scGPT
   repository_revision_used_for_extraction: cebd6fae655b9c585a4807daa3ac31bb764f06b4

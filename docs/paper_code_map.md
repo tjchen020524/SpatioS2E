@@ -12,8 +12,9 @@ data and generated evidence. Figure numbers refer to the current manuscript.
 | Fig. 3 component-resolved held-out transfer | `evaluate_heldout_decoder` and `component_metrics` | Target-disjoint prediction matrices from fixed biological partitions |
 | Fig. 3 no-image gene-mean model | `fit_gene_mean_counterfactual` and `broadcast_gene_means` | Frozen gene vectors and training-individual gene means; no spot-level input |
 | Fig. 4 signal-dependent spatial transfer | `center_within_section` and observed-defined gene-PCC policy | Training-only variance rankings and section identities |
-| Fig. 5 decoder robustness | `BiasFreeFactorizedDecoder` and `ConcatenationMLPDecoder` | Matched Decima target-disjoint inputs and controls |
+| Extended Data Fig. 4 decoder robustness | `BiasFreeFactorizedDecoder` and `ConcatenationMLPDecoder` | Matched Decima target-disjoint inputs and controls |
 | Fig. 5 representation replication | `extract_scgpt_gene_tokens`, `gene_vectors` and the shared held-out fitting loop | Whole-human scGPT checkpoint, matched covered targets and within-representation controls |
+| Fig. 5c and Extended Data Fig. 10 external audits | `experiments/external_genequery_component_audit/` | HER2ST inputs, official GeneQuery vectors and ResNet weights; DeepSpot-M source and released checkpoint |
 | Supplementary residual-only assay | `SectionCenteredResidualDecoder` and `center_within_section` | Exactly section-centred training targets |
 | Supplementary branch interventions | `FactorizedDotProductDecoder.forward_branches` | Frozen checkpoint and reproducible within-partition identity permutations |
 

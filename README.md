@@ -32,6 +32,11 @@ assays used in the accompanying study (Fig. 1a--c).*
 - Reuse the manuscript's biological splits, target partitions, model settings
   and external-model checksums.
 
+The source distribution also includes the [external GeneQuery and DeepSpot-M
+audit workflows](experiments/external_genequery_component_audit/README.md) used
+in Fig. 5c and Extended Data Fig. 10. These require separately obtained cohort
+inputs and upstream model artifacts.
+
 ## Installation
 
 SpatioS2E requires Python 3.10 or newer.

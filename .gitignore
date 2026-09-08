@@ -35,6 +35,13 @@ dist/
 /scGPT/
 /UNI/
 /UNI2-h/
+/DeepSpotM/
+/experiments/external_genequery_component_audit/artifacts/
+/experiments/external_genequery_component_audit/runs/
+/experiments/external_genequery_component_audit/trainable_backbone_runs/
+/experiments/external_genequery_component_audit/deepspotm/runs/
+*.safetensors
+*.npy
 
 # Large scientific artifacts
 *.h5ad

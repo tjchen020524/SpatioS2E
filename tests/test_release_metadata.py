@@ -7,7 +7,7 @@ import spatios2e
 
 
 ROOT = Path(__file__).resolve().parents[1]
-EXPECTED_VERSION = "1.0.0"
+EXPECTED_VERSION = "1.1.0"
 
 
 def test_release_version_is_consistent():
@@ -19,7 +19,7 @@ def test_release_version_is_consistent():
     assert match.group(1) == EXPECTED_VERSION
     assert spatios2e.__version__ == EXPECTED_VERSION
     assert str(citation["version"]) == EXPECTED_VERSION
-    assert citation["date-released"].isoformat() == "2026-08-31"
+    assert citation["date-released"].isoformat() == "2026-09-07"
     assert (ROOT / "docs" / "releases" / f"v{EXPECTED_VERSION}.md").is_file()
 
 

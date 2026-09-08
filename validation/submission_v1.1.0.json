@@ -1,0 +1,863 @@
+{
+  "artifacts": {
+    "dependency_lock": {
+      "path": "requirements-lock-linux-x86_64-py310.txt",
+      "sha256": "911b53e3b40d00458daa0871ff01e209d3dbf565c9b44ae73dbe1a963b87556a"
+    },
+    "gene_partition_manifest": {
+      "path": "configs/manuscript/gene_partition_manifest.json",
+      "sha256": "9eacb1197b143b58f98b18bbabb1ade8aa89a5ad3f443f5cde8bab4f839d8b4e"
+    },
+    "source_snapshot": {
+      "files": [
+        {
+          "bytes": 2604,
+          "path": "CHANGELOG.md",
+          "sha256": "a87633e488dc28807933c9a847ffe041958e0e1979fc3054312d97af23026c41"
+        },
+        {
+          "bytes": 1106,
+          "path": "CITATION.cff",
+          "sha256": "90f41429de1d4e6612905a8fae38f07e10b2c9a001af201aa92e858c482e3192"
+        },
+        {
+          "bytes": 1074,
+          "path": "LICENSE",
+          "sha256": "85af7f187844bb77e55e2e190bc79a228d7b54be1b2d5c44ad88e226e69c45db"
+        },
+        {
+          "bytes": 691,
+          "path": "MANIFEST.in",
+          "sha256": "7dfcb8bee186c5b738da49d73aa4db6962b0292c1c06be07b8114c0348321023"
+        },
+        {
+          "bytes": 7115,
+          "path": "README.md",
+          "sha256": "bc1140fb40568ea1b9122b447cc75d423d8998171f947adbf084ff830d863db7"
+        },
+        {
+          "bytes": 2134,
+          "path": "configs/manuscript/README.md",
+          "sha256": "68d80091c9b97638abb5a10f30efb8393780033be22dabb75c326fe9218b13ba"
+        },
+        {
+          "bytes": 2600,
+          "path": "configs/manuscript/biological_splits/dlpfc.json",
+          "sha256": "48df4d3bf071988f9b361b058559b1d7013a932f47c1211bfcb3e8a94e09e0f2"
+        },
+        {
+          "bytes": 503,
+          "path": "configs/manuscript/biological_splits/her2st.json",
+          "sha256": "3d9284e780fd404c9c89ac9ebb7ede62d4e80980a8455b9417d80bccef007492"
+        },
+        {
+          "bytes": 1231,
+          "path": "configs/manuscript/biological_splits/hippocampus.json",
+          "sha256": "5277a60955b23f4af8184934c01786d51e6698fa27710425e833ab411b3491ae"
+        },
+        {
+          "bytes": 1151,
+          "path": "configs/manuscript/biological_splits/nac.json",
+          "sha256": "4f92b1013037f796d2b75f09b907d27e116d8ccf5c3541de6b3a11075c374b23"
+        },
+        {
+          "bytes": 1650,
+          "path": "configs/manuscript/cohorts.yaml",
+          "sha256": "8278db99f99fc160eadb7be2fabf561217302ea2461a6c19955b5bd1877f3316"
+        },
+        {
+          "bytes": 2679,
+          "path": "configs/manuscript/external_models.yaml",
+          "sha256": "bfa6f5ae9eaa148d26c8f463f67bfbf4b355acc8aea7acc3171dce68de1ea156"
+        },
+        {
+          "bytes": 15018,
+          "path": "configs/manuscript/gene_partition_manifest.json",
+          "sha256": "9eacb1197b143b58f98b18bbabb1ade8aa89a5ad3f443f5cde8bab4f839d8b4e"
+        },
+        {
+          "bytes": 58880,
+          "path": "configs/manuscript/gene_splits/dlpfc/heldout_genes.txt",
+          "sha256": "f3ff669018819b0d47afa921b252989510b986c8c443435e894f35cb11a69baa"
+        },
+        {
+          "bytes": 235472,
+          "path": "configs/manuscript/gene_splits/dlpfc/train_genes.txt",
+          "sha256": "92e7cb74e03615cb33771ea195e411ceb02c7449f7df2b2104a31325afc03e13"
+        },
+        {
+          "bytes": 50944,
+          "path": "configs/manuscript/gene_splits/her2st/heldout_genes.txt",
+          "sha256": "413a0ca2cb25ca8fe5049712bd09ebcd39bdc346cb0248a2c7e71f5cef2c48f8"
+        },
+        {
+          "bytes": 203680,
+          "path": "configs/manuscript/gene_splits/her2st/train_genes.txt",
+          "sha256": "bb961fa62b755ee1dca447ca645953cd6d623e9e4b83147f0bbd31215e6dbe7d"
+        },
+        {
+          "bytes": 58880,
+          "path": "configs/manuscript/gene_splits/hippocampus_donor_disjoint/heldout_genes.txt",
+          "sha256": "f3ff669018819b0d47afa921b252989510b986c8c443435e894f35cb11a69baa"
+        },
+        {
+          "bytes": 235472,
+          "path": "configs/manuscript/gene_splits/hippocampus_donor_disjoint/train_genes.txt",
+          "sha256": "92e7cb74e03615cb33771ea195e411ceb02c7449f7df2b2104a31325afc03e13"
+        },
+        {
+          "bytes": 58880,
+          "path": "configs/manuscript/gene_splits/nac/heldout_genes.txt",
+          "sha256": "72b6f1429628cbaefcaaf880b9a9243680a2b330b9830dc30f3fc1c1daf7dab2"
+        },
+        {
+          "bytes": 235472,
+          "path": "configs/manuscript/gene_splits/nac/train_genes.txt",
+          "sha256": "748d9b486cae9f4962afe1c8cfccd184e2bd635d23aaeab873cc5581cf0a0476"
+        },
+        {
+          "bytes": 58832,
+          "path": "configs/manuscript/gene_splits_sensitivity/chromosome_blocked/dlpfc/heldout_genes.txt",
+          "sha256": "11e363be5ee89829617d9d1107296571e0653735ea4eb96de3c7d9653a3b4ec9"
+        },
+        {
+          "bytes": 235520,
+          "path": "configs/manuscript/gene_splits_sensitivity/chromosome_blocked/dlpfc/train_genes.txt",
+          "sha256": "01b7b644b55d7e7e23a918b1770c4ef705f8c6e113a1f6fec07482b9c317b715"
+        },
+        {
+          "bytes": 51104,
+          "path": "configs/manuscript/gene_splits_sensitivity/chromosome_blocked/her2st/heldout_genes.txt",
+          "sha256": "1ed025bdcef1ed7572486b103fdf07d5391a8b8995fdde09794f22abcbe9f7d6"
+        },
+        {
+          "bytes": 203520,
+          "path": "configs/manuscript/gene_splits_sensitivity/chromosome_blocked/her2st/train_genes.txt",
+          "sha256": "b6ce7cb52f65ac38f376d47862c98b87eff267e027af6373d426d68aad3ed032"
+        },
+        {
+          "bytes": 58832,
+          "path": "configs/manuscript/gene_splits_sensitivity/chromosome_blocked/hippocampus_donor_disjoint/heldout_genes.txt",
+          "sha256": "11e363be5ee89829617d9d1107296571e0653735ea4eb96de3c7d9653a3b4ec9"
+        },
+        {
+          "bytes": 235520,
+          "path": "configs/manuscript/gene_splits_sensitivity/chromosome_blocked/hippocampus_donor_disjoint/train_genes.txt",
+          "sha256": "01b7b644b55d7e7e23a918b1770c4ef705f8c6e113a1f6fec07482b9c317b715"
+        },
+        {
+          "bytes": 58832,
+          "path": "configs/manuscript/gene_splits_sensitivity/chromosome_blocked/nac/heldout_genes.txt",
+          "sha256": "79375b29a3ddd663f3a01f4ca30d938243e807f7a821753e106d724498b444b3"
+        },
+        {
+          "bytes": 235520,
+          "path": "configs/manuscript/gene_splits_sensitivity/chromosome_blocked/nac/train_genes.txt",
+          "sha256": "6407f21a6afac0c4a7c2a7fded713ed339e60af9935d03046d74de783396d2c4"
+        },
+        {
+          "bytes": 58656,
+          "path": "configs/manuscript/gene_splits_sensitivity/embedding_cluster/dlpfc/heldout_genes.txt",
+          "sha256": "63613f840b667873e6eba997195a22c110f1587f0b8097276de42427fa9bba3a"
+        },
+        {
+          "bytes": 235696,
+          "path": "configs/manuscript/gene_splits_sensitivity/embedding_cluster/dlpfc/train_genes.txt",
+          "sha256": "f0454cfd1044c49487e23563c7986694cab8832032a851ab3c89a9d1be403396"
+        },
+        {
+          "bytes": 50448,
+          "path": "configs/manuscript/gene_splits_sensitivity/embedding_cluster/her2st/heldout_genes.txt",
+          "sha256": "7cbde127753d05507c0f773a949df4ad1e7cffd77de9ecb089fa2d34bcf5beda"
+        },
+        {
+          "bytes": 204176,
+          "path": "configs/manuscript/gene_splits_sensitivity/embedding_cluster/her2st/train_genes.txt",
+          "sha256": "1c0e65b0682664a7b51a48fc801101e1abd74e6f20e73894d72bf09864eda7d4"
+        },
+        {
+          "bytes": 58656,
+          "path": "configs/manuscript/gene_splits_sensitivity/embedding_cluster/hippocampus_donor_disjoint/heldout_genes.txt",
+          "sha256": "63613f840b667873e6eba997195a22c110f1587f0b8097276de42427fa9bba3a"
+        },
+        {
+          "bytes": 235696,
+          "path": "configs/manuscript/gene_splits_sensitivity/embedding_cluster/hippocampus_donor_disjoint/train_genes.txt",
+          "sha256": "f0454cfd1044c49487e23563c7986694cab8832032a851ab3c89a9d1be403396"
+        },
+        {
+          "bytes": 58656,
+          "path": "configs/manuscript/gene_splits_sensitivity/embedding_cluster/nac/heldout_genes.txt",
+          "sha256": "f6cda89df2e48e769f9117ef3a2ab917a9f5220563c91ae88eed4771f03dd034"
+        },
+        {
+          "bytes": 235696,
+          "path": "configs/manuscript/gene_splits_sensitivity/embedding_cluster/nac/train_genes.txt",
+          "sha256": "1675782acaf4053964d9bec38e80b7d6a45b807c74ade4acef83310c65cfb828"
+        },
+        {
+          "bytes": 58880,
+          "path": "configs/manuscript/gene_splits_sensitivity/expression_seed123/dlpfc/heldout_genes.txt",
+          "sha256": "1bd361996ae69b9fcb5adad65897dde6407c5bca55678b4dddabc3bbc5497fbc"
+        },
+        {
+          "bytes": 235472,
+          "path": "configs/manuscript/gene_splits_sensitivity/expression_seed123/dlpfc/train_genes.txt",
+          "sha256": "7a9f9021cc1a89773c29de92ed95234e96d1b9869c0ae798318afb03aa1fdccc"
+        },
+        {
+          "bytes": 50864,
+          "path": "configs/manuscript/gene_splits_sensitivity/expression_seed123/her2st/heldout_genes.txt",
+          "sha256": "7b1dcdd2ceb6fe5529cb69d2e112ee29e55a5bcfaf19a09ff7a0c19e013aa882"
+        },
+        {
+          "bytes": 203760,
+          "path": "configs/manuscript/gene_splits_sensitivity/expression_seed123/her2st/train_genes.txt",
+          "sha256": "6db2fa9d28003470f436f513a3184f25d696e309aafc3374e12e76fc0ce453b4"
+        },
+        {
+          "bytes": 58880,
+          "path": "configs/manuscript/gene_splits_sensitivity/expression_seed123/hippocampus_donor_disjoint/heldout_genes.txt",
+          "sha256": "1bd361996ae69b9fcb5adad65897dde6407c5bca55678b4dddabc3bbc5497fbc"
+        },
+        {
+          "bytes": 235472,
+          "path": "configs/manuscript/gene_splits_sensitivity/expression_seed123/hippocampus_donor_disjoint/train_genes.txt",
+          "sha256": "7a9f9021cc1a89773c29de92ed95234e96d1b9869c0ae798318afb03aa1fdccc"
+        },
+        {
+          "bytes": 58880,
+          "path": "configs/manuscript/gene_splits_sensitivity/expression_seed123/nac/heldout_genes.txt",
+          "sha256": "bd9953d9765e049b2d386724fdced4252625533bda00f097b38f2c3f33d6406e"
+        },
+        {
+          "bytes": 235472,
+          "path": "configs/manuscript/gene_splits_sensitivity/expression_seed123/nac/train_genes.txt",
+          "sha256": "da1bb9b1b865a02ef24390cdc6cf74cb0ae3f53e309cad10985e9dc9d4b46e66"
+        },
+        {
+          "bytes": 58880,
+          "path": "configs/manuscript/gene_splits_sensitivity/expression_seed456/dlpfc/heldout_genes.txt",
+          "sha256": "9de9f77ece96ea403ad3e7ceb158c0229546848639ca0386fab6450816be4ee8"
+        },
+        {
+          "bytes": 235472,
+          "path": "configs/manuscript/gene_splits_sensitivity/expression_seed456/dlpfc/train_genes.txt",
+          "sha256": "0c2573bdfbc84a1216c21f6b22cf4714a3a191b674db2cfdb78acb3ac54c13ad"
+        },
+        {
+          "bytes": 50592,
+          "path": "configs/manuscript/gene_splits_sensitivity/expression_seed456/her2st/heldout_genes.txt",
+          "sha256": "6863f0a17e62bb28a1421ee4bb5599a0059fd53c53225791dc1d4bd0161bf1de"
+        },
+        {
+          "bytes": 204032,
+          "path": "configs/manuscript/gene_splits_sensitivity/expression_seed456/her2st/train_genes.txt",
+          "sha256": "0e29bc2d0a8d862aceef1e26f1eabecde8c8abf6a175f36618b84cebceb8ec3e"
+        },
+        {
+          "bytes": 58880,
+          "path": "configs/manuscript/gene_splits_sensitivity/expression_seed456/hippocampus_donor_disjoint/heldout_genes.txt",
+          "sha256": "9de9f77ece96ea403ad3e7ceb158c0229546848639ca0386fab6450816be4ee8"
+        },
+        {
+          "bytes": 235472,
+          "path": "configs/manuscript/gene_splits_sensitivity/expression_seed456/hippocampus_donor_disjoint/train_genes.txt",
+          "sha256": "0c2573bdfbc84a1216c21f6b22cf4714a3a191b674db2cfdb78acb3ac54c13ad"
+        },
+        {
+          "bytes": 58880,
+          "path": "configs/manuscript/gene_splits_sensitivity/expression_seed456/nac/heldout_genes.txt",
+          "sha256": "6f9a67798ba55ff7dcf9c4c533b556c22292440fd7336ad9b936294e52819ad9"
+        },
+        {
+          "bytes": 235472,
+          "path": "configs/manuscript/gene_splits_sensitivity/expression_seed456/nac/train_genes.txt",
+          "sha256": "4beddcff1bf5f159194c8ace6cd4c0b70f990635db4ccea6d6cc7ac3a4e2d59c"
+        },
+        {
+          "bytes": 58880,
+          "path": "configs/manuscript/gene_splits_sensitivity/historical/dlpfc/heldout_genes.txt",
+          "sha256": "cfa659a46fb4b35c27571ae5a9c77dc935bcfe16117ed6d30d0b7b494881fff6"
+        },
+        {
+          "bytes": 235472,
+          "path": "configs/manuscript/gene_splits_sensitivity/historical/dlpfc/train_genes.txt",
+          "sha256": "ed1a0a7a452d778f4c87af11f1231085a3f1ce69579406ed3a7945f903e4082a"
+        },
+        {
+          "bytes": 50016,
+          "path": "configs/manuscript/gene_splits_sensitivity/historical/her2st/heldout_genes.txt",
+          "sha256": "5526dfbe06e111c2683a3b5249e8210ca4f61bf3c6b78955adb48a45a8d42ccf"
+        },
+        {
+          "bytes": 204608,
+          "path": "configs/manuscript/gene_splits_sensitivity/historical/her2st/train_genes.txt",
+          "sha256": "17467116063cbf4135be1972c5ff6b38a6b4348cf289a361c13ca0421a8bc206"
+        },
+        {
+          "bytes": 58880,
+          "path": "configs/manuscript/gene_splits_sensitivity/historical/hippocampus_donor_disjoint/heldout_genes.txt",
+          "sha256": "cfa659a46fb4b35c27571ae5a9c77dc935bcfe16117ed6d30d0b7b494881fff6"
+        },
+        {
+          "bytes": 235472,
+          "path": "configs/manuscript/gene_splits_sensitivity/historical/hippocampus_donor_disjoint/train_genes.txt",
+          "sha256": "ed1a0a7a452d778f4c87af11f1231085a3f1ce69579406ed3a7945f903e4082a"
+        },
+        {
+          "bytes": 58880,
+          "path": "configs/manuscript/gene_splits_sensitivity/historical/nac/heldout_genes.txt",
+          "sha256": "80b918e3a1065684b3f015f4e7066bcc5c467918bf74709437a81885b3079392"
+        },
+        {
+          "bytes": 235472,
+          "path": "configs/manuscript/gene_splits_sensitivity/historical/nac/train_genes.txt",
+          "sha256": "5ff26179002d5e00520c80b55e5f89199f4f17c761e932167450ecd301cc2985"
+        },
+        {
+          "bytes": 3280,
+          "path": "configs/manuscript/heldout_assay.yaml",
+          "sha256": "856236e94ba745e59e3128055035aadfeef7ddbe887be8935af6cc121fb2ca87"
+        },
+        {
+          "bytes": 446,
+          "path": "docs/assets/README.md",
+          "sha256": "1cc1c239565e403232d067e52fe2538dde4bc290fa0800ed8ae17abe0c9eda7e"
+        },
+        {
+          "bytes": 700241,
+          "path": "docs/assets/figure_1_abc.png",
+          "sha256": "09e2e7488911ff63e7a2b3ad8736389a41c0e0772cbe18b7e7b14e2a2750a06e"
+        },
+        {
+          "bytes": 2526,
+          "path": "docs/heldout_assay.md",
+          "sha256": "32e2a8a3fdcdb49b1a7ca6b74fc14995b11d801aeb73cc2b96e4a1c776c4a630"
+        },
+        {
+          "bytes": 3915,
+          "path": "docs/paper_code_map.md",
+          "sha256": "f4a8a683237104a4cbaaadb7816ee345950a658a391b1fda36b87d1a95fa37b4"
+        },
+        {
+          "bytes": 1966,
+          "path": "docs/releases/v0.2.0.md",
+          "sha256": "c169b4dcd87a8610096dc333a0f743d42ef2dc179d7f8b7ad8a96719fbc83e3b"
+        },
+        {
+          "bytes": 2129,
+          "path": "docs/releases/v1.0.0.md",
+          "sha256": "809273223d7076319e0a3645e6691e05363499e59fbe867768b873d81c8436fa"
+        },
+        {
+          "bytes": 921,
+          "path": "docs/releases/v1.1.0.md",
+          "sha256": "fa5dbfe74d7b2b8dbd610b8c7c8b07aa70f7f9170422c2b55d7603c75aa9cf16"
+        },
+        {
+          "bytes": 2230,
+          "path": "docs/releasing.md",
+          "sha256": "7acd219b26f6605be0146409c6687cc9000ae45dfb4b1b26154ad766faa59910"
+        },
+        {
+          "bytes": 81,
+          "path": "experiments/__init__.py",
+          "sha256": "a1a44f02d599ddfa3cc7e10749b2dee3aa80795662bb116d4cef4adc8ec7d71a"
+        },
+        {
+          "bytes": 7582,
+          "path": "experiments/external_genequery_component_audit/README.md",
+          "sha256": "35bf22ee35ef3f6517f2e46e6ea4f5984c58b2a2be120344c5b051bcf6218ed1"
+        },
+        {
+          "bytes": 8068,
+          "path": "experiments/external_genequery_component_audit/audit_predictions.py",
+          "sha256": "05993f2e1211e5366cbb82620c78d2f75eade3c970cb7752d3c41ab6b4b49a59"
+        },
+        {
+          "bytes": 7427,
+          "path": "experiments/external_genequery_component_audit/common.py",
+          "sha256": "7e64f09d432d551374c9e1ecb5192084a200313abc90ae175dc38f0e158d9253"
+        },
+        {
+          "bytes": 13494,
+          "path": "experiments/external_genequery_component_audit/deepspotm/predict_zero_shot.py",
+          "sha256": "ed9421b09564ee7983e2d688d7235cdc182315d82a75691eadbe6e53491b1ef5"
+        },
+        {
+          "bytes": 5089,
+          "path": "experiments/external_genequery_component_audit/deepspotm/prepare_panel.py",
+          "sha256": "6d51c6d1ca1ecfad82f8e183507bfccf8244c7b323792d54ab4c696720629213"
+        },
+        {
+          "bytes": 6042,
+          "path": "experiments/external_genequery_component_audit/extract_resnet50_features.py",
+          "sha256": "3a197b278a4b088b4639db5ca92397af7062fe5a947b284314800a20554c9240"
+        },
+        {
+          "bytes": 3819,
+          "path": "experiments/external_genequery_component_audit/extract_resnet50_patches.py",
+          "sha256": "49896968c187e6ab3a36f338d2c3dacba9be546a5328bc26253505da30e6d41b"
+        },
+        {
+          "bytes": 5232,
+          "path": "experiments/external_genequery_component_audit/mean_only_baseline.py",
+          "sha256": "281303724e23ee67647b891590b5c1717a835f615e2f8e9971e18bea8187011f"
+        },
+        {
+          "bytes": 4465,
+          "path": "experiments/external_genequery_component_audit/model.py",
+          "sha256": "0f4329540e2b293d5c7c41c1d8e5332dc367229b74e99d3d46b0306f9207e311"
+        },
+        {
+          "bytes": 3878,
+          "path": "experiments/external_genequery_component_audit/patch_dataset.py",
+          "sha256": "7c99c522ac6b8d14d59b3aa60aed45cf11ce8c0ac07d3b30e694864506dbaf84"
+        },
+        {
+          "bytes": 5931,
+          "path": "experiments/external_genequery_component_audit/prepare_panel.py",
+          "sha256": "66af4f10a487e8a5f8db237d5e18f4e54f2b4b98ff19b7a9659b3a61d53cfeff"
+        },
+        {
+          "bytes": 4971,
+          "path": "experiments/external_genequery_component_audit/summarize_audit.py",
+          "sha256": "a66170b7d77a6e086548043bfe15e925b30acedf93f7fa9a9896ace9c69ec7fd"
+        },
+        {
+          "bytes": 2086,
+          "path": "experiments/external_genequery_component_audit/test_core.py",
+          "sha256": "901a8cf1b5cf8a4e33a2d03067d6114708de20cc619693abdfa5a6dbe7630378"
+        },
+        {
+          "bytes": 9813,
+          "path": "experiments/external_genequery_component_audit/train_genequery_audit.py",
+          "sha256": "19362101baebba47f35ff39022f978fb74ef1ac7bf88659e514f93a4a565422d"
+        },
+        {
+          "bytes": 10714,
+          "path": "experiments/external_genequery_component_audit/train_genequery_trainable_backbone.py",
+          "sha256": "5b4687536a47eb3af49472bd4ea9baceb8ea04421dc37c3ee0b095567518f4f6"
+        },
+        {
+          "bytes": 5907,
+          "path": "experiments/heldout_metric_policy.py",
+          "sha256": "193b221c92cfd306f0cb6eb466937c9e089e93dd44b481abbbffc11dc2d08a58"
+        },
+        {
+          "bytes": 2228,
+          "path": "pyproject.toml",
+          "sha256": "9b4395fd1b949e51333ffdf55888d37b2f9a4f5e933011f394c2c4e9a315a3ae"
+        },
+        {
+          "bytes": 953,
+          "path": "requirements-lock-linux-x86_64-py310.txt",
+          "sha256": "911b53e3b40d00458daa0871ff01e209d3dbf565c9b44ae73dbe1a963b87556a"
+        },
+        {
+          "bytes": 4318,
+          "path": "scripts/build_manuscript_partition_manifest.py",
+          "sha256": "2c6430a2e0aa3b7877d638e84c31b756794f5ca950e7ea0db79bc27f26f8a8a8"
+        },
+        {
+          "bytes": 673,
+          "path": "scripts/run_cleanroom_rebuild.sh",
+          "sha256": "a3cda188c865cef9784b2e1e0fffc40aea11cb616a9ec1d3473fbc1c7ed94602"
+        },
+        {
+          "bytes": 9702,
+          "path": "scripts/validate_cleanroom.py",
+          "sha256": "c70b4f300ec78bc4a199b980d9e67d5897b581f736b0ae32f494a187a6b3530b"
+        },
+        {
+          "bytes": 13341,
+          "path": "scripts/validate_real_heldout_smoke.py",
+          "sha256": "0f9f9cd97e28a6fd2210b27b3f4d7c78a4e8ba978040bd071ffd359a27a1402b"
+        },
+        {
+          "bytes": 96,
+          "path": "spatios2e/__init__.py",
+          "sha256": "a80edcb721528b8fe9f1ed5a436967a7f5856104f8a5457876d9037c278471b2"
+        },
+        {
+          "bytes": 163,
+          "path": "spatios2e/data/__init__.py",
+          "sha256": "e29e92af60606aa2e63f093d7ba6cf0f32d264cd22ac86ba7159ddde539c5628"
+        },
+        {
+          "bytes": 15144,
+          "path": "spatios2e/data/dataset.py",
+          "sha256": "36fcd7f30af36a285de3cfd0837b3745b3c7217bcb3bcb3252e760b802eaa8c7"
+        },
+        {
+          "bytes": 526,
+          "path": "spatios2e/evaluation/__init__.py",
+          "sha256": "a3265c67131fcd8e52eee90dd203d1e5a859606bfa0deb169fc9bc5a7a6026e9"
+        },
+        {
+          "bytes": 7352,
+          "path": "spatios2e/evaluation/components.py",
+          "sha256": "403bf274f648f59e0ea85610e88fc618bf4509d694d71acb6f34efcef31bbcf7"
+        },
+        {
+          "bytes": 16523,
+          "path": "spatios2e/evaluation/evaluate.py",
+          "sha256": "0b6751e07718ece6975557039446f7e759799405f293f7324b504534e68d5615"
+        },
+        {
+          "bytes": 6327,
+          "path": "spatios2e/evaluation/gene_mean.py",
+          "sha256": "1f1d8193317bc69ff81630181714abd25c2fc00d870ad19157316e83b87b4fa9"
+        },
+        {
+          "bytes": 1271,
+          "path": "spatios2e/models/__init__.py",
+          "sha256": "55d179c049b5163af5828c85fba0741280cac9d6df91fd16b3b54352e9737153"
+        },
+        {
+          "bytes": 10127,
+          "path": "spatios2e/models/decima_wrapper.py",
+          "sha256": "6abe45c483e87e3f6bb12aefbae31a46c9d3e7e9e434ed0e5445948a17c0cc57"
+        },
+        {
+          "bytes": 6310,
+          "path": "spatios2e/models/factory.py",
+          "sha256": "02ad2fe497dbf4d516a03121065b95684acbfe1a7b522936f413a7e173446e36"
+        },
+        {
+          "bytes": 3786,
+          "path": "spatios2e/models/gene_vectors.py",
+          "sha256": "2cbfa33fc9dcf8e11e4bd9217fa3caf957df91b24480f9c87ec2f1fe16e94fdc"
+        },
+        {
+          "bytes": 6761,
+          "path": "spatios2e/models/heldout_gene.py",
+          "sha256": "5883b1d92e79ac081782efb53ce6f0ca75ae3f88e35586a754434492d764e89b"
+        },
+        {
+          "bytes": 4705,
+          "path": "spatios2e/models/morphology_model.py",
+          "sha256": "0069e847b7fa4b145594805cd86411d9ea22f939f919b782399dbf559791b18d"
+        },
+        {
+          "bytes": 8748,
+          "path": "spatios2e/models/residual_model.py",
+          "sha256": "16a615e5ed463986044eaf9f04346dbffc8d35c0f37a8c5ca3e4b45380c08fee"
+        },
+        {
+          "bytes": 16748,
+          "path": "spatios2e/models/single_cell_prior.py",
+          "sha256": "e4d853994e1459fc05fdbf5b270ffa77214e244c7e96bf0d235deb23c6ea045d"
+        },
+        {
+          "bytes": 11542,
+          "path": "spatios2e/models/spatios2e_model.py",
+          "sha256": "428df765573ae2393daab526e2e61c7229385a881a3bc47d2bf980ff6bb51e20"
+        },
+        {
+          "bytes": 45,
+          "path": "spatios2e/preprocessing/__init__.py",
+          "sha256": "0e8a1a2c3a8d1c06a6360a6b5e587ae202c2d854a1449351319f2adb2bbc69f4"
+        },
+        {
+          "bytes": 8181,
+          "path": "spatios2e/preprocessing/aggregate_multimodal_features.py",
+          "sha256": "b8fb33edad9129cf1c524c328a17c795cfa3c0234fff6c2ac1dc0092f7a38f90"
+        },
+        {
+          "bytes": 5884,
+          "path": "spatios2e/preprocessing/align_multimodal_inputs.py",
+          "sha256": "a141d8aa31e0aec21206f7797226ef8ed40c8e7c6777489c4b5b811230493812"
+        },
+        {
+          "bytes": 19247,
+          "path": "spatios2e/preprocessing/build_snrna_scgpt_gene_context.py",
+          "sha256": "a9687ec6c90b1ea6df0d2a005d7be6770f6df9504a8ec0b1c4f1ec224f0ea949"
+        },
+        {
+          "bytes": 7765,
+          "path": "spatios2e/preprocessing/build_spatial_graph.py",
+          "sha256": "d2740ff6f97c1f9a3c8507e0f145877b7b4246b266e150cc337b836bba2e6803"
+        },
+        {
+          "bytes": 19048,
+          "path": "spatios2e/preprocessing/extract_histology_embeddings.py",
+          "sha256": "dbbb7979037b23c87bd189244b79b140cf3f34e5afb63d31c09e48a3074a4166"
+        },
+        {
+          "bytes": 5952,
+          "path": "spatios2e/preprocessing/extract_scgpt_gene_tokens.py",
+          "sha256": "a497bb20090ccda8f4bbf1e54d5397c4d81dd65ac008e58c726e576112ce698f"
+        },
+        {
+          "bytes": 8541,
+          "path": "spatios2e/preprocessing/map_genes.py",
+          "sha256": "6bc9c00bf4e3dae6281e9ed9bfd256d9f52ac990aa23adade5570758edfd3362"
+        },
+        {
+          "bytes": 8076,
+          "path": "spatios2e/preprocessing/normalize_visium.py",
+          "sha256": "846a27701150aa6228416fbb6b038dddc619300a41c50f167ab8f9cf0709c539"
+        },
+        {
+          "bytes": 7197,
+          "path": "spatios2e/preprocessing/prepare_spatial_features.py",
+          "sha256": "490115eff2deebea5192ac0268a6b1e5935bea2a8080b92efb9e66950b044b51"
+        },
+        {
+          "bytes": 8478,
+          "path": "spatios2e/preprocessing/subset_expression_by_gene_split.py",
+          "sha256": "cc1b843417a7fcec47cfd4d1c1a768b19b66db1be0e29bc9621f1d1c1b24880c"
+        },
+        {
+          "bytes": 409,
+          "path": "spatios2e/training/__init__.py",
+          "sha256": "99ffb594067e83bc0ad8e9bdeda8c5b25b860711b21172f523da4aac25b8109c"
+        },
+        {
+          "bytes": 9661,
+          "path": "spatios2e/training/heldout.py",
+          "sha256": "63e354e877d091622ef158a981b7f2c9bfa9deb47cd6006e386feccbb1ac29aa"
+        },
+        {
+          "bytes": 30156,
+          "path": "spatios2e/training/train.py",
+          "sha256": "f2cebd12ff5a234c3d666e38bea3bc75854f078485b2f986f11bfd575b5090c5"
+        },
+        {
+          "bytes": 37,
+          "path": "spatios2e/utils/__init__.py",
+          "sha256": "c7b04f2f8610bd94ff10cf28a39c1cfb2de416de5d2b078c9d0c7fbac4cea5ef"
+        },
+        {
+          "bytes": 7281,
+          "path": "spatios2e/utils/residual_scale.py",
+          "sha256": "ee0605a4f5979e35cba9a668775ef1f6995fd6f35c37660bfceadb90a0513b9f"
+        },
+        {
+          "bytes": 754,
+          "path": "tests/test_balanced_gene_chunks.py",
+          "sha256": "a17084a0c22ea02374793eb79d60c3a5bb4e35be0f6d8c812cdfea26d9efdd01"
+        },
+        {
+          "bytes": 2113,
+          "path": "tests/test_component_metrics.py",
+          "sha256": "a5e22443bcfa9f16147f31106c5a0adf92037ae1c9f1fa96cfb4e500a14c523e"
+        },
+        {
+          "bytes": 957,
+          "path": "tests/test_evaluation_coverage.py",
+          "sha256": "4ac9f697ed8bd704e5319cfdc8905244946a463e1e15e5d65e74cea420590cf1"
+        },
+        {
+          "bytes": 3701,
+          "path": "tests/test_external_audit_release.py",
+          "sha256": "ae46b4d390758c276dc31ed872eab283d876d154d3eccca2f743b2f954025c70"
+        },
+        {
+          "bytes": 1164,
+          "path": "tests/test_gene_mean_counterfactual.py",
+          "sha256": "6e5d019ff192b171c7ad1278f981ef0d76dd863e03bf93705dd71954376fac6c"
+        },
+        {
+          "bytes": 1778,
+          "path": "tests/test_gene_vectors.py",
+          "sha256": "89c37f7dffe9cfa880cbd2c87f5cbe6c5d35edf397b0b2f78580b5a046e8bae9"
+        },
+        {
+          "bytes": 2045,
+          "path": "tests/test_heldout_gene_decoders.py",
+          "sha256": "cc97bf7f1dc99c1a72e06334c47ef07ed1cd655cb9002dc341688ca12610488c"
+        },
+        {
+          "bytes": 1714,
+          "path": "tests/test_heldout_training.py",
+          "sha256": "51a38685750b63187255a96203271f165ff106e679c192f26321bb132ba0ea4c"
+        },
+        {
+          "bytes": 853,
+          "path": "tests/test_imports.py",
+          "sha256": "31addda5a630a13169d195218443668b5b85b713587dac7229c424aa4547bb3b"
+        },
+        {
+          "bytes": 6977,
+          "path": "tests/test_manuscript_splits.py",
+          "sha256": "3f6da986cadc2380be57223fdb793422d7e1ca86dbe71138526e9612857609c2"
+        },
+        {
+          "bytes": 1251,
+          "path": "tests/test_release_metadata.py",
+          "sha256": "ae3d91a105dc2698f7b9cfab8883ef51d95c72aa9bde22357cb88e8b87cb3554"
+        },
+        {
+          "bytes": 1510,
+          "path": "tests/test_scgpt_gene_tokens.py",
+          "sha256": "1b276fb25069890b9e2947c33b12d281a6ac6d0311340db4b29a3b86b1d0c147"
+        },
+        {
+          "bytes": 1298,
+          "path": "tests/test_training_gene_prior.py",
+          "sha256": "218c4faf70210530daa3a3601504cf9f0c78df122db16cfb1bd0d218a6edb020"
+        }
+      ],
+      "n_files": 138,
+      "sha256": "311bf86e7b5e1628f651afbffcd09ee3f1923e26a9ef652562483366251d0742"
+    }
+  },
+  "checks": [
+    {
+      "command": [
+        "python",
+        "scripts/build_manuscript_partition_manifest.py",
+        "--check"
+      ],
+      "duration_seconds": 0.11,
+      "label": "partition manifest",
+      "return_code": 0,
+      "stderr": "",
+      "stdout": "PASS: configs/manuscript/gene_partition_manifest.json is current\n"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "duration_seconds": 5.069,
+      "label": "unit and synthetic training tests",
+      "return_code": 0,
+      "stderr": "",
+      "stdout": "......................................                                   [100%]\n38 passed in 4.48s\n"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "ruff",
+        "check",
+        "spatios2e",
+        "tests",
+        "scripts",
+        "experiments"
+      ],
+      "duration_seconds": 0.05,
+      "label": "ruff",
+      "return_code": 0,
+      "stderr": "",
+      "stdout": "All checks passed!\n"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "build",
+        "--no-isolation",
+        "--outdir",
+        "<temporary-build-dir>"
+      ],
+      "duration_seconds": 4.03,
+      "label": "source and wheel build",
+      "return_code": 0,
+      "stderr": "",
+      "stdout": "* Getting build dependencies for sdist...\nrunning egg_info\nwriting spatios2e.egg-info/PKG-INFO\nwriting dependency_links to spatios2e.egg-info/dependency_links.txt\nwriting entry points to spatios2e.egg-info/entry_points.txt\nwriting requirements to spatios2e.egg-info/requires.txt\nwriting top-level names to spatios2e.egg-info/top_level.txt\nreading manifest file 'spatios2e.egg-info/SOURCES.txt'\nreading manifest template 'MANIFEST.in'\nadding license file 'LICENSE'\nwriting manifest file 'spatios2e.egg-info/SOURCES.txt'\n* Building sdist...\nrunning sdist\nrunning egg_info\nwriting spatios2e.egg-info/PKG-INFO\nwriting dependency_links to spatios2e.egg-info/dependency_links.txt\nwriting entry points to spatios2e.egg-info/entry_points.txt\nwriting requirements to spatios2e.egg-info/requires.txt\nwriting top-level names to spatios2e.egg-info/top_level.txt\nreading manifest file 'spatios2e.egg-info/SOURCES.txt'\nreading manifest template 'MANIFEST.in'\nadding license file 'LICENSE'\nwriting manifest file 'spatios2e.egg-info/SOURCES.txt'\nrunning check\ncreating spatios2e-1.1.0\ncreating spatios2e-1.1.0/configs\ncreating spatios2e-1.1.0/configs/manuscript\ncreating spatios2e-1.1.0/configs/manuscript/biological_splits\ncreating spatios2e-1.1.0/configs/manuscript/gene_splits/dlpfc\ncreating spatios2e-1.1.0/configs/manuscript/gene_splits/her2st\ncreating spatios2e-1.1.0/configs/manuscript/gene_splits/hippocampus_donor_disjoint\ncreating spatios2e-1.1.0/configs/manuscript/gene_splits/nac\ncreating spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/chromosome_blocked/dlpfc\ncreating spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/chromosome_blocked/her2st\ncreating spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/chromosome_blocked/hippocampus_donor_disjoint\ncreating spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/chromosome_blocked/nac\ncreating spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/embedding_cluster/dlpfc\ncreating spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/embedding_cluster/her2st\ncreating spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/embedding_cluster/hippocampus_donor_disjoint\ncreating spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/embedding_cluster/nac\ncreating spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/expression_seed123/dlpfc\ncreating spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/expression_seed123/her2st\ncreating spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/expression_seed123/hippocampus_donor_disjoint\ncreating spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/expression_seed123/nac\ncreating spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/expression_seed456/dlpfc\ncreating spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/expression_seed456/her2st\ncreating spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/expression_seed456/hippocampus_donor_disjoint\ncreating spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/expression_seed456/nac\ncreating spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/historical/dlpfc\ncreating spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/historical/her2st\ncreating spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/historical/hippocampus_donor_disjoint\ncreating spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/historical/nac\ncreating spatios2e-1.1.0/docs\ncreating spatios2e-1.1.0/docs/assets\ncreating spatios2e-1.1.0/docs/releases\ncreating spatios2e-1.1.0/examples/hippocampus\ncreating spatios2e-1.1.0/examples/hippocampus/gene_splits\ncreating spatios2e-1.1.0/experiments\ncreating spatios2e-1.1.0/experiments/external_genequery_component_audit\ncreating spatios2e-1.1.0/experiments/external_genequery_component_audit/deepspotm\ncreating spatios2e-1.1.0/scripts\ncreating spatios2e-1.1.0/spatios2e\ncreating spatios2e-1.1.0/spatios2e.egg-info\ncreating spatios2e-1.1.0/spatios2e/data\ncreating spatios2e-1.1.0/spatios2e/evaluation\ncreating spatios2e-1.1.0/spatios2e/models\ncreating spatios2e-1.1.0/spatios2e/preprocessing\ncreating spatios2e-1.1.0/spatios2e/training\ncreating spatios2e-1.1.0/spatios2e/utils\ncreating spatios2e-1.1.0/tests\ncreating spatios2e-1.1.0/validation\ncopying files to spatios2e-1.1.0...\ncopying CHANGELOG.md -> spatios2e-1.1.0\ncopying CITATION.cff -> spatios2e-1.1.0\ncopying LICENSE -> spatios2e-1.1.0\ncopying MANIFEST.in -> spatios2e-1.1.0\ncopying README.md -> spatios2e-1.1.0\ncopying environment-lock.yml -> spatios2e-1.1.0\ncopying environment.yml -> spatios2e-1.1.0\ncopying pyproject.toml -> spatios2e-1.1.0\ncopying requirements-lock-linux-x86_64-py310.txt -> spatios2e-1.1.0\ncopying requirements.txt -> spatios2e-1.1.0\ncopying configs/hippocampus_spatios2e.yaml -> spatios2e-1.1.0/configs\ncopying configs/manuscript/README.md -> spatios2e-1.1.0/configs/manuscript\ncopying configs/manuscript/cohorts.yaml -> spatios2e-1.1.0/configs/manuscript\ncopying configs/manuscript/external_models.yaml -> spatios2e-1.1.0/configs/manuscript\ncopying configs/manuscript/gene_partition_manifest.json -> spatios2e-1.1.0/configs/manuscript\ncopying configs/manuscript/heldout_assay.yaml -> spatios2e-1.1.0/configs/manuscript\ncopying configs/manuscript/biological_splits/dlpfc.json -> spatios2e-1.1.0/configs/manuscript/biological_splits\ncopying configs/manuscript/biological_splits/her2st.json -> spatios2e-1.1.0/configs/manuscript/biological_splits\ncopying configs/manuscript/biological_splits/hippocampus.json -> spatios2e-1.1.0/configs/manuscript/biological_splits\ncopying configs/manuscript/biological_splits/nac.json -> spatios2e-1.1.0/configs/manuscript/biological_splits\ncopying configs/manuscript/gene_splits/dlpfc/heldout_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits/dlpfc\ncopying configs/manuscript/gene_splits/dlpfc/train_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits/dlpfc\ncopying configs/manuscript/gene_splits/her2st/heldout_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits/her2st\ncopying configs/manuscript/gene_splits/her2st/train_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits/her2st\ncopying configs/manuscript/gene_splits/hippocampus_donor_disjoint/heldout_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits/hippocampus_donor_disjoint\ncopying configs/manuscript/gene_splits/hippocampus_donor_disjoint/train_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits/hippocampus_donor_disjoint\ncopying configs/manuscript/gene_splits/nac/heldout_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits/nac\ncopying configs/manuscript/gene_splits/nac/train_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits/nac\ncopying configs/manuscript/gene_splits_sensitivity/chromosome_blocked/dlpfc/heldout_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/chromosome_blocked/dlpfc\ncopying configs/manuscript/gene_splits_sensitivity/chromosome_blocked/dlpfc/train_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/chromosome_blocked/dlpfc\ncopying configs/manuscript/gene_splits_sensitivity/chromosome_blocked/her2st/heldout_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/chromosome_blocked/her2st\ncopying configs/manuscript/gene_splits_sensitivity/chromosome_blocked/her2st/train_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/chromosome_blocked/her2st\ncopying configs/manuscript/gene_splits_sensitivity/chromosome_blocked/hippocampus_donor_disjoint/heldout_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/chromosome_blocked/hippocampus_donor_disjoint\ncopying configs/manuscript/gene_splits_sensitivity/chromosome_blocked/hippocampus_donor_disjoint/train_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/chromosome_blocked/hippocampus_donor_disjoint\ncopying configs/manuscript/gene_splits_sensitivity/chromosome_blocked/nac/heldout_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/chromosome_blocked/nac\ncopying configs/manuscript/gene_splits_sensitivity/chromosome_blocked/nac/train_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/chromosome_blocked/nac\ncopying configs/manuscript/gene_splits_sensitivity/embedding_cluster/dlpfc/heldout_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/embedding_cluster/dlpfc\ncopying configs/manuscript/gene_splits_sensitivity/embedding_cluster/dlpfc/train_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/embedding_cluster/dlpfc\ncopying configs/manuscript/gene_splits_sensitivity/embedding_cluster/her2st/heldout_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/embedding_cluster/her2st\ncopying configs/manuscript/gene_splits_sensitivity/embedding_cluster/her2st/train_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/embedding_cluster/her2st\ncopying configs/manuscript/gene_splits_sensitivity/embedding_cluster/hippocampus_donor_disjoint/heldout_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/embedding_cluster/hippocampus_donor_disjoint\ncopying configs/manuscript/gene_splits_sensitivity/embedding_cluster/hippocampus_donor_disjoint/train_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/embedding_cluster/hippocampus_donor_disjoint\ncopying configs/manuscript/gene_splits_sensitivity/embedding_cluster/nac/heldout_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/embedding_cluster/nac\ncopying configs/manuscript/gene_splits_sensitivity/embedding_cluster/nac/train_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/embedding_cluster/nac\ncopying configs/manuscript/gene_splits_sensitivity/expression_seed123/dlpfc/heldout_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/expression_seed123/dlpfc\ncopying configs/manuscript/gene_splits_sensitivity/expression_seed123/dlpfc/train_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/expression_seed123/dlpfc\ncopying configs/manuscript/gene_splits_sensitivity/expression_seed123/her2st/heldout_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/expression_seed123/her2st\ncopying configs/manuscript/gene_splits_sensitivity/expression_seed123/her2st/train_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/expression_seed123/her2st\ncopying configs/manuscript/gene_splits_sensitivity/expression_seed123/hippocampus_donor_disjoint/heldout_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/expression_seed123/hippocampus_donor_disjoint\ncopying configs/manuscript/gene_splits_sensitivity/expression_seed123/hippocampus_donor_disjoint/train_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/expression_seed123/hippocampus_donor_disjoint\ncopying configs/manuscript/gene_splits_sensitivity/expression_seed123/nac/heldout_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/expression_seed123/nac\ncopying configs/manuscript/gene_splits_sensitivity/expression_seed123/nac/train_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/expression_seed123/nac\ncopying configs/manuscript/gene_splits_sensitivity/expression_seed456/dlpfc/heldout_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/expression_seed456/dlpfc\ncopying configs/manuscript/gene_splits_sensitivity/expression_seed456/dlpfc/train_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/expression_seed456/dlpfc\ncopying configs/manuscript/gene_splits_sensitivity/expression_seed456/her2st/heldout_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/expression_seed456/her2st\ncopying configs/manuscript/gene_splits_sensitivity/expression_seed456/her2st/train_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/expression_seed456/her2st\ncopying configs/manuscript/gene_splits_sensitivity/expression_seed456/hippocampus_donor_disjoint/heldout_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/expression_seed456/hippocampus_donor_disjoint\ncopying configs/manuscript/gene_splits_sensitivity/expression_seed456/hippocampus_donor_disjoint/train_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/expression_seed456/hippocampus_donor_disjoint\ncopying configs/manuscript/gene_splits_sensitivity/expression_seed456/nac/heldout_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/expression_seed456/nac\ncopying configs/manuscript/gene_splits_sensitivity/expression_seed456/nac/train_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/expression_seed456/nac\ncopying configs/manuscript/gene_splits_sensitivity/historical/dlpfc/heldout_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/historical/dlpfc\ncopying configs/manuscript/gene_splits_sensitivity/historical/dlpfc/train_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/historical/dlpfc\ncopying configs/manuscript/gene_splits_sensitivity/historical/her2st/heldout_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/historical/her2st\ncopying configs/manuscript/gene_splits_sensitivity/historical/her2st/train_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/historical/her2st\ncopying configs/manuscript/gene_splits_sensitivity/historical/hippocampus_donor_disjoint/heldout_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/historical/hippocampus_donor_disjoint\ncopying configs/manuscript/gene_splits_sensitivity/historical/hippocampus_donor_disjoint/train_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/historical/hippocampus_donor_disjoint\ncopying configs/manuscript/gene_splits_sensitivity/historical/nac/heldout_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/historical/nac\ncopying configs/manuscript/gene_splits_sensitivity/historical/nac/train_genes.txt -> spatios2e-1.1.0/configs/manuscript/gene_splits_sensitivity/historical/nac\ncopying docs/heldout_assay.md -> spatios2e-1.1.0/docs\ncopying docs/paper_code_map.md -> spatios2e-1.1.0/docs\ncopying docs/releasing.md -> spatios2e-1.1.0/docs\ncopying docs/assets/README.md -> spatios2e-1.1.0/docs/assets\ncopying docs/assets/figure_1_abc.png -> spatios2e-1.1.0/docs/assets\ncopying docs/releases/v0.2.0.md -> spatios2e-1.1.0/docs/releases\ncopying docs/releases/v1.0.0.md -> spatios2e-1.1.0/docs/releases\ncopying docs/releases/v1.1.0.md -> spatios2e-1.1.0/docs/releases\ncopying examples/hippocampus/run_train_eval.sh -> spatios2e-1.1.0/examples/hippocampus\ncopying examples/hippocampus/gene_splits/all_genes.txt -> spatios2e-1.1.0/examples/hippocampus/gene_splits\ncopying examples/hippocampus/gene_splits/test_genes.txt -> spatios2e-1.1.0/examples/hippocampus/gene_splits\ncopying examples/hippocampus/gene_splits/train_genes.txt -> spatios2e-1.1.0/examples/hippocampus/gene_splits\ncopying examples/hippocampus/gene_splits/val_genes.txt -> spatios2e-1.1.0/examples/hippocampus/gene_splits\ncopying experiments/__init__.py -> spatios2e-1.1.0/experiments\ncopying experiments/heldout_metric_policy.py -> spatios2e-1.1.0/experiments\ncopying experiments/external_genequery_component_audit/README.md -> spatios2e-1.1.0/experiments/external_genequery_component_audit\ncopying experiments/external_genequery_component_audit/audit_predictions.py -> spatios2e-1.1.0/experiments/external_genequery_component_audit\ncopying experiments/external_genequery_component_audit/common.py -> spatios2e-1.1.0/experiments/external_genequery_component_audit\ncopying experiments/external_genequery_component_audit/extract_resnet50_features.py -> spatios2e-1.1.0/experiments/external_genequery_component_audit\ncopying experiments/external_genequery_component_audit/extract_resnet50_patches.py -> spatios2e-1.1.0/experiments/external_genequery_component_audit\ncopying experiments/external_genequery_component_audit/mean_only_baseline.py -> spatios2e-1.1.0/experiments/external_genequery_component_audit\ncopying experiments/external_genequery_component_audit/model.py -> spatios2e-1.1.0/experiments/external_genequery_component_audit\ncopying experiments/external_genequery_component_audit/patch_dataset.py -> spatios2e-1.1.0/experiments/external_genequery_component_audit\ncopying experiments/external_genequery_component_audit/prepare_panel.py -> spatios2e-1.1.0/experiments/external_genequery_component_audit\ncopying experiments/external_genequery_component_audit/summarize_audit.py -> spatios2e-1.1.0/experiments/external_genequery_component_audit\ncopying experiments/external_genequery_component_audit/test_core.py -> spatios2e-1.1.0/experiments/external_genequery_component_audit\ncopying experiments/external_genequery_component_audit/train_genequery_audit.py -> spatios2e-1.1.0/experiments/external_genequery_component_audit\ncopying experiments/external_genequery_component_audit/train_genequery_trainable_backbone.py -> spatios2e-1.1.0/experiments/external_genequery_component_audit\ncopying experiments/external_genequery_component_audit/deepspotm/predict_zero_shot.py -> spatios2e-1.1.0/experiments/external_genequery_component_audit/deepspotm\ncopying experiments/external_genequery_component_audit/deepspotm/prepare_panel.py -> spatios2e-1.1.0/experiments/external_genequery_component_audit/deepspotm\ncopying scripts/build_manuscript_partition_manifest.py -> spatios2e-1.1.0/scripts\ncopying scripts/run_cleanroom_rebuild.sh -> spatios2e-1.1.0/scripts\ncopying scripts/validate_cleanroom.py -> spatios2e-1.1.0/scripts\ncopying scripts/validate_real_heldout_smoke.py -> spatios2e-1.1.0/scripts\ncopying spatios2e/__init__.py -> spatios2e-1.1.0/spatios2e\ncopying spatios2e.egg-info/PKG-INFO -> spatios2e-1.1.0/spatios2e.egg-info\ncopying spatios2e.egg-info/SOURCES.txt -> spatios2e-1.1.0/spatios2e.egg-info\ncopying spatios2e.egg-info/dependency_links.txt -> spatios2e-1.1.0/spatios2e.egg-info\ncopying spatios2e.egg-info/entry_points.txt -> spatios2e-1.1.0/spatios2e.egg-info\ncopying spatios2e.egg-info/requires.txt -> spatios2e-1.1.0/spatios2e.egg-info\ncopying spatios2e.egg-info/top_level.txt -> spatios2e-1.1.0/spatios2e.egg-info\ncopying spatios2e/data/__init__.py -> spatios2e-1.1.0/spatios2e/data\ncopying spatios2e/data/dataset.py -> spatios2e-1.1.0/spatios2e/data\ncopying spatios2e/evaluation/__init__.py -> spatios2e-1.1.0/spatios2e/evaluation\ncopying spatios2e/evaluation/components.py -> spatios2e-1.1.0/spatios2e/evaluation\ncopying spatios2e/evaluation/evaluate.py -> spatios2e-1.1.0/spatios2e/evaluation\ncopying spatios2e/evaluation/gene_mean.py -> spatios2e-1.1.0/spatios2e/evaluation\ncopying spatios2e/models/__init__.py -> spatios2e-1.1.0/spatios2e/models\ncopying spatios2e/models/decima_wrapper.py -> spatios2e-1.1.0/spatios2e/models\ncopying spatios2e/models/factory.py -> spatios2e-1.1.0/spatios2e/models\ncopying spatios2e/models/gene_vectors.py -> spatios2e-1.1.0/spatios2e/models\ncopying spatios2e/models/heldout_gene.py -> spatios2e-1.1.0/spatios2e/models\ncopying spatios2e/models/morphology_model.py -> spatios2e-1.1.0/spatios2e/models\ncopying spatios2e/models/residual_model.py -> spatios2e-1.1.0/spatios2e/models\ncopying spatios2e/models/single_cell_prior.py -> spatios2e-1.1.0/spatios2e/models\ncopying spatios2e/models/spatios2e_model.py -> spatios2e-1.1.0/spatios2e/models\ncopying spatios2e/preprocessing/__init__.py -> spatios2e-1.1.0/spatios2e/preprocessing\ncopying spatios2e/preprocessing/aggregate_multimodal_features.py -> spatios2e-1.1.0/spatios2e/preprocessing\ncopying spatios2e/preprocessing/align_multimodal_inputs.py -> spatios2e-1.1.0/spatios2e/preprocessing\ncopying spatios2e/preprocessing/build_snrna_scgpt_gene_context.py -> spatios2e-1.1.0/spatios2e/preprocessing\ncopying spatios2e/preprocessing/build_spatial_graph.py -> spatios2e-1.1.0/spatios2e/preprocessing\ncopying spatios2e/preprocessing/extract_histology_embeddings.py -> spatios2e-1.1.0/spatios2e/preprocessing\ncopying spatios2e/preprocessing/extract_scgpt_gene_tokens.py -> spatios2e-1.1.0/spatios2e/preprocessing\ncopying spatios2e/preprocessing/map_genes.py -> spatios2e-1.1.0/spatios2e/preprocessing\ncopying spatios2e/preprocessing/normalize_visium.py -> spatios2e-1.1.0/spatios2e/preprocessing\ncopying spatios2e/preprocessing/prepare_spatial_features.py -> spatios2e-1.1.0/spatios2e/preprocessing\ncopying spatios2e/preprocessing/subset_expression_by_gene_split.py -> spatios2e-1.1.0/spatios2e/preprocessing\ncopying spatios2e/training/__init__.py -> spatios2e-1.1.0/spatios2e/training\ncopying spatios2e/training/heldout.py -> spatios2e-1.1.0/spatios2e/training\ncopying spatios2e/training/train.py -> spatios2e-1.1.0/spatios2e/training\ncopying spatios2e/utils/__init__.py -> spatios2e-1.1.0/spatios2e/utils\ncopying spatios2e/utils/residual_scale.py -> spatios2e-1.1.0/spatios2e/utils\ncopying tests/test_balanced_gene_chunks.py -> spatios2e-1.1.0/tests\ncopying tests/test_component_metrics.py -> spatios2e-1.1.0/tests\ncopying tests/test_evaluation_coverage.py -> spatios2e-1.1.0/tests\ncopying tests/test_external_audit_release.py -> spatios2e-1.1.0/tests\ncopying tests/test_gene_mean_counterfactual.py -> spatios2e-1.1.0/tests\ncopying tests/test_gene_vectors.py -> spatios2e-1.1.0/tests\ncopying tests/test_heldout_gene_decoders.py -> spatios2e-1.1.0/tests\ncopying tests/test_heldout_training.py -> spatios2e-1.1.0/tests\ncopying tests/test_imports.py -> spatios2e-1.1.0/tests\ncopying tests/test_manuscript_splits.py -> spatios2e-1.1.0/tests\ncopying tests/test_release_metadata.py -> spatios2e-1.1.0/tests\ncopying tests/test_scgpt_gene_tokens.py -> spatios2e-1.1.0/tests\ncopying tests/test_training_gene_prior.py -> spatios2e-1.1.0/tests\ncopying validation/README.md -> spatios2e-1.1.0/validation\ncopying validation/checksums.sha256 -> spatios2e-1.1.0/validation\ncopying validation/cleanroom_validation_linux_x86_64_py310.json -> spatios2e-1.1.0/validation\ncopying validation/real_heldout_smoke_hippocampus_seed42.json -> spatios2e-1.1.0/validation\ncopying validation/real_heldout_smoke_hippocampus_seed42.tsv -> spatios2e-1.1.0/validation\ncopying validation/submission_v1.1.0.json -> spatios2e-1.1.0/validation\ncopying spatios2e.egg-info/SOURCES.txt -> spatios2e-1.1.0/spatios2e.egg-info\nWriting spatios2e-1.1.0/setup.cfg\nCreating tar archive\nremoving 'spatios2e-1.1.0' (and everything under it)\n* Building wheel from sdist\n* Getting build dependencies for wheel...\nrunning egg_info\nwriting spatios2e.egg-info/PKG-INFO\nwriting dependency_links to spatios2e.egg-info/dependency_links.txt\nwriting entry points to spatios2e.egg-info/entry_points.txt\nwriting requirements to spatios2e.egg-info/requires.txt\nwriting top-level names to spatios2e.egg-info/top_level.txt\nreading manifest file 'spatios2e.egg-info/SOURCES.txt'\nreading manifest template 'MANIFEST.in'\nadding license file 'LICENSE'\nwriting manifest file 'spatios2e.egg-info/SOURCES.txt'\n* Building wheel...\nrunning bdist_wheel\nrunning build\nrunning build_py\ncreating build/lib/spatios2e\ncopying spatios2e/__init__.py -> build/lib/spatios2e\ncreating build/lib/spatios2e/data\ncopying spatios2e/data/__init__.py -> build/lib/spatios2e/data\ncopying spatios2e/data/dataset.py -> build/lib/spatios2e/data\ncreating build/lib/spatios2e/evaluation\ncopying spatios2e/evaluation/__init__.py -> build/lib/spatios2e/evaluation\ncopying spatios2e/evaluation/components.py -> build/lib/spatios2e/evaluation\ncopying spatios2e/evaluation/evaluate.py -> build/lib/spatios2e/evaluation\ncopying spatios2e/evaluation/gene_mean.py -> build/lib/spatios2e/evaluation\ncreating build/lib/spatios2e/models\ncopying spatios2e/models/__init__.py -> build/lib/spatios2e/models\ncopying spatios2e/models/decima_wrapper.py -> build/lib/spatios2e/models\ncopying spatios2e/models/factory.py -> build/lib/spatios2e/models\ncopying spatios2e/models/gene_vectors.py -> build/lib/spatios2e/models\ncopying spatios2e/models/heldout_gene.py -> build/lib/spatios2e/models\ncopying spatios2e/models/morphology_model.py -> build/lib/spatios2e/models\ncopying spatios2e/models/residual_model.py -> build/lib/spatios2e/models\ncopying spatios2e/models/single_cell_prior.py -> build/lib/spatios2e/models\ncopying spatios2e/models/spatios2e_model.py -> build/lib/spatios2e/models\ncreating build/lib/spatios2e/preprocessing\ncopying spatios2e/preprocessing/__init__.py -> build/lib/spatios2e/preprocessing\ncopying spatios2e/preprocessing/aggregate_multimodal_features.py -> build/lib/spatios2e/preprocessing\ncopying spatios2e/preprocessing/align_multimodal_inputs.py -> build/lib/spatios2e/preprocessing\ncopying spatios2e/preprocessing/build_snrna_scgpt_gene_context.py -> build/lib/spatios2e/preprocessing\ncopying spatios2e/preprocessing/build_spatial_graph.py -> build/lib/spatios2e/preprocessing\ncopying spatios2e/preprocessing/extract_histology_embeddings.py -> build/lib/spatios2e/preprocessing\ncopying spatios2e/preprocessing/extract_scgpt_gene_tokens.py -> build/lib/spatios2e/preprocessing\ncopying spatios2e/preprocessing/map_genes.py -> build/lib/spatios2e/preprocessing\ncopying spatios2e/preprocessing/normalize_visium.py -> build/lib/spatios2e/preprocessing\ncopying spatios2e/preprocessing/prepare_spatial_features.py -> build/lib/spatios2e/preprocessing\ncopying spatios2e/preprocessing/subset_expression_by_gene_split.py -> build/lib/spatios2e/preprocessing\ncreating build/lib/spatios2e/training\ncopying spatios2e/training/__init__.py -> build/lib/spatios2e/training\ncopying spatios2e/training/heldout.py -> build/lib/spatios2e/training\ncopying spatios2e/training/train.py -> build/lib/spatios2e/training\ncreating build/lib/spatios2e/utils\ncopying spatios2e/utils/__init__.py -> build/lib/spatios2e/utils\ncopying spatios2e/utils/residual_scale.py -> build/lib/spatios2e/utils\nrunning egg_info\nwriting spatios2e.egg-info/PKG-INFO\nwriting dependency_links to spatios2e.egg-info/dependency_links.txt\nwriting entry points to spatios2e.egg-info/entry_points.txt\nwriting requirements to spatios2e.egg-info/requires.txt\nwriting top-level names to spatios2e.egg-info/top_level.txt\nreading manifest file 'spatios2e.egg-info/SOURCES.txt'\nreading manifest template 'MANIFEST.in'\nadding license file 'LICENSE'\nwriting manifest file 'spatios2e.egg-info/SOURCES.txt'\ninstalling to build/bdist.linux-x86_64/wheel\nrunning install\nrunning install_lib\ncreating build/bdist.linux-x86_64/wheel\ncreating build/bdist.linux-x86_64/wheel/spatios2e\ncopying build/lib/spatios2e/__init__.py -> build/bdist.linux-x86_64/wheel/./spatios2e\ncreating build/bdist.linux-x86_64/wheel/spatios2e/data\ncopying build/lib/spatios2e/data/__init__.py -> build/bdist.linux-x86_64/wheel/./spatios2e/data\ncopying build/lib/spatios2e/data/dataset.py -> build/bdist.linux-x86_64/wheel/./spatios2e/data\ncreating build/bdist.linux-x86_64/wheel/spatios2e/evaluation\ncopying build/lib/spatios2e/evaluation/__init__.py -> build/bdist.linux-x86_64/wheel/./spatios2e/evaluation\ncopying build/lib/spatios2e/evaluation/components.py -> build/bdist.linux-x86_64/wheel/./spatios2e/evaluation\ncopying build/lib/spatios2e/evaluation/evaluate.py -> build/bdist.linux-x86_64/wheel/./spatios2e/evaluation\ncopying build/lib/spatios2e/evaluation/gene_mean.py -> build/bdist.linux-x86_64/wheel/./spatios2e/evaluation\ncreating build/bdist.linux-x86_64/wheel/spatios2e/models\ncopying build/lib/spatios2e/models/__init__.py -> build/bdist.linux-x86_64/wheel/./spatios2e/models\ncopying build/lib/spatios2e/models/decima_wrapper.py -> build/bdist.linux-x86_64/wheel/./spatios2e/models\ncopying build/lib/spatios2e/models/factory.py -> build/bdist.linux-x86_64/wheel/./spatios2e/models\ncopying build/lib/spatios2e/models/gene_vectors.py -> build/bdist.linux-x86_64/wheel/./spatios2e/models\ncopying build/lib/spatios2e/models/heldout_gene.py -> build/bdist.linux-x86_64/wheel/./spatios2e/models\ncopying build/lib/spatios2e/models/morphology_model.py -> build/bdist.linux-x86_64/wheel/./spatios2e/models\ncopying build/lib/spatios2e/models/residual_model.py -> build/bdist.linux-x86_64/wheel/./spatios2e/models\ncopying build/lib/spatios2e/models/single_cell_prior.py -> build/bdist.linux-x86_64/wheel/./spatios2e/models\ncopying build/lib/spatios2e/models/spatios2e_model.py -> build/bdist.linux-x86_64/wheel/./spatios2e/models\ncreating build/bdist.linux-x86_64/wheel/spatios2e/preprocessing\ncopying build/lib/spatios2e/preprocessing/__init__.py -> build/bdist.linux-x86_64/wheel/./spatios2e/preprocessing\ncopying build/lib/spatios2e/preprocessing/aggregate_multimodal_features.py -> build/bdist.linux-x86_64/wheel/./spatios2e/preprocessing\ncopying build/lib/spatios2e/preprocessing/align_multimodal_inputs.py -> build/bdist.linux-x86_64/wheel/./spatios2e/preprocessing\ncopying build/lib/spatios2e/preprocessing/build_snrna_scgpt_gene_context.py -> build/bdist.linux-x86_64/wheel/./spatios2e/preprocessing\ncopying build/lib/spatios2e/preprocessing/build_spatial_graph.py -> build/bdist.linux-x86_64/wheel/./spatios2e/preprocessing\ncopying build/lib/spatios2e/preprocessing/extract_histology_embeddings.py -> build/bdist.linux-x86_64/wheel/./spatios2e/preprocessing\ncopying build/lib/spatios2e/preprocessing/extract_scgpt_gene_tokens.py -> build/bdist.linux-x86_64/wheel/./spatios2e/preprocessing\ncopying build/lib/spatios2e/preprocessing/map_genes.py -> build/bdist.linux-x86_64/wheel/./spatios2e/preprocessing\ncopying build/lib/spatios2e/preprocessing/normalize_visium.py -> build/bdist.linux-x86_64/wheel/./spatios2e/preprocessing\ncopying build/lib/spatios2e/preprocessing/prepare_spatial_features.py -> build/bdist.linux-x86_64/wheel/./spatios2e/preprocessing\ncopying build/lib/spatios2e/preprocessing/subset_expression_by_gene_split.py -> build/bdist.linux-x86_64/wheel/./spatios2e/preprocessing\ncreating build/bdist.linux-x86_64/wheel/spatios2e/training\ncopying build/lib/spatios2e/training/__init__.py -> build/bdist.linux-x86_64/wheel/./spatios2e/training\ncopying build/lib/spatios2e/training/heldout.py -> build/bdist.linux-x86_64/wheel/./spatios2e/training\ncopying build/lib/spatios2e/training/train.py -> build/bdist.linux-x86_64/wheel/./spatios2e/training\ncreating build/bdist.linux-x86_64/wheel/spatios2e/utils\ncopying build/lib/spatios2e/utils/__init__.py -> build/bdist.linux-x86_64/wheel/./spatios2e/utils\ncopying build/lib/spatios2e/utils/residual_scale.py -> build/bdist.linux-x86_64/wheel/./spatios2e/utils\nrunning install_egg_info\nCopying spatios2e.egg-info to build/bdist.linux-x86_64/wheel/./spatios2e-1.1.0-py3.10.egg-info\nrunning install_scripts\ncreating build/bdist.linux-x86_64/wheel/spatios2e-1.1.0.dist-info/WHEEL\ncreating '<temporary-build-dir>/.tmp-ppuurztj/spatios2e-1.1.0-py3-none-any.whl' and adding 'build/bdist.linux-x86_64/wheel' to it\nadding 'spatios2e/__init__.py'\nadding 'spatios2e/data/__init__.py'\nadding 'spatios2e/data/dataset.py'\nadding 'spatios2e/evaluation/__init__.py'\nadding 'spatios2e/evaluation/components.py'\nadding 'spatios2e/evaluation/evaluate.py'\nadding 'spatios2e/evaluation/gene_mean.py'\nadding 'spatios2e/models/__init__.py'\nadding 'spatios2e/models/decima_wrapper.py'\nadding 'spatios2e/models/factory.py'\nadding 'spatios2e/models/gene_vectors.py'\nadding 'spatios2e/models/heldout_gene.py'\nadding 'spatios2e/models/morphology_model.py'\nadding 'spatios2e/models/residual_model.py'\nadding 'spatios2e/models/single_cell_prior.py'\nadding 'spatios2e/models/spatios2e_model.py'\nadding 'spatios2e/preprocessing/__init__.py'\nadding 'spatios2e/preprocessing/aggregate_multimodal_features.py'\nadding 'spatios2e/preprocessing/align_multimodal_inputs.py'\nadding 'spatios2e/preprocessing/build_snrna_scgpt_gene_context.py'\nadding 'spatios2e/preprocessing/build_spatial_graph.py'\nadding 'spatios2e/preprocessing/extract_histology_embeddings.py'\nadding 'spatios2e/preprocessing/extract_scgpt_gene_tokens.py'\nadding 'spatios2e/preprocessing/map_genes.py'\nadding 'spatios2e/preprocessing/normalize_visium.py'\nadding 'spatios2e/preprocessing/prepare_spatial_features.py'\nadding 'spatios2e/preprocessing/subset_expression_by_gene_split.py'\nadding 'spatios2e/training/__init__.py'\nadding 'spatios2e/training/heldout.py'\nadding 'spatios2e/training/train.py'\nadding 'spatios2e/utils/__init__.py'\nadding 'spatios2e/utils/residual_scale.py'\nadding 'spatios2e-1.1.0.dist-info/LICENSE'\nadding 'spatios2e-1.1.0.dist-info/METADATA'\nadding 'spatios2e-1.1.0.dist-info/WHEEL'\nadding 'spatios2e-1.1.0.dist-info/entry_points.txt'\nadding 'spatios2e-1.1.0.dist-info/top_level.txt'\nadding 'spatios2e-1.1.0.dist-info/RECORD'\nremoving build/bdist.linux-x86_64/wheel\nSuccessfully built spatios2e-1.1.0.tar.gz and spatios2e-1.1.0-py3-none-any.whl\n"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "spatios2e.evaluation.components",
+        "--help"
+      ],
+      "duration_seconds": 0.136,
+      "label": "component-evaluator CLI",
+      "return_code": 0,
+      "stderr": "<python-environment>/lib/python/runpy.py:126: RuntimeWarning: 'spatios2e.evaluation.components' found in sys.modules after import of package 'spatios2e.evaluation', but prior to execution of 'spatios2e.evaluation.components'; this may result in unpredictable behaviour\n  warn(RuntimeWarning(msg))\n",
+      "stdout": "usage: components.py [-h] [--observed-key OBSERVED_KEY]\n                     [--predicted-key PREDICTED_KEY]\n                     [--section-key SECTION_KEY] [--output OUTPUT]\n                     input\n\nComponent-resolved endpoints for spatial-expression matrices. Matrices are\nexpected in ``[spot, gene]`` order. Gene means describe the across-gene\nordering of mean normalized log-expression; subtracting those means isolates\nwithin-gene variation.\n\npositional arguments:\n  input                 NPZ containing observed and predicted [spot, gene]\n                        arrays\n\noptions:\n  -h, --help            show this help message and exit\n  --observed-key OBSERVED_KEY\n  --predicted-key PREDICTED_KEY\n  --section-key SECTION_KEY\n                        Optionally centre both matrices within section first\n  --output OUTPUT       JSON output path; stdout if omitted\n"
+    }
+  ],
+  "dependency_lock": {
+    "installed": {
+      "build": "1.2.2.post1",
+      "certifi": "2022.12.7",
+      "charset-normalizer": "2.1.1",
+      "exceptiongroup": "1.3.1",
+      "filelock": "3.32.3",
+      "fsspec": "2026.7.0",
+      "h5py": "3.11.0",
+      "idna": "3.4",
+      "iniconfig": "2.3.0",
+      "jinja2": "3.1.6",
+      "markupsafe": "3.0.3",
+      "mpmath": "1.3.0",
+      "networkx": "3.4.2",
+      "numpy": "1.26.4",
+      "packaging": "26.3",
+      "pandas": "2.1.4",
+      "pillow": "10.4.0",
+      "pip": "25.0.1",
+      "pluggy": "1.6.0",
+      "pyproject-hooks": "1.2.0",
+      "pytest": "8.3.5",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2026.3.post1",
+      "pyyaml": "6.0.2",
+      "requests": "2.28.1",
+      "ruff": "0.9.10",
+      "scipy": "1.11.4",
+      "setuptools": "75.8.0",
+      "six": "1.17.0",
+      "spatios2e": "0.2.0",
+      "sympy": "1.14.0",
+      "tomli": "2.4.1",
+      "torch": "2.1.2+cpu",
+      "torchvision": "0.16.2+cpu",
+      "tqdm": "4.67.1",
+      "typing-extensions": "4.16.0",
+      "tzdata": "2026.3",
+      "urllib3": "1.26.13",
+      "wheel": "0.45.1"
+    },
+    "mismatches": {},
+    "n_locked": 38
+  },
+  "git": {
+    "commit": "2b842dfcd0149119fa522e1ea2989bf4b3232c8e",
+    "dirty": true
+  },
+  "hardware": {
+    "cpu_model": "INTEL(R) XEON(R) PLATINUM 8558U",
+    "gpu": {
+      "available": false,
+      "devices": [],
+      "reason": "FileNotFoundError"
+    },
+    "logical_cpu_count": 96,
+    "memory_bytes": 1081879617536
+  },
+  "operating_system": {
+    "machine": "x86_64",
+    "platform": "Linux-5.14.0-427.13.1.el9_4.x86_64-x86_64-with-glibc2.34",
+    "release": "5.14.0-427.13.1.el9_4.x86_64",
+    "system": "Linux"
+  },
+  "platform_support": "CPython 3.10, Linux x86_64",
+  "python": {
+    "implementation": "CPython",
+    "version": "3.10.19"
+  },
+  "schema_version": 1,
+  "scope": "CPU clean-room install, exact dependency check, partition-manifest regeneration, unit tests, synthetic held-out-decoder training/evaluation, lint, package build and CLI smoke test. This is not a rerun of the four-cohort manuscript analyses and does not validate CUDA execution.",
+  "status": "PASS",
+  "timestamp_utc": "2026-09-08T00:59:00.169824+00:00",
+  "torch": {
+    "cuda_available": false,
+    "cuda_runtime": null,
+    "cudnn_version": null,
+    "device_count": 0,
+    "device_names": [],
+    "imported": true,
+    "version": "2.1.2+cpu"
+  }
+}

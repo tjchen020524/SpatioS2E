@@ -21,7 +21,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 LOCK = ROOT / "requirements-lock-linux-x86_64-py310.txt"
 PARTITION_MANIFEST = ROOT / "configs" / "manuscript" / "gene_partition_manifest.json"
-SOURCE_ROOTS = ("spatios2e", "tests", "scripts", "configs/manuscript", "docs")
+SOURCE_ROOTS = ("spatios2e", "tests", "scripts", "configs/manuscript", "docs", "experiments")
 SOURCE_FILES = (
     "pyproject.toml",
     "MANIFEST.in",
@@ -71,6 +71,7 @@ def _source_snapshot() -> dict[str, object]:
                 if path.is_file()
                 and "__pycache__" not in path.parts
                 and path.suffix not in {".pyc", ".pyo"}
+                and not {"artifacts", "runs", "trainable_backbone_runs"}.intersection(path.parts)
             )
     paths.extend(ROOT / relative for relative in SOURCE_FILES)
     records = []
@@ -209,7 +210,7 @@ def main() -> None:
         checks = [
             _run("partition manifest", [sys.executable, "scripts/build_manuscript_partition_manifest.py", "--check"]),
             _run("unit and synthetic training tests", [sys.executable, "-m", "pytest", "-q"]),
-            _run("ruff", [sys.executable, "-m", "ruff", "check", "spatios2e", "tests", "scripts"]),
+            _run("ruff", [sys.executable, "-m", "ruff", "check", "spatios2e", "tests", "scripts", "experiments"]),
             _run(
                 "source and wheel build",
                 [sys.executable, "-m", "build", "--no-isolation", "--outdir", build_dir],

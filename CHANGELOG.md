@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.1.0 — submission candidate, 2026-09-07
+
+- Add the HER2ST GeneQuery frozen-feature and end-to-end audit workflows,
+  DeepSpot-M released-checkpoint adapters, no-image baseline and shared evaluator.
+- Support three-seed paired summaries, including signed MSE component changes.
+- Replace research-cluster paths with configurable local inputs.
+- Update the manuscript-to-code map to the five main and ten Extended Data figures.
+- Preserve the v1.0.0 tag and historical validation records unchanged.
+
 ## 1.0.0 — 2026-08-31
 
 - Mark the first stable, citable manuscript software release.

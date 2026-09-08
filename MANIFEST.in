@@ -9,6 +9,8 @@ recursive-include docs *.md *.png
 recursive-include examples *.sh *.txt
 recursive-include scripts *.py *.sh
 recursive-include tests *.py
+recursive-include experiments *.py *.md
+include validation/submission_v1.1.0.json
 include validation/README.md
 include validation/checksums.sha256
 include validation/cleanroom_validation_linux_x86_64_py310.json

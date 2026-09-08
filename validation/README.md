@@ -1,5 +1,19 @@
 # Clean-room validation records
 
+## Current submission candidate
+
+`submission_v1.1.0.json` records the v1.1.0 source snapshot, dependency checks,
+tests, lint and distribution builds. It reuses the previously prepared pinned
+CPU environment; it is not a claim that a new environment was created for
+this revision. Tests include external-audit synthetic predictions, three-seed
+aggregation, missing-condition rejection and signed MSE changes. No external
+weights are loaded and no GPU training is performed by this validation.
+
+The two older reports below remain historical records for v1.0.0. Their
+checksums are preserved unchanged, rather than relabelled as v1.1.0 results.
+
+## Historical clean-room and real-data checks
+
 The publication release distinguishes a newly validated release environment
 from the mutable environments in which the historical manuscript experiments
 were run. The latter cannot be reconstructed exactly and are not inferred from
