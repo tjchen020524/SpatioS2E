@@ -12,6 +12,7 @@ import platform
 import re
 import subprocess
 import sys
+import tarfile
 import tempfile
 import time
 from datetime import datetime, timezone
@@ -21,7 +22,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 LOCK = ROOT / "requirements-lock-linux-x86_64-py310.txt"
 PARTITION_MANIFEST = ROOT / "configs" / "manuscript" / "gene_partition_manifest.json"
-SOURCE_ROOTS = ("spatios2e", "tests", "scripts", "configs/manuscript", "docs", "experiments")
+SOURCE_ROOTS = ("spatios2e", "tests", "scripts", "configs/manuscript", "docs", "experiments",
+                "manuscript_workflows", "examples")
 SOURCE_FILES = (
     "pyproject.toml",
     "MANIFEST.in",
@@ -197,6 +199,8 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
+    if args.output.exists():
+        parser.error('Refusing to overwrite an existing validation record; choose a new report path')
 
     locked = _locked_packages()
     installed = _installed_packages()
@@ -206,6 +210,8 @@ def main() -> None:
         if installed.get(name) != version
     }
 
+    wheel_record = {}
+    archived_primary = {}
     with tempfile.TemporaryDirectory(prefix="spatios2e-build-") as build_dir:
         checks = [
             _run("partition manifest", [sys.executable, "scripts/build_manuscript_partition_manifest.py", "--check"]),
@@ -216,7 +222,60 @@ def main() -> None:
                 [sys.executable, "-m", "build", "--no-isolation", "--outdir", build_dir],
             ),
             _run("component-evaluator CLI", [sys.executable, "-m", "spatios2e.evaluation.components", "--help"]),
+            _run('archived primary synthetic training',
+                 [sys.executable, 'scripts/validate_archived_primary.py', '--output',
+                  str(Path(build_dir) / 'archived_primary.json')]),
         ]
+        primary_report = Path(build_dir) / 'archived_primary.json'
+        if primary_report.exists():
+            archived_primary = json.loads(primary_report.read_text())
+        wheels = list(Path(build_dir).glob('*.whl'))
+        if len(wheels) == 1:
+            wheel = wheels[0]
+            wheel_record = {'name': wheel.name, 'sha256': _sha256(wheel)}
+            target = Path(build_dir) / 'installed'
+            checks.append(_run('fresh wheel installation', [sys.executable, '-m', 'pip', 'install',
+                                '--no-deps', '--no-compile', '--target', str(target), str(wheel)],
+                               cwd=Path(build_dir)))
+            expected = re.search(r'^version = "([^"]+)"$', (ROOT / 'pyproject.toml').read_text(), re.M).group(1)
+            program = f'''
+import sys, json, importlib.metadata
+from pathlib import Path
+sys.path.insert(0, {str(target)!r})
+import numpy as np
+import torch
+import spatios2e
+from spatios2e.models import FactorizedDotProductDecoder
+from spatios2e.training import HeldOutTrainingConfig, fit_heldout_decoder, evaluate_heldout_decoder
+torch.set_num_threads(2)
+assert Path(spatios2e.__file__).is_relative_to({str(target)!r})
+assert importlib.metadata.version('spatios2e') == {expected!r} == spatios2e.__version__
+torch.manual_seed(42)
+x = torch.randn(16, 4)
+y = torch.rand(16, 6)
+vectors = torch.randn(6, 3)
+model = FactorizedDotProductDecoder(spot_dim=4, gene_dim=3, hidden_dim=8, program_dim=4, dropout=0)
+batch = [{{'x': x, 'y': y}}]
+result = fit_heldout_decoder(model, batch, batch, vectors, [0, 1, 2, 3],
+    config=HeldOutTrainingConfig(epochs=1, genes_per_batch=4, validation_genes=4))
+metrics = evaluate_heldout_decoder(model, batch, vectors, [4, 5])
+assert abs(metrics['decomposition_error']) < 1e-6
+assert np.isfinite(metrics['full_matrix_mse'])
+assert set(result.validation_gene_indices).isdisjoint({{4, 5}})
+print(json.dumps({{'version': spatios2e.__version__, 'import_path': spatios2e.__file__,
+                  'best_epoch': result.best_epoch, 'metrics': metrics}}, sort_keys=True))
+'''
+            checks.append(_run('outside-repository wheel synthetic training',
+                               [sys.executable, '-I', '-c', program], cwd=Path(build_dir)))
+        archives = list(Path(build_dir).glob('*.tar.gz'))
+        if len(archives) == 1:
+            with tarfile.open(archives[0]) as archive:
+                names = archive.getnames()
+            required = ['examples/hippocampus/README.md', 'manuscript_workflows/launch.py',
+                        'scripts/prepare_manuscript_inputs.py']
+            missing = [path for path in required if not any(name.endswith('/' + path) for name in names)]
+            checks.append({'label': 'source distribution workflow contents',
+                           'return_code': int(bool(missing)), 'missing': missing})
 
     report = {
         "schema_version": 1,
@@ -224,7 +283,8 @@ def main() -> None:
         "timestamp_utc": datetime.now(timezone.utc).isoformat(),
         "scope": (
             "CPU clean-room install, exact dependency check, partition-manifest regeneration, unit tests, "
-            "synthetic held-out-decoder training/evaluation, lint, package build and CLI smoke test. "
+            "source synthetic tests, lint, build, independently installed wheel synthetic computation "
+            "outside the repository, and source-distribution contents. "
             "This is not a rerun of the four-cohort manuscript analyses and does not validate CUDA execution."
         ),
         "platform_support": "CPython 3.10, Linux x86_64",
@@ -247,6 +307,8 @@ def main() -> None:
         "torch": _torch_inventory(),
         "git": _git_inventory(),
         "artifacts": {
+            "wheel": wheel_record,
+            "archived_primary_synthetic": archived_primary,
             "dependency_lock": {"path": LOCK.name, "sha256": _sha256(LOCK)},
             "gene_partition_manifest": {
                 "path": PARTITION_MANIFEST.relative_to(ROOT).as_posix(),
@@ -255,6 +317,7 @@ def main() -> None:
             "source_snapshot": _source_snapshot(),
         },
         "dependency_lock": {
+            "inventory_scope": 'Base validation environment; newly installed wheel identity is verified separately.',
             "n_locked": len(locked),
             "mismatches": lock_mismatches,
             "installed": dict(sorted(installed.items())),

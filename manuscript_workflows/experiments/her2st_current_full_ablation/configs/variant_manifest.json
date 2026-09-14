@@ -1,0 +1,56 @@
+[
+  {
+    "name": "uni2h",
+    "config": "experiments/her2st_current_full_ablation/configs/uni2h.yaml",
+    "no_graph": true,
+    "spatial_pcc_applicable": true
+  },
+  {
+    "name": "uni2h_gnn",
+    "config": "experiments/her2st_current_full_ablation/configs/uni2h_gnn.yaml",
+    "no_graph": false,
+    "spatial_pcc_applicable": true
+  },
+  {
+    "name": "decima_prior_only",
+    "config": "experiments/her2st_current_full_ablation/configs/decima_prior_only.yaml",
+    "no_graph": true,
+    "spatial_pcc_applicable": false
+  },
+  {
+    "name": "decima_film_no_graph",
+    "config": "experiments/her2st_current_full_ablation/configs/decima_film_no_graph.yaml",
+    "no_graph": true,
+    "spatial_pcc_applicable": true
+  },
+  {
+    "name": "gene_mean_uni2h_residual",
+    "config": "experiments/her2st_current_full_ablation/configs/gene_mean_uni2h_residual.yaml",
+    "no_graph": true,
+    "spatial_pcc_applicable": true
+  },
+  {
+    "name": "gene_mean_uni2h_gnn",
+    "config": "experiments/her2st_current_full_ablation/configs/gene_mean_uni2h_gnn.yaml",
+    "no_graph": false,
+    "spatial_pcc_applicable": true
+  },
+  {
+    "name": "decima_film_gnn",
+    "config": "experiments/her2st_current_full_ablation/configs/decima_film_gnn.yaml",
+    "no_graph": false,
+    "spatial_pcc_applicable": true
+  },
+  {
+    "name": "decima_concat_gnn",
+    "config": "experiments/her2st_current_full_ablation/configs/decima_concat_gnn.yaml",
+    "no_graph": false,
+    "spatial_pcc_applicable": true
+  },
+  {
+    "name": "decima_crossattn_gnn",
+    "config": "experiments/her2st_current_full_ablation/configs/decima_crossattn_gnn.yaml",
+    "no_graph": false,
+    "spatial_pcc_applicable": true
+  }
+]

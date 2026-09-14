@@ -1,0 +1,105 @@
+run_name: her2st_gene_mean_uni2h_gnn_seed123
+paths:
+  expression_root: experiments/her2st_current_full_ablation/data/expression
+  multimodal_root: experiments/her2st_current_full_ablation/data/multimodal
+  graph_root: experiments/her2st_current_full_ablation/data/graphs
+  modality_stats: experiments/her2st_current_full_ablation/data/multimodal/modality_stats.json
+  gene_split_dir: experiments/her2st_current_full_ablation/data/gene_splits
+  decima_ckpt: decima_weights/rep0.ckpt
+  decima_h5: null
+  decima_npz_dir: data/decima_input/gene_inputs_npz
+  residual_scale_npz: experiments/her2st_current_full_ablation/artifacts/train_decima_prior.npz
+  checkpoint_dir: experiments/her2st_current_full_ablation/multiseed/seed_123/variants/gene_mean_uni2h_gnn/checkpoints
+  checkpoint_name: best.pt
+  gene_bias_init_npz: experiments/her2st_current_full_ablation/artifacts/train_gene_mean_prior.npz
+split:
+  train:
+  - A1
+  - A2
+  - A3
+  - A4
+  - A5
+  - A6
+  - B1
+  - B2
+  - B3
+  - B4
+  - B5
+  - B6
+  - C1
+  - C2
+  - C3
+  - C4
+  - C5
+  - C6
+  - D1
+  - D2
+  - D3
+  - D4
+  - D5
+  - D6
+  - E1
+  - E2
+  - E3
+  val:
+  - F1
+  - F2
+  - F3
+  test:
+  - G1
+  - G2
+  - G3
+  - H1
+  - H2
+  - H3
+targets_dense: true
+normalize_modalities: true
+model:
+  variant: image_graph_only
+  no_graph: false
+  gnn_hidden: 256
+  gnn_layers: 3
+  gnn_dropout: 0.1
+  gnn_post_mlp_layers: 1
+  gnn_residual: true
+  film_hidden: 256
+  spot_head_hidden: 128
+  freeze_decima_backbone: true
+  freeze_pseudobulk_head: false
+  delta_head_init_std: 0.0
+  residual_scale_floor: 0.001
+  residual_scale_hidden: 128
+  residual_scale_logscale_clip: 0.75
+  gene_bias_init_key: log_mu_base
+  output_weight_init_std: 0.0
+loss:
+  point_loss: huber
+  huber_beta: 1.0
+  lambda_point: 1.0
+  lambda_gene: 0.6
+  lambda_spot: 0.05
+  lambda_delta_point: 0.0
+  lambda_delta_gene: 0.0
+  delta_target_mode: centered_true
+  lambda_lap: 0.0006
+  lambda_calib_identity: 0.0
+  min_true_std: 1.0e-06
+optim:
+  lr: 0.00025
+  weight_decay: 0.0001
+  max_epochs: 12
+  min_epochs: 8
+  max_genes_per_batch: 96
+  val_max_genes_per_batch: 128
+  train_gene_chunks_per_sample: 7
+  require_full_gene_coverage_per_epoch: true
+  log_every: 1
+  early_stop_patience: 4
+  selection_metric: gene_flat_combo
+  selection_flat_weight: 0.25
+eval:
+  max_genes_per_batch: 128
+  true_std_threshold: 1.0e-06
+  pred_std_threshold: 1.0e-06
+  hvg_ranking_file: experiments/her2st_current_full_ablation/artifacts/train_gene_stats.tsv
+seed: 123

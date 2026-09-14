@@ -1,0 +1,253 @@
+{
+  "cohort_dir": "experiments/nac_current_full_ablation",
+  "seeds": [
+    42,
+    123,
+    456
+  ],
+  "runs": [
+    {
+      "seed": 42,
+      "name": "uni2h",
+      "config": "experiments/nac_current_full_ablation/configs/multiseed/seed_42/uni2h.yaml",
+      "checkpoint": "experiments/nac_current_full_ablation/multiseed/seed_42/variants/uni2h/checkpoints/best.pt",
+      "results": "experiments/nac_current_full_ablation/multiseed/seed_42/variants/uni2h/results",
+      "no_graph": true,
+      "spatial_pcc_applicable": true
+    },
+    {
+      "seed": 42,
+      "name": "uni2h_gnn",
+      "config": "experiments/nac_current_full_ablation/configs/multiseed/seed_42/uni2h_gnn.yaml",
+      "checkpoint": "experiments/nac_current_full_ablation/multiseed/seed_42/variants/uni2h_gnn/checkpoints/best.pt",
+      "results": "experiments/nac_current_full_ablation/multiseed/seed_42/variants/uni2h_gnn/results",
+      "no_graph": false,
+      "spatial_pcc_applicable": true
+    },
+    {
+      "seed": 42,
+      "name": "decima_prior_only",
+      "config": "experiments/nac_current_full_ablation/configs/multiseed/seed_42/decima_prior_only.yaml",
+      "checkpoint": "experiments/nac_current_full_ablation/multiseed/seed_42/variants/decima_prior_only/checkpoints/best.pt",
+      "results": "experiments/nac_current_full_ablation/multiseed/seed_42/variants/decima_prior_only/results",
+      "no_graph": true,
+      "spatial_pcc_applicable": false
+    },
+    {
+      "seed": 42,
+      "name": "decima_film_no_graph",
+      "config": "experiments/nac_current_full_ablation/configs/multiseed/seed_42/decima_film_no_graph.yaml",
+      "checkpoint": "experiments/nac_current_full_ablation/multiseed/seed_42/variants/decima_film_no_graph/checkpoints/best.pt",
+      "results": "experiments/nac_current_full_ablation/multiseed/seed_42/variants/decima_film_no_graph/results",
+      "no_graph": true,
+      "spatial_pcc_applicable": true
+    },
+    {
+      "seed": 42,
+      "name": "gene_mean_uni2h_residual",
+      "config": "experiments/nac_current_full_ablation/configs/multiseed/seed_42/gene_mean_uni2h_residual.yaml",
+      "checkpoint": "experiments/nac_current_full_ablation/multiseed/seed_42/variants/gene_mean_uni2h_residual/checkpoints/best.pt",
+      "results": "experiments/nac_current_full_ablation/multiseed/seed_42/variants/gene_mean_uni2h_residual/results",
+      "no_graph": true,
+      "spatial_pcc_applicable": true
+    },
+    {
+      "seed": 42,
+      "name": "gene_mean_uni2h_gnn",
+      "config": "experiments/nac_current_full_ablation/configs/multiseed/seed_42/gene_mean_uni2h_gnn.yaml",
+      "checkpoint": "experiments/nac_current_full_ablation/multiseed/seed_42/variants/gene_mean_uni2h_gnn/checkpoints/best.pt",
+      "results": "experiments/nac_current_full_ablation/multiseed/seed_42/variants/gene_mean_uni2h_gnn/results",
+      "no_graph": false,
+      "spatial_pcc_applicable": true
+    },
+    {
+      "seed": 42,
+      "name": "decima_film_gnn",
+      "config": "experiments/nac_current_full_ablation/configs/multiseed/seed_42/decima_film_gnn.yaml",
+      "checkpoint": "experiments/nac_current_full_ablation/multiseed/seed_42/variants/decima_film_gnn/checkpoints/best.pt",
+      "results": "experiments/nac_current_full_ablation/multiseed/seed_42/variants/decima_film_gnn/results",
+      "no_graph": false,
+      "spatial_pcc_applicable": true
+    },
+    {
+      "seed": 42,
+      "name": "decima_concat_gnn",
+      "config": "experiments/nac_current_full_ablation/configs/multiseed/seed_42/decima_concat_gnn.yaml",
+      "checkpoint": "experiments/nac_current_full_ablation/multiseed/seed_42/variants/decima_concat_gnn/checkpoints/best.pt",
+      "results": "experiments/nac_current_full_ablation/multiseed/seed_42/variants/decima_concat_gnn/results",
+      "no_graph": false,
+      "spatial_pcc_applicable": true
+    },
+    {
+      "seed": 42,
+      "name": "decima_crossattn_gnn",
+      "config": "experiments/nac_current_full_ablation/configs/multiseed/seed_42/decima_crossattn_gnn.yaml",
+      "checkpoint": "experiments/nac_current_full_ablation/multiseed/seed_42/variants/decima_crossattn_gnn/checkpoints/best.pt",
+      "results": "experiments/nac_current_full_ablation/multiseed/seed_42/variants/decima_crossattn_gnn/results",
+      "no_graph": false,
+      "spatial_pcc_applicable": true
+    },
+    {
+      "seed": 123,
+      "name": "uni2h",
+      "config": "experiments/nac_current_full_ablation/configs/multiseed/seed_123/uni2h.yaml",
+      "checkpoint": "experiments/nac_current_full_ablation/multiseed/seed_123/variants/uni2h/checkpoints/best.pt",
+      "results": "experiments/nac_current_full_ablation/multiseed/seed_123/variants/uni2h/results",
+      "no_graph": true,
+      "spatial_pcc_applicable": true
+    },
+    {
+      "seed": 123,
+      "name": "uni2h_gnn",
+      "config": "experiments/nac_current_full_ablation/configs/multiseed/seed_123/uni2h_gnn.yaml",
+      "checkpoint": "experiments/nac_current_full_ablation/multiseed/seed_123/variants/uni2h_gnn/checkpoints/best.pt",
+      "results": "experiments/nac_current_full_ablation/multiseed/seed_123/variants/uni2h_gnn/results",
+      "no_graph": false,
+      "spatial_pcc_applicable": true
+    },
+    {
+      "seed": 123,
+      "name": "decima_prior_only",
+      "config": "experiments/nac_current_full_ablation/configs/multiseed/seed_123/decima_prior_only.yaml",
+      "checkpoint": "experiments/nac_current_full_ablation/multiseed/seed_123/variants/decima_prior_only/checkpoints/best.pt",
+      "results": "experiments/nac_current_full_ablation/multiseed/seed_123/variants/decima_prior_only/results",
+      "no_graph": true,
+      "spatial_pcc_applicable": false
+    },
+    {
+      "seed": 123,
+      "name": "decima_film_no_graph",
+      "config": "experiments/nac_current_full_ablation/configs/multiseed/seed_123/decima_film_no_graph.yaml",
+      "checkpoint": "experiments/nac_current_full_ablation/multiseed/seed_123/variants/decima_film_no_graph/checkpoints/best.pt",
+      "results": "experiments/nac_current_full_ablation/multiseed/seed_123/variants/decima_film_no_graph/results",
+      "no_graph": true,
+      "spatial_pcc_applicable": true
+    },
+    {
+      "seed": 123,
+      "name": "gene_mean_uni2h_residual",
+      "config": "experiments/nac_current_full_ablation/configs/multiseed/seed_123/gene_mean_uni2h_residual.yaml",
+      "checkpoint": "experiments/nac_current_full_ablation/multiseed/seed_123/variants/gene_mean_uni2h_residual/checkpoints/best.pt",
+      "results": "experiments/nac_current_full_ablation/multiseed/seed_123/variants/gene_mean_uni2h_residual/results",
+      "no_graph": true,
+      "spatial_pcc_applicable": true
+    },
+    {
+      "seed": 123,
+      "name": "gene_mean_uni2h_gnn",
+      "config": "experiments/nac_current_full_ablation/configs/multiseed/seed_123/gene_mean_uni2h_gnn.yaml",
+      "checkpoint": "experiments/nac_current_full_ablation/multiseed/seed_123/variants/gene_mean_uni2h_gnn/checkpoints/best.pt",
+      "results": "experiments/nac_current_full_ablation/multiseed/seed_123/variants/gene_mean_uni2h_gnn/results",
+      "no_graph": false,
+      "spatial_pcc_applicable": true
+    },
+    {
+      "seed": 123,
+      "name": "decima_film_gnn",
+      "config": "experiments/nac_current_full_ablation/configs/multiseed/seed_123/decima_film_gnn.yaml",
+      "checkpoint": "experiments/nac_current_full_ablation/multiseed/seed_123/variants/decima_film_gnn/checkpoints/best.pt",
+      "results": "experiments/nac_current_full_ablation/multiseed/seed_123/variants/decima_film_gnn/results",
+      "no_graph": false,
+      "spatial_pcc_applicable": true
+    },
+    {
+      "seed": 123,
+      "name": "decima_concat_gnn",
+      "config": "experiments/nac_current_full_ablation/configs/multiseed/seed_123/decima_concat_gnn.yaml",
+      "checkpoint": "experiments/nac_current_full_ablation/multiseed/seed_123/variants/decima_concat_gnn/checkpoints/best.pt",
+      "results": "experiments/nac_current_full_ablation/multiseed/seed_123/variants/decima_concat_gnn/results",
+      "no_graph": false,
+      "spatial_pcc_applicable": true
+    },
+    {
+      "seed": 123,
+      "name": "decima_crossattn_gnn",
+      "config": "experiments/nac_current_full_ablation/configs/multiseed/seed_123/decima_crossattn_gnn.yaml",
+      "checkpoint": "experiments/nac_current_full_ablation/multiseed/seed_123/variants/decima_crossattn_gnn/checkpoints/best.pt",
+      "results": "experiments/nac_current_full_ablation/multiseed/seed_123/variants/decima_crossattn_gnn/results",
+      "no_graph": false,
+      "spatial_pcc_applicable": true
+    },
+    {
+      "seed": 456,
+      "name": "uni2h",
+      "config": "experiments/nac_current_full_ablation/configs/multiseed/seed_456/uni2h.yaml",
+      "checkpoint": "experiments/nac_current_full_ablation/multiseed/seed_456/variants/uni2h/checkpoints/best.pt",
+      "results": "experiments/nac_current_full_ablation/multiseed/seed_456/variants/uni2h/results",
+      "no_graph": true,
+      "spatial_pcc_applicable": true
+    },
+    {
+      "seed": 456,
+      "name": "uni2h_gnn",
+      "config": "experiments/nac_current_full_ablation/configs/multiseed/seed_456/uni2h_gnn.yaml",
+      "checkpoint": "experiments/nac_current_full_ablation/multiseed/seed_456/variants/uni2h_gnn/checkpoints/best.pt",
+      "results": "experiments/nac_current_full_ablation/multiseed/seed_456/variants/uni2h_gnn/results",
+      "no_graph": false,
+      "spatial_pcc_applicable": true
+    },
+    {
+      "seed": 456,
+      "name": "decima_prior_only",
+      "config": "experiments/nac_current_full_ablation/configs/multiseed/seed_456/decima_prior_only.yaml",
+      "checkpoint": "experiments/nac_current_full_ablation/multiseed/seed_456/variants/decima_prior_only/checkpoints/best.pt",
+      "results": "experiments/nac_current_full_ablation/multiseed/seed_456/variants/decima_prior_only/results",
+      "no_graph": true,
+      "spatial_pcc_applicable": false
+    },
+    {
+      "seed": 456,
+      "name": "decima_film_no_graph",
+      "config": "experiments/nac_current_full_ablation/configs/multiseed/seed_456/decima_film_no_graph.yaml",
+      "checkpoint": "experiments/nac_current_full_ablation/multiseed/seed_456/variants/decima_film_no_graph/checkpoints/best.pt",
+      "results": "experiments/nac_current_full_ablation/multiseed/seed_456/variants/decima_film_no_graph/results",
+      "no_graph": true,
+      "spatial_pcc_applicable": true
+    },
+    {
+      "seed": 456,
+      "name": "gene_mean_uni2h_residual",
+      "config": "experiments/nac_current_full_ablation/configs/multiseed/seed_456/gene_mean_uni2h_residual.yaml",
+      "checkpoint": "experiments/nac_current_full_ablation/multiseed/seed_456/variants/gene_mean_uni2h_residual/checkpoints/best.pt",
+      "results": "experiments/nac_current_full_ablation/multiseed/seed_456/variants/gene_mean_uni2h_residual/results",
+      "no_graph": true,
+      "spatial_pcc_applicable": true
+    },
+    {
+      "seed": 456,
+      "name": "gene_mean_uni2h_gnn",
+      "config": "experiments/nac_current_full_ablation/configs/multiseed/seed_456/gene_mean_uni2h_gnn.yaml",
+      "checkpoint": "experiments/nac_current_full_ablation/multiseed/seed_456/variants/gene_mean_uni2h_gnn/checkpoints/best.pt",
+      "results": "experiments/nac_current_full_ablation/multiseed/seed_456/variants/gene_mean_uni2h_gnn/results",
+      "no_graph": false,
+      "spatial_pcc_applicable": true
+    },
+    {
+      "seed": 456,
+      "name": "decima_film_gnn",
+      "config": "experiments/nac_current_full_ablation/configs/multiseed/seed_456/decima_film_gnn.yaml",
+      "checkpoint": "experiments/nac_current_full_ablation/multiseed/seed_456/variants/decima_film_gnn/checkpoints/best.pt",
+      "results": "experiments/nac_current_full_ablation/multiseed/seed_456/variants/decima_film_gnn/results",
+      "no_graph": false,
+      "spatial_pcc_applicable": true
+    },
+    {
+      "seed": 456,
+      "name": "decima_concat_gnn",
+      "config": "experiments/nac_current_full_ablation/configs/multiseed/seed_456/decima_concat_gnn.yaml",
+      "checkpoint": "experiments/nac_current_full_ablation/multiseed/seed_456/variants/decima_concat_gnn/checkpoints/best.pt",
+      "results": "experiments/nac_current_full_ablation/multiseed/seed_456/variants/decima_concat_gnn/results",
+      "no_graph": false,
+      "spatial_pcc_applicable": true
+    },
+    {
+      "seed": 456,
+      "name": "decima_crossattn_gnn",
+      "config": "experiments/nac_current_full_ablation/configs/multiseed/seed_456/decima_crossattn_gnn.yaml",
+      "checkpoint": "experiments/nac_current_full_ablation/multiseed/seed_456/variants/decima_crossattn_gnn/checkpoints/best.pt",
+      "results": "experiments/nac_current_full_ablation/multiseed/seed_456/variants/decima_crossattn_gnn/results",
+      "no_graph": false,
+      "spatial_pcc_applicable": true
+    }
+  ]
+}

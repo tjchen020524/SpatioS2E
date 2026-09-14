@@ -1,5 +1,18 @@
 # Changelog
 
+## Review follow-up — 2026-09-13 (unreleased)
+
+- Add portable UNI2-h and Decima preparation, fitted-feature assembly and a
+  prepared-input primary analysis path.
+- Archive selected custom manuscript workflows and final fitted configurations,
+  with original/portable source hashes and explicit code/data-root separation.
+- Freeze all 24 GeneQuery run settings and provide a command renderer/launcher.
+- Validate the archived six-epoch primary driver on synthetic inputs and a
+  freshly installed wheel outside the source checkout.
+- Fix README image tracking, source-distribution example documentation and
+  candidate metadata; preserve historical validation and tags.
+- Public release, visibility and DOI publication remain subject to author approval.
+
 ## 1.1.0 — submission candidate, 2026-09-07
 
 - Add the HER2ST GeneQuery frozen-feature and end-to-end audit workflows,

@@ -1,0 +1,103 @@
+run_name: hippocampus_gse264624_donor_disjoint_gene_mean_uni2h_residual_seed456
+paths:
+  expression_root: experiments/hippocampus_current_full_ablation/data/expression
+  multimodal_root: experiments/hippocampus_current_full_ablation/data/multimodal
+  graph_root: experiments/hippocampus_current_full_ablation/data/graphs
+  modality_stats: experiments/hippocampus_current_full_ablation/data/multimodal/modality_stats.json
+  gene_split_dir: experiments/hippocampus_current_full_ablation/data/gene_splits
+  decima_ckpt: decima_weights/rep0.ckpt
+  decima_h5: null
+  decima_npz_dir: data/decima_input/gene_inputs_npz
+  residual_scale_npz: experiments/hippocampus_current_full_ablation/artifacts/train_decima_prior.npz
+  checkpoint_dir: experiments/hippocampus_current_full_ablation/multiseed/seed_456/variants/gene_mean_uni2h_residual/checkpoints
+  checkpoint_name: best.pt
+  gene_bias_init_npz: experiments/hippocampus_current_full_ablation/artifacts/train_gene_mean_prior.npz
+split:
+  train:
+  - GSM8226199_V12F14-051_A1
+  - GSM8226199_V12F14-051_B1
+  - GSM8226199_V12F14-051_C1
+  - GSM8226199_V12F14-051_D1
+  - GSM8226201_V11L05-333_A1
+  - GSM8226201_V11L05-333_B1
+  - GSM8226201_V11L05-333_C1
+  - GSM8226201_V11L05-333_D1
+  - GSM8226203_V10B01-086_A1
+  - GSM8226203_V10B01-086_B1
+  - GSM8226204_V11L05-335_A1
+  - GSM8226204_V11L05-335_B1
+  - GSM8226204_V11L05-335_C1
+  - GSM8226205_V11U08-084_A1
+  - GSM8226205_V11U08-084_B1
+  - GSM8226205_V11U08-084_C1
+  - GSM8226205_V11U08-084_D1
+  - GSM8226206_V11A20-297_A1
+  - GSM8226206_V11A20-297_B1
+  - GSM8226206_V11A20-297_C1
+  - GSM8226206_V11A20-297_D1
+  - GSM8226206_V11L05-335_D1
+  val:
+  - GSM8226202_V10B01-085_A1
+  - GSM8226202_V10B01-085_B1
+  - GSM8226202_V10B01-085_C1
+  - GSM8226202_V10B01-085_D1
+  - GSM8226208_V11L05-336_A1
+  - GSM8226208_V11L05-336_B1
+  - GSM8226208_V11L05-336_C1
+  - GSM8226208_V11L05-336_D1
+  test:
+  - GSM8226200_V10B01-086_C1
+  - GSM8226200_V10B01-086_D1
+  - GSM8226207_V11U08-081_A1
+  - GSM8226207_V11U08-081_B1
+targets_dense: true
+normalize_modalities: true
+model:
+  variant: image_graph_only
+  no_graph: true
+  gnn_hidden: 256
+  gnn_layers: 3
+  gnn_dropout: 0.1
+  gnn_post_mlp_layers: 1
+  gnn_residual: true
+  film_hidden: 256
+  spot_head_hidden: 128
+  freeze_decima_backbone: true
+  freeze_pseudobulk_head: false
+  delta_head_init_std: 0.0
+  residual_scale_floor: 0.001
+  residual_scale_hidden: 128
+  residual_scale_logscale_clip: 0.75
+  gene_bias_init_key: log_mu_base
+  output_weight_init_std: 0.0
+loss:
+  point_loss: huber
+  huber_beta: 1.0
+  lambda_point: 1.0
+  lambda_gene: 0.6
+  lambda_spot: 0.05
+  lambda_delta_point: 0.0
+  lambda_delta_gene: 0.0
+  delta_target_mode: centered_true
+  lambda_lap: 0.0006
+  lambda_calib_identity: 0.0
+  min_true_std: 1.0e-06
+optim:
+  lr: 0.00025
+  weight_decay: 0.0001
+  max_epochs: 12
+  min_epochs: 8
+  max_genes_per_batch: 96
+  val_max_genes_per_batch: 128
+  train_gene_chunks_per_sample: 9
+  require_full_gene_coverage_per_epoch: true
+  log_every: 1
+  early_stop_patience: 4
+  selection_metric: gene_flat_combo
+  selection_flat_weight: 0.25
+eval:
+  max_genes_per_batch: 128
+  true_std_threshold: 1.0e-06
+  pred_std_threshold: 1.0e-06
+  hvg_ranking_file: experiments/hippocampus_current_full_ablation/artifacts/train_gene_stats.tsv
+seed: 456

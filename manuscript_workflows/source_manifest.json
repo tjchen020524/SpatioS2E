@@ -1,0 +1,1156 @@
+{
+  "scope": "Selected custom manuscript workflows and their local Python import closure; no third-party source.",
+  "transformations": [
+    "Resolve development data/output roots with workflow_paths.DATA_ROOT",
+    "Resolve dynamic custom-script paths with workflow_paths.CODE_ROOT",
+    "Make fitted configuration paths relative to the data workspace",
+    "Append optional data-root import paths after archived code"
+  ],
+  "files": [
+    {
+      "path": "experiments/benchmark_bleep_hippocampus_fullgenes/run_bleep_fullgenes.py",
+      "original_sha256": "e4a528522449b93ea7ac29a1d5745ea853456834c5b06cfa10267feb8765f3cc",
+      "archived_sha256": "c42219e2916f5c548a90a8048b1b9e2df6adb7f3065c3f07bcb524868aa46446"
+    },
+    {
+      "path": "experiments/benchmark_stnet_hippocampus_fullgenes/eval_stnet_fullgenes.py",
+      "original_sha256": "9c15255c72825e6ef7fe5e82cd8b498562e80d496efe97a48170240bd6510c63",
+      "archived_sha256": "5488892d17a3af2a7220e4cc81e525acd72584ae28a8220ef6275a0bddf84b56"
+    },
+    {
+      "path": "experiments/benchmark_stnet_hippocampus_fullgenes/prepare_stnet_fullgenes_dataset.py",
+      "original_sha256": "3cd24c512a6b07c2dfd57233c4859edf6c53371a2498501bf670b7a100504648",
+      "archived_sha256": "db3966a0109a305efdef9b27bc0d3041ee4fd1a8eaead63bab94757c955c6d52"
+    },
+    {
+      "path": "experiments/benchmark_stnet_hippocampus_fullgenes/run_stnet_fullgenes_fixedsplit.py",
+      "original_sha256": "2b103e4e379e5dbc92dca8b9ce5de83f034c3db32703f3103507494b82e0eb5e",
+      "archived_sha256": "d7306f31010ca934b585f0b23fa3db4344e24b0226dd8c16fdf2224feede754b"
+    },
+    {
+      "path": "experiments/current_full_ablation_common/evaluate_with_coverage.py",
+      "original_sha256": "0599c8c037ea9f745440ae21e0cbeb1198e78b4bde13c1df65d83fc225bf8887",
+      "archived_sha256": "7c6886c399bd445802944ecb60ed2e7166c8f38a0ce7a023c011f738c8e40aaf"
+    },
+    {
+      "path": "experiments/current_full_ablation_common/preflight_cohort.py",
+      "original_sha256": "72cad9fb60cd6d59f9b0bb99a55ab01b769fc3bb2db62a965ba57ad3c1bd9d2b",
+      "archived_sha256": "7895adae63f60004134ebd8d34b615e202ae32d9e5559c25c88bffb54d227881"
+    },
+    {
+      "path": "experiments/current_full_ablation_common/prepare_priors.py",
+      "original_sha256": "03c902f74efa4b83e6e5aff789590169fe8e6c3cbcfe37160abf37d9b08bf8ef",
+      "archived_sha256": "f40cedf1e991e091041203ea5e6ebf4f92681e883f45c8bce8095904f1ab5302"
+    },
+    {
+      "path": "experiments/current_full_ablation_common/summarize_ablation.py",
+      "original_sha256": "0c85eea429b6a6bc963e1119665eb547c8314ca8b9b6958b34bae8892cb06887",
+      "archived_sha256": "71d27e0f26909acd2b185814c1fb5129ab8da3ac12dd07a754628f3567e244af"
+    },
+    {
+      "path": "experiments/current_full_ablation_common/summarize_multiseed.py",
+      "original_sha256": "950e1249381eaeb86731117230316e8ba13db6a00c4f01a15cabdec5ab80e372",
+      "archived_sha256": "dd3f12b541789ddb14122a40204b3c72b61e046869d41b7fd37ea68a0578d39e"
+    },
+    {
+      "path": "experiments/current_full_ablation_common/train_balanced_ablation.py",
+      "original_sha256": "6921c2ba091da33b0dcc91c7c3e61e90ba944993abc28c6ba894a5851b30fceb",
+      "archived_sha256": "6921c2ba091da33b0dcc91c7c3e61e90ba944993abc28c6ba894a5851b30fceb"
+    },
+    {
+      "path": "experiments/current_full_ablation_common/write_configs.py",
+      "original_sha256": "9106b9667acf6ee57c63399eb86ebacca0e6213e964963eba48f2d47a378a2a7",
+      "archived_sha256": "8f7b7e6cb7bbd3a3121122bb1761c7a16be51f8b832d4e7cb6c5d60264db55f0"
+    },
+    {
+      "path": "experiments/current_full_ablation_common/write_multiseed_configs.py",
+      "original_sha256": "86a7ec2aa3e9574f950d838dda891cbfbd264acc3c6642f590971a4576725fd4",
+      "archived_sha256": "c8b68f7ecf8fa37aedf47030b23e1297785f2c08a5a1db00be2d318dc382eb37"
+    },
+    {
+      "path": "experiments/dlpfc_current_full_ablation/prepare_dlpfc.py",
+      "original_sha256": "addd393ccf0a81bbae803a25ff1e573438ca6cab1919d954bf712d7bf85df89b",
+      "archived_sha256": "04814b54be6883bb0c5e24cb1183f758e53c640665902795209792ad02482e85"
+    },
+    {
+      "path": "experiments/dlpfc_lightweight_sequence_prior_validation/extract_dlpfc_uni2h_embeddings.py",
+      "original_sha256": "6dbf76bf98d7ff8870fa87324a95edb92637ca9e8c66ee9d73b149a6f979772f",
+      "archived_sha256": "01a44a6e21dbbd874d4b6a20d1f38917edd7fa1eeb03dd678ccc3ee1fb73620c"
+    },
+    {
+      "path": "experiments/geneheldout_uni2h_decima_decoder_noseq_controls/run_geneheldout_noseq_controls.py",
+      "original_sha256": "8221d9d0caa10174fad8b575ebdd750d3f55786a2e56679b6b21f49ecf57f241",
+      "archived_sha256": "796d98c581bd4123145cd1f17bf63aa899515664e1858936db562c48ad81951c"
+    },
+    {
+      "path": "experiments/heldout_decoder_architecture_audit/evaluate_branch_intervention.py",
+      "original_sha256": "5db6508b0d67eef339adf4bea18f1352f389cb99d44fb1b622d1db2c4dbea5c2",
+      "archived_sha256": "0e3a5efdf6071623cec485b551aa8771160e4909a0b87493c837e511d2c37ee4"
+    },
+    {
+      "path": "experiments/heldout_decoder_architecture_audit/run_bias_free.py",
+      "original_sha256": "ef1d1b15ffd9143ff174febf36b6bb8d699d882c61f8e023668269886bda7997",
+      "archived_sha256": "ef824a566d971d708e04245ea411685ee3a43ab2b85739ec66d9592b2c89bd53"
+    },
+    {
+      "path": "experiments/heldout_decoder_architecture_audit/run_concat_mlp.py",
+      "original_sha256": "aeea89f4147bbf86a5bc5678a853ab16cdbc2df682110b96501ceb5d12f16f54",
+      "archived_sha256": "f14b73fc171fb725f9ac4756aee585f1c05c01cf58b982d241f94aa334f0d215"
+    },
+    {
+      "path": "experiments/heldout_decoder_architecture_audit/run_residual_only.py",
+      "original_sha256": "350a3fdf4b50d394b9736ff7bb715a261568d4a2403b4c0553413be8d6a3afed",
+      "archived_sha256": "129b901779217258d82aca8d49dcebc16c6ec3b9de04b2817e07d552bf76209e"
+    },
+    {
+      "path": "experiments/heldout_decoder_architecture_audit/summarize_full.py",
+      "original_sha256": "336df027534d560b01ae2c82b60096cbe6f7ea28dec897b3be98da83d237a460",
+      "archived_sha256": "795f8362cace3fc21ca0cb8712ba9ba8765059fd3dbf97d4e118318e528b488c"
+    },
+    {
+      "path": "experiments/heldout_decoder_architecture_audit/summarize_pilot.py",
+      "original_sha256": "8d21a2eee4cc6b1d9761d79b247c4fcb2dba3555386fef1010ba935a8a6ba435",
+      "archived_sha256": "27b45d6b92ef70293d02e053cacff93bc65e535250e0ccd32e61ff2bf2cf6c1b"
+    },
+    {
+      "path": "experiments/heldout_decoder_architecture_audit/validate_raw_architecture_pilot.py",
+      "original_sha256": "49a0a56a21e61af2729183c80324816a9707932e1c31152ce24e1a277b9661f5",
+      "archived_sha256": "22f508ccb93086a9c6860637360482ab414ac6e5e9eb299f89fb71f5f97d6ea2"
+    },
+    {
+      "path": "experiments/heldout_gene_second_stage/__init__.py",
+      "original_sha256": "02796d7f01906ab8d58ba5bfadba926c643a7600d5616e1b8a3facf9bac8ff7d",
+      "archived_sha256": "02796d7f01906ab8d58ba5bfadba926c643a7600d5616e1b8a3facf9bac8ff7d"
+    },
+    {
+      "path": "experiments/heldout_gene_second_stage/audit_constant_gene_mean_pcc.py",
+      "original_sha256": "fca189a1a1ee5fbba036099e6909e81800e62469483a6015c2d43af6cffa0cb1",
+      "archived_sha256": "fca189a1a1ee5fbba036099e6909e81800e62469483a6015c2d43af6cffa0cb1"
+    },
+    {
+      "path": "experiments/heldout_gene_second_stage/audit_scgpt_provenance_and_coverage.py",
+      "original_sha256": "88433e242e93715714cb506ca8f8fa964a8cf643b606bd70a1905c170985f268",
+      "archived_sha256": "a79fd4215e7c53528b816fe933c4e9ad1a1444010452b611af6b8e1deae520ef"
+    },
+    {
+      "path": "experiments/heldout_gene_second_stage/audit_scgpt_static_gene_vectors.py",
+      "original_sha256": "04c0c8c44ef407ca02ad3d60c0cabbfe702b604cf9b25b9ee56ad182359b8713",
+      "archived_sha256": "1ef7db00b980a11a0c12bf8e3356ae8e09d739a29fc1abd158de17052b9b4b18"
+    },
+    {
+      "path": "experiments/heldout_gene_second_stage/build_alternative_abundance.py",
+      "original_sha256": "7c0eae734ae9b2a0c4760a226b5d16fe61fcfbce49ee29f548498c29d3ac671c",
+      "archived_sha256": "c6168da52defa8a77d9bde00179dff5a5898fed13f299624213880f4c31b2fce"
+    },
+    {
+      "path": "experiments/heldout_gene_second_stage/build_biological_uncertainty.py",
+      "original_sha256": "ac18223c82dcdb999aa6c459514cb22b0831cb80b7902e953c09c95038aba2d2",
+      "archived_sha256": "ac18223c82dcdb999aa6c459514cb22b0831cb80b7902e953c09c95038aba2d2"
+    },
+    {
+      "path": "experiments/heldout_gene_second_stage/build_common_target_representation_audit.py",
+      "original_sha256": "5fc89ce7a6e9b057bff6efebfbb4109b21ecca619ff809f3090243571d9045db",
+      "archived_sha256": "97bcd399c01097124dbddb6efa7a28100b82d1f2ad208e8fc57a75a8a2db592b"
+    },
+    {
+      "path": "experiments/heldout_gene_second_stage/build_decima_full_variance_deciles.py",
+      "original_sha256": "bbbeb41eeeae9b6a359d9c8fc98d359685054e58a015b923dbdaaa963c0a4592",
+      "archived_sha256": "09b1846f6af88f98e043ee0939c800ce3fb861372a298bd3b61b723ccc8bd539"
+    },
+    {
+      "path": "experiments/heldout_gene_second_stage/build_decima_pretraining_audit.py",
+      "original_sha256": "079a385dc42dcc9968f9f9f7d0f43be45827b56bafda5e4fe75ea12ba009d1c2",
+      "archived_sha256": "079a385dc42dcc9968f9f9f7d0f43be45827b56bafda5e4fe75ea12ba009d1c2"
+    },
+    {
+      "path": "experiments/heldout_gene_second_stage/build_detection_and_covariate_controls.py",
+      "original_sha256": "97a53d3e25e224535d2f4ec5acc4f67553eecbd66511c33052e71853bdf47bbf",
+      "archived_sha256": "e55cc2ab8e765a3144003e7b659b66605c344d837856ca9cbc29266b67f36726"
+    },
+    {
+      "path": "experiments/heldout_gene_second_stage/build_gene_level_release.py",
+      "original_sha256": "36c2b5560e0feebb86a3873ba9363f98378ef95c0d93277e94e045d7ca81861e",
+      "archived_sha256": "36c2b5560e0feebb86a3873ba9363f98378ef95c0d93277e94e045d7ca81861e"
+    },
+    {
+      "path": "experiments/heldout_gene_second_stage/build_gene_mean_baselines.py",
+      "original_sha256": "3c0ad5bd17dc18ea1ec698ab4a56430b43e85d30670337ad263c1df2e9efa23f",
+      "archived_sha256": "ba9b6c390243761fd5a006043ca14a10c2f3440f156865fefeba5340d0ad525b"
+    },
+    {
+      "path": "experiments/heldout_gene_second_stage/build_gene_partitions.py",
+      "original_sha256": "72e7357cbc43fea02285f685faa1a2f5c65fa7e40e268b4d3ebc3e34f55b8c2a",
+      "archived_sha256": "72e7357cbc43fea02285f685faa1a2f5c65fa7e40e268b4d3ebc3e34f55b8c2a"
+    },
+    {
+      "path": "experiments/heldout_gene_second_stage/build_matched_gene_mean_controls.py",
+      "original_sha256": "05832ed568ccaad99b024cfb7285786749586bd6b397b85b40ba4cb9438faae2",
+      "archived_sha256": "14f8795bf2e8d8090916175bfbc93efdb2b47a92e2f00d238d619aac606e5e2b"
+    },
+    {
+      "path": "experiments/heldout_gene_second_stage/build_partition_balance.py",
+      "original_sha256": "f9e81977c9424419b81584a3f8a9a395356b97fa416fe09dfa5a45b65e71fc0f",
+      "archived_sha256": "6fe3a81adb3d6e6f64d21c8933aaec59e18b6ab3d6cc3cb803fbbe338df8d0e4"
+    },
+    {
+      "path": "experiments/heldout_gene_second_stage/build_representation_spatial_stratification.py",
+      "original_sha256": "4f95a75ca06b71b636df7d2f30c67aacbefc9ea8c718895e3beef9c5a8082d49",
+      "archived_sha256": "bf704555584a7ae19d8f1f64b524d238dcb77c388ebcc4ee630877f775e03625"
+    },
+    {
+      "path": "experiments/heldout_gene_second_stage/build_sequence_covariates.py",
+      "original_sha256": "1421c797b5821ba22a8c4d2f13223e24220153890a33b973f5d7838c2db0fd72",
+      "archived_sha256": "2172b24512888edb498b82e42784a96e79d3d78f941489660b0a71a8f4205052"
+    },
+    {
+      "path": "experiments/heldout_gene_second_stage/build_similarity_stratified_effects.py",
+      "original_sha256": "b9743ac4ccb7b2987b805d4f7b5dfd8d082cd6840e1b036f1c862a4bec4a6f96",
+      "archived_sha256": "b9743ac4ccb7b2987b805d4f7b5dfd8d082cd6840e1b036f1c862a4bec4a6f96"
+    },
+    {
+      "path": "experiments/heldout_gene_second_stage/evaluate_scgpt_section_centered.py",
+      "original_sha256": "fc16ab6f9218f38b2497e05b118dd73dd8f58ef9e40600b91951abada0dc0035",
+      "archived_sha256": "fc16ab6f9218f38b2497e05b118dd73dd8f58ef9e40600b91951abada0dc0035"
+    },
+    {
+      "path": "experiments/heldout_gene_second_stage/run_decoder_control.py",
+      "original_sha256": "d7049f45ad01d2a1e0f1c0424397a66ce33bb658cfe2e4efaf2b2ee388ac4b7f",
+      "archived_sha256": "02a83d6f9f6e8c5d484a7072190aa88878e5763922af0efd0103681f0474335d"
+    },
+    {
+      "path": "experiments/heldout_gene_second_stage/run_partition_control.py",
+      "original_sha256": "926debefa976953ebeda15ed6dfb4d3d94e0e769ab9ff422a1aa1b0c0346a2e1",
+      "archived_sha256": "da113d5dc4941a886d5d82676bf4052285c00409c1d28a72ac16fe0945650f00"
+    },
+    {
+      "path": "experiments/heldout_gene_second_stage/run_scgpt_gene_token_decoder.py",
+      "original_sha256": "43c6d1102282bfc83de37dd0d12e338cee13180ea33564219465a2e7eafb93db",
+      "archived_sha256": "43c6d1102282bfc83de37dd0d12e338cee13180ea33564219465a2e7eafb93db"
+    },
+    {
+      "path": "experiments/heldout_gene_second_stage/summarize_decoder_controls.py",
+      "original_sha256": "2e28ae75d62bf080511071b68fe10ca3e1dfdfaeb37fa140ab4e617b243e80c7",
+      "archived_sha256": "2e28ae75d62bf080511071b68fe10ca3e1dfdfaeb37fa140ab4e617b243e80c7"
+    },
+    {
+      "path": "experiments/heldout_gene_second_stage/summarize_offline_stage2.py",
+      "original_sha256": "908ba17fb9029b48b64819c246107f33d22b3b1e11c52d4c3879253304473e8a",
+      "archived_sha256": "908ba17fb9029b48b64819c246107f33d22b3b1e11c52d4c3879253304473e8a"
+    },
+    {
+      "path": "experiments/heldout_gene_second_stage/summarize_partitions.py",
+      "original_sha256": "2a050996927a34b08c1489bb3a2bed6d8aea5a92e78f1d19ecdaf830626099e9",
+      "archived_sha256": "2a050996927a34b08c1489bb3a2bed6d8aea5a92e78f1d19ecdaf830626099e9"
+    },
+    {
+      "path": "experiments/heldout_gene_second_stage/summarize_scgpt_decoder.py",
+      "original_sha256": "66849d4e0b399404e3cf60244455f79008004262a7f070cfcc5e38548b59c4a2",
+      "archived_sha256": "66849d4e0b399404e3cf60244455f79008004262a7f070cfcc5e38548b59c4a2"
+    },
+    {
+      "path": "experiments/heldout_gene_second_stage/summarize_scgpt_training_defined_hvg.py",
+      "original_sha256": "5e2a4f7dd9fa58e59120ef4ac6b84dd1eae020d2cc6158916e81260368bb646b",
+      "archived_sha256": "5e2a4f7dd9fa58e59120ef4ac6b84dd1eae020d2cc6158916e81260368bb646b"
+    },
+    {
+      "path": "experiments/heldout_metric_policy.py",
+      "original_sha256": "193b221c92cfd306f0cb6eb466937c9e089e93dd44b481abbbffc11dc2d08a58",
+      "archived_sha256": "193b221c92cfd306f0cb6eb466937c9e089e93dd44b481abbbffc11dc2d08a58"
+    },
+    {
+      "path": "experiments/her2st_current_full_ablation/evaluate_pathology_program.py",
+      "original_sha256": "2bf8706296846de72424c6875029b6ee064d4158ca1ec96131bb8a4787cadc9e",
+      "archived_sha256": "cce0ff79cd4651a2342e684fc3021a0006f6642d54c11e2ec1aa57af2b9049b5"
+    },
+    {
+      "path": "experiments/her2st_current_full_ablation/extract_uni2h_embeddings.py",
+      "original_sha256": "6abf896d846aac5882c55ef685b2ac2b6a272875b4788d236bd36586311efee0",
+      "archived_sha256": "8417ebb485214dddc45d5698d43cb20d777b22d7543366df82e412e15157cb77"
+    },
+    {
+      "path": "experiments/her2st_current_full_ablation/prepare_her2st.py",
+      "original_sha256": "a1b2fbe361b7c7f19b5ba83674e2396a0f4b9959a72ce967165c1a5c7ddef6d6",
+      "archived_sha256": "b50da95ff4a7ae1ecb5bc985b71f8fa3bbfe0b264b3df88b55360e2677cad843"
+    },
+    {
+      "path": "experiments/her2st_current_full_ablation/prepare_pathology_program.py",
+      "original_sha256": "d13e0d4daaca1b40e0620605f45ea4475550dcd664668952b93f64a533ab61b9",
+      "archived_sha256": "8d10a1a9a53bf847429348fc7801272832c8ed968716d154e3081d597bb62a4d"
+    },
+    {
+      "path": "experiments/her2st_current_full_ablation/summarize_multiseed_pathology.py",
+      "original_sha256": "0cbd20dc564ed36465590dffb88a059ffc5cba071ff251700f08366200145c31",
+      "archived_sha256": "c49a587159dc266db95c5b243661920796ca452f50f77c8eac409a459d5b248c"
+    },
+    {
+      "path": "experiments/her2st_current_full_ablation/summarize_pathology_program.py",
+      "original_sha256": "fcfb0b98e4af7a6a3e0d2f78c80288f4f35e540ee737256a61e625d798493e96",
+      "archived_sha256": "bec27a974b9d2e1f1f49e7e754b3cfe4912d5f9a742f3bbab93ea8664835c7a0"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/prepare_hippocampus.py",
+      "original_sha256": "12c9918983e978edd82fb0105dfccdc037ed66a89ad91e9fa930d5d89a95f121",
+      "archived_sha256": "b1e5acf3a6da4f408fb81474633deac8deaeb690902303603542fbd169e677bf"
+    },
+    {
+      "path": "experiments/hippocampus_donor_disjoint_external_benchmark/prepare_benchmark.py",
+      "original_sha256": "bb8696bdb9a70c17120eade12736fc06b97105b1cf44939ca5c1fbf132055e8f",
+      "archived_sha256": "fd8fa6afa876f342ff416b414132d4b964b7b1ff4b651707d460a2abbdf8a1f3"
+    },
+    {
+      "path": "experiments/hippocampus_donor_disjoint_external_benchmark/run_bleep.py",
+      "original_sha256": "62d4ee85cd98529d5d6f0f8698b927184ed9a6da0f3ccba3fcd7c320637ae68d",
+      "archived_sha256": "750e30f451fd97b712f05786801750345cbd6077d79124d8bd7f54ddeb595e12"
+    },
+    {
+      "path": "experiments/hippocampus_donor_disjoint_external_benchmark/run_hist2st.py",
+      "original_sha256": "2d1c5f8417645a56f7cbfa9e27915af08ea72b51980e517a9820682e5fe7a438",
+      "archived_sha256": "49744800a27f6d86cbd327ea42d6f451f63bc28f86401db89c21333a99d2b463"
+    },
+    {
+      "path": "experiments/hippocampus_donor_disjoint_external_benchmark/run_stnet.py",
+      "original_sha256": "f1c60a2334338d1af712f232da28efaac6f54af35c4b8d02a5274807fb06f0c8",
+      "archived_sha256": "808b93554b61e2402ee382979a23350cf95f9477e6d23528c7291cea59a7b4a3"
+    },
+    {
+      "path": "experiments/hippocampus_donor_disjoint_external_benchmark/summarize_results.py",
+      "original_sha256": "568ceecb45d13d46626b8aa52507bfa32742268687bd30e04221c338c41e93b4",
+      "archived_sha256": "6206ee429ce17430b701c8ab39641f53d497e34231cd3e4d48b83331bea60325"
+    },
+    {
+      "path": "experiments/hist2st_spatial/eval_hist2st_spot.py",
+      "original_sha256": "775d0db5598edd7203f89f49340da5d39384a32b4d763933a4945b75135143d7",
+      "archived_sha256": "81571c6d63913c5aba31773d49f65345c58768906665df05ff48ca7c911dc906"
+    },
+    {
+      "path": "experiments/hist2st_spatial/hist2st_dataset.py",
+      "original_sha256": "3ddd6f162b8da80d46c7a3b0922dbd896e40a1087fcf5ceb5994cbf86aa4a216",
+      "archived_sha256": "3ddd6f162b8da80d46c7a3b0922dbd896e40a1087fcf5ceb5994cbf86aa4a216"
+    },
+    {
+      "path": "experiments/hist2st_spatial/train_hist2st_spot.py",
+      "original_sha256": "4553c82f492eeb3aa7522145a806dceeb00a3b63c26cc86fe0b7a8748c07a657",
+      "archived_sha256": "a0bfce23af4fc4f692c5fde2a1c72924f5f00c0c5a3b179d90f746a1429c6468"
+    },
+    {
+      "path": "experiments/multicohort_geneheldout_decima/evaluate_section_centered.py",
+      "original_sha256": "25f0600df77f6e1e73c3b2bf514bf767d8edcbf262198c99428f8726f1f0efba",
+      "archived_sha256": "11a56c54e90cb0d6ca1be382725e2a8c019d69672fce9cfc8b10d40509241a14"
+    },
+    {
+      "path": "experiments/multicohort_geneheldout_decima/run_cohort_geneheldout.py",
+      "original_sha256": "520e03a03526098f626be037baebbe8bfc3741d00ee34161a301a8d1b6da8d43",
+      "archived_sha256": "9cd544b99b47a8ca9c5d842b702f299e2b287b0af152d3ced029e163826f81c8"
+    },
+    {
+      "path": "experiments/multicohort_geneheldout_decima_clean_split/clean_split_config.py",
+      "original_sha256": "89a3e2ccdca43a5daa2031268bbfdb394f32056dea57f8e4a92b8e655497a6f6",
+      "archived_sha256": "d9b82c8c3158da110b2636b09840bb17a2e56f5d935ea3743a016fef633f2174"
+    },
+    {
+      "path": "experiments/multicohort_geneheldout_decima_clean_split/evaluate_components.py",
+      "original_sha256": "61f5c74e37ba8c47b82339a2e5c21c9591028d134b40a904a1a56d0a03c0162a",
+      "archived_sha256": "6ef9e7a3237a27264c21384669c2d48b23ce80ba9aaad4b6342fbd223fc38a9d"
+    },
+    {
+      "path": "experiments/multicohort_geneheldout_decima_clean_split/freeze_clean_partition.py",
+      "original_sha256": "f632c037e5846429f1a526845dfa45ff1e4ee8be988b89ccca5616fe33300595",
+      "archived_sha256": "3577b04dff697cd192d45e0087831d4da7d43612166d53a22da7bf5a2ec0f73c"
+    },
+    {
+      "path": "experiments/multicohort_geneheldout_decima_clean_split/run_clean_geneheldout.py",
+      "original_sha256": "c1b86a886eb02aea7439e0245e259984b678474ad8e727827d8cbc827803c6bc",
+      "archived_sha256": "c1b86a886eb02aea7439e0245e259984b678474ad8e727827d8cbc827803c6bc"
+    },
+    {
+      "path": "experiments/multicohort_geneheldout_decima_clean_split/summarize_clean_replication.py",
+      "original_sha256": "b5e2b5674e67b5224b249872339f4c707e914dc39a5f242fa98ef2f921168384",
+      "archived_sha256": "b5e2b5674e67b5224b249872339f4c707e914dc39a5f242fa98ef2f921168384"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/prepare_nac.py",
+      "original_sha256": "3e6c5f9ee8d8cb2610804e569c5472166d6b3a822369c1389d218deaae2afbd7",
+      "archived_sha256": "2677a3c74f97ac52f3c47d85d04004961089b5be30b648953980c9c5c149deb2"
+    },
+    {
+      "path": "experiments/sample_split_fullgenes_v4_structured_loss/eval_sample_split_v4.py",
+      "original_sha256": "710540f28d37445f3072b5bf0b2ce261dc9c6a628b2b5df3ad59aa3113f8e6c9",
+      "archived_sha256": "6ab65d8c78e650404e8c0fc9840f8c28d6f10abd12ff4d5ee799f40cb8a80840"
+    },
+    {
+      "path": "experiments/sample_split_fullgenes_v4_structured_loss/train_stage0_reg_v4.py",
+      "original_sha256": "2da9ec980922bec93b47a696b709826cf4ec75940f65ac68de63c0631db322de",
+      "archived_sha256": "57160e834fd0bac782885baea1d1f3c6a1fc377d8f5ac1ab0046865f90555bab"
+    },
+    {
+      "path": "experiments/sample_split_fullgenes_v4b_uni2h/extract_histology_embeddings_uni2h.py",
+      "original_sha256": "aa05b0d4d8f289934db3ec7d9d0fbc5dfe02a5440afcdd2cf321678d29bd7b55",
+      "archived_sha256": "2bb2eb63ea4811d711e91f74ba3f644b7794033f06eb6b5f91954a8910685247"
+    },
+    {
+      "path": "experiments/stpath_finetune_spatios2e/common.py",
+      "original_sha256": "7dd8baea6474d4e86a6d22eae2b44e8903ec0232b937662429372bf7b3b306a0",
+      "archived_sha256": "c1b50f9c9632d76b2b1e25d76a6d57be01af8817b10417567d15049799ad4c26"
+    },
+    {
+      "path": "experiments/stpath_finetune_spatios2e/eval_stpath_finetuned_only.py",
+      "original_sha256": "b0139b70f90a31bf5ab558b32f0c2675e44a4a5616d3b414415236400fa9db30",
+      "archived_sha256": "b0139b70f90a31bf5ab558b32f0c2675e44a4a5616d3b414415236400fa9db30"
+    },
+    {
+      "path": "experiments/stpath_finetune_spatios2e/export_finetuned_outputs.py",
+      "original_sha256": "d875bf5f8687d508246a8c4febae11f999554ace265c808e1be725e66d36578e",
+      "archived_sha256": "d875bf5f8687d508246a8c4febae11f999554ace265c808e1be725e66d36578e"
+    },
+    {
+      "path": "experiments/stpath_finetune_spatios2e/train.py",
+      "original_sha256": "16aa70fb2a54ddb628d2ea3f9ec016f25719dcbb8d73850bdadf16f188e4e999",
+      "archived_sha256": "16aa70fb2a54ddb628d2ea3f9ec016f25719dcbb8d73850bdadf16f188e4e999"
+    },
+    {
+      "path": "experiments/stpath_seq_mechanism_controls/build_cold_gene_split.py",
+      "original_sha256": "980a48df66afda5c3fcd0c1f37c4b75269d0cc1130f60f5c206e3ec863c6e61f",
+      "archived_sha256": "980a48df66afda5c3fcd0c1f37c4b75269d0cc1130f60f5c206e3ec863c6e61f"
+    },
+    {
+      "path": "models/decima_wrapper.py",
+      "original_sha256": "cf95211f1b52a31a46df2dfbe4a107204e92ee95d32c34c51acace89a0758cd0",
+      "archived_sha256": "cf95211f1b52a31a46df2dfbe4a107204e92ee95d32c34c51acace89a0758cd0"
+    },
+    {
+      "path": "models/stage0_image_graph_model.py",
+      "original_sha256": "7e72b0510a3b56fcb2d9f91fe2c1e15d3b2aa73c4e7893115b633ba3ef7245a7",
+      "archived_sha256": "7e72b0510a3b56fcb2d9f91fe2c1e15d3b2aa73c4e7893115b633ba3ef7245a7"
+    },
+    {
+      "path": "models/stage0_reg_model_concat.py",
+      "original_sha256": "53a3570e202ecf1252ecfdcbce70ed228c6bfdf75ccee8d326215245faf4bbbc",
+      "archived_sha256": "53a3570e202ecf1252ecfdcbce70ed228c6bfdf75ccee8d326215245faf4bbbc"
+    },
+    {
+      "path": "models/stage0_reg_model_crossattn.py",
+      "original_sha256": "b3e9268ab2c1adc4a4c4e29a761d3b404542e87244f3a9d9985f3b5b92932a9c",
+      "archived_sha256": "b3e9268ab2c1adc4a4c4e29a761d3b404542e87244f3a9d9985f3b5b92932a9c"
+    },
+    {
+      "path": "models/stage0_reg_model_factory.py",
+      "original_sha256": "32b79d5406e6e7afb03289e73695337e705e8737488f499e13e06123dfe32e5e",
+      "archived_sha256": "32b79d5406e6e7afb03289e73695337e705e8737488f499e13e06123dfe32e5e"
+    },
+    {
+      "path": "models/stage0_reg_model_snrna.py",
+      "original_sha256": "a6204855d0018a67050edcc02782385ca377ad00b1bee6edc7e0624e3083ecbd",
+      "archived_sha256": "a6204855d0018a67050edcc02782385ca377ad00b1bee6edc7e0624e3083ecbd"
+    },
+    {
+      "path": "models/stage0_reg_model_v11.py",
+      "original_sha256": "c38ad632fa747bbff3ee07e367463216907bb5a2e59fa1d8cb004c37ff90ea9e",
+      "archived_sha256": "c38ad632fa747bbff3ee07e367463216907bb5a2e59fa1d8cb004c37ff90ea9e"
+    },
+    {
+      "path": "models/stage0_reg_model_v3.py",
+      "original_sha256": "1e8e9dac1a19edea9a04c2a1bee8aeea4f6e1b63f95e82178f2696d9110faea1",
+      "archived_sha256": "1e8e9dac1a19edea9a04c2a1bee8aeea4f6e1b63f95e82178f2696d9110faea1"
+    },
+    {
+      "path": "models/stage0_reg_model_v7.py",
+      "original_sha256": "de295d3dd73b0954614d97511458f3f6ee4399495e684e4ba25127b627ffc7ac",
+      "archived_sha256": "de295d3dd73b0954614d97511458f3f6ee4399495e684e4ba25127b627ffc7ac"
+    },
+    {
+      "path": "paper/submission/scripts/build_five_figure_evidence_audit.py",
+      "original_sha256": "b74e622a9165d56e452308318f0ba6f09fb0869b312822917e83690663d10f26",
+      "archived_sha256": "c20127a63bb8255740e7310c2b863ab63d72e75418fc986a4471da321af6effe"
+    },
+    {
+      "path": "paper/submission/scripts/build_training_defined_hvg_analysis.py",
+      "original_sha256": "55fd57eecd5332b8e3149243caad98f070f629bc7d2a650e41a53bdf2c808d24",
+      "archived_sha256": "a12f7871381661815a17254e43eb5bf5451735afc89047d0312e5ac4355af033"
+    },
+    {
+      "path": "scripts/build_spatial_graph.py",
+      "original_sha256": "ad0d6c1a9856a50a50a430e51e33d056a4af72d9c73ca69e2c78f003ab5c309e",
+      "archived_sha256": "ad0d6c1a9856a50a50a430e51e33d056a4af72d9c73ca69e2c78f003ab5c309e"
+    },
+    {
+      "path": "scripts/extract_histology_embeddings.py",
+      "original_sha256": "609f0d02bbaa710654ccc2de3890e7aa1f253762f2edb62f966d8dbc74884b11",
+      "archived_sha256": "609f0d02bbaa710654ccc2de3890e7aa1f253762f2edb62f966d8dbc74884b11"
+    },
+    {
+      "path": "scripts/gnn_dataloader.py",
+      "original_sha256": "36fcd7f30af36a285de3cfd0837b3745b3c7217bcb3bcb3252e760b802eaa8c7",
+      "archived_sha256": "36fcd7f30af36a285de3cfd0837b3745b3c7217bcb3bcb3252e760b802eaa8c7"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/decima_concat_gnn.yaml",
+      "original_sha256": "77b82eda1b1d70e5dd48493d76bcf5730f92b3e1759a4604222d2fc42e425d65",
+      "archived_sha256": "77b82eda1b1d70e5dd48493d76bcf5730f92b3e1759a4604222d2fc42e425d65"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/decima_crossattn_gnn.yaml",
+      "original_sha256": "cd46885e220ffa8b2a49fdaaa18e47802d53b5e5629cc5d1835f57eb2b8728bb",
+      "archived_sha256": "cd46885e220ffa8b2a49fdaaa18e47802d53b5e5629cc5d1835f57eb2b8728bb"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/decima_film_gnn.yaml",
+      "original_sha256": "b9f37a021ecddd1acb45558e3ee2309a7ef97fc707811bce271ccab945110a72",
+      "archived_sha256": "b9f37a021ecddd1acb45558e3ee2309a7ef97fc707811bce271ccab945110a72"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/decima_film_no_graph.yaml",
+      "original_sha256": "305c2f32511ebd2ff130b5dae9a9450ff4fb35fcb0dd6d8ba550f22e81280525",
+      "archived_sha256": "305c2f32511ebd2ff130b5dae9a9450ff4fb35fcb0dd6d8ba550f22e81280525"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/decima_prior_only.yaml",
+      "original_sha256": "69a04d9e52beaa8d70637304b5b157f4533aba809389201d9d4e5c17c44e98dd",
+      "archived_sha256": "69a04d9e52beaa8d70637304b5b157f4533aba809389201d9d4e5c17c44e98dd"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/gene_mean_uni2h_gnn.yaml",
+      "original_sha256": "060b1606e43ef9603040e94e3eee1f2782bccaf17807af6d6370c0e7591b2be5",
+      "archived_sha256": "060b1606e43ef9603040e94e3eee1f2782bccaf17807af6d6370c0e7591b2be5"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/gene_mean_uni2h_residual.yaml",
+      "original_sha256": "5287fc149461c495cd83797616686da581aced4f38140b65aa34e34d979ffa95",
+      "archived_sha256": "5287fc149461c495cd83797616686da581aced4f38140b65aa34e34d979ffa95"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/multiseed/seed_123/decima_concat_gnn.yaml",
+      "original_sha256": "7d179b89340741f91bf8e23f26ed44a6290d600cecc70d5b9432e8455ebdc62a",
+      "archived_sha256": "7d179b89340741f91bf8e23f26ed44a6290d600cecc70d5b9432e8455ebdc62a"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/multiseed/seed_123/decima_crossattn_gnn.yaml",
+      "original_sha256": "e9e87dca355821f4fd17a214edb0765767402f8346a0e0bc7c086404e307f600",
+      "archived_sha256": "e9e87dca355821f4fd17a214edb0765767402f8346a0e0bc7c086404e307f600"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/multiseed/seed_123/decima_film_gnn.yaml",
+      "original_sha256": "5a2ebe48c9c11fdd95f3c75f60a263d06004a54351aa9fe227a7d4f41b80465a",
+      "archived_sha256": "5a2ebe48c9c11fdd95f3c75f60a263d06004a54351aa9fe227a7d4f41b80465a"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/multiseed/seed_123/decima_film_no_graph.yaml",
+      "original_sha256": "314c84ba1dbb443c41c3de4c0c386559ef8c8507b42349d068458131cdf0c792",
+      "archived_sha256": "314c84ba1dbb443c41c3de4c0c386559ef8c8507b42349d068458131cdf0c792"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/multiseed/seed_123/decima_prior_only.yaml",
+      "original_sha256": "1f8fa3a90629d50ba96afcc013a9123bc61ad4c1a036de60959c0e4122520ea6",
+      "archived_sha256": "1f8fa3a90629d50ba96afcc013a9123bc61ad4c1a036de60959c0e4122520ea6"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/multiseed/seed_123/gene_mean_uni2h_gnn.yaml",
+      "original_sha256": "aee5beea0bcadc6ed89128b71ec74b6ebd6458bb5a152c8a5ce1386a40d95462",
+      "archived_sha256": "aee5beea0bcadc6ed89128b71ec74b6ebd6458bb5a152c8a5ce1386a40d95462"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/multiseed/seed_123/gene_mean_uni2h_residual.yaml",
+      "original_sha256": "3eea387e16ca954274102e5327a0beb3c4c6136d48129f1844d72e9296013055",
+      "archived_sha256": "3eea387e16ca954274102e5327a0beb3c4c6136d48129f1844d72e9296013055"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/multiseed/seed_123/uni2h.yaml",
+      "original_sha256": "17c78889c5d8c021010511e5887e3b77acd4024bdf9e548963ab3e12c8cd91ff",
+      "archived_sha256": "17c78889c5d8c021010511e5887e3b77acd4024bdf9e548963ab3e12c8cd91ff"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/multiseed/seed_123/uni2h_gnn.yaml",
+      "original_sha256": "a9b516b5fb879274ea26d63e815c5030ba0f75b0261621e1aca0b296d3d289b6",
+      "archived_sha256": "a9b516b5fb879274ea26d63e815c5030ba0f75b0261621e1aca0b296d3d289b6"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/multiseed/seed_42/decima_concat_gnn.yaml",
+      "original_sha256": "866a7695047e14bc7676b7e48e5272d3bc4fe1f7060c551a594998d3ebd79c9b",
+      "archived_sha256": "866a7695047e14bc7676b7e48e5272d3bc4fe1f7060c551a594998d3ebd79c9b"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/multiseed/seed_42/decima_crossattn_gnn.yaml",
+      "original_sha256": "cead797f6c7ac6494f55366dd3c737708c3936b8bfbf794f607ac365b59828d0",
+      "archived_sha256": "cead797f6c7ac6494f55366dd3c737708c3936b8bfbf794f607ac365b59828d0"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/multiseed/seed_42/decima_film_gnn.yaml",
+      "original_sha256": "159f54fb64eb2599ed326f34da2b1692c21468f343f855cb4aa2a906208da88a",
+      "archived_sha256": "159f54fb64eb2599ed326f34da2b1692c21468f343f855cb4aa2a906208da88a"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/multiseed/seed_42/decima_film_no_graph.yaml",
+      "original_sha256": "1f6603142aeb00e6006270ac8d4d3efad698c6cc0d15c12a9d913934e0bdd09c",
+      "archived_sha256": "1f6603142aeb00e6006270ac8d4d3efad698c6cc0d15c12a9d913934e0bdd09c"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/multiseed/seed_42/decima_prior_only.yaml",
+      "original_sha256": "143f62d5e6483291cb43628a671e17018bd8b019714b95c5b61942078c7ca482",
+      "archived_sha256": "143f62d5e6483291cb43628a671e17018bd8b019714b95c5b61942078c7ca482"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/multiseed/seed_42/gene_mean_uni2h_gnn.yaml",
+      "original_sha256": "48c2cc299043e0764eb5843b6451cb434cf5d6ecf1da44052ab4d51a57513d5d",
+      "archived_sha256": "48c2cc299043e0764eb5843b6451cb434cf5d6ecf1da44052ab4d51a57513d5d"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/multiseed/seed_42/gene_mean_uni2h_residual.yaml",
+      "original_sha256": "a5896dd1fbad29cec7aefff542a9ca61416ab4bf7db95a281257bb2f2b5099c6",
+      "archived_sha256": "a5896dd1fbad29cec7aefff542a9ca61416ab4bf7db95a281257bb2f2b5099c6"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/multiseed/seed_42/uni2h.yaml",
+      "original_sha256": "66a614c057293ce1260a7c00aa0449df4eebce850a72fba9d8d90a9e3d2d8334",
+      "archived_sha256": "66a614c057293ce1260a7c00aa0449df4eebce850a72fba9d8d90a9e3d2d8334"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/multiseed/seed_42/uni2h_gnn.yaml",
+      "original_sha256": "169b31cdb846637b8cebc80981616194ffa1b6827083d58697ba238e984c0ccf",
+      "archived_sha256": "169b31cdb846637b8cebc80981616194ffa1b6827083d58697ba238e984c0ccf"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/multiseed/seed_456/decima_concat_gnn.yaml",
+      "original_sha256": "1047e292bd4d5423f886ae4af45f62121b043c9e52ac9c8b6b3956697b53f3f8",
+      "archived_sha256": "1047e292bd4d5423f886ae4af45f62121b043c9e52ac9c8b6b3956697b53f3f8"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/multiseed/seed_456/decima_crossattn_gnn.yaml",
+      "original_sha256": "88485a8b32abee21326300f2a5f8b6e70636de3094793a7bface0dba4ec2584b",
+      "archived_sha256": "88485a8b32abee21326300f2a5f8b6e70636de3094793a7bface0dba4ec2584b"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/multiseed/seed_456/decima_film_gnn.yaml",
+      "original_sha256": "fcc45a42dbc32321478d9752654ba18f18df97b708a091e907cd4643732358f4",
+      "archived_sha256": "fcc45a42dbc32321478d9752654ba18f18df97b708a091e907cd4643732358f4"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/multiseed/seed_456/decima_film_no_graph.yaml",
+      "original_sha256": "011cf33ba1366d468415d8b17a8f1962dce9e6ce4c123e31e410726cae96789f",
+      "archived_sha256": "011cf33ba1366d468415d8b17a8f1962dce9e6ce4c123e31e410726cae96789f"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/multiseed/seed_456/decima_prior_only.yaml",
+      "original_sha256": "61d969f49b979c888849898eaf58f84792aa4f666774c9edadd68db9051462e8",
+      "archived_sha256": "61d969f49b979c888849898eaf58f84792aa4f666774c9edadd68db9051462e8"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/multiseed/seed_456/gene_mean_uni2h_gnn.yaml",
+      "original_sha256": "b982e9aa1e4ead29f11665f2dc584da9ae935172fbfffcb29a5b90dad7fb7588",
+      "archived_sha256": "b982e9aa1e4ead29f11665f2dc584da9ae935172fbfffcb29a5b90dad7fb7588"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/multiseed/seed_456/gene_mean_uni2h_residual.yaml",
+      "original_sha256": "7463ad19aa95e034aee931c0341009bbdaafec1200f9ec674ea6dabfc99c263f",
+      "archived_sha256": "7463ad19aa95e034aee931c0341009bbdaafec1200f9ec674ea6dabfc99c263f"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/multiseed/seed_456/uni2h.yaml",
+      "original_sha256": "16e47969928d3aff412fcd13573d4399439dd14b4ff743638e294a84146380b5",
+      "archived_sha256": "16e47969928d3aff412fcd13573d4399439dd14b4ff743638e294a84146380b5"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/multiseed/seed_456/uni2h_gnn.yaml",
+      "original_sha256": "d3693cc252136742cefa9a1c7f131b45e3f6d0c3c24fcebaff40727003449cb5",
+      "archived_sha256": "d3693cc252136742cefa9a1c7f131b45e3f6d0c3c24fcebaff40727003449cb5"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/multiseed_manifest.json",
+      "original_sha256": "9251ea86d5b3ba3981432a4bb0db1add9042caae0f1bb07a46e9dc2acad747b8",
+      "archived_sha256": "9251ea86d5b3ba3981432a4bb0db1add9042caae0f1bb07a46e9dc2acad747b8"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/uni2h.yaml",
+      "original_sha256": "b04962662e6282b7240b08bf885382b528fa71b0820ff927c7690a31c9db75ed",
+      "archived_sha256": "b04962662e6282b7240b08bf885382b528fa71b0820ff927c7690a31c9db75ed"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/uni2h_gnn.yaml",
+      "original_sha256": "21b56a7ea74810a7250a6eab1e9b4a89389ed2668336a2345766cf5711926019",
+      "archived_sha256": "21b56a7ea74810a7250a6eab1e9b4a89389ed2668336a2345766cf5711926019"
+    },
+    {
+      "path": "experiments/hippocampus_current_full_ablation/configs/variant_manifest.json",
+      "original_sha256": "06d536410ef3102a3ffd4ed019df3486ec0d39ad187dfd6c4845d95071f2ee10",
+      "archived_sha256": "98c7d3f429438ede9d4b137a410e1aa8b71cbcb795da013f5ca8010798d90d38"
+    },
+    {
+      "path": "experiments/dlpfc_current_full_ablation/configs/decima_concat_gnn.yaml",
+      "original_sha256": "b7ade9a96643a3441f3cf5fe8002994df567c3f4cc1e864a1083d16705a8b437",
+      "archived_sha256": "b7ade9a96643a3441f3cf5fe8002994df567c3f4cc1e864a1083d16705a8b437"
+    },
+    {
+      "path": "experiments/dlpfc_current_full_ablation/configs/decima_crossattn_gnn.yaml",
+      "original_sha256": "40702a1545e99bc8a8cf555be604121515760a28105a48b5aa6087926b265092",
+      "archived_sha256": "40702a1545e99bc8a8cf555be604121515760a28105a48b5aa6087926b265092"
+    },
+    {
+      "path": "experiments/dlpfc_current_full_ablation/configs/decima_film_gnn.yaml",
+      "original_sha256": "c342847ff32bd90fdf49076f4679a075d1702220f65acc7004b4722dd4b82899",
+      "archived_sha256": "c342847ff32bd90fdf49076f4679a075d1702220f65acc7004b4722dd4b82899"
+    },
+    {
+      "path": "experiments/dlpfc_current_full_ablation/configs/decima_film_no_graph.yaml",
+      "original_sha256": "5200617e429e189b8d70b82ae9f52f9b83541302a2dfe08e0fa35d4018680624",
+      "archived_sha256": "5200617e429e189b8d70b82ae9f52f9b83541302a2dfe08e0fa35d4018680624"
+    },
+    {
+      "path": "experiments/dlpfc_current_full_ablation/configs/decima_prior_only.yaml",
+      "original_sha256": "10d093ccbeb0299d9030a20b73a047c43bd524b2f584982b9da523ddf713eacd",
+      "archived_sha256": "10d093ccbeb0299d9030a20b73a047c43bd524b2f584982b9da523ddf713eacd"
+    },
+    {
+      "path": "experiments/dlpfc_current_full_ablation/configs/gene_mean_uni2h_gnn.yaml",
+      "original_sha256": "8e8413fcf04da0462b5ce8994cc6fda2ea0e8264f495d8529c982350d7deb0dc",
+      "archived_sha256": "8e8413fcf04da0462b5ce8994cc6fda2ea0e8264f495d8529c982350d7deb0dc"
+    },
+    {
+      "path": "experiments/dlpfc_current_full_ablation/configs/gene_mean_uni2h_residual.yaml",
+      "original_sha256": "28afe32c482b5a8b7fd2dd765ae7b25bb42ad3d9dc7250907383c5294ca20d17",
+      "archived_sha256": "28afe32c482b5a8b7fd2dd765ae7b25bb42ad3d9dc7250907383c5294ca20d17"
+    },
+    {
+      "path": "experiments/dlpfc_current_full_ablation/configs/multiseed/seed_123/decima_concat_gnn.yaml",
+      "original_sha256": "61a9cfdd8dd9f44f08c00612773d892d63a46608d63cf6f0ecf267c5b50ee9ac",
+      "archived_sha256": "61a9cfdd8dd9f44f08c00612773d892d63a46608d63cf6f0ecf267c5b50ee9ac"
+    },
+    {
+      "path": "experiments/dlpfc_current_full_ablation/configs/multiseed/seed_123/decima_crossattn_gnn.yaml",
+      "original_sha256": "dafd62b12ce27ebcd3549440981e159206ece5a31d28682f135f2d79b6ea9ee5",
+      "archived_sha256": "dafd62b12ce27ebcd3549440981e159206ece5a31d28682f135f2d79b6ea9ee5"
+    },
+    {
+      "path": "experiments/dlpfc_current_full_ablation/configs/multiseed/seed_123/decima_film_gnn.yaml",
+      "original_sha256": "319700fc400674ee4c19e0830f8221cb838ad6f0ede3dedd49c422ade115adbb",
+      "archived_sha256": "319700fc400674ee4c19e0830f8221cb838ad6f0ede3dedd49c422ade115adbb"
+    },
+    {
+      "path": "experiments/dlpfc_current_full_ablation/configs/multiseed/seed_123/decima_film_no_graph.yaml",
+      "original_sha256": "d58532ba697b862f3886d75b58736ed64d633efdfdf67b1479afece0a9a294f4",
+      "archived_sha256": "d58532ba697b862f3886d75b58736ed64d633efdfdf67b1479afece0a9a294f4"
+    },
+    {
+      "path": "experiments/dlpfc_current_full_ablation/configs/multiseed/seed_123/decima_prior_only.yaml",
+      "original_sha256": "792b89520002da9544f40e133cb13810937c8f99600c029eeab00e8cf741acf2",
+      "archived_sha256": "792b89520002da9544f40e133cb13810937c8f99600c029eeab00e8cf741acf2"
+    },
+    {
+      "path": "experiments/dlpfc_current_full_ablation/configs/multiseed/seed_123/gene_mean_uni2h_gnn.yaml",
+      "original_sha256": "2b992c50fdbb9de2ccd5a7adfaa314d500e6db407c23a7de6c9743552ab86ae2",
+      "archived_sha256": "2b992c50fdbb9de2ccd5a7adfaa314d500e6db407c23a7de6c9743552ab86ae2"
+    },
+    {
+      "path": "experiments/dlpfc_current_full_ablation/configs/multiseed/seed_123/gene_mean_uni2h_residual.yaml",
+      "original_sha256": "7d288dad7fc55c14ab3ec9fca0318cc70148c22df376b1faed3afe8782c7aca1",
+      "archived_sha256": "7d288dad7fc55c14ab3ec9fca0318cc70148c22df376b1faed3afe8782c7aca1"
+    },
+    {
+      "path": "experiments/dlpfc_current_full_ablation/configs/multiseed/seed_123/uni2h.yaml",
+      "original_sha256": "ffb2c00e1c2e03d4caa265a22336016bfa1c1d7741f3562ed2a8519be64d2d7c",
+      "archived_sha256": "ffb2c00e1c2e03d4caa265a22336016bfa1c1d7741f3562ed2a8519be64d2d7c"
+    },
+    {
+      "path": "experiments/dlpfc_current_full_ablation/configs/multiseed/seed_123/uni2h_gnn.yaml",
+      "original_sha256": "e1ad4d161d981463018ed562b85a68e77244b7bb306483155fddb69f44b679d8",
+      "archived_sha256": "e1ad4d161d981463018ed562b85a68e77244b7bb306483155fddb69f44b679d8"
+    },
+    {
+      "path": "experiments/dlpfc_current_full_ablation/configs/multiseed/seed_456/decima_concat_gnn.yaml",
+      "original_sha256": "acaaa66c335074247c34b5193df52b8b5a02db9c689587ca7a1b2e02964665bf",
+      "archived_sha256": "acaaa66c335074247c34b5193df52b8b5a02db9c689587ca7a1b2e02964665bf"
+    },
+    {
+      "path": "experiments/dlpfc_current_full_ablation/configs/multiseed/seed_456/decima_crossattn_gnn.yaml",
+      "original_sha256": "936b6c469c3ccf75978da60e2d588c0deaf7883c4d9451d7abbe84f4fcc05cf4",
+      "archived_sha256": "936b6c469c3ccf75978da60e2d588c0deaf7883c4d9451d7abbe84f4fcc05cf4"
+    },
+    {
+      "path": "experiments/dlpfc_current_full_ablation/configs/multiseed/seed_456/decima_film_gnn.yaml",
+      "original_sha256": "721a610c9f3d11a6a5db5eefd03b2a06c9fe9d1de3dbcc108fab9ad440a2be20",
+      "archived_sha256": "721a610c9f3d11a6a5db5eefd03b2a06c9fe9d1de3dbcc108fab9ad440a2be20"
+    },
+    {
+      "path": "experiments/dlpfc_current_full_ablation/configs/multiseed/seed_456/decima_film_no_graph.yaml",
+      "original_sha256": "6bae7ec528c573c7cfca3e6e1600433b0101ae750342eee574bd048b75a448c4",
+      "archived_sha256": "6bae7ec528c573c7cfca3e6e1600433b0101ae750342eee574bd048b75a448c4"
+    },
+    {
+      "path": "experiments/dlpfc_current_full_ablation/configs/multiseed/seed_456/decima_prior_only.yaml",
+      "original_sha256": "cfc7772899c52fa274101feff8e85daf9fafc6c32763238db17195b02032ba66",
+      "archived_sha256": "cfc7772899c52fa274101feff8e85daf9fafc6c32763238db17195b02032ba66"
+    },
+    {
+      "path": "experiments/dlpfc_current_full_ablation/configs/multiseed/seed_456/gene_mean_uni2h_gnn.yaml",
+      "original_sha256": "4fd2fca4eff4020368824b915d972152828969f24c72ddf1fc4c61d5442bcebb",
+      "archived_sha256": "4fd2fca4eff4020368824b915d972152828969f24c72ddf1fc4c61d5442bcebb"
+    },
+    {
+      "path": "experiments/dlpfc_current_full_ablation/configs/multiseed/seed_456/gene_mean_uni2h_residual.yaml",
+      "original_sha256": "443eeeae28a1d1613505a89a2b17821e5e5d8f43876c8330bae26b8e6615beed",
+      "archived_sha256": "443eeeae28a1d1613505a89a2b17821e5e5d8f43876c8330bae26b8e6615beed"
+    },
+    {
+      "path": "experiments/dlpfc_current_full_ablation/configs/multiseed/seed_456/uni2h.yaml",
+      "original_sha256": "3cd1ac30c6887e3c16734be8ad7030d0bfe3b8d61ca5d026c009bd5a2b41aff9",
+      "archived_sha256": "3cd1ac30c6887e3c16734be8ad7030d0bfe3b8d61ca5d026c009bd5a2b41aff9"
+    },
+    {
+      "path": "experiments/dlpfc_current_full_ablation/configs/multiseed/seed_456/uni2h_gnn.yaml",
+      "original_sha256": "e266f50bb512cd2cbca12bb8efbc0185e67e5e7e591db911d7dcecde12dbe9e0",
+      "archived_sha256": "e266f50bb512cd2cbca12bb8efbc0185e67e5e7e591db911d7dcecde12dbe9e0"
+    },
+    {
+      "path": "experiments/dlpfc_current_full_ablation/configs/multiseed_manifest.json",
+      "original_sha256": "638b4f904520012c5451017ca4b4a62d91383c07a777a8948f376b6b3c2f360c",
+      "archived_sha256": "638b4f904520012c5451017ca4b4a62d91383c07a777a8948f376b6b3c2f360c"
+    },
+    {
+      "path": "experiments/dlpfc_current_full_ablation/configs/uni2h.yaml",
+      "original_sha256": "5e41db543c75657439530c14a840e05f71ec25e47673d3e0fe9b30179b5d6117",
+      "archived_sha256": "5e41db543c75657439530c14a840e05f71ec25e47673d3e0fe9b30179b5d6117"
+    },
+    {
+      "path": "experiments/dlpfc_current_full_ablation/configs/uni2h_gnn.yaml",
+      "original_sha256": "cd207c1b8c1a54ebcaee26319e73c78b97a8398f6419b52ba0e5cf5ff1aa9a6c",
+      "archived_sha256": "cd207c1b8c1a54ebcaee26319e73c78b97a8398f6419b52ba0e5cf5ff1aa9a6c"
+    },
+    {
+      "path": "experiments/dlpfc_current_full_ablation/configs/variant_manifest.json",
+      "original_sha256": "e57ead8b29465ef61a446af5d6faa0c49716ce30b415ffb79574418ad3f04d79",
+      "archived_sha256": "e4e6dc7e2bc1c5b10ed7eaa17fe33e5cdcd514ad3eedc265002540a5e9377310"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/decima_concat_gnn.yaml",
+      "original_sha256": "86b0fc78edebb3a4ba672958be3ea92e514baf436755fc5ebee3424c2f5510ce",
+      "archived_sha256": "86b0fc78edebb3a4ba672958be3ea92e514baf436755fc5ebee3424c2f5510ce"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/decima_crossattn_gnn.yaml",
+      "original_sha256": "6cde71b070d2006d5af4359c3a132dd50305bb841a96cc492e55b70568090d5b",
+      "archived_sha256": "6cde71b070d2006d5af4359c3a132dd50305bb841a96cc492e55b70568090d5b"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/decima_film_gnn.yaml",
+      "original_sha256": "a8f147c3df4bae62dbc6ea788de88ba8b2fe7256319d2f2524a6acd8b37613f4",
+      "archived_sha256": "a8f147c3df4bae62dbc6ea788de88ba8b2fe7256319d2f2524a6acd8b37613f4"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/decima_film_no_graph.yaml",
+      "original_sha256": "ce150b1265327cd377af773bf5294aef42ecbe47027e11c88041b680d0fa74cb",
+      "archived_sha256": "ce150b1265327cd377af773bf5294aef42ecbe47027e11c88041b680d0fa74cb"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/decima_prior_only.yaml",
+      "original_sha256": "29b3fb1739837aca84f2f02835b7c49622ba0e396d1c7b39d53ed34a1049775a",
+      "archived_sha256": "29b3fb1739837aca84f2f02835b7c49622ba0e396d1c7b39d53ed34a1049775a"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/gene_mean_uni2h_gnn.yaml",
+      "original_sha256": "56faceef4f4893030debc8a423c56b332b7a8178f423589a24ff70b73b406d7a",
+      "archived_sha256": "56faceef4f4893030debc8a423c56b332b7a8178f423589a24ff70b73b406d7a"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/gene_mean_uni2h_residual.yaml",
+      "original_sha256": "369da733e8835e1cc9080578eae32fa2773c3b9f78b198d322062c2b80ec674d",
+      "archived_sha256": "369da733e8835e1cc9080578eae32fa2773c3b9f78b198d322062c2b80ec674d"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/multiseed/seed_123/decima_concat_gnn.yaml",
+      "original_sha256": "d09b052fc2de2b317fb73593093a151bfc8f2065d319ab54ca0187814cea5391",
+      "archived_sha256": "d09b052fc2de2b317fb73593093a151bfc8f2065d319ab54ca0187814cea5391"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/multiseed/seed_123/decima_crossattn_gnn.yaml",
+      "original_sha256": "54920b3126aa4e2d9248b3b248b77f326666d443057fe11b96a49932f0d4a802",
+      "archived_sha256": "54920b3126aa4e2d9248b3b248b77f326666d443057fe11b96a49932f0d4a802"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/multiseed/seed_123/decima_film_gnn.yaml",
+      "original_sha256": "13d0ea52df576ab8620312e0f6b39d7895f46be67a17c425cf259278ccba020d",
+      "archived_sha256": "13d0ea52df576ab8620312e0f6b39d7895f46be67a17c425cf259278ccba020d"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/multiseed/seed_123/decima_film_no_graph.yaml",
+      "original_sha256": "fc06594b15155dc7828650024ea35e8792ed54296e2a086976da6ac5fc846fdf",
+      "archived_sha256": "fc06594b15155dc7828650024ea35e8792ed54296e2a086976da6ac5fc846fdf"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/multiseed/seed_123/decima_prior_only.yaml",
+      "original_sha256": "94e718aa7880b0800d793043dcbbbe8b842ecc63f841360d2b4d41a308aea27c",
+      "archived_sha256": "94e718aa7880b0800d793043dcbbbe8b842ecc63f841360d2b4d41a308aea27c"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/multiseed/seed_123/gene_mean_uni2h_gnn.yaml",
+      "original_sha256": "86a82c08d3f598625b13e9220e6310c3b86c2846a60c9e0ed1ad07b6a90ed74b",
+      "archived_sha256": "86a82c08d3f598625b13e9220e6310c3b86c2846a60c9e0ed1ad07b6a90ed74b"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/multiseed/seed_123/gene_mean_uni2h_residual.yaml",
+      "original_sha256": "dae00ae5d4626cefa34b020a7a379f99f557223f2502450034a64111c8e3fcc0",
+      "archived_sha256": "dae00ae5d4626cefa34b020a7a379f99f557223f2502450034a64111c8e3fcc0"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/multiseed/seed_123/uni2h.yaml",
+      "original_sha256": "5205e92c53565c8e5a6e6fe999da5de2cdcc1bbf8d425337561fa24dbcb4f455",
+      "archived_sha256": "5205e92c53565c8e5a6e6fe999da5de2cdcc1bbf8d425337561fa24dbcb4f455"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/multiseed/seed_123/uni2h_gnn.yaml",
+      "original_sha256": "cea0a07cb008626adda328caaeb5db8b10d5e58d11991f13ca0daaa7d1f38a5b",
+      "archived_sha256": "cea0a07cb008626adda328caaeb5db8b10d5e58d11991f13ca0daaa7d1f38a5b"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/multiseed/seed_42/decima_concat_gnn.yaml",
+      "original_sha256": "430475cd1ab93d4da9e980a84308ebd6145d21e92651a7d2624b88b922192f28",
+      "archived_sha256": "430475cd1ab93d4da9e980a84308ebd6145d21e92651a7d2624b88b922192f28"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/multiseed/seed_42/decima_crossattn_gnn.yaml",
+      "original_sha256": "07ed72fae34ae1725d5a8ecf99e94ddb872d2ccb5bc48a43d357a03941c1e726",
+      "archived_sha256": "07ed72fae34ae1725d5a8ecf99e94ddb872d2ccb5bc48a43d357a03941c1e726"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/multiseed/seed_42/decima_film_gnn.yaml",
+      "original_sha256": "62cc3f5a3284db1b61465e2ba2faaff7488e48c52347743e7c58d733b4e2eba1",
+      "archived_sha256": "62cc3f5a3284db1b61465e2ba2faaff7488e48c52347743e7c58d733b4e2eba1"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/multiseed/seed_42/decima_film_no_graph.yaml",
+      "original_sha256": "e2885d4355e9f95ce5e42b57ad24965ef8ceb03a2a5efb211cc5df15974c6011",
+      "archived_sha256": "e2885d4355e9f95ce5e42b57ad24965ef8ceb03a2a5efb211cc5df15974c6011"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/multiseed/seed_42/decima_prior_only.yaml",
+      "original_sha256": "0ff8f691083bab436c89461c9864ff3af2c72d4848bdb2351922026bb32911eb",
+      "archived_sha256": "0ff8f691083bab436c89461c9864ff3af2c72d4848bdb2351922026bb32911eb"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/multiseed/seed_42/gene_mean_uni2h_gnn.yaml",
+      "original_sha256": "76c17b7b6c600202ecfd2b5f16072243d25fce730df2b3cbbfda2233f1b42e59",
+      "archived_sha256": "76c17b7b6c600202ecfd2b5f16072243d25fce730df2b3cbbfda2233f1b42e59"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/multiseed/seed_42/gene_mean_uni2h_residual.yaml",
+      "original_sha256": "fad12a0924e5eb76a1b57316eacae7e9126ac370378893a79020175a3d9429b8",
+      "archived_sha256": "fad12a0924e5eb76a1b57316eacae7e9126ac370378893a79020175a3d9429b8"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/multiseed/seed_42/uni2h.yaml",
+      "original_sha256": "b51daf1fd9c3a47ad28e3c92c74b17fc76584bd3f9e9e674149a19cea5f7d5ed",
+      "archived_sha256": "b51daf1fd9c3a47ad28e3c92c74b17fc76584bd3f9e9e674149a19cea5f7d5ed"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/multiseed/seed_42/uni2h_gnn.yaml",
+      "original_sha256": "9d44b70cbdf1ef0db5e14bfb99ca14e10f886abdec95900afa5a886aec520110",
+      "archived_sha256": "9d44b70cbdf1ef0db5e14bfb99ca14e10f886abdec95900afa5a886aec520110"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/multiseed/seed_456/decima_concat_gnn.yaml",
+      "original_sha256": "73a61998293cf721838117ff55a4290ca04cfbf3bf383d52430476569790bc4f",
+      "archived_sha256": "73a61998293cf721838117ff55a4290ca04cfbf3bf383d52430476569790bc4f"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/multiseed/seed_456/decima_crossattn_gnn.yaml",
+      "original_sha256": "36b7384c802b71df04821442f361dfecf9ccf6c0a026ea46a97aba097e008e9f",
+      "archived_sha256": "36b7384c802b71df04821442f361dfecf9ccf6c0a026ea46a97aba097e008e9f"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/multiseed/seed_456/decima_film_gnn.yaml",
+      "original_sha256": "be50b2ddcac1f3b46149f60b4ffae0e9419222972412a1fe168fb0d2ab1470fe",
+      "archived_sha256": "be50b2ddcac1f3b46149f60b4ffae0e9419222972412a1fe168fb0d2ab1470fe"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/multiseed/seed_456/decima_film_no_graph.yaml",
+      "original_sha256": "b23a38f588b9750dc211fcbee17ce825a166402fd246a9cf036d67e5d04079c9",
+      "archived_sha256": "b23a38f588b9750dc211fcbee17ce825a166402fd246a9cf036d67e5d04079c9"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/multiseed/seed_456/decima_prior_only.yaml",
+      "original_sha256": "88e0188dae2e2fc333250712949908c100bc70d8ac83e9057bf1ca8d1063a023",
+      "archived_sha256": "88e0188dae2e2fc333250712949908c100bc70d8ac83e9057bf1ca8d1063a023"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/multiseed/seed_456/gene_mean_uni2h_gnn.yaml",
+      "original_sha256": "f636c09435a1a8b57916aa518058c9a5b71e9faa90da2cb45610f8edd500b253",
+      "archived_sha256": "f636c09435a1a8b57916aa518058c9a5b71e9faa90da2cb45610f8edd500b253"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/multiseed/seed_456/gene_mean_uni2h_residual.yaml",
+      "original_sha256": "466ac45dc36adbf0574751b6a107454760efbe94f535c93c1fbbed3d8bcd2b1b",
+      "archived_sha256": "466ac45dc36adbf0574751b6a107454760efbe94f535c93c1fbbed3d8bcd2b1b"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/multiseed/seed_456/uni2h.yaml",
+      "original_sha256": "0a79a3aadb93d31fa249feb92c781c6e775c67584ad5a03a4ad298914fbb57b0",
+      "archived_sha256": "0a79a3aadb93d31fa249feb92c781c6e775c67584ad5a03a4ad298914fbb57b0"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/multiseed/seed_456/uni2h_gnn.yaml",
+      "original_sha256": "0530e4110bbeda8814ad301371baf48744e0d757e41640712f3912cdb23f6b35",
+      "archived_sha256": "0530e4110bbeda8814ad301371baf48744e0d757e41640712f3912cdb23f6b35"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/multiseed_manifest.json",
+      "original_sha256": "e6fc37ed33e6a71c213250f5b7f59907642760a7fdd09ba6e376fc212fd6600c",
+      "archived_sha256": "e6fc37ed33e6a71c213250f5b7f59907642760a7fdd09ba6e376fc212fd6600c"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/uni2h.yaml",
+      "original_sha256": "e0e46ed8ace8c60858a4d8c042e01a4d181531a78fb63080cda882e11358d3e6",
+      "archived_sha256": "e0e46ed8ace8c60858a4d8c042e01a4d181531a78fb63080cda882e11358d3e6"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/uni2h_gnn.yaml",
+      "original_sha256": "b58128d50930dd14642a559c8d030464bfee6eb82c3d122568ff57503ad46b8d",
+      "archived_sha256": "b58128d50930dd14642a559c8d030464bfee6eb82c3d122568ff57503ad46b8d"
+    },
+    {
+      "path": "experiments/nac_current_full_ablation/configs/variant_manifest.json",
+      "original_sha256": "7ac466354a996d085d9d8c23f06290ee9f090a01776c2504c3e61dc139781ad7",
+      "archived_sha256": "f8adc6e7133906b49b63b4fddefbc2e02c83be9300ad2961df1e063551c3c6cf"
+    },
+    {
+      "path": "experiments/her2st_current_full_ablation/configs/decima_concat_gnn.yaml",
+      "original_sha256": "80df95155cc586978330bb6277c4c1c766dfab1a5a986266bb08ed9935dc26ec",
+      "archived_sha256": "80df95155cc586978330bb6277c4c1c766dfab1a5a986266bb08ed9935dc26ec"
+    },
+    {
+      "path": "experiments/her2st_current_full_ablation/configs/decima_crossattn_gnn.yaml",
+      "original_sha256": "018eceb8f1468e3a0b7ecafe24f7cc3a3363f3d70edd177fd15b2d6bd6fc18a2",
+      "archived_sha256": "018eceb8f1468e3a0b7ecafe24f7cc3a3363f3d70edd177fd15b2d6bd6fc18a2"
+    },
+    {
+      "path": "experiments/her2st_current_full_ablation/configs/decima_film_gnn.yaml",
+      "original_sha256": "099679501e7fe2c2b504f94269fecece31b8aab79b0a03679e4a7bc1cf8a7488",
+      "archived_sha256": "099679501e7fe2c2b504f94269fecece31b8aab79b0a03679e4a7bc1cf8a7488"
+    },
+    {
+      "path": "experiments/her2st_current_full_ablation/configs/decima_film_no_graph.yaml",
+      "original_sha256": "7afea3872efb693e906f40999cb235ddbd3c838de1f0f249fae148dc6ab93847",
+      "archived_sha256": "7afea3872efb693e906f40999cb235ddbd3c838de1f0f249fae148dc6ab93847"
+    },
+    {
+      "path": "experiments/her2st_current_full_ablation/configs/decima_prior_only.yaml",
+      "original_sha256": "022b3a803ad69249647d6be77d6ffaff07db9332b9a318154b685ff64f4a7b1a",
+      "archived_sha256": "022b3a803ad69249647d6be77d6ffaff07db9332b9a318154b685ff64f4a7b1a"
+    },
+    {
+      "path": "experiments/her2st_current_full_ablation/configs/gene_mean_uni2h_gnn.yaml",
+      "original_sha256": "a3e2f8e8202e55e4036cc0dd2c6f4d64e96e863dea46ceeec2c0fbf08d5f336f",
+      "archived_sha256": "a3e2f8e8202e55e4036cc0dd2c6f4d64e96e863dea46ceeec2c0fbf08d5f336f"
+    },
+    {
+      "path": "experiments/her2st_current_full_ablation/configs/gene_mean_uni2h_residual.yaml",
+      "original_sha256": "84870d1f0af362fac9455c2de5e10acec6a564d3d1a7bf61150dfc548ae342ea",
+      "archived_sha256": "84870d1f0af362fac9455c2de5e10acec6a564d3d1a7bf61150dfc548ae342ea"
+    },
+    {
+      "path": "experiments/her2st_current_full_ablation/configs/multiseed/seed_123/decima_concat_gnn.yaml",
+      "original_sha256": "c545659d84206a274e11c986f4bb7e220a3552d311a1da91f1d6cfed266f01f4",
+      "archived_sha256": "c545659d84206a274e11c986f4bb7e220a3552d311a1da91f1d6cfed266f01f4"
+    },
+    {
+      "path": "experiments/her2st_current_full_ablation/configs/multiseed/seed_123/decima_crossattn_gnn.yaml",
+      "original_sha256": "ca6d0860d4b4ab41216d043d4fe769e1474573caf82fd43799c7da1817ce4cbd",
+      "archived_sha256": "ca6d0860d4b4ab41216d043d4fe769e1474573caf82fd43799c7da1817ce4cbd"
+    },
+    {
+      "path": "experiments/her2st_current_full_ablation/configs/multiseed/seed_123/decima_film_gnn.yaml",
+      "original_sha256": "36acb2287e0927dbe633d4f31c8da81775c1e281c08f3531992f6cf9345a7966",
+      "archived_sha256": "36acb2287e0927dbe633d4f31c8da81775c1e281c08f3531992f6cf9345a7966"
+    },
+    {
+      "path": "experiments/her2st_current_full_ablation/configs/multiseed/seed_123/decima_film_no_graph.yaml",
+      "original_sha256": "6cb267170fcdf8e7450e4a14b9d573890160cdb8f1311af4821ea231b5ee57e5",
+      "archived_sha256": "6cb267170fcdf8e7450e4a14b9d573890160cdb8f1311af4821ea231b5ee57e5"
+    },
+    {
+      "path": "experiments/her2st_current_full_ablation/configs/multiseed/seed_123/decima_prior_only.yaml",
+      "original_sha256": "0609467a187c2b26348d6c4762d9085aee56f65fc9514c7a999cbcc734fcba8f",
+      "archived_sha256": "0609467a187c2b26348d6c4762d9085aee56f65fc9514c7a999cbcc734fcba8f"
+    },
+    {
+      "path": "experiments/her2st_current_full_ablation/configs/multiseed/seed_123/gene_mean_uni2h_gnn.yaml",
+      "original_sha256": "9682924b9a8804149c36ad0ad6c65d78f1bf3c998cc172a4585e4e0974a70a1f",
+      "archived_sha256": "9682924b9a8804149c36ad0ad6c65d78f1bf3c998cc172a4585e4e0974a70a1f"
+    },
+    {
+      "path": "experiments/her2st_current_full_ablation/configs/multiseed/seed_123/gene_mean_uni2h_residual.yaml",
+      "original_sha256": "4848090d986ac662be8bb273cd5736dd564c1148d5469a1b5bec0fde02b2498b",
+      "archived_sha256": "4848090d986ac662be8bb273cd5736dd564c1148d5469a1b5bec0fde02b2498b"
+    },
+    {
+      "path": "experiments/her2st_current_full_ablation/configs/multiseed/seed_123/uni2h.yaml",
+      "original_sha256": "793d84f8fd321e1274898a70a59130598bb89a366b4a9a3b03e61c441bbbc388",
+      "archived_sha256": "793d84f8fd321e1274898a70a59130598bb89a366b4a9a3b03e61c441bbbc388"
+    },
+    {
+      "path": "experiments/her2st_current_full_ablation/configs/multiseed/seed_123/uni2h_gnn.yaml",
+      "original_sha256": "fafb6791f728a1e56a5c2aa826c23334c1a044a4854a318c2bf9f87b8d5b27b3",
+      "archived_sha256": "fafb6791f728a1e56a5c2aa826c23334c1a044a4854a318c2bf9f87b8d5b27b3"
+    },
+    {
+      "path": "experiments/her2st_current_full_ablation/configs/multiseed/seed_456/decima_concat_gnn.yaml",
+      "original_sha256": "4fd63aec32b96d841f55b929c5bc82ee347272e49a9d971d223eebce3a02f05f",
+      "archived_sha256": "4fd63aec32b96d841f55b929c5bc82ee347272e49a9d971d223eebce3a02f05f"
+    },
+    {
+      "path": "experiments/her2st_current_full_ablation/configs/multiseed/seed_456/decima_crossattn_gnn.yaml",
+      "original_sha256": "bdb14b69307332de5455984a9d481b5e8591a11a5b4f66753abb568c87103dbd",
+      "archived_sha256": "bdb14b69307332de5455984a9d481b5e8591a11a5b4f66753abb568c87103dbd"
+    },
+    {
+      "path": "experiments/her2st_current_full_ablation/configs/multiseed/seed_456/decima_film_gnn.yaml",
+      "original_sha256": "6a731d33e686299e005eaa918c9164205c01b24d353a53ae2d5fa7fd19e681b5",
+      "archived_sha256": "6a731d33e686299e005eaa918c9164205c01b24d353a53ae2d5fa7fd19e681b5"
+    },
+    {
+      "path": "experiments/her2st_current_full_ablation/configs/multiseed/seed_456/decima_film_no_graph.yaml",
+      "original_sha256": "d7f4879991b1e62feae632d8c072310720810affce1d9f3b6fc9fd69a1c3f8ba",
+      "archived_sha256": "d7f4879991b1e62feae632d8c072310720810affce1d9f3b6fc9fd69a1c3f8ba"
+    },
+    {
+      "path": "experiments/her2st_current_full_ablation/configs/multiseed/seed_456/decima_prior_only.yaml",
+      "original_sha256": "8a0ec583758b625c7dc705fd173e2e29ae32eeb069cc48547c247f4832381e5c",
+      "archived_sha256": "8a0ec583758b625c7dc705fd173e2e29ae32eeb069cc48547c247f4832381e5c"
+    },
+    {
+      "path": "experiments/her2st_current_full_ablation/configs/multiseed/seed_456/gene_mean_uni2h_gnn.yaml",
+      "original_sha256": "8817ab6edd8025b0984fbbd98bd22dfa0b11dd79519da5d68742da76df873d29",
+      "archived_sha256": "8817ab6edd8025b0984fbbd98bd22dfa0b11dd79519da5d68742da76df873d29"
+    },
+    {
+      "path": "experiments/her2st_current_full_ablation/configs/multiseed/seed_456/gene_mean_uni2h_residual.yaml",
+      "original_sha256": "2475e1a97a503f4c4c86cf4d50a9251f360f5d523b597b8c169abfd8a7b222a0",
+      "archived_sha256": "2475e1a97a503f4c4c86cf4d50a9251f360f5d523b597b8c169abfd8a7b222a0"
+    },
+    {
+      "path": "experiments/her2st_current_full_ablation/configs/multiseed/seed_456/uni2h.yaml",
+      "original_sha256": "6f6415ec560d38bc26d9633aab31cd5296d7761a3597a3913bb1072d35c9d63c",
+      "archived_sha256": "6f6415ec560d38bc26d9633aab31cd5296d7761a3597a3913bb1072d35c9d63c"
+    },
+    {
+      "path": "experiments/her2st_current_full_ablation/configs/multiseed/seed_456/uni2h_gnn.yaml",
+      "original_sha256": "64831bed3485314cdcfbe5c5f534a377467ac4b1060002cd934e1f04d4fefa5d",
+      "archived_sha256": "64831bed3485314cdcfbe5c5f534a377467ac4b1060002cd934e1f04d4fefa5d"
+    },
+    {
+      "path": "experiments/her2st_current_full_ablation/configs/multiseed_manifest.json",
+      "original_sha256": "0abdc6cae0f0fe0141ae79ba10584aa022c5e9c917f9fba60a911aeabde3026a",
+      "archived_sha256": "0abdc6cae0f0fe0141ae79ba10584aa022c5e9c917f9fba60a911aeabde3026a"
+    },
+    {
+      "path": "experiments/her2st_current_full_ablation/configs/uni2h.yaml",
+      "original_sha256": "6647f5044652fa277f1940bf2fb2732664895731c82ec14ef65438ab2c8fae02",
+      "archived_sha256": "6647f5044652fa277f1940bf2fb2732664895731c82ec14ef65438ab2c8fae02"
+    },
+    {
+      "path": "experiments/her2st_current_full_ablation/configs/uni2h_gnn.yaml",
+      "original_sha256": "860d9bc764b57a75bf32659440945efa600dfef87055cdfaf67fb00f95b769e4",
+      "archived_sha256": "860d9bc764b57a75bf32659440945efa600dfef87055cdfaf67fb00f95b769e4"
+    },
+    {
+      "path": "experiments/her2st_current_full_ablation/configs/variant_manifest.json",
+      "original_sha256": "07f853d597a864bbaead2d5fa237cfc23cdcd2a4ba255e96bf621abf058d18a0",
+      "archived_sha256": "b03d5bdeda3d858db2d0d4a54bab90fb95c3ca220adcd7ad05195c2a35220fe2"
+    }
+  ]
+}

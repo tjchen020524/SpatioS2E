@@ -23,6 +23,13 @@ analyses are not part of this manuscript release.
 
 ## Dependencies and upstream artifacts
 
+All 24 actual run configurations are frozen in
+`configs/manuscript/genequery_runs.json`. Use
+`python scripts/run_genequery_record.py --help` to render an exact command;
+training starts only with `--execute`. Both settings used evaluation batch
+size 8. The frozen-feature script's generic default of 16 is not the value
+used for these manuscript runs.
+
 For GeneQuery image extraction and end-to-end training:
 
 ```bash

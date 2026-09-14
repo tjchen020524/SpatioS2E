@@ -1,0 +1,104 @@
+run_name: nac_gse307586_decima_film_no_graph
+paths:
+  expression_root: experiments/nac_current_full_ablation/data/expression
+  multimodal_root: experiments/nac_current_full_ablation/data/multimodal
+  graph_root: experiments/nac_current_full_ablation/data/graphs
+  modality_stats: experiments/nac_current_full_ablation/data/multimodal/modality_stats.json
+  gene_split_dir: experiments/nac_current_full_ablation/data/gene_splits
+  decima_ckpt: decima_weights/rep0.ckpt
+  decima_h5: null
+  decima_npz_dir: data/decima_input/gene_inputs_npz
+  residual_scale_npz: experiments/nac_current_full_ablation/artifacts/train_decima_prior.npz
+  checkpoint_dir: experiments/nac_current_full_ablation/variants/decima_film_no_graph/checkpoints
+  checkpoint_name: best.pt
+split:
+  train:
+  - GSM9227428_Nac_2720_33V
+  - GSM9227429_Nac_2720_34V
+  - GSM9227430_Nac_2720_35V
+  - GSM9227431_Nac_2720_36V
+  - GSM9227436_41v_NAc
+  - GSM9227437_42v_NAc
+  - GSM9227438_43v_NAc
+  - GSM9227439_44v_NAc
+  - GSM9227442_47v_Nac
+  - GSM9227444_49v_Nac
+  - GSM9227445_50v_Nac
+  - GSM9227446_51v_Nac
+  - GSM9227447_52v_Nac
+  - GSM9227448_53v_NAc
+  - GSM9227449_54v_NAc
+  - GSM9227450_55v_NAc
+  - GSM9227451_56v_NAc
+  - GSM9227452_57v_NAc
+  - GSM9227453_58v_NAc
+  - GSM9227454_59v_NAc
+  - GSM9227455_60v_NAc
+  - GSM9227460_73v_NAc
+  - GSM9227461_74v_NAc
+  - GSM9227462_75v_NAc
+  - GSM9227463_76v_NAc
+  val:
+  - GSM9227440_45v_Nac
+  - GSM9227441_46v_Nac
+  - GSM9227443_48v_Nac
+  - GSM9227464_78v_NAc
+  - GSM9227465_79v_NAc
+  test:
+  - GSM9227432_37v_NAc
+  - GSM9227433_38v_NAc
+  - GSM9227434_39v_NAc
+  - GSM9227435_40v_NAc
+  - GSM9227456_61v_NAc
+  - GSM9227457_62v_NAc
+  - GSM9227458_63v_NAc
+  - GSM9227459_64v_NAc
+targets_dense: true
+normalize_modalities: true
+model:
+  variant: v11b
+  no_graph: true
+  gnn_hidden: 256
+  gnn_layers: 3
+  gnn_dropout: 0.1
+  gnn_post_mlp_layers: 1
+  gnn_residual: true
+  film_hidden: 256
+  spot_head_hidden: 128
+  freeze_decima_backbone: true
+  freeze_pseudobulk_head: false
+  delta_head_init_std: 0.0
+  residual_scale_floor: 0.001
+  residual_scale_hidden: 128
+  residual_scale_logscale_clip: 0.75
+loss:
+  point_loss: huber
+  huber_beta: 1.0
+  lambda_point: 1.0
+  lambda_gene: 0.6
+  lambda_spot: 0.05
+  lambda_delta_point: 0.0
+  lambda_delta_gene: 0.0
+  delta_target_mode: baseline_relative
+  lambda_lap: 0.0006
+  lambda_calib_identity: 0.0005
+  min_true_std: 1.0e-06
+optim:
+  lr: 0.00025
+  weight_decay: 0.0001
+  max_epochs: 12
+  min_epochs: 8
+  max_genes_per_batch: 96
+  val_max_genes_per_batch: 128
+  train_gene_chunks_per_sample: 8
+  require_full_gene_coverage_per_epoch: true
+  log_every: 1
+  early_stop_patience: 4
+  selection_metric: gene_flat_combo
+  selection_flat_weight: 0.25
+eval:
+  max_genes_per_batch: 128
+  true_std_threshold: 1.0e-06
+  pred_std_threshold: 1.0e-06
+  hvg_ranking_file: experiments/nac_current_full_ablation/artifacts/train_gene_stats.tsv
+seed: 42

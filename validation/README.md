@@ -1,13 +1,29 @@
 # Clean-room validation records
 
-## Current submission candidate
+## Review follow-up
 
-`submission_v1.1.0.json` records the v1.1.0 source snapshot, dependency checks,
+`review_followup_20260913.json` records the reviewed source commit and source
+hash, source tests, the archived primary driver trained for six epochs on a
+small synthetic panel, source-distribution contents, and a newly built wheel
+installed into a fresh target directory. The wheel is imported and used for
+synthetic fitting/evaluation outside the repository with isolated Python;
+its version, import path and SHA-256 are recorded separately from the base
+validation environment's distribution inventory. The pinned CPU environment
+is reused, not described as newly created. No full cohort/GPU rerun is implied.
+
+The validation report is committed after the source commit that it identifies;
+its own addition does not change that tested source snapshot. A public tag,
+release, DOI and source-data deposit remain pending author approval.
+
+## Historical candidate validation
+
+`submission_v1.1.0.json` records an earlier dirty v1.1.0 candidate, dependency checks,
 tests, lint and distribution builds. It reuses the previously prepared pinned
 CPU environment; it is not a claim that a new environment was created for
 this revision. Tests include external-audit synthetic predictions, three-seed
 aggregation, missing-condition rejection and signed MSE changes. No external
-weights are loaded and no GPU training is performed by this validation.
+weights are loaded and no GPU training is performed by that validation. It
+predates the review follow-up and does not validate the present source or wheel.
 
 The two older reports below remain historical records for v1.0.0. Their
 checksums are preserved unchanged, rather than relabelled as v1.1.0 results.

@@ -12,10 +12,10 @@ within-gene spatial variation. The package provides model-agnostic evaluation,
 matched gene-vector controls, trainable fitted-target and target-disjoint
 decoders, and the frozen design records used in the accompanying study.
 
-![Image feature extraction and fitted- and held-out-gene assays](docs/assets/figure_1_abc.png)
+![Image feature extraction and fitted- and held-out-gene assays](docs/assets/figure_1_cde.png)
 
 *Image feature extraction and the separately trained fitted- and held-out-gene
-assays used in the accompanying study (Fig. 1a--c).*
+assays used in the accompanying study (Fig. 1c–e).*
 
 ## Highlights
 
@@ -163,16 +163,22 @@ this repository.
 
 ## Manuscript resources
 
+The [reproduction guide](docs/reproduction.md) provides executable UNI2-h and
+Decima preparation, an input schema, a complete primary run path and the
+[archived custom analyses](manuscript_workflows/README.md). Decima-conditioned
+fitting additionally requires `decima==0.5.1`; weights alone do not install it.
+
 [`configs/manuscript/`](configs/manuscript/README.md) contains the exact
 four-cohort biological splits, primary and sensitivity target partitions,
 held-out-assay settings and external-model provenance. The
 [`manuscript-to-code map`](docs/paper_code_map.md) links each analysis to its
 public implementation.
 
-The repository includes reusable source code, configuration records and tests.
-Raw cohort data, licensed third-party weights, trained checkpoints, prediction
-matrices and numerical Source Data are distributed separately under their
-applicable terms.
+The repository includes source code, configuration records and tests. Numerical
+Source Data accompany the manuscript submission; a public deposit link awaits
+author approval. Raw data, licensed third-party weights, trained checkpoints
+and dense predictions are not included here. Version 1.1.0 identifies this
+candidate, not a new public release or DOI.
 
 ## Repository layout
 

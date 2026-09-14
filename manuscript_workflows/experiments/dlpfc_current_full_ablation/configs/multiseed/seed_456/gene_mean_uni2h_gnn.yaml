@@ -1,0 +1,132 @@
+run_name: dlpfc_gse307403_gene_mean_uni2h_gnn_seed456
+paths:
+  expression_root: experiments/dlpfc_current_full_ablation/data/expression
+  multimodal_root: experiments/dlpfc_current_full_ablation/data/multimodal
+  graph_root: experiments/dlpfc_current_full_ablation/data/graphs
+  modality_stats: experiments/dlpfc_current_full_ablation/data/multimodal/modality_stats.json
+  gene_split_dir: experiments/dlpfc_current_full_ablation/data/gene_splits
+  decima_ckpt: decima_weights/rep0.ckpt
+  decima_h5: null
+  decima_npz_dir: data/decima_input/gene_inputs_npz
+  residual_scale_npz: experiments/dlpfc_current_full_ablation/artifacts/train_decima_prior.npz
+  checkpoint_dir: experiments/dlpfc_current_full_ablation/multiseed/seed_456/variants/gene_mean_uni2h_gnn/checkpoints
+  checkpoint_name: best.pt
+  gene_bias_init_npz: experiments/dlpfc_current_full_ablation/artifacts/train_gene_mean_prior.npz
+split:
+  train:
+  - GSM9223441_Br8325-V13F27-295_B1
+  - GSM9223426_Br2242-V13M06-281_C1
+  - GSM9223446_Br1753-V13F27-296_C1
+  - GSM9223438_Br5314-V13F27-294_C1
+  - GSM9223424_Br5400-V13M06-281_A1
+  - GSM9223467_Br2421-V13F27-336_D1
+  - GSM9223462_Br1214-V13M06-344_C1
+  - GSM9223456_Br5276-V13M06-343_A1
+  - GSM9223444_Br1139-V13F27-296_A1
+  - GSM9223435_Br6032-V13F27-293_D1
+  - GSM9223466_Br1923-V13F27-336_C1
+  - GSM9223436_Br5746-V13F27-294_A1
+  - GSM9223423_Br6257-V13M06-280_D1
+  - GSM9223428_Br6560-V13M06-282_A1
+  - GSM9223414_Br5789-V12D07-334_C1
+  - GSM9223421_Br5636-V13M06-280_B1
+  - GSM9223416_Br1113-V13M06-279_A1
+  - GSM9223425_Br5395-V13M06-281_B1
+  - GSM9223453_Br8207-V13M06-342_B1
+  - GSM9223451_Br2470-V13M06-340_D1
+  - GSM9223408_Br1526-V12F14-057_A1
+  - GSM9223434_Br5588-V13F27-293_C1
+  - GSM9223458_Br5573-V13M06-343_C1
+  - GSM9223409_Br1958-V12F14-057_B1
+  - GSM9223460_Br6496-V13M06-344_A1
+  - GSM9223415_Br6432-V12D07-334_D1
+  - GSM9223457_Br8492-V13M06-343_B1
+  - GSM9223427_Br5888-V13M06-281_D1
+  - GSM9223449_Br8406-V13M06-340_B1
+  - GSM9223430_Br6297-V13M06-282_C1
+  - GSM9223429_Br6437-V13M06-282_B1
+  - GSM9223405_Br2719-V12F14-053_A1
+  - GSM9223463_Br5228-V13M06-344_D1
+  - GSM9223433_Br5599-V13F27-293_B1
+  - GSM9223447_Br6389-V13F27-296_D1
+  - GSM9223431_Br5436-V13M06-282_D1
+  - GSM9223455_Br8667-V13M06-342_D1
+  - GSM9223417_Br8042-V13M06-279_B1
+  - GSM9223440_Br1092-V13F27-295_A1
+  - GSM9223450_Br1682-V13M06-340_C1
+  - GSM9223443_Br8772-V13F27-295_D1
+  - GSM9223437_Br5928-V13F27-294_B1
+  - GSM9223461_Br6369-V13M06-344_B1
+  - GSM9223418_Br8537-V13M06-279_C1
+  val:
+  - GSM9223454_Br8433-V13M06-342_C1
+  - GSM9223465_Br1204-V13F27-336_B1
+  - GSM9223407_Br5367-V12F14-053_D1
+  - GSM9223432_Br5622-V13F27-293_A1
+  - GSM9223442_Br2627-V13F27-295_C1
+  - GSM9223410_Br2039-V12F14-057_C1
+  - GSM9223439_Br5639-V13F27-294_D1
+  - GSM9223459_Br5973-V13M06-343_D1
+  - GSM9223448_Br5931-V13M06-340_A1
+  test:
+  - GSM9223411_Br2378-V12F14-057_D1
+  - GSM9223464_Br8218-V13F27-336_A1
+  - GSM9223413_Br5472-V12D07-334_B1
+  - GSM9223419_Br8514-V13M06-279_D1
+  - GSM9223420_Br5590-V13M06-280_A1
+  - GSM9223422_Br2720-V13M06-280_C1
+  - GSM9223452_Br5224-V13M06-342_A1
+  - GSM9223406_Br5182-V12F14-053_C1
+  - GSM9223412_Br5373-V12D07-334_A1
+  - GSM9223445_Br1578-V13F27-296_B1
+targets_dense: true
+normalize_modalities: true
+model:
+  variant: image_graph_only
+  no_graph: false
+  gnn_hidden: 256
+  gnn_layers: 3
+  gnn_dropout: 0.1
+  gnn_post_mlp_layers: 1
+  gnn_residual: true
+  film_hidden: 256
+  spot_head_hidden: 128
+  freeze_decima_backbone: true
+  freeze_pseudobulk_head: false
+  delta_head_init_std: 0.0
+  residual_scale_floor: 0.001
+  residual_scale_hidden: 128
+  residual_scale_logscale_clip: 0.75
+  gene_bias_init_key: log_mu_base
+  output_weight_init_std: 0.0
+loss:
+  point_loss: huber
+  huber_beta: 1.0
+  lambda_point: 1.0
+  lambda_gene: 0.6
+  lambda_spot: 0.05
+  lambda_delta_point: 0.0
+  lambda_delta_gene: 0.0
+  delta_target_mode: centered_true
+  lambda_lap: 0.0006
+  lambda_calib_identity: 0.0
+  min_true_std: 1.0e-06
+optim:
+  lr: 0.00025
+  weight_decay: 0.0001
+  max_epochs: 12
+  min_epochs: 8
+  max_genes_per_batch: 96
+  val_max_genes_per_batch: 128
+  train_gene_chunks_per_sample: 5
+  require_full_gene_coverage_per_epoch: true
+  log_every: 1
+  early_stop_patience: 4
+  selection_metric: gene_flat_combo
+  selection_flat_weight: 0.25
+eval:
+  max_genes_per_batch: 128
+  true_std_threshold: 1.0e-06
+  pred_std_threshold: 1.0e-06
+  hvg_ranking_file: experiments/dlpfc_current_full_ablation/artifacts/train_gene_stats.tsv
+seed: 456

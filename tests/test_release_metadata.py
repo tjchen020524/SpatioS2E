@@ -19,7 +19,8 @@ def test_release_version_is_consistent():
     assert match.group(1) == EXPECTED_VERSION
     assert spatios2e.__version__ == EXPECTED_VERSION
     assert str(citation["version"]) == EXPECTED_VERSION
-    assert citation["date-released"].isoformat() == "2026-09-07"
+    # Candidate metadata must not imply a formally published release date.
+    assert "date-released" not in citation
     assert (ROOT / "docs" / "releases" / f"v{EXPECTED_VERSION}.md").is_file()
 
 
@@ -32,8 +33,11 @@ def test_release_license_uses_collective_holder_and_no_email():
 
 
 def test_readme_overview_is_included_in_source_distribution():
-    overview = ROOT / "docs" / "assets" / "figure_1_abc.png"
+    readme = (ROOT / "README.md").read_text()
+    images = re.findall(r'(?:src="|\]\()(docs/assets/[^"\)]+\.png)', readme)
     manifest = (ROOT / "MANIFEST.in").read_text()
 
-    assert overview.is_file()
+    assert images
+    assert all((ROOT / path).is_file() for path in images)
     assert "recursive-include docs *.md *.png" in manifest
+    assert "recursive-include examples *.sh *.txt *.md" in manifest
