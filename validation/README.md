@@ -2,7 +2,7 @@
 
 ## Review follow-up
 
-`review_followup_20260913.json` records the reviewed source commit and source
+`review_followup_20260913_final.json` records the reviewed source commit and source
 hash, source tests, the archived primary driver trained for six epochs on a
 small synthetic panel, source-distribution contents, and a newly built wheel
 installed into a fresh target directory. The wheel is imported and used for
@@ -16,6 +16,10 @@ its own addition does not change that tested source snapshot. A public tag,
 release, DOI and source-data deposit remain pending author approval.
 
 ## Historical candidate validation
+
+`review_followup_20260913.json` preserves the first successful review-stage
+validation, before the final README schematic-label adjustment. The final
+record above includes that asset change; the scientific implementation is unchanged.
 
 `submission_v1.1.0.json` records an earlier dirty v1.1.0 candidate, dependency checks,
 tests, lint and distribution builds. It reuses the previously prepared pinned
