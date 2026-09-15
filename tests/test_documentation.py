@@ -21,7 +21,7 @@ def test_synthetic_quickstart_runs_without_external_inputs(tmp_path):
 
 
 def test_public_markdown_relative_links_resolve():
-    documents = [ROOT / "README.md", ROOT / "CONTRIBUTING.md", ROOT / "CHANGELOG.md"]
+    documents = [ROOT / "README.md"]
     for directory in ("docs", "validation", "configs", "examples", "experiments", "manuscript_workflows"):
         documents.extend((ROOT / directory).rglob("*.md"))
     for document in documents:

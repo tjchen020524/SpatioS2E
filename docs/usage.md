@@ -117,5 +117,4 @@ The [reproduction guide](reproduction.md) describes the separate upstream
 code and artifact requirements.
 
 For the pinned Linux/CPU environment and independent installation checks, see
-[validation records](../validation/README.md). Development and testing
-instructions are in [CONTRIBUTING.md](../CONTRIBUTING.md).
+[validation and testing](../validation/README.md).

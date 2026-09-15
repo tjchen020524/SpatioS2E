@@ -30,8 +30,6 @@ SOURCE_FILES = (
     "README.md",
     "LICENSE",
     "CITATION.cff",
-    "CONTRIBUTING.md",
-    "CHANGELOG.md",
     LOCK.name,
 )
 

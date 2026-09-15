@@ -18,6 +18,15 @@ and [`environment-lock.yml`](../environment-lock.yml).
 
 ## Run the checks
 
+From the repository root:
+
+```bash
+python -m pip install -e '.[dev]'
+python -m pytest -q
+python -m ruff check spatios2e tests scripts experiments
+python -m build
+```
+
 To install the pinned dependencies in a new environment and write a report:
 
 ```bash
