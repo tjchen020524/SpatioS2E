@@ -1,28 +1,38 @@
-# Manuscript reproduction
+# Reproducing the paper
 
-This guide covers input preparation and the manuscript analysis workflows.
-Custom scripts and configurations are in `manuscript_workflows/`, with original
-and portable source hashes recorded in `source_manifest.json`.
+The main held-out-gene experiment uses expression matrices, UNI2-h image
+features and fixed Decima gene vectors. The steps below prepare these inputs,
+fit one model and summarize the complete set of runs. The final section lists
+the scGPT, fitted-gene and other analyses.
 
-## Environments and preparation
+Run commands from the repository root. Replace `/inputs`, `/weights` and
+`/work/reproduction` with your local paths. `--data-root` keeps experiment
+inputs and results in a separate working directory.
 
-The pinned CPU lock validates the package without external weights. For input
-extraction and historical GPU workflows, use a separate environment:
+## 1. Install dependencies and obtain the inputs
+
+Obtain the cohort data and model files listed in
+[Data and pretrained models](data_availability.md). In an environment with a
+CUDA-compatible PyTorch installation, install the preprocessing and analysis
+dependencies:
 
 ```bash
 python -m pip install -e '.[preprocess,analysis]'
 python -m pip install 'decima==0.5.1'
 ```
 
-Decima is a separate code dependency, not just a checkpoint; see its
-[official installation and artifact instructions](https://github.com/Genentech/decima).
-Obtain its metadata AnnData, `rep0.ckpt` and reference hg38 FASTA separately.
+Decima input preparation also needs its metadata AnnData, `rep0.ckpt` and
+reference hg38 FASTA; see the
+[Decima instructions](https://github.com/Genentech/decima).
 UNI2-h requires the [provider's access approval](https://huggingface.co/MahmoodLab/UNI2-h).
-Revisions and hashes are in `configs/manuscript/external_models.yaml`.
-Third-party code, weights and derived outputs retain their respective licenses.
-The CPU lock is not a historical GPU environment specification.
+The model revisions used in the paper are recorded in
+[`external_models.yaml`](../configs/manuscript/external_models.yaml).
+The pinned CPU environment is for the [installation tests](../validation/README.md),
+not GPU training.
 
-### UNI2-h
+## 2. Prepare image features and gene vectors
+
+### Extract UNI2-h image features
 
 Supply one image and a TSV with unique `barcode`, `pixel_x`, `pixel_y` columns.
 For Visium use full-resolution coordinates and the section's Space Ranger spot
@@ -45,7 +55,7 @@ nearest-centre spacing (minimum 32 pixels), and white padding. Both use bilinear
 and `embeddings[N,1536]`; a JSON records input/output hashes and crop settings.
 Archived cohort-specific extractors retain the original raw-data adapters.
 
-### Decima sequences and fixed vectors
+### Extract Decima gene vectors
 
 ```bash
 python -m spatios2e.preprocessing.prepare_decima_vectors sequences \
@@ -62,15 +72,15 @@ Each gene input has `seq_mask[5,524288]`, constructed by Decima from strand-awar
 windows and a gene-body mask. Mean pooling the final frozen feature map gives
 `embeddings[G,1920]`, ordered by `gene_ids`. Missing inputs are rejected. Both
 stages record hashes. Downstream standardization is fitted later, on training
-genes only. Batch size is a memory setting, not a feature definition.
+genes only.
 
-### Expression and identity contract
+### Prepare expression matrices and sample assignments
 
-Archived `prepare_hippocampus.py`, `prepare_dlpfc.py`, `prepare_nac.py` and
-`prepare_her2st.py` retain the actual cohort filtering, normalization, identifier
-mapping and zero-filling procedures. Raw data must be acquired separately using
-the manuscript accessions. For generic Visium conversion, see
-`spatios2e-normalize-visium --help`.
+The cohort-specific `prepare_hippocampus.py`, `prepare_dlpfc.py`,
+`prepare_nac.py` and `prepare_her2st.py` scripts in `manuscript_workflows/experiments/`
+perform the filtering, normalization, identifier matching and zero filling used
+in the paper. For other Visium inputs, see `spatios2e-normalize-visium --help`.
+The held-out-gene runner expects:
 
 | Prepared input | Contents |
 | --- | --- |
@@ -84,9 +94,10 @@ Expression rows must be the sorted union of the cohort's frozen train/held-out
 gene lists. Spot alignment is by barcode, not array position. Historical NPZ
 files may contain object arrays: load only trusted preprocessing outputs.
 
-## Complete primary run path
+## 3. Train and evaluate the held-out-gene models
 
-Stage a cohort into a new data workspace, then run the original driver:
+The following commands prepare the hippocampus inputs and fit the Decima-vector
+model for seed 42:
 
 ```bash
 python scripts/prepare_manuscript_inputs.py --cohort hippocampus \
@@ -105,23 +116,30 @@ The driver fits six epochs, selects on training genes in validation individuals,
 then exports held-out-gene endpoints and per-gene sufficient statistics.
 Repeat `decima`, `random`, `constant` for seeds 42, 123, 456 and four cohorts
 (`hippocampus_donor_disjoint`, `dlpfc`, `nac`, `her2st`): 36 primary runs.
-Checkpoints and component tables are written under
-`experiments/multicohort_geneheldout_decima_clean_split/{runs,components/runs}/`.
-Do not reuse output directories for a different input snapshot.
+Within your data workspace, checkpoints are written under
+`experiments/multicohort_geneheldout_decima_clean_split/runs/` and per-run metrics
+under `experiments/multicohort_geneheldout_decima_clean_split/components/runs/`.
+Use a new workspace when changing the inputs.
 
-For a bounded real-input CPU check, use
-`scripts/validate_real_heldout_smoke.py --help`; its subset/one-epoch metrics are
-not manuscript estimates. Weight-free fitting is tested in pytest and in the
-independently installed wheel validation outside the repository.
+After all 36 runs finish, summarize the results:
 
-## Other archived scientific workflows
+```bash
+python manuscript_workflows/launch.py --data-root /work/reproduction \
+  experiments.multicohort_geneheldout_decima_clean_split.summarize_clean_replication
+```
+
+The `results/` directory under the same experiment contains `per_run.tsv`,
+`paired_effects.tsv` and `paired_effects_summary.tsv`. These give the individual
+run values, matched pretrained-versus-control differences and seed summaries.
+The [figure and table index](paper_code_map.md) connects the analyses to the paper.
+
+## 4. Run the remaining analyses
 
 Run modules with the same `launch.py --data-root ... MODULE [arguments]` form.
-Prefixes below are under `experiments.`. These are actual research scripts;
-their explicit input/output filenames remain visible in source. Aggregators
-without a cohort option expect all upstream cohort/run files and do not create
-missing results. Secondary workflows also require source metadata such as
-gene annotations and section-to-individual maps.
+Prefixes below are under `experiments.`. Summary scripts without a cohort
+option require completed runs from every cohort. Check the input column before
+running a secondary analysis; several also need gene annotations or
+section-to-individual maps.
 
 | Analysis | Module(s) | Upstream requirements |
 | --- | --- | --- |
@@ -151,20 +169,12 @@ before using their relative paths. Fitted models additionally need 31 coordinate
 descriptors, graphs and training-only modality stats; primary held-out staging
 does not generate those inputs. See the fitted-example preparation commands.
 
-GeneQuery/DeepSpot-M remain in top-level
-`experiments/external_genequery_component_audit/`; use their dedicated README.
-`configs/manuscript/genequery_runs.json` records all 24 historical invocations,
-including evaluation batch size 8, rather than relying on defaults.
+For GeneQuery and DeepSpot-M, follow the
+[external-model instructions](../experiments/external_genequery_component_audit/README.md).
+`configs/manuscript/genequery_runs.json` records the 24 GeneQuery runs, including
+evaluation batch size 8.
 
 The archived BLEEP and ST-Net adapters resolve upstream source under
 `<data-root>/third_party/BLEEP` and `<data-root>/third_party/ST-Net` by default.
 Set `SPATIOS2E_BLEEP_ROOT` or `SPATIOS2E_STNET_ROOT` to use an existing checkout
 elsewhere. These paths contain upstream source, not pretrained checkpoints.
-
-## Artifact availability
-
-This Git/source archive contains code, configs, partitions and validation.
-Numerical Source Data and Supplementary Tables are separate manuscript files.
-Raw images/counts, third-party weights, trained checkpoints and dense predictions
-are not included. See [data and artifact availability](data_availability.md)
-for cohort identifiers and required external inputs.

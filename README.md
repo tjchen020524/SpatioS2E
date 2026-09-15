@@ -1,17 +1,16 @@
 # SpatioS2E
 
 [![Tests](https://github.com/tjchen020524/SpatioS2E/actions/workflows/tests.yml/badge.svg)](https://github.com/tjchen020524/SpatioS2E/actions/workflows/tests.yml)
-[![License](https://img.shields.io/badge/license-MIT-2F855A.svg)](LICENSE)
 
 Code for the study:
 
 **Pretrained gene representations transfer mean expression more broadly than
 spatial patterns in virtual spatial transcriptomics**
 
-The analyses distinguish gene-mean prediction from recovery of within-gene
-spatial variation across four brain and breast cancer cohorts. This repository
-provides evaluation tools, gene-conditioned predictors and workflows for
-reproducing the analyses.
+We train image-based expression predictors with fixed gene vectors from Decima
+or scGPT. Across four brain and breast cancer cohorts, we test held-out genes
+in new donors or patients and separate improvements in gene means from
+improvements in spatial variation.
 
 ![Image features and fitted- and held-out-gene prediction workflows](docs/assets/figure_1_cde.png)
 
@@ -27,28 +26,26 @@ source .venv/bin/activate
 python -m pip install -e .
 ```
 
-## Quick start
+## Try the evaluation
 
-Run the synthetic example:
+This synthetic example compares a prediction that assigns one value to each
+gene with one that also captures spatial variation. It needs no external data
+or model weights.
 
 ```bash
 python examples/synthetic_components.py
 ```
 
-The example reports full-matrix, gene-mean and within-gene metrics for mean-only
-and spatial predictions. No external data or model weights are required.
+To evaluate your own prediction matrices, see [Using SpatioS2E](docs/usage.md).
 
-## Documentation
+## Reproduce the paper
 
-- [Usage guide](docs/usage.md) — evaluate predictions and train gene-conditioned models.
-- [Reproducing the paper](docs/reproduction.md) — prepare inputs and run the study workflows.
-- [Analysis index](docs/paper_code_map.md) — locate the code for each manuscript analysis.
-- [Data and pretrained models](docs/data_availability.md) — find cohort accessions and required inputs.
+- [Get the data and pretrained models](docs/data_availability.md).
+- [Prepare inputs and run the experiments](docs/reproduction.md).
+- [Find analysis code by figure or table](docs/paper_code_map.md).
 
 ## Citation and support
 
-See [CITATION.cff](CITATION.cff) for software citation details. For questions or
-bug reports, please use
-[GitHub Issues](https://github.com/tjchen020524/SpatioS2E/issues).
-
-The code is released under the [MIT License](LICENSE).
+Citation details are in [CITATION.cff](CITATION.cff). The code is available under
+the [MIT License](LICENSE). Questions and bug reports can be posted in
+[Issues](https://github.com/tjchen020524/SpatioS2E/issues).

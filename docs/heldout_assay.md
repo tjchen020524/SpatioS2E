@@ -1,13 +1,12 @@
-# Held-out-target assay contract
+# Train and evaluate held-out genes
 
-This guide documents the reusable decoder API. For the manuscript workflow
-commands, see [Manuscript reproduction](reproduction.md).
+The example below fits a decoder using prepared image features and fixed gene
+vectors. For the full cohort experiments, see [Reproducing the paper](reproduction.md).
 
-The reusable assay fits one decoder within a tissue domain while excluding a
-fixed target set from optimization and checkpoint selection. Biological test
-individuals are likewise absent from fitting and selection.
+Use training genes for both optimization and checkpoint selection. Reserve the
+held-out genes and test individuals for final evaluation.
 
-## Batch interface
+## Prepare the data loaders
 
 Training, validation and test iterables yield either a mapping or a pair:
 
@@ -21,10 +20,14 @@ Training, validation and test iterables yield either a mapping or a pair:
 The aliases `x` and `y` are also accepted. Iterables used for more than one
 epoch must be re-iterable, such as a `torch.utils.data.DataLoader`.
 
-## Fitting
+## Fit the model and evaluate held-out genes
+
+Here, `gene_vectors` contains one row per gene in the same order as the
+expression columns. `training_gene_indices` and `heldout_gene_indices` are
+disjoint column indices. The three loaders draw spots from separate training,
+validation and test individuals.
 
 ```python
-import numpy as np
 import torch
 
 from spatios2e.models import FactorizedDotProductDecoder
@@ -62,10 +65,9 @@ metrics = evaluate_heldout_decoder(
 The validation subset is sampled from those same genes. The held-out indices
 enter only the post-fit evaluation call.
 
-## Matched vector controls
+## Compare gene-vector conditions
 
-All vector conditions must use the same biological and molecular partitions.
-The manuscript constructs:
+Use the same individual and gene splits for every condition. The paper compares:
 
 - feature-wise standardized pretrained vectors, with statistics estimated from
   downstream training genes only;
@@ -76,7 +78,7 @@ The manuscript constructs:
 
 The corresponding utilities are `standardize_from_training_genes`,
 `random_gene_vectors`, `constant_gene_vectors` and
-`permute_gene_identity_within_partitions`. Frozen seeds and checkpoint-selection
+`permute_gene_identity_within_partitions`. Seeds and checkpoint-selection
 settings are recorded in
 [`configs/manuscript/heldout_assay.yaml`](../configs/manuscript/heldout_assay.yaml).
 

@@ -1,10 +1,9 @@
-# External gene-query audits
+# GeneQuery and DeepSpot-M analyses
 
-Source workflows for Fig. 5c and Extended Data Fig. 10. Run the commands from
-the repository root after installing SpatioS2E. They are included in the Git
-repository and source distribution, not installed as wheel entry points.
+These scripts reproduce the component analyses in Fig. 5c and Extended Data
+Fig. 10. Run them from a clone of the repository after installing SpatioS2E.
 
-## Scope
+## Analyses
 
 - GeneQuery: a reconstruction of the gene-aware head with frozen ResNet-50
   features and a separate end-to-end ResNet-50 training workflow. Both use
@@ -17,17 +16,16 @@ repository and source distribution, not installed as wheel entry points.
 GeneQuery uses 613 training and 138 held-out genes; DeepSpot-M uses 601 and
 135. Patients A–E train the GeneQuery reconstruction and no-image mappings,
 F selects GeneQuery checkpoints, and G–H provide 3,097 test spots. DeepSpot-M
-target tokens have upstream spatial-training exposure. These are within-system
-audits, not a ranking under identical training conditions.
+target tokens have upstream spatial-training exposure, so the comparisons are
+between conditions within each implementation.
 
-## Dependencies and upstream artifacts
+## Install dependencies and obtain model files
 
-All 24 actual run configurations are frozen in
-`configs/manuscript/genequery_runs.json`. Use
-`python scripts/run_genequery_record.py --help` to render an exact command;
-training starts only with `--execute`. Both settings used evaluation batch
-size 8. The frozen-feature script's generic default of 16 is not the value
-used for these manuscript runs.
+The arguments for all 24 GeneQuery runs are in
+[`genequery_runs.json`](../../configs/manuscript/genequery_runs.json).
+`python scripts/run_genequery_record.py --help` shows how to print a recorded
+command or launch it with `--execute`. The commands below set evaluation batch
+size to 8, as used in both settings in the paper.
 
 For GeneQuery image extraction and end-to-end training:
 
@@ -42,8 +40,8 @@ environment has PyTorch 2.8.0, torchvision 0.23.0, timm 1.0.27 and safetensors
 Install DeepSpot-M separately in an environment compatible with its pinned
 upstream source. Do not force the core CPU lock onto that environment.
 
-Obtain upstream inputs under their own access and license terms. They are not
-covered by this repository's MIT license and are not redistributed here:
+Download the following files from their original providers under the applicable
+access and license terms:
 
 | Input | Revision / SHA-256 |
 | --- | --- |
@@ -75,10 +73,9 @@ data/
 The manifest needs `sample`, `patient`, `split` (`train`, `val`, `test`) and
 `n_spots`. Expression NPZ files contain gene-by-spot CSR arrays `data`,
 `indices`, `indptr`, `shape`, plus ordered string `gene_ids` and `barcodes`.
-Values are the prepared log(CPM+1) expression, not raw counts. Coordinates
-contain `pixel_x`, `pixel_y` and `barcodes` in the same spot order. This release
-consumes these prepared inputs; it does not download or reconstruct the raw
-HER2ST preprocessing pipeline automatically.
+Expression values are normalized log(CPM+1). Coordinates contain `pixel_x`,
+`pixel_y` and `barcodes` in the same spot order. Prepare the HER2ST inputs
+before running the commands below; see the [reproduction guide](../../docs/reproduction.md).
 
 Set `SPATIOS2E_GENEQUERY_PANEL` to the public 785-symbol panel NPY, and
 `SPATIOS2E_GENE_META` to the symbol/Ensembl TSV (symbols in its first column,
@@ -97,9 +94,9 @@ python "$AUDIT/extract_resnet50_patches.py"
 
 for seed in 42 123 456; do
   for variant in semantic identity_shuffle random constant; do
-    python "$AUDIT/train_genequery_audit.py" --seed "$seed" --variant "$variant" --device cuda
+    python "$AUDIT/train_genequery_audit.py" --seed "$seed" --variant "$variant" --eval-batch-size 8 --device cuda
     python "$AUDIT/audit_predictions.py" "$AUDIT/runs/seed_$seed/$variant/predictions.npz"
-    python "$AUDIT/train_genequery_trainable_backbone.py" --seed "$seed" --variant "$variant" --device cuda
+    python "$AUDIT/train_genequery_trainable_backbone.py" --seed "$seed" --variant "$variant" --eval-batch-size 8 --device cuda
     python "$AUDIT/audit_predictions.py" "$AUDIT/trainable_backbone_runs/seed_$seed/$variant/predictions.npz"
   done
   python "$AUDIT/mean_only_baseline.py" --seed "$seed"

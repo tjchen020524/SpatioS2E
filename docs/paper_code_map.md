@@ -1,10 +1,10 @@
-# Manuscript-to-code map
+# Code for each figure and table
 
 The table maps manuscript analyses to implementations and required inputs.
 For workflow commands and output locations, see the
 [reproduction guide](reproduction.md).
 
-| Analysis | Public implementation | External inputs |
+| Analysis | Functions or scripts | Required inputs |
 | --- | --- | --- |
 | Fig. 1 evaluation framework | `component_metrics`, `center_within_section` and frozen split records | Observed and predicted `[spot, gene]` matrices plus biological and target identities |
 | Fig. 1 fitted-target assay | `SpatioS2EModel`, `MorphologyGraphModel` and the model factory | UNI2-h features, spatial coordinates/graphs, Decima vectors and training-tissue gene means |
@@ -23,34 +23,7 @@ For workflow commands and output locations, see the
 | Supplementary residual-only assay | `SectionCenteredResidualDecoder` and `center_within_section` | Exactly section-centred training targets |
 | Supplementary branch interventions | `FactorizedDotProductDecoder.forward_branches` | Frozen checkpoint and reproducible within-partition identity permutations |
 
-The exact section and primary downstream gene partitions for all four cohorts
-are versioned in `configs/manuscript/`. `heldout_assay.yaml` records the matched
-decoder, vector controls, optimization and endpoint policy; `external_models.yaml`
-records upstream revisions and hashes without redistributing checkpoints.
-
-The supplied fitted-gene trainer implements the manuscript schedule's balanced
-gene chunks, full-panel coverage assertion, minimum-epoch rule and
-validation-based checkpoint selection. The checkpoint evaluator applies the
-reported gene-variance eligibility and constant-prediction rules and can export
-training-derived top-HVG summaries.
-
-At the Decima assay dimensions (1,536 spot features, 1,920 gene features, a
-512-unit hidden layer and 96-dimensional programs), the public implementations
-have 2,371,777 parameters for the full factorized decoder, 1,875,905 for the
-bias-free decoder, 2,441,345 for the 704-unit concatenation MLP and 1,875,904
-for the residual-only decoder. These counts are locked by the test suite.
-
-## Model roles
-
-The repository includes fitted-target models and separately trained
-held-out-target decoders. Decima and scGPT provide frozen gene vectors; all
-reported comparisons are made against matched controls within each
-representation family.
-
-## Numerical evidence
-
-Numerical Source Data and Supplementary Tables are separate manuscript files.
-See [data and artifact availability](data_availability.md). Raw cohort inputs, third-party
-weights, downstream checkpoints and dense predictions are not bundled here.
-The component evaluator also works with independently supplied compatible
-prediction matrices.
+Use the sample and gene splits in [configs/manuscript](../configs/manuscript/README.md).
+The same directory contains `heldout_assay.yaml` for decoder settings and
+`external_models.yaml` for pretrained-model revisions. Data sources are listed
+in [Data and pretrained models](data_availability.md).

@@ -1,15 +1,14 @@
-# Hippocampus Benchmark Example
+# Fitted-gene hippocampus example
 
 This example uses the manuscript's donor-disjoint hippocampus partition: six
 training donors (22 sections), two validation donors (8 sections) and two test
 donors (4 sections).
 
-Required external files:
+## Prepare the inputs
 
 Install Decima 0.5.1 in the optional model environment. Use the
 [input preparation guide](../../docs/reproduction.md) to generate reference
-sequence inputs and UNI2-h vectors; the generic ResNet extractor does not
-produce manuscript UNI2-h features.
+sequence inputs and UNI2-h vectors. Place the prepared files at:
 
 - `weights/decima/rep0.ckpt`
 - `data/decima_input/gene_inputs_npz/<ENSG_ID>.npz`
@@ -47,13 +46,11 @@ must follow these barcodes. No cell-composition measurements are used.
 The normalizer file records separate spatial/histology/celltype means and
 standard deviations, computed from the archived training sections only.
 
-For all manuscript fitted variants, use the archived cohort preparation,
+For the complete fitted-gene comparisons, use the cohort preparation,
 `prepare_priors`, `write_configs`, `write_multiseed_configs` and
-`train_balanced_ablation` drivers listed in the reproduction guide. These
-retain the training-only anchors/scales, balanced gene chunks and variant
-definitions; the single example below is not the entire ablation study.
+`train_balanced_ablation` scripts listed in the [reproduction guide](../../docs/reproduction.md).
 
-Run:
+## Train and evaluate
 
 ```bash
 bash examples/hippocampus/run_train_eval.sh

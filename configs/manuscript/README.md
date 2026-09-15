@@ -1,6 +1,7 @@
-# Manuscript configuration record
+# Sample splits, gene lists and model settings
 
-This directory freezes the non-sensitive design inputs used in the manuscript.
+Use these files to match the sample assignments, gene lists and model settings
+used in the paper.
 
 - `cohorts.yaml` records accession, image modality, biological unit and section,
   individual and gene-universe counts.
@@ -15,10 +16,10 @@ This directory freezes the non-sensitive design inputs used in the manuscript.
   primary and sensitivity gene list, together with the primary--historical
   overlap audit.
 - `heldout_assay.yaml` records the matched decoder, optimization protocol,
-  Decima and scGPT representation contracts, control construction and endpoint
-  policy.
+  Decima and scGPT vector settings, controls and evaluation rules.
 - `external_models.yaml` records upstream model versions and checksums without
   redistributing licensed checkpoints.
+- `genequery_runs.json` gives the arguments for all 24 GeneQuery runs.
 
 The primary gene lists are ordered stable Ensembl identifiers. Visium features
 were intersected with the Decima-supported identifiers by exact string equality;
@@ -26,12 +27,8 @@ the mapping did not strip version suffixes or substitute aliases. HER2ST symbols
 were retained only when they mapped uniquely to one identifier, and the universe
 was restricted to symbols observed among training patients.
 
-These files do not contain expression matrices, tissue images, frozen image or
-gene vectors, trained weights or predictions. Data must be obtained from the
-listed source studies and processed under their access and redistribution
-terms. The split and checksum tests in `tests/test_manuscript_splits.py` detect
-accidental drift in this record. Regenerate the manifest with
-`python scripts/build_manuscript_partition_manifest.py` after an intentional
-partition change. The scGPT counts are vocabulary-covered
-subsets of the same frozen target partitions; all matched vector conditions
-use the same covered targets within cohort.
+The scGPT analyses use the genes covered by its vocabulary within these same
+partitions. Every scGPT vector condition uses the same covered genes.
+
+Check the recorded splits with
+`python scripts/build_manuscript_partition_manifest.py --check`.

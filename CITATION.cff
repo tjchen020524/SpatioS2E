@@ -3,10 +3,10 @@ message: If you use SpatioS2E, please cite this software and specify the version
 title: "SpatioS2E: component-resolved evaluation of gene-conditioned virtual spatial transcriptomics"
 type: software
 abstract: >-
-  SpatioS2E provides evaluation tools and gene-conditioned predictors for
-  virtual spatial transcriptomics. It separates gene-mean prediction from
-  within-gene spatial variation and includes matched gene-vector controls,
-  held-out-gene training and the analysis workflows used in the accompanying study.
+  Code for comparing Decima and scGPT gene representations in image-based
+  spatial expression prediction. The analyses separate improvements in
+  gene-mean prediction from improvements in within-gene spatial variation
+  across four brain and breast cancer cohorts.
 authors:
   - family-names: Chen
     given-names: Tingjun
