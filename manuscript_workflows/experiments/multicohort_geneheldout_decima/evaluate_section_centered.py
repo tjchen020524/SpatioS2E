@@ -28,7 +28,11 @@ ROOT = DATA_ROOT
 if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))
 
-from experiments.heldout_metric_policy import gene_correlations_from_moments  # noqa: E402
+from experiments.heldout_metric_policy import (  # noqa: E402
+    OBSERVED_STD_MIN,
+    PREDICTED_STD_MIN,
+    gene_correlations_from_moments,
+)
 from experiments.multicohort_geneheldout_decima.run_cohort_geneheldout import (  # noqa: E402
     configure_base,
 )
@@ -57,11 +61,14 @@ def sha256(path: Path) -> str:
 
 
 def finite_corr(x: np.ndarray, y: np.ndarray) -> float:
+    """Across-gene PCC, excluding constant or numerically constant vectors."""
     mask = np.isfinite(x) & np.isfinite(y)
     if int(mask.sum()) < 2:
         return float("nan")
     x_use = x[mask].astype(np.float64, copy=False)
     y_use = y[mask].astype(np.float64, copy=False)
+    if float(np.std(x_use)) <= OBSERVED_STD_MIN or float(np.std(y_use)) <= PREDICTED_STD_MIN:
+        return float("nan")
     x_centered = x_use - x_use.mean()
     y_centered = y_use - y_use.mean()
     denominator = math.sqrt(float(np.dot(x_centered, x_centered) * np.dot(y_centered, y_centered)))
@@ -405,8 +412,8 @@ def evaluate_one(
     individual_frame.insert(0, "variant", variant)
     individual_frame.insert(0, "seed", seed)
     individual_frame.insert(0, "cohort", cohort)
-    section_frame.to_csv(output_dir / "per_section.tsv", sep="\t", index=False)
-    individual_frame.to_csv(output_dir / "per_individual.tsv", sep="\t", index=False)
+    section_frame.to_csv(output_dir / "per_section.tsv", sep="\t", index=False, na_rep="NA")
+    individual_frame.to_csv(output_dir / "per_individual.tsv", sep="\t", index=False, na_rep="NA")
     pd.DataFrame(
         {
             "cohort": cohort,
