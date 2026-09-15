@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: If you use SpatioS2E, please cite the archived software release and the associated manuscript.
+message: If you use SpatioS2E, please cite this software and specify the version and Git commit used. The manuscript citation will be added when its preprint identifier is available.
 title: "SpatioS2E: component-resolved evaluation of gene-conditioned virtual spatial transcriptomics"
 type: software
 abstract: >-

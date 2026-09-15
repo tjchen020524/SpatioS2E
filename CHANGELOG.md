@@ -1,5 +1,14 @@
 # Changelog
 
+## Public-source readiness — 2026-09-15
+
+- Add a synthetic, weight-free quick start and contribution guidance.
+- Clarify software versus data/weight availability and preprint citation status.
+- Refresh the manuscript code map, figure-asset provenance and public-facing text.
+- Make the archived BLEEP and ST-Net repository paths configurable.
+- Preserve historical validation and upstream source hashes; validate the
+  updated source and independently installed wheel before handoff.
+
 ## Review follow-up — 2026-09-13 (unreleased)
 
 - Add portable UNI2-h and Decima preparation, fitted-feature assembly and a
@@ -11,7 +20,6 @@
   freshly installed wheel outside the source checkout.
 - Fix README image tracking, source-distribution example documentation and
   candidate metadata; preserve historical validation and tags.
-- Public release, visibility and DOI publication remain subject to author approval.
 
 ## 1.1.0 — submission candidate, 2026-09-07
 

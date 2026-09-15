@@ -3,6 +3,10 @@
 Research software for component-resolved evaluation and gene-conditioned
 prediction in virtual spatial transcriptomics.
 
+Code accompanying **Pretrained gene representations transfer mean expression
+more broadly than spatial patterns in virtual spatial transcriptomics**, by
+Tingjun Chen and Stephanie C. Hicks. The preprint link will be added when available.
+
 [![Tests](https://github.com/tjchen020524/SpatioS2E/actions/workflows/tests.yml/badge.svg)](https://github.com/tjchen020524/SpatioS2E/actions/workflows/tests.yml)
 [![Python](https://img.shields.io/badge/python-%E2%89%A53.10-3776AB.svg)](pyproject.toml)
 [![License](https://img.shields.io/badge/license-MIT-2F855A.svg)](LICENSE)
@@ -15,7 +19,7 @@ decoders, and the frozen design records used in the accompanying study.
 ![Image feature extraction and fitted- and held-out-gene assays](docs/assets/figure_1_cde.png)
 
 *Image feature extraction and the separately trained fitted- and held-out-gene
-assays used in the accompanying study (Fig. 1c–e).*
+assays used in the accompanying study.*
 
 ## Highlights
 
@@ -55,10 +59,21 @@ Install preprocessing and development dependencies when needed:
 python -m pip install -e ".[preprocess,dev]"
 ```
 
-The publication release also includes a fully pinned CPython 3.10 Linux/CPU
+The repository also includes a fully pinned CPython 3.10 Linux/CPU
 environment and an independently generated validation record. See
 [`validation/README.md`](validation/README.md) for the exact clean-room
 procedure.
+
+## Quick start — no data or weights required
+
+```bash
+python examples/synthetic_components.py
+```
+
+This small example compares a spatially constant gene-mean prediction with a
+prediction that also recovers spatial variation. It prints both matrix-level
+and within-gene metrics and checks the MSE decomposition. These are synthetic
+illustrations, not manuscript results.
 
 ## Component-resolved evaluation
 
@@ -175,10 +190,12 @@ held-out-assay settings and external-model provenance. The
 public implementation.
 
 The repository includes source code, configuration records and tests. Numerical
-Source Data accompany the manuscript submission; a public deposit link awaits
-author approval. Raw data, licensed third-party weights, trained checkpoints
-and dense predictions are not included here. Version 1.1.0 identifies this
-candidate, not a new public release or DOI.
+Source Data and Supplementary Tables are separate manuscript files, not part
+of this code repository. Raw data, licensed third-party weights, trained
+checkpoints and dense predictions must be obtained or generated separately.
+See [data and artifact availability](docs/data_availability.md) for the accessions
+and required inputs. Version 1.1.0 is the current software version; cite a commit
+hash when an immutable release DOI is unavailable.
 
 ## Repository layout
 
@@ -196,3 +213,10 @@ candidate, not a new public release or DOI.
 SpatioS2E is released under the [MIT License](LICENSE). Citation metadata are
 provided in [`CITATION.cff`](CITATION.cff). The version-specific Zenodo DOI and
 manuscript DOI will be added after assignment.
+
+## Questions and contributions
+
+Use [GitHub Issues](https://github.com/tjchen020524/SpatioS2E/issues) for bug
+reports and reproducibility questions. Please include the commit, environment,
+command and a small synthetic example; do not upload restricted cohort data
+or credentials. See [CONTRIBUTING.md](CONTRIBUTING.md).

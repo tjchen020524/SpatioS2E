@@ -1,9 +1,9 @@
 # Manuscript reproduction
 
-This candidate contains the package and a selected archive of the actual custom
+This repository contains the package and a selected archive of the actual custom
 analysis scripts. `manuscript_workflows/source_manifest.json` records original
-and archived source hashes. Only development-root assignments and import-path
-priority were made portable. Full GPU/cohort experiments were not rerun as part
+and archived source hashes. Development/data roots, external repository paths and import-path priority
+were made portable; scientific model and metric definitions were retained. Full GPU/cohort experiments were not rerun as part
 of release validation.
 
 ## Environments and preparation
@@ -158,11 +158,16 @@ GeneQuery/DeepSpot-M remain in top-level
 `configs/manuscript/genequery_runs.json` records all 24 historical invocations,
 including evaluation batch size 8, rather than relying on defaults.
 
+The archived BLEEP and ST-Net adapters resolve upstream source under
+`<data-root>/third_party/BLEEP` and `<data-root>/third_party/ST-Net` by default.
+Set `SPATIOS2E_BLEEP_ROOT` or `SPATIOS2E_STNET_ROOT` to use an existing checkout
+elsewhere. These paths contain upstream source, not pretrained checkpoints.
+
 ## Artifact availability
 
 This Git/source archive contains code, configs, partitions and validation.
-Numerical Source Data accompany the manuscript submission but are not currently
-a separate downloadable deposit from this candidate. Raw images/counts,
-third-party weights, trained checkpoints and dense predictions are not included.
-Public release and an immutable deposit link await author approval; package
-version 1.1.0 does not imply a new public release, tag or DOI.
+Numerical Source Data and Supplementary Tables are separate manuscript files.
+Raw images/counts, third-party weights, trained checkpoints and dense predictions
+are not included. See [data and artifact availability](data_availability.md)
+for cohort identifiers and the distinction between code and external inputs.
+Until an immutable software DOI is assigned, record the version and Git commit.

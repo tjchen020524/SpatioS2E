@@ -1,5 +1,12 @@
 # Clean-room validation records
 
+## Public-source readiness
+
+`public_readiness_20260915.json` records the clean source commit tested before
+public-source handoff: unit tests, pinned dependencies, lint, source/wheel builds,
+an independently installed wheel and the synthetic archived primary workflow.
+Historical reports below are preserved as records of their identified commits.
+
 ## Review follow-up
 
 `review_followup_20260913_final.json` records the reviewed source commit and source
@@ -12,8 +19,8 @@ validation environment's distribution inventory. The pinned CPU environment
 is reused, not described as newly created. No full cohort/GPU rerun is implied.
 
 The validation report is committed after the source commit that it identifies;
-its own addition does not change that tested source snapshot. A public tag,
-release, DOI and source-data deposit remain pending author approval.
+its own addition does not change that tested source snapshot. GitHub visibility,
+version tags, software DOIs and numerical data deposits are separate records.
 
 ## Historical candidate validation
 

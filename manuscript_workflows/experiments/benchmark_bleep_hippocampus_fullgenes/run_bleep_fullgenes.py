@@ -23,7 +23,7 @@ ROOT = DATA_ROOT
 EXP_ROOT = ROOT / "experiments/benchmark_bleep_hippocampus_fullgenes"
 DATA_ROOT = EXP_ROOT / "data"
 EXPRESSION_ROOT = ROOT / "experiments/sample_split_fullgenes/expression_full"
-BLEEP_ROOT = Path("/users/tchen2/SpatioS2E/third_party/BLEEP")
+BLEEP_ROOT = Path(os.environ.get("SPATIOS2E_BLEEP_ROOT", ROOT / "third_party/BLEEP")).resolve()
 
 
 def patch_torch_pytree() -> None:

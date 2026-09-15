@@ -18,8 +18,7 @@ GeneQuery uses 613 training and 138 held-out genes; DeepSpot-M uses 601 and
 135. Patients A–E train the GeneQuery reconstruction and no-image mappings,
 F selects GeneQuery checkpoints, and G–H provide 3,097 test spots. DeepSpot-M
 target tokens have upstream spatial-training exposure. These are within-system
-audits, not a ranking under identical training conditions. Experimental HBD
-analyses are not part of this manuscript release.
+audits, not a ranking under identical training conditions.
 
 ## Dependencies and upstream artifacts
 

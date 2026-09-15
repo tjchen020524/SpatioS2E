@@ -19,6 +19,10 @@ data and generated evidence. Figure numbers refer to the current manuscript.
 | Extended Data Fig. 8 decoder robustness | `BiasFreeFactorizedDecoder` and `ConcatenationMLPDecoder` | Matched Decima target-disjoint inputs and controls |
 | Fig. 5 representation replication | `extract_scgpt_gene_tokens`, `gene_vectors` and the shared held-out fitting loop | Whole-human scGPT checkpoint, matched covered targets and within-representation controls |
 | Fig. 5c and Extended Data Fig. 10 external audits | `experiments/external_genequery_component_audit/` | HER2ST inputs, official GeneQuery vectors and ResNet weights; DeepSpot-M source and released checkpoint |
+| Extended Data Fig. 3f and Supplementary Table S18 covariates | `manuscript_workflows/experiments/heldout_gene_second_stage/build_sequence_covariates.py` and `build_detection_and_covariate_controls.py` | Sequence annotations, training-individual means and primary Decima outputs |
+| Extended Data Fig. 7 and Supplementary Table S7 partitions | `manuscript_workflows/experiments/heldout_gene_second_stage/build_gene_partitions.py` and `run_partition_control.py` | Training-only expression strata, vectors and chromosome metadata |
+| Supplementary Table S15 provenance/coverage | `build_decima_pretraining_audit.py` and `audit_scgpt_provenance_and_coverage.py` in `manuscript_workflows/experiments/heldout_gene_second_stage/` | Packaged upstream metadata, vocabulary and downstream gene lists |
+| Supplementary Table S20 fitted fusion | archived `current_full_ablation_common` drivers and cohort configs | FiLM, concatenation and cross-attention runs on the graph-enabled background |
 | Supplementary residual-only assay | `SectionCenteredResidualDecoder` and `center_within_section` | Exactly section-centred training targets |
 | Supplementary branch interventions | `FactorizedDotProductDecoder.forward_branches` | Frozen checkpoint and reproducible within-partition identity permutations |
 
@@ -48,8 +52,8 @@ representation family.
 
 ## Numerical evidence
 
-Numerical Source Data accompany the manuscript submission; their public
-deposit link remains pending author approval. Raw cohort inputs, third-party
+Numerical Source Data and Supplementary Tables are separate manuscript files.
+See [data and artifact availability](data_availability.md). Raw cohort inputs, third-party
 weights, downstream checkpoints and dense predictions are not bundled here.
 The component evaluator also works with independently supplied compatible
 prediction matrices.

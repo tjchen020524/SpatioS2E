@@ -4,13 +4,14 @@
     "Resolve development data/output roots with workflow_paths.DATA_ROOT",
     "Resolve dynamic custom-script paths with workflow_paths.CODE_ROOT",
     "Make fitted configuration paths relative to the data workspace",
-    "Append optional data-root import paths after archived code"
+    "Append optional data-root import paths after archived code",
+    "Resolve external BLEEP and ST-Net roots from operator environment variables (2026-09-15)"
   ],
   "files": [
     {
       "path": "experiments/benchmark_bleep_hippocampus_fullgenes/run_bleep_fullgenes.py",
       "original_sha256": "e4a528522449b93ea7ac29a1d5745ea853456834c5b06cfa10267feb8765f3cc",
-      "archived_sha256": "c42219e2916f5c548a90a8048b1b9e2df6adb7f3065c3f07bcb524868aa46446"
+      "archived_sha256": "3a262395baa1ef388a7d896cb1bd25c15c2117e136d676fdde20035fa8679bc8"
     },
     {
       "path": "experiments/benchmark_stnet_hippocampus_fullgenes/eval_stnet_fullgenes.py",
@@ -25,7 +26,7 @@
     {
       "path": "experiments/benchmark_stnet_hippocampus_fullgenes/run_stnet_fullgenes_fixedsplit.py",
       "original_sha256": "2b103e4e379e5dbc92dca8b9ce5de83f034c3db32703f3103507494b82e0eb5e",
-      "archived_sha256": "d7306f31010ca934b585f0b23fa3db4344e24b0226dd8c16fdf2224feede754b"
+      "archived_sha256": "5e34a891c4e07ffdc5f32881407c484cdfd3a0a6904056708285517e17a05d07"
     },
     {
       "path": "experiments/current_full_ablation_common/evaluate_with_coverage.py",

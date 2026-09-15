@@ -23,13 +23,14 @@ ROOT = Path(__file__).resolve().parents[1]
 LOCK = ROOT / "requirements-lock-linux-x86_64-py310.txt"
 PARTITION_MANIFEST = ROOT / "configs" / "manuscript" / "gene_partition_manifest.json"
 SOURCE_ROOTS = ("spatios2e", "tests", "scripts", "configs/manuscript", "docs", "experiments",
-                "manuscript_workflows", "examples")
+                "manuscript_workflows", "examples", ".github")
 SOURCE_FILES = (
     "pyproject.toml",
     "MANIFEST.in",
     "README.md",
     "LICENSE",
     "CITATION.cff",
+    "CONTRIBUTING.md",
     "CHANGELOG.md",
     LOCK.name,
 )

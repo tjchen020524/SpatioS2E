@@ -5,6 +5,7 @@ from workflow_paths import DATA_ROOT
 import argparse
 import json
 import math
+import os
 import sys
 from collections import OrderedDict
 from pathlib import Path
@@ -15,7 +16,7 @@ import torchvision
 
 
 PROJECT_ROOT = DATA_ROOT
-STNET_ROOT = Path("/users/tchen2/SpatioS2E/third_party/ST-Net")
+STNET_ROOT = Path(os.environ.get("SPATIOS2E_STNET_ROOT", PROJECT_ROOT / "third_party/ST-Net")).resolve()
 EXP_ROOT = PROJECT_ROOT / "experiments/benchmark_stnet_hippocampus_fullgenes"
 
 if str(STNET_ROOT) not in sys.path:
