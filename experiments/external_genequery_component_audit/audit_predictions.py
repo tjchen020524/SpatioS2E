@@ -21,7 +21,8 @@ if str(ROOT) not in sys.path:
 from experiments.heldout_metric_policy import gene_correlations_from_moments  # noqa: E402
 
 
-def finite_corr(x: np.ndarray, y: np.ndarray, constant_value: float = float("nan")) -> float:
+def finite_corr(x: np.ndarray, y: np.ndarray, *, std_min: float = 1.0e-6) -> float:
+    """Return PCC, or NaN when either vector has negligible variation."""
     x = np.asarray(x, dtype=np.float64).ravel()
     y = np.asarray(y, dtype=np.float64).ravel()
     mask = np.isfinite(x) & np.isfinite(y)
@@ -29,9 +30,11 @@ def finite_corr(x: np.ndarray, y: np.ndarray, constant_value: float = float("nan
         return float("nan")
     xc = x[mask] - x[mask].mean()
     yc = y[mask] - y[mask].mean()
-    denominator = math.sqrt(float(np.dot(xc, xc) * np.dot(yc, yc)))
-    if denominator <= 0.0:
-        return constant_value
+    x_ss = float(np.dot(xc, xc))
+    y_ss = float(np.dot(yc, yc))
+    if min(x_ss, y_ss) <= int(mask.sum()) * std_min**2:
+        return float("nan")
+    denominator = math.sqrt(x_ss * y_ss)
     return float(np.clip(np.dot(xc, yc) / denominator, -1.0, 1.0))
 
 
@@ -56,6 +59,13 @@ def matrix_metrics(pred: np.ndarray, true: np.ndarray) -> Dict[str, object]:
     policy = gene_correlations_from_moments(
         count, sum_pred, sum_true, sum_pred2, sum_true2, sum_cross
     )
+    centered_pcc = policy.centered_full_matrix_pcc
+    centered_count = float(count[policy.eligible].sum())
+    if centered_count == 0 or min(
+        float(policy.centered_pred_ss[policy.eligible].sum()),
+        float(policy.centered_true_ss[policy.eligible].sum()),
+    ) <= centered_count * 1.0e-12:
+        centered_pcc = float("nan")
     total_count = int(pred.size)
     total_sse = float(gene_sse.sum())
     abundance_sse = float(abundance_gene_sse.sum())
@@ -65,12 +75,12 @@ def matrix_metrics(pred: np.ndarray, true: np.ndarray) -> Dict[str, object]:
         "n_genes": int(pred.shape[1]),
         "n_eligible_gene_pcc": policy.n_eligible,
         "n_constant_prediction_gene_pcc": policy.n_constant_prediction,
-        "full_matrix_pcc": finite_corr(pred, true, constant_value=0.0),
-        "abundance_pcc": finite_corr(mean_pred, mean_true, constant_value=0.0),
+        "full_matrix_pcc": finite_corr(pred, true),
+        "abundance_pcc": finite_corr(mean_pred, mean_true),
         "abundance_rmse": float(np.sqrt(np.mean(np.square(mean_pred - mean_true)))),
         "mean_gene_pcc": policy.mean,
         "median_gene_pcc": policy.median,
-        "centered_full_matrix_pcc": policy.centered_full_matrix_pcc,
+        "centered_full_matrix_pcc": centered_pcc,
         "overall_mse": total_sse / total_count,
         "abundance_mse": abundance_sse / total_count,
         "centered_mse": centered_sse / total_count,

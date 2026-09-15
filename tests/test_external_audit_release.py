@@ -8,6 +8,9 @@ import sys
 
 import numpy as np
 import pandas as pd
+import pytest
+
+from experiments.external_genequery_component_audit.audit_predictions import finite_corr, matrix_metrics
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -35,7 +38,10 @@ def make_runs(tmp_path):
             path.parent.mkdir(parents=True)
             # Semantic has higher error: a positive fraction is not an improvement.
             mean = 2.0 if variant == "semantic" else 1.0
-            path.write_text(json.dumps(dict(metrics, overall_mse=mean+1, abundance_mse=mean, centered_mse=1.0)))
+            row = dict(metrics, overall_mse=mean+1, abundance_mse=mean, centered_mse=1.0)
+            if variant == "constant":
+                row["abundance_pcc"] = float("nan")
+            path.write_text(json.dumps(row))
 
 
 def test_three_seed_summary_and_signed_error(tmp_path):
@@ -48,6 +54,8 @@ def test_three_seed_summary_and_signed_error(tmp_path):
     assert (frame.gene_mean_fraction == 1).all()
     assert (frame.mse_change_direction == "increase").all()
     assert (frame.attribution_error.abs() < 1e-12).all()
+    assert frame.loc[frame.comparison == "semantic_vs_constant", "delta_abundance_pcc"].isna().all()
+    assert frame.loc[frame.comparison != "semantic_vs_constant", "delta_abundance_pcc"].notna().all()
 
 
 def test_summary_rejects_missing_condition(tmp_path):
@@ -76,8 +84,43 @@ def test_prediction_cli_constant_spatial_output(tmp_path):
     assert result.returncode == 0, result.stderr
     row = json.loads((tmp_path / "audit/summary.json").read_text())
     assert row["mean_gene_pcc"] == 0
-    assert row["section_centered_full_matrix_pcc"] == 0
+    assert np.isnan(row["section_centered_full_matrix_pcc"])
+    assert np.isnan(row["centered_full_matrix_pcc"])
+    assert np.isfinite(row["full_matrix_pcc"])
+    assert np.isfinite(row["abundance_pcc"])
     assert abs(row["overall_mse"]-row["abundance_mse"]-row["centered_mse"]) < 1e-12
+
+
+@pytest.mark.parametrize("constant", [0.0, 0.1, 2.0])
+def test_matrix_pcc_is_undefined_for_constant_predictions(constant):
+    true = np.arange(20, dtype=float).reshape(5, 4)
+    row = matrix_metrics(np.full_like(true, constant), true)
+    assert np.isnan(row["full_matrix_pcc"])
+    assert np.isnan(row["abundance_pcc"])
+    assert np.isnan(row["centered_full_matrix_pcc"])
+    assert row["mean_gene_pcc"] == 0
+    assert abs(row["decomposition_error"]) < 1e-12
+
+
+def test_shared_spatial_map_retains_defined_matrix_correlations():
+    true = np.arange(20, dtype=float).reshape(5, 4)
+    pred = np.broadcast_to(np.arange(5, dtype=float)[:, None], true.shape)
+    row = matrix_metrics(pred, true)
+    assert np.isnan(row["abundance_pcc"])
+    assert np.isfinite(row["full_matrix_pcc"])
+    assert np.isfinite(row["centered_full_matrix_pcc"])
+
+
+@pytest.mark.parametrize("swap", [False, True])
+def test_negligible_variation_is_undefined_in_either_vector(swap):
+    variable = np.arange(4, dtype=float)
+    near_constant = 0.1 + 1e-12 * variable
+    x, y = (variable, near_constant) if swap else (near_constant, variable)
+    assert np.isnan(finite_corr(x, y))
+
+
+def test_zero_correlation_with_variable_inputs_remains_defined():
+    assert finite_corr(np.array([-1., 0., 1.]), np.array([1., -2., 1.])) == 0
 
 
 def test_external_configuration_uses_release_split():
