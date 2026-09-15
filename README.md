@@ -16,7 +16,7 @@ improvements in spatial variation.
 
 ## Installation
 
-Requires Python 3.10 or newer.
+Requires Python 3.10 or newer; tested on CPython 3.10/Linux.
 
 ```bash
 git clone https://github.com/tjchen020524/SpatioS2E.git

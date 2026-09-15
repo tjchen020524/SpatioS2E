@@ -8,6 +8,7 @@ passed to :func:`evaluate_heldout_decoder` only after fitting is complete.
 
 from __future__ import annotations
 
+from collections.abc import Iterator
 from copy import deepcopy
 from dataclasses import asdict, dataclass
 from typing import Iterable, Mapping, Sequence
@@ -145,9 +146,23 @@ def fit_heldout_decoder(
     config: HeldOutTrainingConfig = HeldOutTrainingConfig(),
     device: torch.device | str = "cpu",
 ) -> HeldOutTrainingResult:
-    """Fit a shared decoder without exposing held-out targets to optimization."""
+    """Fit a shared decoder without exposing held-out targets to optimization.
+
+    For multiple epochs, both batch sources must be re-iterable (for example,
+    lists or DataLoaders), not one-shot iterators or generators.
+    """
 
     config.validate()
+    if config.epochs > 1:
+        for name, batches in (
+            ("training_batches", training_batches),
+            ("validation_batches", validation_batches),
+        ):
+            if isinstance(batches, Iterator):
+                raise TypeError(
+                    f"{name} must be re-iterable when epochs > 1; "
+                    "pass a DataLoader or list, not a one-shot iterator or generator"
+                )
     device = torch.device(device)
     model.to(device)
     vectors = torch.as_tensor(gene_vectors, dtype=torch.float32, device=device)
