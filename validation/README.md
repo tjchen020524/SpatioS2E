@@ -6,7 +6,6 @@ they do not reproduce the full four-cohort GPU analyses.
 
 | Record | Coverage |
 | --- | --- |
-| [CPU validation, 2026-09-15](cpu_validation_20260915.json) | 48 tests, dependency checks, lint, source/wheel builds, isolated wheel execution and synthetic primary-workflow training |
 | [CPU validation, 2026-09-13](review_followup_20260913_final.json) | 44 tests, isolated wheel execution and synthetic primary-workflow training; record cited in Supplementary Methods |
 | [Clean installation](cleanroom_validation_linux_x86_64_py310.json) | Fresh CPython 3.10.19 environment, all 38 pinned dependencies and 27 tests |
 | [Real-data integration](real_heldout_smoke_hippocampus_seed42.json) | Bounded hippocampus input alignment, one-epoch fitting and held-out-gene evaluation; [output table](real_heldout_smoke_hippocampus_seed42.tsv) |
@@ -33,7 +32,7 @@ For the real-data check, run
 hippocampus inputs described in the [reproduction guide](../docs/reproduction.md).
 
 From the repository root, verify the archived dependency lock, partition
-manifest and original validation records with:
+manifest, validation records and README figure with:
 
 ```bash
 sha256sum -c validation/checksums.sha256

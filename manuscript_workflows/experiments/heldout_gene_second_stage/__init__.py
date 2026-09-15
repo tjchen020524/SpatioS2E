@@ -1,1 +1,1 @@
-"""Reviewer-driven held-out-gene controls and uncertainty analyses."""
+"""Held-out-gene controls and uncertainty analyses."""

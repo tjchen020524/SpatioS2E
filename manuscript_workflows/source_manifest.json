@@ -5,7 +5,8 @@
     "Resolve dynamic custom-script paths with workflow_paths.CODE_ROOT",
     "Make fitted configuration paths relative to the data workspace",
     "Append optional data-root import paths after archived code",
-    "Resolve external BLEEP and ST-Net roots from operator environment variables (2026-09-15)"
+    "Resolve external BLEEP and ST-Net roots from operator environment variables (2026-09-15)",
+    "Normalize non-functional module docstrings"
   ],
   "files": [
     {
@@ -121,7 +122,7 @@
     {
       "path": "experiments/heldout_gene_second_stage/__init__.py",
       "original_sha256": "02796d7f01906ab8d58ba5bfadba926c643a7600d5616e1b8a3facf9bac8ff7d",
-      "archived_sha256": "02796d7f01906ab8d58ba5bfadba926c643a7600d5616e1b8a3facf9bac8ff7d"
+      "archived_sha256": "ac00f1e34f71f0b4c863dfac23500b293dd2a7d8afefced468569339bc90ea80"
     },
     {
       "path": "experiments/heldout_gene_second_stage/audit_constant_gene_mean_pcc.py",

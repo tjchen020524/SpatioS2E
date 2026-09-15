@@ -2166,7 +2166,7 @@
       "duration_seconds": 0.849,
       "label": "fresh wheel installation",
       "return_code": 0,
-      "stderr": "WARNING: The directory '/users/tchen2/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.\n",
+      "stderr": "WARNING: The directory '<user-home>/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.\n",
       "stdout": "Processing ./spatios2e-1.1.0-py3-none-any.whl\nInstalling collected packages: spatios2e\nSuccessfully installed spatios2e-1.1.0\n"
     },
     {
@@ -2258,6 +2258,11 @@
   "python": {
     "implementation": "CPython",
     "version": "3.10.19"
+  },
+  "redactions": {
+    "fields": ["checks[6].stderr"],
+    "description": "Machine-local home-directory prefix replaced with <user-home>; all other recorded fields unchanged.",
+    "original_sha256": "b8d21b2f6f0e53878d401efde11e213335989e865ba494769a913390b63d0797"
   },
   "schema_version": 1,
   "scope": "CPU clean-room install, exact dependency check, partition-manifest regeneration, unit tests, source synthetic tests, lint, build, independently installed wheel synthetic computation outside the repository, and source-distribution contents. This is not a rerun of the four-cohort manuscript analyses and does not validate CUDA execution.",

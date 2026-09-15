@@ -34,11 +34,13 @@ def test_public_markdown_relative_links_resolve():
 
 def test_readme_asset_checksum_is_current():
     asset = ROOT / "docs/assets/figure_1_cde.png"
-    assert hashlib.sha256(asset.read_bytes()).hexdigest() in (asset.parent / "README.md").read_text()
+    expected = f"{hashlib.sha256(asset.read_bytes()).hexdigest()}  docs/assets/figure_1_cde.png"
+    checksums = (ROOT / "validation/checksums.sha256").read_text().splitlines()
+    assert expected in checksums
 
 
-def test_archived_python_has_no_author_specific_absolute_roots():
+def test_archived_python_has_no_machine_specific_absolute_roots():
+    local_root = re.compile(r"/(?:home|users|Users)/[^/\s<>]+/|/dcs\d+/[^/\s]+/data/")
     for path in (ROOT / "manuscript_workflows").rglob("*.py"):
         text = path.read_text()
-        assert "/users/tchen2/" not in text, path
-        assert "/dcs04/hicks/data/tchen2/" not in text, path
+        assert not local_root.search(text), path

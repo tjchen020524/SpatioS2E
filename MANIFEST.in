@@ -14,7 +14,6 @@ recursive-include scripts *.py *.sh
 recursive-include tests *.py
 recursive-include experiments *.py *.md
 include validation/review_followup_20260913_final.json
-include validation/cpu_validation_20260915.json
 include validation/README.md
 include validation/checksums.sha256
 include validation/cleanroom_validation_linux_x86_64_py310.json

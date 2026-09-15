@@ -26,7 +26,6 @@ def test_archive_is_hash_traced_and_python_syntax_is_valid():
         assert path.suffix in {'.py', '.yaml', '.json'}
         if path.suffix == '.py':
             ast.parse(path.read_text())
-        assert '/dcs04/hicks/data/tchen2/' not in path.read_text()
 
 
 def test_historical_decoder_computes_outside_development_root(tmp_path):

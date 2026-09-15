@@ -180,6 +180,7 @@ def _portable_text(value: str) -> str:
         text,
     )
     text = re.sub(r"/tmp/spatios2e-build-[^/\s]+", "<temporary-build-dir>", text)
+    text = re.sub(r"/(?:home|users|Users)/[^/\s\"'<>]+(?=/|$)", "<user-home>", text)
     return text
 
 
