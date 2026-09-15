@@ -1,8 +1,7 @@
 # Held-out-target assay contract
 
-For a runnable prepared-input path and the actual manuscript analysis drivers,
-see [Manuscript reproduction](reproduction.md). The examples below document
-the reusable API; they are not standalone four-cohort reproduction scripts.
+This guide documents the reusable decoder API. For the manuscript workflow
+commands, see [Manuscript reproduction](reproduction.md).
 
 The reusable assay fits one decoder within a tissue domain while excluding a
 fixed target set from optimization and checkpoint selection. Biological test

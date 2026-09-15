@@ -54,7 +54,7 @@ architecture controls:
 `spatios2e.training.heldout` exposes reusable fitting, checkpoint selection and
 evaluation functions for precomputed spot representations and fixed gene
 vectors. The held-out targets enter only the post-fit evaluation call. See the
-[`held-out assay contract`](heldout_assay.md) for the batch interface and
+[held-out assay guide](heldout_assay.md) for the batch interface and
 an API example.
 
 The manuscript uses sequence-derived Decima vectors and static scGPT gene-token
@@ -103,7 +103,6 @@ New-cohort prediction requires cohort data and upstream tissue-image and gene
 representations. UNI2-h, Decima and scGPT weights are obtained from their
 respective projects; trained downstream checkpoints are not distributed in
 this repository.
-
 
 ## Optional dependencies and validation
 

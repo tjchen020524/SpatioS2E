@@ -13,10 +13,8 @@ recursive-include manuscript_workflows *.py *.json *.yaml *.md
 recursive-include scripts *.py *.sh
 recursive-include tests *.py
 recursive-include experiments *.py *.md
-include validation/submission_v1.1.0.json
-include validation/review_followup_20260913.json
 include validation/review_followup_20260913_final.json
-recursive-include validation public_readiness_*.json
+include validation/cpu_validation_20260915.json
 include validation/README.md
 include validation/checksums.sha256
 include validation/cleanroom_validation_linux_x86_64_py310.json

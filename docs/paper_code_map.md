@@ -1,11 +1,8 @@
 # Manuscript-to-code map
 
-The [reproduction guide](reproduction.md) maps these components to actual
-archived drivers, their upstream inputs and output tables. The reusable APIs
-in the table below are not the complete manuscript workflow by themselves.
-
-This document separates reusable public implementations from cohort-specific
-data and generated evidence. Figure numbers refer to the current manuscript.
+The table maps manuscript analyses to implementations and required inputs.
+For workflow commands and output locations, see the
+[reproduction guide](reproduction.md).
 
 | Analysis | Public implementation | External inputs |
 | --- | --- | --- |

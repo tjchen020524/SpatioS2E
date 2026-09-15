@@ -1,86 +1,40 @@
-# Clean-room validation records
+# Validation
 
-## Public-source readiness
+The records below identify the tested source snapshots, dependencies, commands
+and results. CPU checks cover installation, tests and synthetic workflows;
+they do not reproduce the full four-cohort GPU analyses.
 
-`public_readiness_20260915.json` records the clean source commit tested before
-public-source handoff: unit tests, pinned dependencies, lint, source/wheel builds,
-an independently installed wheel and the synthetic archived primary workflow.
-Historical reports below are preserved as records of their identified commits.
+| Record | Coverage |
+| --- | --- |
+| [CPU validation, 2026-09-15](cpu_validation_20260915.json) | 48 tests, dependency checks, lint, source/wheel builds, isolated wheel execution and synthetic primary-workflow training |
+| [CPU validation, 2026-09-13](review_followup_20260913_final.json) | 44 tests, isolated wheel execution and synthetic primary-workflow training; record cited in Supplementary Methods |
+| [Clean installation](cleanroom_validation_linux_x86_64_py310.json) | Fresh CPython 3.10.19 environment, all 38 pinned dependencies and 27 tests |
+| [Real-data integration](real_heldout_smoke_hippocampus_seed42.json) | Bounded hippocampus input alignment, one-epoch fitting and held-out-gene evaluation; [output table](real_heldout_smoke_hippocampus_seed42.tsv) |
 
-## Review follow-up
+The real-data check uses small subsets to test the implementation; its metrics
+are not manuscript results. Historical reports apply to their recorded source
+snapshots. The pinned CPU environment is specified in
+[`requirements-lock-linux-x86_64-py310.txt`](../requirements-lock-linux-x86_64-py310.txt)
+and [`environment-lock.yml`](../environment-lock.yml).
 
-`review_followup_20260913_final.json` records the reviewed source commit and source
-hash, source tests, the archived primary driver trained for six epochs on a
-small synthetic panel, source-distribution contents, and a newly built wheel
-installed into a fresh target directory. The wheel is imported and used for
-synthetic fitting/evaluation outside the repository with isolated Python;
-its version, import path and SHA-256 are recorded separately from the base
-validation environment's distribution inventory. The pinned CPU environment
-is reused, not described as newly created. No full cohort/GPU rerun is implied.
+## Run the checks
 
-The validation report is committed after the source commit that it identifies;
-its own addition does not change that tested source snapshot. GitHub visibility,
-version tags, software DOIs and numerical data deposits are separate records.
-
-## Historical candidate validation
-
-`review_followup_20260913.json` preserves the first successful review-stage
-validation, before the final README schematic-label adjustment. The final
-record above includes that asset change; the scientific implementation is unchanged.
-
-`submission_v1.1.0.json` records an earlier dirty v1.1.0 candidate, dependency checks,
-tests, lint and distribution builds. It reuses the previously prepared pinned
-CPU environment; it is not a claim that a new environment was created for
-this revision. Tests include external-audit synthetic predictions, three-seed
-aggregation, missing-condition rejection and signed MSE changes. No external
-weights are loaded and no GPU training is performed by that validation. It
-predates the review follow-up and does not validate the present source or wheel.
-
-The two older reports below remain historical records for v1.0.0. Their
-checksums are preserved unchanged, rather than relabelled as v1.1.0 results.
-
-## Historical clean-room and real-data checks
-
-The publication release distinguishes a newly validated release environment
-from the mutable environments in which the historical manuscript experiments
-were run. The latter cannot be reconstructed exactly and are not inferred from
-this lock.
-
-`requirements-lock-linux-x86_64-py310.txt` pins every Python package in the
-supported clean-room environment. `environment-lock.yml` also fixes the Python
-patch version. The validation report records the lock checksum, source
-snapshot, operating system, CPU, visible GPUs, PyTorch CUDA/cuDNN metadata,
-installed distributions, commands, captured logs and exit codes.
-`checksums.sha256` provides a compact integrity record for the dependency lock,
-gene-partition manifest and both validation outputs; its paths are relative to
-the repository root.
-
-To create a new environment rather than reuse an existing one:
+To install the pinned dependencies in a new environment and write a report:
 
 ```bash
 bash scripts/run_cleanroom_rebuild.sh \
   /path/to/python3.10 \
   /new/path/spatios2e-cleanroom \
-  validation/cleanroom_validation_linux_x86_64_py310.json
+  /new/path/cpu-validation.json
 ```
 
-The archived report covers installation, dependency verification, checksum
-manifest regeneration, unit tests, a synthetic held-out-decoder training and
-evaluation, lint, distribution builds and a command-line smoke test. It is a
-CPU validation and is not evidence that the complete four-cohort workflow or
-CUDA execution was rerun. A future full-workflow record should use the same
-reporting convention and additionally freeze the external data, pretrained
-weights, trained checkpoints and source-data outputs that licensing permits.
+For the real-data check, run
+`python scripts/validate_real_heldout_smoke.py --help` and supply the prepared
+hippocampus inputs described in the [reproduction guide](../docs/reproduction.md).
 
-The companion `real_heldout_smoke_hippocampus_seed42` record is a bounded
-real-data integration check. It reads frozen hippocampus expression and UNI2-h
-feature files, the archived biological and target partitions and Decima
-vectors; verifies every spot-manifest sample against the final donor-disjoint
-manuscript split; fits matched
-pretrained- and random-vector decoders for one epoch using the manuscript
-decoder dimensions; evaluates downstream-held-out genes; and writes a TSV
-source table. Its deliberately small subset tests data alignment, fitting and
-evaluation without being interpreted as a reproduction or estimate of any
-reported manuscript result. The command is implemented by
-`scripts/validate_real_heldout_smoke.py`; its input paths are supplied by the
-operator because source data and third-party vectors are not redistributed.
+From the repository root, verify the archived dependency lock, partition
+manifest and original validation records with:
+
+```bash
+sha256sum -c validation/checksums.sha256
+```

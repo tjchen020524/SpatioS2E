@@ -21,7 +21,9 @@ def test_synthetic_quickstart_runs_without_external_inputs(tmp_path):
 
 
 def test_public_markdown_relative_links_resolve():
-    documents = [ROOT / "README.md", ROOT / "CONTRIBUTING.md", *ROOT.glob("docs/**/*.md")]
+    documents = [ROOT / "README.md", ROOT / "CONTRIBUTING.md", ROOT / "CHANGELOG.md"]
+    for directory in ("docs", "validation", "configs", "examples", "experiments", "manuscript_workflows"):
+        documents.extend((ROOT / directory).rglob("*.md"))
     for document in documents:
         for target in re.findall(r"\]\(([^)]+)\)", document.read_text()):
             if target.startswith(("https://", "http://", "mailto:", "#")):

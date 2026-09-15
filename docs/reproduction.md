@@ -1,10 +1,8 @@
 # Manuscript reproduction
 
-This repository contains the package and a selected archive of the actual custom
-analysis scripts. `manuscript_workflows/source_manifest.json` records original
-and archived source hashes. Development/data roots, external repository paths and import-path priority
-were made portable; scientific model and metric definitions were retained. Full GPU/cohort experiments were not rerun as part
-of release validation.
+This guide covers input preparation and the manuscript analysis workflows.
+Custom scripts and configurations are in `manuscript_workflows/`, with original
+and portable source hashes recorded in `source_manifest.json`.
 
 ## Environments and preparation
 
@@ -169,5 +167,4 @@ This Git/source archive contains code, configs, partitions and validation.
 Numerical Source Data and Supplementary Tables are separate manuscript files.
 Raw images/counts, third-party weights, trained checkpoints and dense predictions
 are not included. See [data and artifact availability](data_availability.md)
-for cohort identifiers and the distinction between code and external inputs.
-Until an immutable software DOI is assigned, record the version and Git commit.
+for cohort identifiers and required external inputs.

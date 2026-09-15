@@ -8,8 +8,7 @@ core tests run without downloading cohort data or model weights.
 
 The identifiers below are recorded in
 [`configs/manuscript/cohorts.yaml`](../configs/manuscript/cohorts.yaml).
-Use the provider's access terms and the manuscript's preprocessing description;
-an accession alone does not supply the aligned feature matrices used by the code.
+Follow the providers' access terms and the manuscript's preprocessing procedures.
 
 | Cohort | Recorded accession / deposit |
 | --- | --- |
@@ -32,5 +31,4 @@ an accession alone does not supply the aligned feature matrices used by the code
 
 The [reproduction guide](reproduction.md) describes preparation, alignment and
 training. The [code map](paper_code_map.md) identifies the implementation behind
-each analysis. Public code availability and availability of every scientific
-input are separate: full-cohort reproduction requires the external inputs above.
+each analysis.

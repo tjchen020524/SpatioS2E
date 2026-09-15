@@ -19,9 +19,8 @@ def test_release_version_is_consistent():
     assert match.group(1) == EXPECTED_VERSION
     assert spatios2e.__version__ == EXPECTED_VERSION
     assert str(citation["version"]) == EXPECTED_VERSION
-    # Candidate metadata must not imply a formally published release date.
-    assert "date-released" not in citation
-    assert (ROOT / "docs" / "releases" / f"v{EXPECTED_VERSION}.md").is_file()
+    changelog = (ROOT / "CHANGELOG.md").read_text()
+    assert re.search(rf"^## {re.escape(EXPECTED_VERSION)}(?:\s|$)", changelog, re.MULTILINE)
 
 
 def test_release_license_uses_collective_holder_and_no_email():

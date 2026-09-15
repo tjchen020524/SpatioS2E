@@ -1,13 +1,12 @@
 cff-version: 1.2.0
-message: If you use SpatioS2E, please cite this software and specify the version and Git commit used. The manuscript citation will be added when its preprint identifier is available.
+message: If you use SpatioS2E, please cite this software and specify the version used.
 title: "SpatioS2E: component-resolved evaluation of gene-conditioned virtual spatial transcriptomics"
 type: software
 abstract: >-
-  SpatioS2E provides fitted-target and target-disjoint experimental systems for
-  gene-conditioned virtual spatial transcriptomics. It includes
-  component-resolved endpoints that separate gene-mean log-expression from
-  within-gene spatial variation, matched gene-vector controls, held-out-target
-  decoders and frozen manuscript analysis contracts.
+  SpatioS2E provides evaluation tools and gene-conditioned predictors for
+  virtual spatial transcriptomics. It separates gene-mean prediction from
+  within-gene spatial variation and includes matched gene-vector controls,
+  held-out-gene training and the analysis workflows used in the accompanying study.
 authors:
   - family-names: Chen
     given-names: Tingjun
