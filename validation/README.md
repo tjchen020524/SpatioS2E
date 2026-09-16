@@ -41,7 +41,7 @@ For the real-data check, run
 hippocampus inputs described in the [reproduction guide](../docs/reproduction.md).
 
 From the repository root, verify the archived dependency lock, partition
-manifest, validation records and README figure with:
+manifest and validation records with:
 
 ```bash
 sha256sum -c validation/checksums.sha256

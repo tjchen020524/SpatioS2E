@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "spatios2e"
 version = "1.1.2"
-description = "Component-resolved evaluation and gene-conditioned prediction of spatial expression."
+description = "Analysis of mean-expression and spatial-pattern transfer from pretrained gene representations."
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}

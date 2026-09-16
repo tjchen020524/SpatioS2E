@@ -1,5 +1,4 @@
 """Keep the public documentation and weight-free entry point usable."""
-import hashlib
 import json
 from pathlib import Path
 import re
@@ -30,13 +29,6 @@ def test_public_markdown_relative_links_resolve():
                 continue
             relative = target.split("#", 1)[0]
             assert (document.parent / relative).exists(), (document, target)
-
-
-def test_readme_asset_checksum_is_current():
-    asset = ROOT / "docs/assets/figure_1_cde.png"
-    expected = f"{hashlib.sha256(asset.read_bytes()).hexdigest()}  docs/assets/figure_1_cde.png"
-    checksums = (ROOT / "validation/checksums.sha256").read_text().splitlines()
-    assert expected in checksums
 
 
 def test_archived_python_has_no_machine_specific_absolute_roots():

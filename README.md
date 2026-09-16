@@ -7,12 +7,11 @@ Code for the study:
 **Pretrained gene representations transfer mean expression more broadly than
 spatial patterns in virtual spatial transcriptomics**
 
-We train image-based expression predictors with fixed gene vectors from Decima
-or scGPT. Across four brain and breast cancer cohorts, we test held-out genes
-in new donors or patients and separate improvements in gene means from
-improvements in spatial variation.
-
-![Image features and fitted- and held-out-gene prediction workflows](docs/assets/figure_1_cde.png)
+We study what pretrained gene representations contribute to spatial expression
+prediction. Across three human brain regions and HER2-positive breast cancer,
+we evaluate Decima- and scGPT-derived vectors on held-out genes in new donors
+or patients, separating gains in gene-mean prediction from gains in within-gene
+spatial variation.
 
 ## Installation
 
@@ -36,7 +35,7 @@ or model weights.
 python examples/synthetic_components.py
 ```
 
-To evaluate your own prediction matrices, see [Using SpatioS2E](docs/usage.md).
+To evaluate your own prediction matrices, see [Evaluation and training](docs/usage.md).
 
 ## Reproduce the paper
 

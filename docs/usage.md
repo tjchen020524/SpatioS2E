@@ -1,4 +1,4 @@
-# Using SpatioS2E
+# Evaluation and training
 
 Use the examples below to evaluate prediction matrices or fit a model with
 prepared features. For the paper's cohort-specific experiments, follow

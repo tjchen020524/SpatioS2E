@@ -29,12 +29,8 @@ def test_release_license_uses_collective_holder_and_no_email():
     assert "@" not in citation_text
 
 
-def test_readme_overview_is_included_in_source_distribution():
-    readme = (ROOT / "README.md").read_text()
-    images = re.findall(r'(?:src="|\]\()(docs/assets/[^"\)]+\.png)', readme)
+def test_public_documentation_is_included_in_source_distribution():
     manifest = (ROOT / "MANIFEST.in").read_text()
 
-    assert images
-    assert all((ROOT / path).is_file() for path in images)
-    assert "recursive-include docs *.md *.png" in manifest
+    assert "recursive-include docs *.md" in manifest
     assert "recursive-include examples *.sh *.txt *.md" in manifest
