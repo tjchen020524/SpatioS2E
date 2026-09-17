@@ -7,11 +7,12 @@ Code for the study:
 **Pretrained gene representations transfer mean expression more broadly than
 spatial patterns in virtual spatial transcriptomics**
 
-We study what pretrained gene representations contribute to spatial expression
-prediction. Across three human brain regions and HER2-positive breast cancer,
-we evaluate Decima- and scGPT-derived vectors on held-out genes in new donors
-or patients, separating gains in gene-mean prediction from gains in within-gene
-spatial variation.
+We ask whether pretrained gene representations help spatial predictors estimate
+gene means, recover spatial variation, or both. To test this, we train spatial
+predictors using tissue-image features and fixed gene vectors extracted from
+Decima or scGPT, alongside matched control-vector models. We evaluate the
+predictors on genes excluded from fitting and model selection, in new donors
+or patients across three human brain regions and HER2-positive breast cancer.
 
 ## Installation
 
