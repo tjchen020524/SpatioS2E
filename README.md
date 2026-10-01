@@ -7,6 +7,11 @@ Code for the study:
 **Pretrained gene representations transfer mean expression more broadly than
 spatial patterns in virtual spatial transcriptomics**
 
+Tingjun Chen and Stephanie C. Hicks. *bioRxiv* (2026).
+
+[Read the preprint](https://www.biorxiv.org/content/10.64898/2026.09.15.751768v1)
+· [DOI: 10.64898/2026.09.15.751768](https://doi.org/10.64898/2026.09.15.751768)
+
 We ask whether pretrained gene representations help spatial predictors estimate
 gene means, recover spatial variation, or both. To test this, we train spatial
 predictors using tissue-image features and fixed gene vectors extracted from
@@ -43,9 +48,12 @@ To evaluate your own prediction matrices, see [Evaluation and training](docs/usa
 - [Get the data and pretrained models](docs/data_availability.md).
 - [Prepare inputs and run the experiments](docs/reproduction.md).
 - [Find analysis code by figure or table](docs/paper_code_map.md).
+- [Recompute no-image retention from numerical Source Data](docs/no_image_retention.md).
 
 ## Citation and support
 
-Citation details are in [CITATION.cff](CITATION.cff). The code is available under
+Please cite the [preprint](https://doi.org/10.64898/2026.09.15.751768) and record
+the software version or commit used. Machine-readable citation details are in
+[CITATION.cff](CITATION.cff). The code is available under
 the [MIT License](LICENSE). Questions and bug reports can be posted in
 [Issues](https://github.com/tjchen020524/SpatioS2E/issues).

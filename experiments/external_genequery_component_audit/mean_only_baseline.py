@@ -55,6 +55,7 @@ def main() -> None:
     parser.add_argument("--panel-artifact", type=Path, default=PANEL_ARTIFACT)
     parser.add_argument("--output-root", type=Path, default=RUN_ROOT)
     parser.add_argument("--max-spots", type=int, default=0)
+    parser.add_argument("--target-scale", choices=("log1p_cpm", "log1p_cp10k"), default="log1p_cpm")
     parser.add_argument("--overwrite", action="store_true")
     args = parser.parse_args()
 
@@ -66,8 +67,8 @@ def main() -> None:
     embeddings = counterfactual_embeddings(
         panel["semantic_embeddings"], labels, args.variant, args.seed
     )
-    train_y, _, _ = load_expression_partition("train", gene_ids, args.max_spots)
-    test_y, samples, barcodes = load_expression_partition("test", gene_ids, args.max_spots)
+    train_y, _, _ = load_expression_partition("train", gene_ids, args.max_spots, target_scale=args.target_scale)
+    test_y, samples, barcodes = load_expression_partition("test", gene_ids, args.max_spots, target_scale=args.target_scale)
     train_means = train_y[:, train_mask].mean(axis=0)
     train_embeddings = embeddings[train_mask].astype(np.float64)
     feature_mean = train_embeddings.mean(axis=0, keepdims=True)
@@ -126,7 +127,7 @@ def main() -> None:
         "ridge_feature_scaling": "featurewise mean/std fitted on downstream training genes",
         "ridge_validation": "fixed seed-42 20% internal holdout from downstream training genes",
         "nonnegative_prediction_clip": True,
-        "target_scale": "log1p_counts_per_million",
+        "target_scale": "log1p_counts_per_10000" if args.target_scale == "log1p_cp10k" else "log1p_counts_per_million",
         "panel_artifact": str(args.panel_artifact),
         "n_train_genes": int(train_mask.sum()),
         "n_heldout_genes": int(heldout_mask.sum()),

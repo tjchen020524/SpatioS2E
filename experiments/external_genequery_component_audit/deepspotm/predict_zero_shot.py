@@ -60,7 +60,7 @@ class DeepSpotTestDataset(Dataset):
             patch_barcodes = np.load(
                 patch_root / sample / "barcodes.npy", allow_pickle=False
             ).astype(str)
-            expression, expression_barcodes = load_expression(sample, gene_ids)
+            expression, expression_barcodes = load_expression(sample, gene_ids, target_scale="log1p_cp10k")
             if not np.array_equal(patch_barcodes, expression_barcodes):
                 raise ValueError("Patch/expression barcode mismatch for %s" % sample)
             if patches.ndim != 4 or tuple(patches.shape[1:]) != (224, 224, 3):
@@ -282,7 +282,9 @@ def main() -> None:
             "upstream_spatial_target_exposure": True,
             "source": args.source,
             "source_tokens": "spatially_trained_checkpoint_parameters",
-            "target_scale": "log1p_counts_per_million",
+            "target_scale": "log1p_counts_per_10000",
+            "stored_expression_scale": "log1p_counts_per_million",
+            "reference_conversion": "log1p(expm1(stored_expression) / 100)",
             "model_root": str(args.model_root),
             "model_checkpoint_sha256": checkpoint_sha256,
             "panel_artifact": str(args.panel_artifact),

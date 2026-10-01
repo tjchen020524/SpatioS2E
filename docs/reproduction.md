@@ -178,3 +178,9 @@ The archived BLEEP and ST-Net adapters resolve upstream source under
 `<data-root>/third_party/BLEEP` and `<data-root>/third_party/ST-Net` by default.
 Set `SPATIOS2E_BLEEP_ROOT` or `SPATIOS2E_STNET_ROOT` to use an existing checkout
 elsewhere. These paths contain upstream source, not pretrained checkpoints.
+
+## 5. Recompute no-image retention from Source Data
+
+For the common complete-decoder random-vector reference used for Decima and
+scGPT, see [No-image retention](no_image_retention.md). This calculation uses
+exported absolute scores and requires no retraining or model downloads.

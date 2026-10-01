@@ -62,7 +62,21 @@ def load_panel_artifact(path: Path = PANEL_ARTIFACT) -> Dict[str, np.ndarray]:
         return {key: data[key] for key in data.files}
 
 
-def load_expression(sample: str, gene_ids: Iterable[str]) -> Tuple[np.ndarray, np.ndarray]:
+def expression_on_scale(expression: np.ndarray, target_scale: str = "log1p_cpm") -> np.ndarray:
+    """Convert stored log1p(CPM) values without renormalizing the queried panel."""
+    if target_scale == "log1p_cpm":
+        return expression
+    if target_scale != "log1p_cp10k":
+        raise ValueError("Unknown target scale: %s" % target_scale)
+    values = np.asarray(expression, dtype=np.float64)
+    if not np.isfinite(values).all() or (values < 0).any():
+        raise ValueError("Expected finite nonnegative log1p(CPM) expression")
+    return np.log1p(np.expm1(values) / 100.0).astype(np.float32)
+
+
+def load_expression(
+    sample: str, gene_ids: Iterable[str], *, target_scale: str = "log1p_cpm"
+) -> Tuple[np.ndarray, np.ndarray]:
     manifest = load_manifest().set_index("sample")
     split = str(manifest.loc[sample, "split"])
     path = HER2 / "data/expression" / sample / (split + ".npz")
@@ -80,7 +94,7 @@ def load_expression(sample: str, gene_ids: Iterable[str]) -> Tuple[np.ndarray, n
         raise ValueError("%s is missing %d requested genes" % (sample, len(missing)))
     indices = np.asarray([lookup[gene_id] for gene_id in requested], dtype=np.int64)
     expression = matrix[indices].toarray().T.astype(np.float32, copy=False)
-    return expression, barcodes
+    return expression_on_scale(expression, target_scale), barcodes
 
 
 def load_feature_sample(sample: str, root: Path = FEATURE_ROOT) -> Tuple[np.ndarray, np.ndarray]:
@@ -134,6 +148,8 @@ def load_expression_partition(
     partition: str,
     gene_ids: Iterable[str],
     max_spots: int = 0,
+    *,
+    target_scale: str = "log1p_cpm",
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Return expression, sample IDs, and barcodes without requiring image features."""
 
@@ -145,7 +161,7 @@ def load_expression_partition(
     sample_blocks = []
     barcode_blocks = []
     for sample in samples:
-        expression, barcodes = load_expression(sample, gene_ids)
+        expression, barcodes = load_expression(sample, gene_ids, target_scale=target_scale)
         expression_blocks.append(expression)
         sample_blocks.append(np.repeat(sample, len(barcodes)))
         barcode_blocks.append(barcodes)

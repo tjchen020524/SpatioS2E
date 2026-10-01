@@ -31,6 +31,7 @@ dependencies = [
 [project.urls]
 Repository = "https://github.com/tjchen020524/SpatioS2E"
 Issues = "https://github.com/tjchen020524/SpatioS2E/issues"
+Preprint = "https://doi.org/10.64898/2026.09.15.751768"
 
 [project.optional-dependencies]
 external-audit = [

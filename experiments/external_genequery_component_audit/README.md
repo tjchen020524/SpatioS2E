@@ -1,6 +1,6 @@
 # GeneQuery and DeepSpot-M analyses
 
-These scripts reproduce the component analyses in Fig. 5c and Extended Data
+These scripts reproduce the component analyses in Fig. 5c,d and Extended Data
 Fig. 10. Run them from a clone of the repository after installing SpatioS2E.
 
 ## Analyses
@@ -119,12 +119,22 @@ obtain its gated model directory, including `tokens.csv` and weights:
 ```bash
 python "$AUDIT/deepspotm/prepare_panel.py" --model-root /path/to/DeepSpotM
 python "$AUDIT/deepspotm/predict_zero_shot.py" --model-root /path/to/DeepSpotM --source scgpt --seed 42
-python "$AUDIT/mean_only_baseline.py" --seed 42 --panel-artifact "$AUDIT/artifacts/deepspotm/her2_panel_scgpt.npz" --output-root "$AUDIT/deepspotm/runs"
+python "$AUDIT/mean_only_baseline.py" --seed 42 --panel-artifact "$AUDIT/artifacts/deepspotm/her2_panel_scgpt.npz" --target-scale log1p_cp10k --output-root "$AUDIT/deepspotm/runs"
 for variant in semantic identity_shuffle random constant semantic_mean_only; do
   python "$AUDIT/audit_predictions.py" "$AUDIT/deepspotm/runs/seed_42/$variant/predictions.npz"
 done
 python "$AUDIT/summarize_audit.py" --run-root "$AUDIT/deepspotm/runs" --expected-seeds 42
 ```
+
+DeepSpot-M is evaluated on its training scale, `log1p(counts per 10,000)`.
+The exporter converts the stored HER2ST log-CPM reference as
+`log1p(expm1(log_CPM) / 100)` and leaves checkpoint predictions unchanged.
+The library-size denominator remains the full 15,914-gene training-patient
+universe used during preprocessing; the 135 queried genes are not renormalized.
+The independent ridge uses the same CP10K scale via `--target-scale log1p_cp10k`.
+GeneQuery and its ridge use log1p(CPM), the default ridge target scale.
+References are unsmoothed. These different scales and training designs do not
+support a head-to-head ranking from MSE bar lengths.
 
 ## Metrics and outputs
 
@@ -133,7 +143,7 @@ The evaluator accepts NPZ files with `pred`, `true` (spot × gene), `gene_ids`,
 `barcodes`. It reports pooled, per-gene, per-section and per-individual metrics.
 Section-centred full-matrix PCC correlates flattened residuals; it is distinct
 from averaging section-centred per-gene correlations. External matrix and
-gene-mean PCC use zero for zero-variance vectors. Observed-eligible genes with
+gene-mean PCC are undefined (NaN in numerical outputs) for zero-variance vectors. Observed-eligible genes with
 constant predictions remain in the within-gene PCC denominator with value zero.
 
 Summary MSE reductions are control minus semantic; PCC effects are semantic

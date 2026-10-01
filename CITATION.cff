@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: If you use SpatioS2E, please cite this software and specify the version used.
+message: If you use SpatioS2E, please cite the accompanying preprint and specify the software version or commit used.
 title: "SpatioS2E: component-resolved evaluation of gene-conditioned virtual spatial transcriptomics"
 type: software
 abstract: >-
@@ -17,6 +17,19 @@ authors:
 version: 1.1.2
 repository-code: https://github.com/tjchen020524/SpatioS2E
 license: MIT
+preferred-citation:
+  type: article
+  title: "Pretrained gene representations transfer mean expression more broadly than spatial patterns in virtual spatial transcriptomics"
+  authors:
+    - family-names: Chen
+      given-names: Tingjun
+    - family-names: Hicks
+      given-names: Stephanie C.
+  journal: bioRxiv
+  year: 2026
+  month: 9
+  doi: 10.64898/2026.09.15.751768
+  url: https://www.biorxiv.org/content/10.64898/2026.09.15.751768v1
 keywords:
   - spatial transcriptomics
   - virtual spatial transcriptomics

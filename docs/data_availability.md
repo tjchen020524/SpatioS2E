@@ -32,6 +32,9 @@ The weights remain subject to their providers' licenses.
 
 ## Results
 
-Numerical Source Data and Supplementary Tables are separate manuscript files.
+The [bioRxiv preprint](https://www.biorxiv.org/content/10.64898/2026.09.15.751768v1)
+provides the paper and its supplementary-material links. Numerical Source Data
+and Supplementary Tables are separate manuscript files; record which paper
+version and Source Data archive you use.
 Running the [experiments](reproduction.md) produces the downstream checkpoints,
 prediction matrices and summary tables.
